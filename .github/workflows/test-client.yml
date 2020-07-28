@@ -4,8 +4,6 @@ on:
   push:
       branches:
         - develop
-      paths:
-        - '.github/workflows/test-client.yml'
 
 jobs:
   setup:
