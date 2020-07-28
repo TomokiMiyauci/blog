@@ -68,7 +68,24 @@ const config: Configuration = {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {}
+  build: {},
+
+  features: {
+    store: false,
+    layouts: true,
+    meta: true,
+    middleware: false,
+    transitions: true,
+    deprecations: false,
+    validate: false,
+    asyncData: true,
+    fetch: false,
+    clientOnline: false,
+    clientPrefetch: true,
+    clientUseUrl: true,
+    componentAliases: false,
+    componentClientOnly: false
+  }
 }
 
 export default config
