@@ -1,5 +1,9 @@
 # tech-blog
 
+![test](https://github.com/TomokiMiyauci/techxas/workflows/test/badge.svg?branch=develop)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
+
 ## Build Setup
 
 ```bash
