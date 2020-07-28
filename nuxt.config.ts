@@ -5,6 +5,9 @@ const config: Configuration = {
    ** See https://nuxtjs.org/api/configuration-mode
    */
   mode: 'universal',
+
+  srcDir: 'src',
+
   /*
    ** Nuxt target
    ** See https://nuxtjs.org/api/configuration-target
