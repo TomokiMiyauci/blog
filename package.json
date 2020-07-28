@@ -12,7 +12,8 @@
     "lint": "yarn lint:script && yarn lint:style",
     "test:unit": "jest",
     "test:e2e": "cypress run",
-    "test:e2e:open": "cypress open"
+    "test:e2e:open": "cypress open",
+    "ci:e2e": "server-test 'dev' :3000 'test:e2e'"
   },
   "lint-staged": {
     "*.{ts,vue}": "eslint",
@@ -54,6 +55,7 @@
     "jest": "^26.1.0",
     "lint-staged": "^10.2.11",
     "prettier": "^2.0.5",
+    "start-server-and-test": "^1.11.2",
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recess-order": "^2.0.4",
