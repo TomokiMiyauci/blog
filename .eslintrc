@@ -11,5 +11,11 @@
     "plugin:prettier/recommended",
     "plugin:nuxt/recommended"
   ],
-  "plugins": ["prettier"]
+  "plugins": ["prettier"],
+  "rules": {
+    "import/order": [
+      "error",
+      { "alphabetize": { "order": "asc", "caseInsensitive": true }, "newlines-between": "always" }
+    ]
+  }
 }
