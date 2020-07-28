@@ -15,6 +15,10 @@
   </svg>
 </template>
 
+<script>
+  export default {}
+</script>
+
 <style>
   .NuxtLogo {
     margin: auto;

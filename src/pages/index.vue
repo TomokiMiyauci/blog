@@ -5,9 +5,8 @@
 </template>
 
 <script lang="ts">
-  import Vue from 'vue'
-
-  export default Vue.extend({
+  import { defineComponent } from 'nuxt-composition-api'
+  export default defineComponent({
     async asyncData({ $content }) {
       const page = await $content('h').fetch()
 

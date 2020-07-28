@@ -7,6 +7,10 @@
   </div>
 </template>
 
+<script>
+  export default {}
+</script>
+
 <style>
   html {
     box-sizing: border-box;
