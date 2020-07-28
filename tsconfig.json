@@ -14,7 +14,7 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "types": ["node", "jest", "@nuxt/types", "@nuxt/content"]
+    "types": ["node", "jest", "cypress", "@nuxt/types", "@nuxt/content"]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
