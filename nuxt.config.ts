@@ -55,7 +55,8 @@ const config: Configuration = {
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    'nuxt-composition-api'
   ],
 
   tailwindcss: {
@@ -95,6 +96,10 @@ const config: Configuration = {
     clientUseUrl: true,
     componentAliases: false,
     componentClientOnly: false
+  },
+
+  generate: {
+    interval: 2000
   }
 }
 
