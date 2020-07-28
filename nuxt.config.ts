@@ -1,4 +1,7 @@
+import { join } from 'path'
+
 import { Configuration } from '@nuxt/types'
+
 const config: Configuration = {
   /*
    ** Nuxt rendering mode
@@ -54,6 +57,10 @@ const config: Configuration = {
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss'
   ],
+
+  tailwindcss: {
+    configPath: join(__dirname, 'tailwind.config.ts')
+  },
   /*
    ** Nuxt.js modules
    */
