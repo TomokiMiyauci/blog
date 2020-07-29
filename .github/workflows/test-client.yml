@@ -123,7 +123,7 @@ jobs:
         with:
           build: yarn generate
           start: yarn start
-          wait-on: 'http://localhost:3000' # localhostが立ち上がるまでwaitさせる
+          wait-on: 'http://localhost:3000'
 
       # - name: Test e2e
       #   run: yarn ci:e2e
@@ -162,56 +162,39 @@ jobs:
   #     - name: Audit
   #       run: yarn run audit
 
-  # build:
-  #   needs: setup
-  #   runs-on: ${{ matrix.os }}
+  build:
+    needs: setup
+    runs-on: ${{ matrix.os }}
 
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-  #       node: [10]
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [10]
 
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
 
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Restore node_modules
-  #       id: node_modules_cache_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
-  #     - name: Restore node_modules of client
-  #       id: node_modules_cache_client_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+      - name: Build
+        run: yarn generate
 
-  #     - name: Build
-  #       run: yarn build -a
-
-  #     - name: Move webpack bundle analyzer
-  #       run: mv .nuxt/stats/ .
-
-  #     - name: Cache building deliverable
-  #       id: build_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/.nuxt
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
-
-  #     - name: Cache webpack bundle analyzer
-  #       id: webpack_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/stats
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-analyzer-${{ github.sha }}
+      - name: Cache building deliverable
+        id: build_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/dist
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
   # export:
   #   needs: [lint, audit, build]
