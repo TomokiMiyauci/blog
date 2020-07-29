@@ -1,8 +1,8 @@
 import { join } from 'path'
 
-import { Configuration } from '@nuxt/types'
+import { NuxtConfig } from '@nuxt/types'
 
-const config: Configuration = {
+const config: NuxtConfig = {
   /*
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
@@ -79,7 +79,15 @@ const config: Configuration = {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {
+    postcss: {
+      preset: {
+        autoprefixer: {
+          grid: 'autoplace'
+        }
+      }
+    }
+  },
 
   features: {
     store: false,
