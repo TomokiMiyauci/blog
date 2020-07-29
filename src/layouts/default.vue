@@ -1,9 +1,13 @@
 <template>
   <div>
-    <header class="header flex flex-start">
-      <div style="font-size: 40px;">Teck Blog</div>
-    </header>
-    <Nuxt />
+    <app-bar />
+    <main
+      class="pt-16 lg:pt-24 bg-light-elevatedSurface dark:bg-dark-elevatedSurface transition-colors duration-300 ease-linear"
+    >
+      <div class="container lg:max-w-4xl mx-auto p-4 pb-8">
+        <Nuxt />
+      </div>
+    </main>
   </div>
 </template>
 

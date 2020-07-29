@@ -31,8 +31,8 @@
     return new Date(date).toLocaleDateString('en', options)
   }
   export default defineComponent({
-    async asyncData({ $content }) {
-      const article = await $content('articles', 'h').fetch()
+    async asyncData({ $content, params }) {
+      const article = await $content('articles', params.slug).fetch()
       return { article }
     },
 
