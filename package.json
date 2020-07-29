@@ -10,7 +10,7 @@
     "generate": "nuxt-ts generate",
     "lint:markup": "vti diagnostics",
     "lint:script": "eslint --ext .ts,.vue --ignore-path .gitignore .",
-    "lint:style": "stylelint **/*.{vue,css} --ignore-path .gitignore",
+    "lint:style": "stylelint **/*.{vue,scss} --ignore-path .gitignore",
     "lint": "yarn lint:markup && yarn lint:script && yarn lint:style",
     "test:unit": "jest",
     "test:e2e": "cypress run",
@@ -19,7 +19,7 @@
   },
   "lint-staged": {
     "*.{ts,vue}": "eslint",
-    "*.{css,vue}": "stylelint"
+    "*.{scss,vue}": "stylelint"
   },
   "husky": {
     "hooks": {
