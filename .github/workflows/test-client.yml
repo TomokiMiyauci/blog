@@ -84,7 +84,7 @@ jobs:
           path: node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
-      - name: test unit
+      - name: Test unit
         run: yarn test:unit --ci
 
       # - name: upload coverage
@@ -94,6 +94,32 @@ jobs:
       #     token: ${{ secrets.CODECOV_TOKEN }}
       #     file: ./coverage/clover.xml
 
+  test-e2e:
+    needs: setup
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Test e2e
+        run: yarn ci:e2e
 
   # audit:
   #   needs: setup
