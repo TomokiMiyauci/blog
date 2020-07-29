@@ -118,8 +118,15 @@ jobs:
           path: node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
-      - name: Test e2e
-        run: yarn ci:e2e
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          build: yarn generate
+          start: yarn start
+          wait-on: 'http://localhost:3000' # localhostが立ち上がるまでwaitさせる
+
+      # - name: Test e2e
+      #   run: yarn ci:e2e
 
   # audit:
   #   needs: setup
