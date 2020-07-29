@@ -36,7 +36,11 @@ const config: NuxtConfig = {
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['@/assets/css/transitions.scss', '@/assets/css/main.scss'],
+
+  pageTransition: {
+    name: 'fade'
+  },
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -88,6 +92,8 @@ const config: NuxtConfig = {
       }
     }
   },
+
+  modern: true,
 
   features: {
     store: false,
