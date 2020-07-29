@@ -29,13 +29,6 @@ jobs:
           path: node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
-      - name: Cache node_modules of client
-        id: node_modules_cache_client_id
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace}}/packages/client/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
       - name: Install
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: yarn --check-files --frozen-lockfile --non-interactive
@@ -64,15 +57,43 @@ jobs:
           path: node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
-      - name: Restore node_modules of client
-        id: node_modules_cache_client_id
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace}}/packages/client/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
       - name: lint by ESlint and Stylelint and VTI
         run: yarn lint
+
+  test-unit:
+    needs: setup
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: test unit
+        run: yarn test:unit --ci
+
+      # - name: upload coverage
+      #   if: matrix.node == 14
+      #   uses: codecov/codecov-action@master
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     file: ./coverage/clover.xml
+
 
   # audit:
   #   needs: setup
@@ -361,41 +382,6 @@ jobs:
   #       uses: rtCamp/action-slack-notify@master
   #       env:
   #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_DEV }}
-  # test-unit:
-  #   needs: setup
-  #   runs-on: ${{ matrix.os }}
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-  #       node: [10]
-
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
-
-  #     - name: checkout
-  #       uses: actions/checkout@master
-
-  #     - name: restore workspace cache
-  #       uses: actions/cache@v1
-  #       with:
-  #         path: ${{ github.workspace }}
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
-
-  #     - name: pre-setup
-  #       run: sed -i -e '2s/^/\/\/ /g' packages/client/src/types/vue-shims.d.ts
-
-  #     - name: test unit
-  #       run: yarn workspace client test:unit --ci
-
-  #     # - name: upload coverage
-  #     #   if: matrix.node == 14
-  #     #   uses: codecov/codecov-action@master
-  #     #   with:
-  #     #     token: ${{ secrets.CODECOV_TOKEN }}
-  #     #     file: ./coverage/clover.xml
 
   # test-snapshot:
   #   needs: setup
