@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-16.04]
         node: [10]
 
     steps:
@@ -39,7 +39,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-16.04]
         node: [10]
 
     steps:
@@ -66,7 +66,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-16.04]
         node: [10]
 
     steps:
@@ -103,7 +103,7 @@ jobs:
 
   #   strategy:
   #     matrix:
-  #       os: [ubuntu-latest]
+  #       os: [ubuntu-16.04]
   #       node: [10]
 
   #   steps:
@@ -137,7 +137,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-16.04]
         node: [10]
 
     steps:
@@ -208,7 +208,7 @@ jobs:
 
   #   strategy:
   #     matrix:
-  #       os: [ubuntu-latest]
+  #       os: [ubuntu-16.04]
   #       node: [10]
 
   #   steps:
@@ -256,7 +256,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-16.04]
         node: [10]
 
     steps:
@@ -288,7 +288,7 @@ jobs:
 
   #   strategy:
   #     matrix:
-  #       os: [ubuntu-latest]
+  #       os: [ubuntu-16.04]
   #       node: [10]
 
   #   steps:
@@ -314,7 +314,7 @@ jobs:
   #         keep_files: true
 
   # lighthouse-mobile:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ubuntu-16.04
   #   needs: deploy
 
   #   steps:
@@ -352,7 +352,7 @@ jobs:
   #         keep_files: true
 
   # lighthouse-desktop:
-  #   runs-on: ubuntu-latest
+  #   runs-on: ubuntu-16.04
   #   needs: lighthouse-mobile
 
   #   steps:
@@ -392,7 +392,7 @@ jobs:
 
   # notice:
   #     needs: deploy
-  #     runs-on: ubuntu-latest
+  #     runs-on: ubuntu-16.04
   #     if: always()
   #     steps:
   #     - uses: actions/checkout@v2
@@ -408,7 +408,7 @@ jobs:
 
   #   strategy:
   #     matrix:
-  #       os: [ubuntu-latest]
+  #       os: [ubuntu-16.04]
   #       node: [10]
 
   #   steps:
@@ -437,7 +437,7 @@ jobs:
 
   # #   strategy:
   # #     matrix:
-  # #       os: [ubuntu-latest]
+  # #       os: [ubuntu-16.04]
   # #       node: [13]
 
   # #   steps:
@@ -481,7 +481,7 @@ jobs:
 
   #   strategy:
   #     matrix:
-  #       os: [ubuntu-latest]
+  #       os: [ubuntu-16.04]
   #       node: [10]
 
   #   steps:
@@ -513,7 +513,7 @@ jobs:
 
   #   strategy:
   #     matrix:
-  #       os: [ubuntu-latest]
+  #       os: [ubuntu-16.04]
 
   #   steps:
   #     - uses: technote-space/workflow-conclusion-action@v1
