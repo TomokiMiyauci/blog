@@ -94,37 +94,6 @@ jobs:
       #     token: ${{ secrets.CODECOV_TOKEN }}
       #     file: ./coverage/clover.xml
 
-  test-e2e:
-    needs: setup
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-16.04]
-        node: [10]
-
-    steps:
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: ${{ matrix.node }}
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Restore node_modules
-        id: node_modules_cache_id
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          build: yarn generate
-          start: yarn start
-          wait-on: 'http://localhost:3000'
-
       # - name: Test e2e
       #   run: yarn ci:e2e
 
@@ -196,6 +165,43 @@ jobs:
           path: ${{ github.workspace}}/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
+  test-e2e:
+    needs: build
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Restore building deliverable
+        id: build_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/dist
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn start
+          wait-on: 'http://localhost:3000'
+
   # export:
   #   needs: [lint, audit, build]
   #   runs-on: ${{ matrix.os }}
@@ -244,40 +250,37 @@ jobs:
   #         path: ${{ github.workspace}}/packages/client/dist
   #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-export-nuxt-${{ github.sha }}
 
-  # deploy:
-  #   needs: export
-  #   runs-on: ${{ matrix.os }}
+  deploy:
+    needs: test-e2e
+    runs-on: ${{ matrix.os }}
 
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-  #       node: [10]
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [10]
 
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
 
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Restore exporting deliverable
-  #       id: export_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/dist
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-export-nuxt-${{ github.sha }}
+      - name: Restore building deliverable
+        id: build_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/dist
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
-  #     - name: Prepare deploy
-  #       run: cp -r dist ${{ github.workspace }}/public
-
-  #     - name: Deploy to hosting to Firebase
-  #       uses: w9jds/firebase-action@v1.3.1
-  #       with:
-  #         args: deploy --only hosting
-  #       env:
-  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN_DEV }}
-  #         PROJECT_PATH: ${{ github.workspace }}
+      - name: Deploy to hosting to Firebase
+        uses: w9jds/firebase-action@v1.3.1
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_PATH: ${{ github.workspace }}
 
   # deploy-webpack-analyzer:
   #   needs: export
