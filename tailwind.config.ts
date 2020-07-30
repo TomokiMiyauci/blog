@@ -6,7 +6,7 @@
  */
 import { join } from 'path'
 
-import { TailwindcssConfiguration } from '@/src/types/tailwindcss'
+import { TailwindcssConfiguration } from '@/types/tailwindcss'
 
 const BASE_DIR = join(__dirname, 'src')
 const VUE_FILE = join('**', '*.vue')
