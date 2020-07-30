@@ -93,7 +93,7 @@ const config: NuxtConfig = {
     }
   },
 
-  modern: true,
+  modern: 'client',
 
   features: {
     store: false,
