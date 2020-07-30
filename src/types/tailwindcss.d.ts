@@ -19,7 +19,7 @@ export interface TailwindcssConfiguration {
   important?: boolean
   separator?: string
   theme?: Theme
-  variants?: Record<string, Variant[]>
+  variants?: Partial<Record<keyof CorePlugins, Variant[]>>
   corePlugins?: CorePlugins
   plugins?: any[]
   purge?: Purge
