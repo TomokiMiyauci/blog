@@ -1,6 +1,8 @@
 ---
 title: Hello world
-description: 'このブログは、技術情報を発信するために作られました。'
+description: このブログは、技術情報を発信するために作られました
+tags: 
+  - blog
 ---
 
 ## このブログについて
