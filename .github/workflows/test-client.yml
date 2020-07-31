@@ -390,17 +390,15 @@ jobs:
   #     #     name: Lighthouse reports
   #     #     path: /tmp/artifacts/desktop
 
-  # notice:
-  #     needs: deploy
-  #     runs-on: ubuntu-16.04
-  #     if: always()
-  #     steps:
-  #     - uses: actions/checkout@v2
-
-  #     - name: Slack Notification
-  #       uses: rtCamp/action-slack-notify@master
-  #       env:
-  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_DEV }}
+  notice:
+      needs: deploy
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_DEV }}
 
   # test-snapshot:
   #   needs: setup
