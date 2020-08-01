@@ -15,7 +15,8 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import { defineComponent } from 'nuxt-composition-api'
+  export default defineComponent({
     props: {
       iconName: {
         type: String,
@@ -34,5 +35,5 @@
         default: 'currentColor'
       }
     }
-  }
+  })
 </script>
