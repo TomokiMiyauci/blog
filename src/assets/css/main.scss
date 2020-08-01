@@ -1,4 +1,13 @@
 .nuxt-content {
+   p {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.625;
+    transition-timing-function: linear;
+    transition-duration: 0.3s;
+    transition-property: background-color, border-color, color, fill, stroke;
+  }
   h2 {
     position: relative;
     display: table;
@@ -17,6 +26,9 @@
       border-radius: 0.25rem;
     }
   }
+  pre {
+    @apply rounded;
+  }
 }
 
 .icon.icon-link {
@@ -27,12 +39,10 @@
   background-size: 20px 20px;
 }
 
-.nuxt-content p {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.625;
-  transition-timing-function: linear;
-  transition-duration: 0.3s;
-  transition-property: background-color, border-color, color, fill, stroke;
+.nuxt-content-highlight {
+  @apply relative;
+
+  .filename {
+    @apply absolute right-0 text-gray-200 font-light z-10 mr-2 mt-1 text-sm;
+  }
 }
