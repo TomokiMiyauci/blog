@@ -4,7 +4,7 @@
   >
     <div class="container relative h-full flex items-center justify-between mx-auto px-4 lg:py-6">
       <nuxt-link class="text-4xl font-mono" to="/">Techxas</nuxt-link>
-      <input-search />
+      <fulltext-search />
     </div>
   </header>
 </template>
