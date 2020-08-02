@@ -19,12 +19,14 @@
       </ul>
       <div class="mt-12">
         <nuxt-content :document="article" />
+        <prev-next :prev="prev" :next="next" />
       </div>
     </article>
   </div>
 </template>
 
 <script lang="ts">
+  import { PrevNext } from '@/types/article'
   import { defineComponent } from 'nuxt-composition-api'
   const formatDate = (date: Date) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' }
@@ -33,7 +35,14 @@
   export default defineComponent({
     async asyncData({ $content, params }) {
       const article = await $content('articles', params.slug).fetch()
-      return { article }
+
+      const [prev, next] = await $content('articles')
+        .only(['title', 'slug'])
+        .sortBy('date', 'desc')
+        .surround(params.slug, { before: 1, after: 1 })
+        .fetch<[PrevNext, PrevNext]>()
+
+      return { article, prev, next }
     },
 
     setup() {
