@@ -9,5 +9,6 @@
   "tailwindCSS.includeLanguages": { "vue" : "html" },
   "vetur.experimental.templateInterpolationService": true,
   "vetur.format.defaultFormatter.html": "prettier",
-  "files.autoSave": "onWindowChange"
+  "files.autoSave": "onWindowChange",
+  "textlint.autoFixOnSave": true
 }
