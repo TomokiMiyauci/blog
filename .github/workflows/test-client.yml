@@ -157,6 +157,8 @@ jobs:
 
       - name: Build
         run: yarn generate
+        env:
+          dsn: ${{ secrets.SENTRY_DEV }}
 
       - name: Cache building deliverable
         id: build_id
