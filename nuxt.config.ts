@@ -72,7 +72,8 @@ const config: NuxtConfig = {
   modules: [
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
-    '@nuxt/content'
+    '@nuxt/content',
+    '@nuxtjs/sentry'
   ],
   /*
    ** Content module configuration
@@ -84,6 +85,10 @@ const config: NuxtConfig = {
         theme: 'prism-themes/themes/prism-material-oceanic.css'
       }
     }
+  },
+
+  sentry: {
+    dsn: process.env.dsn
   },
   /*
    ** Build configuration
