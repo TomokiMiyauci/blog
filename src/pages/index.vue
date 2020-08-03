@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <section>
-      <article-headline v-for="article in articles" :key="article.id" :headline="article" />
-    </section>
-    <tags-list :tags="['hello', 'world', 'blog']" />
-  </div>
+  <section>
+    <article-headline v-for="article in articles" :key="article.id" :headline="article" />
+  </section>
 </template>
 
 <script lang="ts">
