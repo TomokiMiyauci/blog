@@ -82,6 +82,7 @@ export interface CorePlugins {
   listStylePosition?: false
   accessibility?: false
   textDecoration?: false
+  textColor?: false
 }
 
 export interface Theme {
