@@ -37,6 +37,8 @@
     "prism-themes": "^1.4.0"
   },
   "devDependencies": {
+    "@iconify/icons-logos": "^1.0.12",
+    "@iconify/vue": "^1.0.2",
     "@mdi/js": "^5.4.55",
     "@nuxt/types": "^2.14.0",
     "@nuxt/typescript-build": "^2.0.2",
