@@ -1,7 +1,8 @@
 <template>
   <div>
-    <h2>Tags</h2>
-    <base-tag v-for="tag in tags" :key="tag" :name="tag" />
+    <h2><mdi-tag-multiple class="mr-1 text-green-700" />Tags</h2>
+    <tag-nuxtjs />
+    <tag-storybook />
   </div>
 </template>
 
