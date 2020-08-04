@@ -68,7 +68,7 @@ const config: NuxtConfig = {
   ],
 
   tailwindcss: {
-    configPath: join(__dirname, 'tailwind.config.ts')
+    configPath: join(__dirname, 'tailwind.config.js')
   },
   /*
    ** Nuxt.js modules
@@ -110,22 +110,22 @@ const config: NuxtConfig = {
 
   // modern: 'client',
 
-  features: {
-    store: false,
-    layouts: true,
-    meta: true,
-    middleware: false,
-    transitions: true,
-    deprecations: false,
-    validate: false,
-    asyncData: true,
-    fetch: false,
-    clientOnline: false,
-    clientPrefetch: true,
-    clientUseUrl: true,
-    componentAliases: false,
-    componentClientOnly: false
-  },
+  // features: {
+  //   store: false,
+  //   layouts: true,
+  //   meta: true,
+  //   middleware: false,
+  //   transitions: true,
+  //   deprecations: false,
+  //   validate: false,
+  //   asyncData: true,
+  //   fetch: false,
+  //   clientOnline: false,
+  //   clientPrefetch: true,
+  //   clientUseUrl: true,
+  //   componentAliases: false,
+  //   componentClientOnly: false
+  // },
 
   generate: {
     interval: 2000
