@@ -6,6 +6,7 @@
     :viewBox="`0 0 ${width} ${height}`"
     :aria-labelledby="iconName"
     role="presentation"
+    class="inline"
   >
     <title lang="en">{{ iconName }} icon</title>
     <g :fill="iconColor">
