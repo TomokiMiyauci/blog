@@ -4,14 +4,14 @@
  ** Docs: https://tailwindcss.com/docs/configuration
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
-import { join } from 'path'
-
-import { TailwindcssConfiguration } from '@/types/tailwindcss'
-
+const { join } = require('path')
 const BASE_DIR = join(__dirname, 'src')
 const VUE_FILE = join('**', '*.vue')
 
-const config: TailwindcssConfiguration = {
+/**
+ * @type {import("src/types/tailwindcss").TailwindcssConfiguration}
+ */
+const config = {
   theme: {
     extend: {
       fontFamily: {
@@ -41,4 +41,5 @@ const config: TailwindcssConfiguration = {
     ]
   }
 }
+
 module.exports = config
