@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex justify-center items-center py-2 px-3 relative shadow leading-5 bg-gray-300 hover:bg-gray-400 hover:shadow-md transition duration-500 rounded-full"
+      class="flex justify-center items-center py-2 px-3 relative shadow leading-5 bg-gray-300 hover:bg-gray-400 hover:shadow-md transition duration-300 rounded-full focus-within:bg-gray-800 focus-within:shadow-md focus-within:text-white"
     >
       <mdi-magnify class="transition duration-300 delay-100" :class="{ 'text-green-500': isShow }" />
 
@@ -9,7 +9,7 @@
         ref="input"
         :value="value"
         type="text"
-        class="px-1 bg-transparent outline-none"
+        class="px-1 bg-transparent focus:text-white outline-none"
         placeholder="Search"
         autocomplete="off"
         spellcheck="false"
