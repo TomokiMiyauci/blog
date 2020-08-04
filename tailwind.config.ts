@@ -12,8 +12,22 @@ const BASE_DIR = join(__dirname, 'src')
 const VUE_FILE = join('**', '*.vue')
 
 const config: TailwindcssConfiguration = {
-  theme: {},
-  variants: {},
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: [
+          'Quicksand',
+          // ...defaultTheme.fontFamily.sans
+          "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
+        ]
+      }
+    }
+  },
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'focus-within'],
+    boxShadow: ['responsive', 'hover', 'focus', 'focus-within'],
+    textColor: ['responsive', 'hover', 'focus', 'focus-within']
+  },
   plugins: [],
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
