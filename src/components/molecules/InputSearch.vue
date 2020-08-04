@@ -1,9 +1,9 @@
 <template>
   <div>
     <div
-      class="flex justify-center items-center py-2 px-3 relative border leading-5 bg-gray-300 hover:bg-green-300 transition duration-500 rounded-full"
+      class="flex justify-center items-center py-2 px-3 relative shadow leading-5 bg-gray-300 hover:bg-gray-400 hover:shadow-md transition duration-500 rounded-full"
     >
-      <mdi-magnify />
+      <mdi-magnify class="transition duration-300 delay-100" :class="{ 'text-green-500': isShow }" />
 
       <input
         ref="input"
@@ -17,6 +17,7 @@
         @input="$emit('input', $event.target.value)"
         @focus="$emit('focus')"
         @blur="$emit('blur')"
+        @keyup="$emit('keydown')"
       />
       <transition name="fade" mode="out-in">
         <button v-if="value" class="focus:outline-none" @click="onClick">
