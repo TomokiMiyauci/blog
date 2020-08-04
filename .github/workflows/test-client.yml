@@ -167,42 +167,42 @@ jobs:
           path: ${{ github.workspace}}/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
-  test-e2e:
-    needs: build
-    runs-on: ${{ matrix.os }}
+  # test-e2e:
+  #   needs: build
+  #   runs-on: ${{ matrix.os }}
 
-    strategy:
-      matrix:
-        os: [ubuntu-16.04]
-        node: [10]
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-16.04]
+  #       node: [10]
 
-    steps:
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: ${{ matrix.node }}
+  #   steps:
+  #     - uses: actions/setup-node@v2-beta
+  #       with:
+  #         node-version: ${{ matrix.node }}
 
-      - name: Checkout
-        uses: actions/checkout@v2
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Restore node_modules
-        id: node_modules_cache_id
-        uses: actions/cache@v2
-        with:
-          path: node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+  #     - name: Restore node_modules
+  #       id: node_modules_cache_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: node_modules
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
-      - name: Restore building deliverable
-        id: build_id
-        uses: actions/cache@v2
-        with:
-          path: ${{ github.workspace}}/dist
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+  #     - name: Restore building deliverable
+  #       id: build_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ${{ github.workspace}}/dist
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          start: yarn start
-          wait-on: 'http://localhost:3000'
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         start: yarn start
+  #         wait-on: 'http://localhost:3000'
 
   # export:
   #   needs: [lint, audit, build]
@@ -253,7 +253,7 @@ jobs:
   #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-export-nuxt-${{ github.sha }}
 
   deploy:
-    needs: test-e2e
+    needs: build
     runs-on: ${{ matrix.os }}
 
     strategy:
