@@ -27,4 +27,4 @@ export type Article = BaseContent &
 
 export type PrevNext = Pick<Article, 'title' | 'slug'>
 
-export type Headline = Pick<Article, 'title' | 'description' | 'slug' | 'readingTime' | 'createdAt'>
+export type Headline = Pick<Article, 'title' | 'description' | 'slug' | 'tags' | 'readingTime' | 'createdAt'>

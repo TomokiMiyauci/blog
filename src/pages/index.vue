@@ -5,19 +5,14 @@
 </template>
 
 <script lang="ts">
+  import { Headline } from '@/types/article'
   import { defineComponent } from 'nuxt-composition-api'
-  const formatDate = (date: Date) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' }
-    return new Date(date).toLocaleDateString('en', options)
-  }
   export default defineComponent({
     async asyncData({ $content }) {
-      const articles = await $content('articles').only(['title', 'description', 'slug', 'tags']).fetch()
+      const articles = await $content('articles')
+        .only(['title', 'description', 'slug', 'tags', 'readingTime', 'createdAt'])
+        .fetch<Headline>()
       return { articles }
-    },
-
-    setup() {
-      return { formatDate }
     }
   })
 </script>
