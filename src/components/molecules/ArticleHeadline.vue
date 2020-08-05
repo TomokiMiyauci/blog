@@ -11,7 +11,11 @@
       <p class="mt-5 mb-3">{{ headline.description }}</p>
       <component :is="i" />
 
-      <h2 class="mt-5">{{ formatDate(headline.createdAt) }} {{ headline.readingTime }}</h2>
+      <h2 class="mt-5">
+        <mdi-calendar-edit class="mr-1" />{{ formatDate(headline.createdAt) }} <mdi-timer class="mr-1" />{{
+          headline.readingTime
+        }}
+      </h2>
     </div>
     <div class="w-full bg-green-200 rounded shadow flex justify-center items-center lg:w-1/3">
       <nuxt-icon height="100" />
