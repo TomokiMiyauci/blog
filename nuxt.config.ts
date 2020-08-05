@@ -1,7 +1,11 @@
 import { join } from 'path'
 
 import { NuxtConfig } from '@nuxt/types'
-
+declare module '@nuxt/types/config/hooks' {
+  interface NuxtOptionsHooks {
+    'content:file:beforeInsert'?: (document: { extension: string; text: string; readingTime: string }) => Promise<void>
+  }
+}
 const config: NuxtConfig = {
   /*
    ** Nuxt rendering mode
@@ -91,6 +95,16 @@ const config: NuxtConfig = {
     }
   },
 
+  hooks: {
+    'content:file:beforeInsert': async (document) => {
+      if (document.extension === '.md') {
+        const { default: readingTime } = await import('reading-time')
+        const { text } = readingTime(document.text)
+        document.readingTime = text
+      }
+    }
+  },
+
   sentry: {
     dsn: process.env.dsn
   },
@@ -108,24 +122,24 @@ const config: NuxtConfig = {
     }
   },
 
-  // modern: 'client',
+  modern: 'client',
 
-  // features: {
-  //   store: false,
-  //   layouts: true,
-  //   meta: true,
-  //   middleware: false,
-  //   transitions: true,
-  //   deprecations: false,
-  //   validate: false,
-  //   asyncData: true,
-  //   fetch: false,
-  //   clientOnline: false,
-  //   clientPrefetch: true,
-  //   clientUseUrl: true,
-  //   componentAliases: false,
-  //   componentClientOnly: false
-  // },
+  features: {
+    store: false,
+    layouts: true,
+    meta: true,
+    middleware: false,
+    transitions: true,
+    deprecations: false,
+    validate: false,
+    asyncData: true,
+    fetch: false,
+    clientOnline: false,
+    clientPrefetch: true,
+    clientUseUrl: true,
+    componentAliases: false,
+    componentClientOnly: false
+  },
 
   generate: {
     interval: 2000
