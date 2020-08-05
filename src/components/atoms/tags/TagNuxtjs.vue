@@ -1,5 +1,5 @@
 <template>
-  <base-tag name="Nuxt.js">
+  <base-tag name="Nuxtjs">
     <nuxt-icon />
   </base-tag>
 </template>

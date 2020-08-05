@@ -1,5 +1,5 @@
 <template>
-  <BaseIconifyIcon :icon="nuxtIcon" />
+  <BaseIconifyIcon v-bind="$attrs" :icon="nuxtIcon" />
 </template>
 
 <script lang="ts">
