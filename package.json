@@ -34,7 +34,8 @@
     "@nuxtjs/sentry": "^4.3.4",
     "nuxt": "^2.14.0",
     "nuxt-composition-api": "^0.11.0",
-    "prism-themes": "^1.4.0"
+    "prism-themes": "^1.4.0",
+    "vue-scrollactive": "^0.9.3"
   },
   "devDependencies": {
     "@iconify/icons-logos": "^1.0.12",
