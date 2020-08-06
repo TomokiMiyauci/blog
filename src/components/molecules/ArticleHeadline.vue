@@ -24,11 +24,9 @@
 
 <script lang="ts">
   import { Headline } from '@/types/article'
+  import { formatDate } from '@/utils/formatter'
   import { defineComponent } from 'nuxt-composition-api'
-  const formatDate = (date: Date) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' }
-    return new Date(date).toLocaleDateString('en', options)
-  }
+
   export default defineComponent({
     components: {
       TagNuxtjs: () => import('@/components/atoms/tags/TagNuxtjs.vue')

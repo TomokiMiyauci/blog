@@ -29,11 +29,9 @@
 
 <script lang="ts">
   import { PrevNext } from '@/types/article'
+  import { formatDate } from '@/utils/formatter'
   import { defineComponent } from 'nuxt-composition-api'
-  const formatDate = (date: Date) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric' }
-    return new Date(date).toLocaleDateString('en', options)
-  }
+
   export default defineComponent({
     async asyncData({ $content, params }) {
       const article = await $content('articles', params.slug).fetch()
