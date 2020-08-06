@@ -9,6 +9,7 @@ type BaseContent = {
   dir: string
   path: string
   slug: string
+  toc: Toc[]
   extension: '.md'
   createdAt: Date
   updated: Date
@@ -18,6 +19,12 @@ type Frontmatter = {
   title: string
   description: string
   tags: string[]
+}
+
+type Toc = {
+  id: string
+  depth: number
+  text: string
 }
 
 export type Article = BaseContent &
