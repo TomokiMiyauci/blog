@@ -6,20 +6,22 @@
       >← Back to Home</nuxt-link
     >
     <article class="mt-12">
-      <div class="mb-8">
-        <BaseH1 :text="article.title" />
-        <p class="mt-1 dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary">
-          {{ formatDate(article.updatedAt) }}
-        </p>
-      </div>
-      <ul>
-        <li v-for="link of article.toc" :key="link.id">
-          <NuxtLink :to="`#${link.id}`">{{ link.text }}</NuxtLink>
-        </li>
-      </ul>
-      <div class="mt-12">
-        <nuxt-content :document="article" />
-        <prev-next :prev="prev" :next="next" />
+      <div class="grid grid-temp">
+        <toc :toc="article.toc" />
+        <div style="grid-column: 2 / 3;">
+          <div class="mb-8">
+            <BaseH1 :text="article.title" />
+            <p class="mt-1 dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary">
+              {{ formatDate(article.updatedAt) }}
+            </p>
+          </div>
+          <nuxt-content :document="article" />
+          <prev-next :prev="prev" :next="next" />
+        </div>
+
+        <div style="grid-column: 3 / 3;" class="p-4">
+          <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" />
+        </div>
       </div>
     </article>
   </div>
@@ -51,43 +53,9 @@
   })
 </script>
 
-<style lang="scss">
-  .nuxt-content {
-    h2 {
-      position: relative;
-      display: table;
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-      font-size: 1.5rem;
-
-      &::after {
-        display: block;
-        width: 80%;
-        margin-top: 0.5rem;
-        margin-bottom: 0.25rem;
-        content: '';
-        border-color: #108775;
-        border-width: 2px;
-        border-radius: 0.25rem;
-      }
-    }
-  }
-
-  .icon.icon-link {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBjbGFzcz0iaGVyb2ljb24tdWkiIGQ9Ik0xMS4wMyA4aDMuOTRsMS4wNi00LjI0YTEgMSAwIDEgMSAxLjk0LjQ4TDE3LjAzIDhIMjBhMSAxIDAgMCAxIDAgMmgtMy40N2wtMSA0SDE4YTEgMSAwIDEgMSAwIDJoLTIuOTdsLTEuMDYgNC4yNWExIDEgMCAxIDEtMS45NC0uNDlsLjk0LTMuNzZIOS4wM2wtMS4wNiA0LjI1YTEgMSAwIDEgMS0xLjk0LS40OUw2Ljk3IDE2SDRhMSAxIDAgMCAxIDAtMmgzLjQ3bDEtNEg2YTEgMSAwIDAgMSAwLTJoMi45N2wxLjA2LTQuMjRhMSAxIDAgMSAxIDEuOTQuNDhMMTEuMDMgOHptLS41IDJsLTEgNGgzLjk0bDEtNGgtMy45NHoiLz48L3N2Zz4K);
-    background-size: 20px 20px;
-  }
-
-  .nuxt-content p {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    margin-bottom: 0.5rem;
-    line-height: 1.625;
-    transition-timing-function: linear;
-    transition-duration: 0.3s;
-    transition-property: background-color, border-color, color, fill, stroke;
+<style scoped>
+  .grid-temp {
+    grid-template-columns: 340px 1fr 240px;
+    width: calc(100% - 50px);
   }
 </style>
