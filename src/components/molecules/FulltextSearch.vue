@@ -1,17 +1,35 @@
 <template>
   <div>
-    <!-- <button ref="link">hhh</button> -->
-    <button-circle class="md:hidden">
-      <mdi-magnify />
-    </button-circle>
-    <input-search
+    <transition name="fade-down" mode="out-in">
+      <div v-if="isShow" class="absolute px-3 inset-0 bg-gray-800">
+        <div class="relative w-full h-full flex justify-center items-center">
+          <input-search v-model="searchQuery" class="w-full" @focus="isShow = true" @blur="isShow = false">
+          </input-search>
+
+          <transition name="fade-down">
+            <search-result
+              v-if="searchQuery"
+              class="absolute w-full top-11/12 right-auto left-0"
+              :articles="articles"
+              :keyword="searchQuery"
+              @click="searchQuery = ''"
+            />
+          </transition>
+        </div>
+      </div>
+      <button-circle v-else class="md:hidden" @click="isShow = true">
+        <mdi-magnify />
+      </button-circle>
+    </transition>
+
+    <!-- <input-search
       v-model="searchQuery"
-      class="hidden md:inline-flex items-center justify-cente"
+      class="hidden md:inline-flex items-center align-middle justify-center"
       :is-show="isShow"
       @focus="isShow = true"
       @blur="isShow = false"
-    />
-    <transition name="fade-down">
+    /> -->
+    <!-- <transition name="fade-down">
       <ul
         v-if="isShow && articles.length"
         class="bg-white shadow-md absolute w-64 mt-1 divide-y rounded-md p-3 hover:shadow-lg transition duration-300"
@@ -30,22 +48,13 @@
         >
         </nuxt-link>
       </ul>
-    </transition>
+    </transition> -->
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent, watch, ref } from 'nuxt-composition-api'
-  const highlight = (text: string, search: string): string => {
-    if (search) {
-      const searchRegExp = new RegExp(search, 'ig')
-      return text.replace(
-        searchRegExp,
-        (match) => `<mark class="bg-green-200 rounded text-green-900 font-bold">${match}</mark>`
-      )
-    }
-    return text
-  }
+
   export default defineComponent({
     setup(_, { root }) {
       const articles = ref<{ slug: string; title: string }[]>([])
@@ -53,39 +62,16 @@
       const isShow = ref(false)
       const link = ref<HTMLLIElement[]>()
 
-      // const fo = () => {
-      //   if (!link.value) return
-      //   const a = link.value[0]
-      //   root.$router.push(a.to)
-      //   console.log(a.to, a)
-      // }
-
       watch(searchQuery, async (now) => {
         if (!now) {
           articles.value = []
           return
         }
 
-        articles.value = await root.$content('articles').limit(3).search(now).fetch()
+        articles.value = await root.$content('articles').limit(3).search(now).only(['title', 'slug']).fetch()
       })
 
-      return { articles, isShow, searchQuery, link, highlight }
+      return { articles, isShow, searchQuery, link }
     }
   })
 </script>
-
-<style scoped lang="scss">
-  ul {
-    &::after {
-      position: absolute;
-      top: -10px;
-      left: 28px;
-      width: 0;
-      height: 0;
-      content: '';
-      border-right: 15px solid transparent;
-      border-bottom: 20px solid white;
-      border-left: 15px solid transparent;
-    }
-  }
-</style>
