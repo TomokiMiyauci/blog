@@ -1,5 +1,9 @@
 <template>
-  <base-button class="p-3 focus:outline-none rounded-full bg-gray-300 items-center justify-center inline-flex">
+  <base-button
+    class="p-3 focus:outline-none rounded-full bg-gray-300 items-center justify-center inline-flex"
+    v-bind="$attrs"
+    v-on="$listeners"
+  >
     <slot />
   </base-button>
 </template>
