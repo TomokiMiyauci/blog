@@ -46,3 +46,9 @@
     @apply absolute right-0 text-gray-200 font-light z-10 mr-2 mt-1 text-sm;
   }
 }
+
+.dark-mode {
+  body {
+    @apply bg-gray-900 text-white;
+  }
+}
