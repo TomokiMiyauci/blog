@@ -1770,6 +1770,14 @@
     webpack-node-externals "^2.5.0"
     webpackbar "^4.0.0"
 
+"@nuxtjs/color-mode@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/color-mode/-/color-mode-1.0.3.tgz#213d9e757f354cb7db1efe9702d54789e95d6dae"
+  integrity sha512-fTmjn9fzFv/LPYPJc6m/AxTSPrkoNrgZncLRxVoG3vfhBcHc3D5bFmKvxOLk4ailR+YlxHgIXQp7YK5lf6sYog==
+  dependencies:
+    defu "^2.0.4"
+    lodash.template "^4.5.0"
+
 "@nuxtjs/eslint-config-typescript@^3.0.0":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@nuxtjs/eslint-config-typescript/-/eslint-config-typescript-3.0.0.tgz#4c307ba1d7038d3d4a6aa40ebd4e0bd80a9af512"
@@ -1845,14 +1853,15 @@
     consola "^2.12.1"
     stylelint-webpack-plugin "^2.0.0"
 
-"@nuxtjs/tailwindcss@^2.1.0":
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/tailwindcss/-/tailwindcss-2.1.1.tgz#7120a269b5a43d4a9d60947f7f734458cf86c180"
-  integrity sha512-9DC7Adds1AKvxMbfW0Jd2EPpDUh3pVVE4wwiuJ45CiwOcz9EIU3Lc02h+bjnb1QFf07ZxJVO2xkN00IwQEFp8w==
+"@nuxtjs/tailwindcss@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/tailwindcss/-/tailwindcss-3.0.0.tgz#7ad85bad52d4637366dd29800a476fe36d242e3a"
+  integrity sha512-UuDGt2QWuKw1/29mAEiKce2ikZ4TPIpjL4vECcY/DcNzeYgzfIDpebzvOH6UXvgN3LGjNiCirtJfB94j7XzBfw==
   dependencies:
     consola "^2.14.0"
+    defu "^3.1.0"
     fs-extra "^9.0.1"
-    tailwindcss "^1.6.0"
+    tailwindcss "^1.6.2"
 
 "@nuxtjs/youch@^4.2.3":
   version "4.2.3"
@@ -16512,7 +16521,14 @@ table@^5.2.3, table@^5.4.6:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-tailwindcss@^1.6.0:
+tailwindcss-dark-mode@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/tailwindcss-dark-mode/-/tailwindcss-dark-mode-1.1.6.tgz#b9a7980e7a3a5f10050857232f3f6c6c6c605724"
+  integrity sha512-3+pd3DqMr0ukOfhz5FTtvrZXCph1QreTMV64HDAjSOuJC1jgnpx+JosoQK6cYACFgwNcSpaSJY0tuQRiiF8Ffg==
+  dependencies:
+    tailwindcss "^1.6.2"
+
+tailwindcss@^1.6.2:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.6.2.tgz#352da9e1b0d9154c95ce12483daa1c2fa1f1eea8"
   integrity sha512-Cpa0kElG8Sg5sJSvTYi2frmIQZq0w37RLNNrYyy/W6HIWKspqSdTfb9tIN6X1gm4KV5a+TE/n7EKmn5Q9C7EUQ==
