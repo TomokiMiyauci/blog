@@ -6,9 +6,9 @@
       >← Back to Home</nuxt-link
     >
     <article class="mt-12">
-      <div class="grid grid-temp">
-        <toc :toc="article.toc" />
-        <div style="grid-column: 2 / 3;">
+      <div class="flex md:grid grid-temp grid-cols-main">
+        <toc class="hidden md:block" :toc="article.toc" />
+        <div style="grid-column: 2 / 3;" class="p-2">
           <div class="mb-8">
             <BaseH1 :text="article.title" />
             <p class="mt-1 dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary">
@@ -19,7 +19,7 @@
           <prev-next :prev="prev" :next="next" />
         </div>
 
-        <div style="grid-column: 3 / 3;" class="p-4">
+        <div class="hidden md:block p-4" style="grid-column: 3 / 3;">
           <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" />
         </div>
       </div>
@@ -50,10 +50,3 @@
     }
   })
 </script>
-
-<style scoped>
-  .grid-temp {
-    grid-template-columns: 340px 1fr 240px;
-    width: calc(100% - 50px);
-  }
-</style>
