@@ -21,6 +21,9 @@ const config = {
           // ...defaultTheme.fontFamily.sans
           "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
         ]
+      },
+      gridTemplateColumns: {
+        main: 'minmax(20%,340px) 1fr min(15%,200px)'
       }
     }
   },
@@ -39,7 +42,8 @@ const config = {
       join(BASE_DIR, 'pages', VUE_FILE),
       join(BASE_DIR, 'plugins', '**', '*.ts'),
       join(__dirname, 'nuxt.config.ts')
-    ]
+    ],
+    whiteList: ['p-hohoho']
   }
 }
 
