@@ -13,6 +13,7 @@ const VUE_FILE = join('**', '*.vue')
  */
 const config = {
   theme: {
+    darkSelector: '.dark-mode',
     extend: {
       fontFamily: {
         sans: [
@@ -28,7 +29,7 @@ const config = {
     boxShadow: ['responsive', 'hover', 'focus', 'focus-within'],
     textColor: ['responsive', 'hover', 'focus', 'focus-within']
   },
-  plugins: [],
+  plugins: [require('tailwindcss-dark-mode')()],
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
     enabled: process.env.NODE_ENV === 'production',
