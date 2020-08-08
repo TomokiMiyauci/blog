@@ -24,6 +24,9 @@ const config = {
       },
       gridTemplateColumns: {
         main: 'minmax(20%,340px) 1fr min(15%,200px)'
+      },
+      inset: {
+        '11/12': '91.666667%'
       }
     }
   },
