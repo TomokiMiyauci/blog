@@ -66,12 +66,15 @@ const config: NuxtConfig = {
     '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
+    // Doc: https://github.com/nuxt-community/color-mode-module
+    '@nuxtjs/color-mode',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
     'nuxt-composition-api'
   ],
 
   tailwindcss: {
+    cssPath: '@/assets/css/tailwind.scss',
     configPath: join(__dirname, 'tailwind.config.js')
   },
   /*
