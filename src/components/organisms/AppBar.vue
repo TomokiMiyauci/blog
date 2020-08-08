@@ -9,7 +9,10 @@
           ><span style="color: #72deaf;">T</span>ech<span style="color: #72deaf;">s</span>rc</span
         ></nuxt-link
       >
-      <fulltext-search />
+      <div class="flex items-center">
+        <fulltext-search />
+        <button-color-mode class="ml-5" />
+      </div>
     </div>
   </header>
 </template>
