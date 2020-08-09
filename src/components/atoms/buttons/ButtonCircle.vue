@@ -1,6 +1,6 @@
 <template>
   <base-button
-    class="p-3 focus:outline-none rounded-full bg-gray-300 items-center justify-center inline-flex"
+    class="p-3 focus:outline-none rounded-full items-center hover:bg-gray-100 dark-hover:bg-gray-900 transition duration-300 justify-center inline-flex"
     v-bind="$attrs"
     v-on="$listeners"
   >
