@@ -1,16 +1,15 @@
 <template>
   <div>
     <transition name="fade-down" mode="out-in">
-      <div v-if="isShow" class="absolute px-3 inset-0 bg-gray-800">
+      <div v-if="isShow" class="absolute px-3 inset-0 bg-white">
         <div class="relative w-full h-full flex justify-center items-center">
           <input-search v-model="searchQuery" class="w-full" @focus="isShow = true" @blur="isShow = false">
           </input-search>
 
-          <transition name="fade-down">
+          <transition name="fade-down" mode="out-in">
             <search-result
-              v-if="searchQuery"
+              v-show="searchQuery"
               class="absolute w-full top-11/12 right-auto left-0"
-              :articles="articles"
               :keyword="searchQuery"
               @click="searchQuery = ''"
             />
@@ -53,23 +52,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, watch, ref } from 'nuxt-composition-api'
+  import { defineComponent, ref } from 'nuxt-composition-api'
 
   export default defineComponent({
-    setup(_, { root }) {
-      const articles = ref<{ slug: string; title: string }[]>([])
+    setup() {
+      const articles = ref<Promise<{ slug: string; title: string }[]> | null>(null)
       const searchQuery = ref('')
       const isShow = ref(false)
       const link = ref<HTMLLIElement[]>()
-
-      watch(searchQuery, async (now) => {
-        if (!now) {
-          articles.value = []
-          return
-        }
-
-        articles.value = await root.$content('articles').limit(3).search(now).only(['title', 'slug']).fetch()
-      })
 
       return { articles, isShow, searchQuery, link }
     }
