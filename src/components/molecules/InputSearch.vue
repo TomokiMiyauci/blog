@@ -19,11 +19,11 @@
       @keyup="$emit('keydown')"
     />
     <transition name="fade" mode="out-in">
-      <button v-if="value" class="focus:outline-none" @click="onClick">
+      <button v-if="forceClose || value" class="focus:outline-none" @click="onClick">
         <mdi-close class="hover:text-green-500 transition duration-500" />
       </button>
 
-      <mdi-slash-forward v-else-if="!isShow" class="bg-gray-500 rounded" />
+      <mdi-slash-forward v-else-if="!isShow" class="hidden md:block bg-gray-500 rounded" />
       <base-svg v-else> </base-svg>
     </transition>
   </div>
@@ -39,6 +39,11 @@
       },
 
       isShow: {
+        type: Boolean,
+        default: false
+      },
+
+      forceClose: {
         type: Boolean,
         default: false
       }
@@ -63,10 +68,11 @@
       })
 
       const onClick = () => {
+        emit('close')
         emit('input')
         focus()
       }
-      return { input, onClick }
+      return { input, onClick, focus }
     }
   })
 </script>

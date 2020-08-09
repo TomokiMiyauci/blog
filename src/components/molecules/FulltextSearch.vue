@@ -1,22 +1,25 @@
 <template>
   <div>
-    <transition name="fade-down" mode="out-in">
-      <div v-if="isShow" class="absolute px-3 inset-0 bg-white">
+    <transition name="fade-down">
+      <div v-if="isShow" class="absolute px-3 inset-0 bg-white md:hidden">
         <div class="relative w-full h-full flex justify-center items-center">
-          <input-search v-model="searchQuery" class="w-full" @focus="isShow = true" @blur="isShow = false">
-          </input-search>
+          <input-search
+            ref="inputSearch"
+            v-model="searchQuery"
+            :force-close="true"
+            class="w-full"
+            @close="isShow = false"
+          />
 
-          <transition name="fade-down" mode="out-in">
-            <search-result
-              v-show="searchQuery"
-              class="absolute w-full top-11/12 right-auto left-0"
-              :keyword="searchQuery"
-              @click="searchQuery = ''"
-            />
-          </transition>
+          <search-result
+            v-show="searchQuery"
+            class="absolute w-full top-11/12 right-auto left-0"
+            :keyword="searchQuery"
+            @click="searchQuery = ''"
+          />
         </div>
       </div>
-      <button-circle v-else class="md:hidden" @click="isShow = true">
+      <button-circle v-else class="md:hidden" @click="onClick">
         <mdi-magnify />
       </button-circle>
     </transition>
@@ -52,16 +55,22 @@
 </template>
 
 <script lang="ts">
+  import type InputSearch from '@/components/molecules/InputSearch.vue'
   import { defineComponent, ref } from 'nuxt-composition-api'
-
   export default defineComponent({
-    setup() {
-      const articles = ref<Promise<{ slug: string; title: string }[]> | null>(null)
+    setup(_, { root }) {
       const searchQuery = ref('')
       const isShow = ref(false)
-      const link = ref<HTMLLIElement[]>()
+      const inputSearch = ref<InstanceType<typeof InputSearch>>()
 
-      return { articles, isShow, searchQuery, link }
+      const onClick = async (): Promise<void> => {
+        isShow.value = true
+        await root.$nextTick()
+        if (!inputSearch.value) return
+        inputSearch.value.focus()
+      }
+
+      return { isShow, searchQuery, onClick, inputSearch }
     }
   })
 </script>

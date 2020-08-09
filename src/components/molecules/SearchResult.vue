@@ -1,45 +1,45 @@
 <template>
-  <div class="bg-white dark:bg-gray-600 shadow-md mt-1 rounded-md p-3 hover:shadow-lg transition duration-300">
-    <Promised :promise="articlesPromise">
-      <template #pending>
-        <div class="flex justify-center">
-          <spin-loader />
-        </div>
-      </template>
-      <template #rejected="error">
-        <div class="flex">
-          <mdi-alert /><span class="ml-1">{{ error }}</span>
-        </div>
-      </template>
-      <template v-slot="articles">
-        <transition name="fade-right" mode="out-in">
-          <div v-if="articles.length">
-            <h2 class="font-bold">Articles</h2>
+  <Promised
+    tag="div"
+    :promise="articlesPromise"
+    class="bg-white dark:bg-gray-600 shadow-md mt-1 rounded-md p-3 hover:shadow-lg transition duration-300"
+  >
+    <template #pending>
+      <div class="flex justify-center">
+        <spin-loader />
+      </div>
+    </template>
+    <template #rejected="error">
+      <div class="flex">
+        <mdi-alert /><span class="ml-1">{{ error }}</span>
+      </div>
+    </template>
+    <template #default="articles">
+      <transition name="fade">
+        <div v-if="articles.length">
+          <h2 class="font-bold">Articles</h2>
 
-            <ul class="divide-y">
-              <transition-group name="fade-left">
-                <nuxt-link
-                  v-for="article in articles"
-                  ref="link"
-                  :key="article.slug"
-                  class="hover:text-green-500 hover:bg-gray-300 transition duration-300 cursor-pointer text-right p-1 rounded font-normal"
-                  tag="li"
-                  :to="{ name: 'slug', params: { slug: article.slug } }"
-                  v-on="$listeners"
-                  v-html="highlight(article.title, keyword)"
-                >
-                </nuxt-link>
-              </transition-group>
-            </ul>
-          </div>
+          <ul class="divide-y">
+            <nuxt-link
+              v-for="article in articles"
+              ref="link"
+              :key="article.slug"
+              class="hover:text-green-500 hover:bg-gray-300 transition duration-300 cursor-pointer text-right p-1 rounded font-normal"
+              tag="li"
+              :to="{ name: 'slug', params: { slug: article.slug } }"
+              v-on="$listeners"
+              v-html="highlight(article.title, keyword)"
+            >
+            </nuxt-link>
+          </ul>
+        </div>
 
-          <h2 v-else class="flex">
-            <mdi-information /><span class="ml-1">No hit {{ keyword }}</span>
-          </h2>
-        </transition>
-      </template>
-    </Promised>
-  </div>
+        <h2 v-else class="flex">
+          <mdi-information /><span class="ml-1">No hit {{ keyword }}</span>
+        </h2>
+      </transition>
+    </template>
+  </Promised>
 </template>
 
 <script lang="ts">
@@ -79,7 +79,6 @@
 
     setup(props, { root }) {
       const asyncSearch = (query: string) => {
-        // await wait(700)
         return root
           .$content('articles')
           .limit(3)
