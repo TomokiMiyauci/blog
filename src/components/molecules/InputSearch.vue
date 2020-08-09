@@ -1,8 +1,8 @@
 <template>
   <div
-    class="flex justify-center items-center py-2 px-3 relative shadow leading-5 bg-gray-300 hover:bg-gray-400 hover:shadow-md transition duration-300 rounded-full focus-within:bg-gray-800 focus-within:shadow-md focus-within:text-white"
+    class="flex justify-center items-center py-2 px-3 relative shadow leading-5 bg-gray-300 hover:bg-gray-400 hover:shadow-md transition duration-300 rounded-full focus-within:bg-gray-800 focus-within:shadow-md focus-within:text-white dark:text-gray-800"
   >
-    <mdi-magnify class="transition duration-300 delay-100" :class="{ 'text-green-500': isShow }" />
+    <mdi-magnify class="transition duration-300 delay-100" />
 
     <input
       ref="input"
@@ -13,10 +13,9 @@
       autocomplete="off"
       spellcheck="false"
       role="combobox"
-      @input="$emit('input', $event.target.value)"
-      @focus="$emit('focus')"
       @blur="$emit('blur')"
-      @keyup="$emit('keydown')"
+      @focus="$emit('focus')"
+      @input="$emit('input', $event.target.value)"
     />
     <transition name="fade" mode="out-in">
       <button v-if="forceClose || value" class="focus:outline-none" @click="onClick">

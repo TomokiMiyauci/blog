@@ -15,7 +15,12 @@
             v-show="searchQuery"
             class="absolute w-full top-11/12 right-auto left-0"
             :keyword="searchQuery"
-            @click="searchQuery = ''"
+            @click="
+              () => {
+                searchQuery = ''
+                isShow = false
+              }
+            "
           />
         </div>
       </div>
@@ -23,14 +28,21 @@
         <mdi-magnify />
       </button-circle>
     </transition>
+    <div class="relative hidden md:inline-flex">
+      <input-search
+        v-model="searchQuery"
+        class="items-center justify-center"
+        @blur="isShow = false"
+        @focus="isShow = true"
+      />
+      <search-result
+        v-show="isShow && searchQuery"
+        class="absolute top-full w-full right-0"
+        :keyword="searchQuery"
+        @click="searchQuery = ''"
+      />
+    </div>
 
-    <!-- <input-search
-      v-model="searchQuery"
-      class="hidden md:inline-flex items-center align-middle justify-center"
-      :is-show="isShow"
-      @focus="isShow = true"
-      @blur="isShow = false"
-    /> -->
     <!-- <transition name="fade-down">
       <ul
         v-if="isShow && articles.length"

@@ -27,7 +27,7 @@
               class="hover:text-green-500 hover:bg-gray-300 transition duration-300 cursor-pointer text-right p-1 rounded font-normal"
               tag="li"
               :to="{ name: 'slug', params: { slug: article.slug } }"
-              v-on="$listeners"
+              @click.native.prevent="$emit('click')"
               v-html="highlight(article.title, keyword)"
             >
             </nuxt-link>
@@ -93,7 +93,6 @@
         () => props.keyword,
         (now) => {
           if (!now) {
-            articlesPromise.value = null
             return
           }
 
@@ -112,7 +111,7 @@
       @apply absolute w-0 h-0;
 
       top: -15px;
-      left: 28px;
+      left: 25px;
       content: '';
       border-right: 15px solid transparent;
       border-bottom: 20px solid white;
