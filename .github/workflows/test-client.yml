@@ -283,6 +283,7 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_PATH: ${{ github.workspace }}
+          PROJECT_ID: develop
 
   # deploy-webpack-analyzer:
   #   needs: export

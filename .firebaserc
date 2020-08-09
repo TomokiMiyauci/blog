@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "tech-xas",
+    "develop": "tech-xas",
     "release": "tech-src"
   }
 }
