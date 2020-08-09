@@ -27,7 +27,7 @@
     }
   }
   pre {
-    @apply rounded;
+    @apply rounded static;
   }
 }
 
@@ -53,6 +53,6 @@ body {
 
 .dark-mode {
   body {
-    @apply bg-gray-900 text-white;
+    @apply bg-gray-800 text-white transition duration-300;
   }
 }
