@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "develop": "tech-xas",
+    "release": "tech-src"
+  }
+}

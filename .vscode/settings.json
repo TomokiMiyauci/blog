@@ -1,6 +1,12 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
-    "eslint.enable": true,
-  }
+    "eslint.enable": true
+  },
+  "css.validate": false,
+  "scss.validate": false,
+  "vetur.experimental.templateInterpolationService": true,
+  "vetur.format.defaultFormatter.html": "prettier",
+  "files.autoSave": "onWindowChange",
+  "textlint.autoFixOnSave": true
 }

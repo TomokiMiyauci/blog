@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "@nuxtjs/eslint-config-typescript",
+    "prettier",
+    "prettier/vue",
+    "plugin:prettier/recommended",
+    "plugin:nuxt/recommended"
+  ],
+  "plugins": ["prettier"],
+  "rules": {
+    "import/order": [
+      "error",
+      { "alphabetize": { "order": "asc", "caseInsensitive": true }, "newlines-between": "always" }
+    ],
+    "vue/no-v-html": "off"
+  }
+}

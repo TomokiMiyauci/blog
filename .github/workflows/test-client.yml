@@ -1,0 +1,527 @@
+name: test
+
+on:
+  push:
+      branches:
+        - develop
+
+jobs:
+  setup:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Install
+        if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
+        run: yarn --check-files --frozen-lockfile --non-interactive
+
+  lint:
+    needs: setup
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: lint by ESlint and Stylelint and VTI
+        run: yarn lint
+
+  test-unit:
+    needs: setup
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Test unit
+        run: yarn test:unit --ci
+
+      # - name: upload coverage
+      #   if: matrix.node == 14
+      #   uses: codecov/codecov-action@master
+      #   with:
+      #     token: ${{ secrets.CODECOV_TOKEN }}
+      #     file: ./coverage/clover.xml
+
+      # - name: Test e2e
+      #   run: yarn ci:e2e
+
+  # audit:
+  #   needs: setup
+  #   runs-on: ${{ matrix.os }}
+
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-16.04]
+  #       node: [10]
+
+  #   steps:
+  #     - uses: actions/setup-node@v2-beta
+  #       with:
+  #         node-version: ${{ matrix.node }}
+
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Restore node_modules
+  #       id: node_modules_cache_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: node_modules
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+  #     - name: Restore node_modules of client
+  #       id: node_modules_cache_client_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ${{ github.workspace}}/packages/client/node_modules
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+  #     - name: Audit
+  #       run: yarn run audit
+
+  build:
+    needs: setup
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Build
+        run: yarn generate
+        env:
+          dsn: ${{ secrets.SENTRY_DEV }}
+
+      - name: Cache building deliverable
+        id: build_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/dist
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+
+  # test-e2e:
+  #   needs: build
+  #   runs-on: ${{ matrix.os }}
+
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-16.04]
+  #       node: [10]
+
+  #   steps:
+  #     - uses: actions/setup-node@v2-beta
+  #       with:
+  #         node-version: ${{ matrix.node }}
+
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Restore node_modules
+  #       id: node_modules_cache_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: node_modules
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+  #     - name: Restore building deliverable
+  #       id: build_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ${{ github.workspace}}/dist
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+
+  #     - name: Cypress run
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         start: yarn start
+  #         wait-on: 'http://localhost:3000'
+
+  # export:
+  #   needs: [lint, audit, build]
+  #   runs-on: ${{ matrix.os }}
+
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-16.04]
+  #       node: [10]
+
+  #   steps:
+  #     - uses: actions/setup-node@v2-beta
+  #       with:
+  #         node-version: ${{ matrix.node }}
+
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Restore node_modules
+  #       id: node_modules_cache_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: node_modules
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+  #     - name: Restore node_modules of client
+  #       id: node_modules_cache_client_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ${{ github.workspace}}/packages/client/node_modules
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+  #     - name: Restore building deliverable
+  #       id: build_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ${{ github.workspace}}/packages/client/.nuxt
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+
+  #     - name: Export static site
+  #       run: yarn export
+
+  #     - name: Cache exporting deliverable
+  #       id: export_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ${{ github.workspace}}/packages/client/dist
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-export-nuxt-${{ github.sha }}
+
+  deploy:
+    needs: build
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [10]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore building deliverable
+        id: build_id
+        uses: actions/cache@v2
+        with:
+          path: ${{ github.workspace}}/dist
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+
+      - name: Deploy to hosting to Firebase
+        uses: w9jds/firebase-action@v1.3.1
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_PATH: ${{ github.workspace }}
+          PROJECT_ID: develop
+
+  # deploy-webpack-analyzer:
+  #   needs: export
+  #   runs-on: ${{ matrix.os }}
+
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-16.04]
+  #       node: [10]
+
+  #   steps:
+  #     - uses: actions/setup-node@v2-beta
+  #       with:
+  #         node-version: ${{ matrix.node }}
+
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Restore webpack bundle analyzer
+  #       id: webpack_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ${{ github.workspace}}/packages/client/stats
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-analyzer-${{ github.sha }}
+
+  #     - name: Deploy to Github Pages
+  #       uses: peaceiris/actions-gh-pages@v3.6.2
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: packages/client/stats
+  #         keep_files: true
+
+  # lighthouse-mobile:
+  #   runs-on: ubuntu-16.04
+  #   needs: deploy
+
+  #   steps:
+  #     - name: checkout
+  #       uses: actions/checkout@v2
+
+  #     - run: mkdir -p lighthouse
+
+  #     - name: Run Lighthouse
+  #       uses: foo-software/lighthouse-check-action@master
+  #       with:
+  #         author: ${{ github.actor }}
+  #         branch: ${{ github.ref }}
+  #         outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
+  #         urls: 'https://markdown-editor-simple.web.app/'
+  #         sha: ${{ github.sha }}
+  #         slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
+
+  #     # - name: Upload artifacts
+  #     #   uses: actions/upload-artifact@master
+  #     #   with:
+  #     #     name: Lighthouse mobile reports
+  #     #     path: lighthouse
+
+  #     - name: Prepare deploy
+  #       run: |
+  #         rm  -f lighthouse/results.json
+  #         mv lighthouse/*.html lighthouse/lighthouse-mobile.html
+
+  #     - name: Deploy to Github Pages
+  #       uses: peaceiris/actions-gh-pages@v3.6.2
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: packages/client/lighthouse
+  #         keep_files: true
+
+  # lighthouse-desktop:
+  #   runs-on: ubuntu-16.04
+  #   needs: lighthouse-mobile
+
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - run:  mkdir -p lighthouse
+
+  #     - name: Run Lighthouse
+  #       uses: foo-software/lighthouse-check-action@master
+  #       with:
+  #         author: ${{ github.actor }}
+  #         branch: ${{ github.ref }}
+  #         outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
+  #         emulatedFormFactor: desktop
+  #         urls: 'https://markdown-editor-simple.web.app/'
+  #         sha: ${{ github.sha }}
+  #         slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
+
+  #     - name: Prepare deploy
+  #       run: |
+  #         rm  -f lighthouse/results.json
+  #         mv lighthouse/*.html lighthouse/lighthouse-pc.html
+
+  #     - name: Deploy to Github Pages
+  #       uses: peaceiris/actions-gh-pages@v3.6.2
+  #       with:
+  #         github_token: ${{ secrets.GITHUB_TOKEN }}
+  #         publish_dir: packages/client/lighthouse
+  #         keep_files: true
+
+  #     # - name: Upload artifacts
+  #     #   uses: actions/upload-artifact@master
+  #     #   with:
+  #     #     name: Lighthouse reports
+  #     #     path: /tmp/artifacts/desktop
+
+  notice:
+      needs: deploy
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_DEV }}
+
+  # test-snapshot:
+  #   needs: setup
+  #   runs-on: ${{ matrix.os }}
+
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-16.04]
+  #       node: [10]
+
+  #   steps:
+  #     - uses: actions/setup-node@v2-beta
+  #       with:
+  #         node-version: ${{ matrix.node }}
+
+  #     - name: checkout
+  #       uses: actions/checkout@master
+
+  #     - name: restore workspace cache
+  #       uses: actions/cache@v1
+  #       with:
+  #         path: ${{ github.workspace }}
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
+
+  #     - name: pre-setup
+  #       run: sed -i -e '2s/^/\/\/ /g' packages/client/src/types/vue-shims.d.ts
+
+  #     - name: test snapshot
+  #       run: yarn workspace client test:snapshot --ci
+
+  # # test-visual:
+  # #   needs: setup
+  # #   runs-on: ${{ matrix.os }}
+
+  # #   strategy:
+  # #     matrix:
+  # #       os: [ubuntu-16.04]
+  # #       node: [13]
+
+  # #   steps:
+  # #     - uses: actions/setup-node@v2-beta
+  # #       with:
+  # #         node-version: ${{ matrix.node }}
+
+  # #     - name: checkout
+  # #       uses: actions/checkout@master
+
+  # #     - name: restore workspace cache
+  # #       uses: actions/cache@v1
+  # #       with:
+  # #         path: ${{ github.workspace }}
+  # #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
+
+  # #     - name: pre-setup
+  # #       run: sed -i -e '2s/^/\/\/ /g' packages/client/src/types/vue-shims.d.ts
+
+  # #     - name: build
+  # #       run: yarn workspace client build-storybook
+
+  # #     - name: deploy
+  # #       env:
+  # #         PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+  # #       run: yarn workspace client percy-storybook --debug
+
+  #     # - name: Percy Test
+  #     #   uses: percy/storybook-action@master
+  #     #   with:
+  #     #     working-directory: packages/client
+  #     #   env:
+  #     #     PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+
+  #     # - name: Setup tmate session
+  #     #   uses: mxschmitt/action-tmate@v2
+
+  # deploy-storybook:
+  #   needs: [lint, audit, test-unit, test-snapshot]
+  #   runs-on: ${{ matrix.os }}
+
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-16.04]
+  #       node: [10]
+
+  #   steps:
+  #     - uses: actions/setup-node@v2-beta
+  #       with:
+  #         node-version: ${{ matrix.node }}
+
+  #     - name: checkout
+  #       uses: actions/checkout@master
+
+  #     - name: restore workspace cache
+  #       uses: actions/cache@v1
+  #       with:
+  #         path: ${{ github.workspace }}
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-nuxt-${{ github.sha }}
+
+  #     - name: pre-setup
+  #       run: sed -i -e '2s/^/\/\/ /g' packages/client/src/types/vue-shims.d.ts
+
+  #     # - name: deploy storybook
+  #     #   run: yarn workspace client deploy-storybook -- --ci
+  #     #   env:
+  #     #     GH_TOKEN: ${ GITHUB_ACTOR }:${{ secrets.GITHUB_TOKEN }}
+
+  # notice:
+  #   needs: [lighthouse-mobile, lighthouse-desktop]
+  #   runs-on: ${{ matrix.os }}
+  #   if: always()
+
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-16.04]
+
+  #   steps:
+  #     - uses: technote-space/workflow-conclusion-action@v1
+  #     - uses: 8398a7/action-slack@v3
+  #       with:
+  #         status: ${{ env.WORKFLOW_CONCLUSION }}
+  #         fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
+  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }} # required

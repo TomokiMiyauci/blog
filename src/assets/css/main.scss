@@ -1,0 +1,58 @@
+.nuxt-content {
+   p {
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.625;
+    transition-timing-function: linear;
+    transition-duration: 0.3s;
+    transition-property: background-color, border-color, color, fill, stroke;
+  }
+  h2 {
+    position: relative;
+    display: table;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+
+    &::after {
+      display: block;
+      width: 80%;
+      margin-top: 0.5rem;
+      margin-bottom: 0.25rem;
+      content: '';
+      border-color: #108775;
+      border-width: 2px;
+      border-radius: 0.25rem;
+    }
+  }
+  pre {
+    @apply rounded static;
+  }
+}
+
+.icon.icon-link {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCBjbGFzcz0iaGVyb2ljb24tdWkiIGQ9Ik0xMS4wMyA4aDMuOTRsMS4wNi00LjI0YTEgMSAwIDEgMSAxLjk0LjQ4TDE3LjAzIDhIMjBhMSAxIDAgMCAxIDAgMmgtMy40N2wtMSA0SDE4YTEgMSAwIDEgMSAwIDJoLTIuOTdsLTEuMDYgNC4yNWExIDEgMCAxIDEtMS45NC0uNDlsLjk0LTMuNzZIOS4wM2wtMS4wNiA0LjI1YTEgMSAwIDEgMS0xLjk0LS40OUw2Ljk3IDE2SDRhMSAxIDAgMCAxIDAtMmgzLjQ3bDEtNEg2YTEgMSAwIDAgMSAwLTJoMi45N2wxLjA2LTQuMjRhMSAxIDAgMSAxIDEuOTQuNDhMMTEuMDMgOHptLS41IDJsLTEgNGgzLjk0bDEtNGgtMy45NHoiLz48L3N2Zz4K);
+  background-size: 20px 20px;
+}
+
+.nuxt-content-highlight {
+  @apply relative;
+
+  .filename {
+    @apply absolute right-0 text-gray-200 font-light z-10 mr-2 mt-1 text-sm;
+  }
+}
+
+body {
+  @apply text-gray-800;
+}
+
+.dark-mode {
+  body {
+    @apply bg-gray-800 text-white transition duration-300;
+  }
+}
