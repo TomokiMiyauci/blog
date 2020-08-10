@@ -109,7 +109,8 @@ const config: NuxtConfig = {
   },
 
   sentry: {
-    dsn: process.env.dsn
+    dsn: process.env.dsn,
+    lazy: true
   },
   /*
    ** Build configuration
