@@ -84,7 +84,8 @@ const config: NuxtConfig = {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
-    '@nuxtjs/sentry'
+    '@nuxtjs/sentry',
+    '@nuxtjs/sitemap'
   ],
   /*
    ** Content module configuration
@@ -111,6 +112,16 @@ const config: NuxtConfig = {
   sentry: {
     dsn: process.env.dsn,
     lazy: true
+  },
+
+  sitemap: {
+    hostname: process.env.HOSTNAME,
+    routes: async () => {
+      const { $content } = (await import('@nuxt/content')).default
+      const files = await $content('articles').only(['slug']).fetch()
+      return files.map(({ slug }) => `/${slug}`)
+    },
+    gzip: true
   },
   /*
    ** Build configuration
