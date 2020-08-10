@@ -8,7 +8,7 @@
     <article class="mt-12">
       <div class="flex md:grid grid-temp grid-cols-main">
         <toc class="hidden md:block" :toc="article.toc" />
-        <div style="grid-column: 2 / 3;" class="p-2">
+        <div style="grid-column: 2 / 3;" class="p-2 overflow-hidden">
           <div class="mb-8">
             <BaseH1 :text="article.title" />
             <p class="mt-1 dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary">
