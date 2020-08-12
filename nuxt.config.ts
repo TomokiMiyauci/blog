@@ -7,6 +7,7 @@ declare module '@nuxt/types/config/hooks' {
     'content:file:beforeInsert'?: (document: { extension: string; text: string; readingTime: string }) => Promise<void>
   }
 }
+const HOSTNAME = process.env.HOSTNAME
 const config: NuxtConfig = {
   /*
    ** Nuxt rendering mode
@@ -86,6 +87,7 @@ const config: NuxtConfig = {
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
     '@nuxtjs/sentry',
+    '@nuxtjs/robots',
     '@nuxtjs/sitemap'
   ],
   /*
@@ -115,8 +117,14 @@ const config: NuxtConfig = {
     lazy: true
   },
 
+  robots: {
+    UserAgent: '*',
+    Disallow: '/',
+    Sitemap: HOSTNAME
+  },
+
   sitemap: {
-    hostname: process.env.HOSTNAME,
+    hostname: HOSTNAME,
     routes: async () => {
       const { $content } = (await import('@nuxt/content')).default as { $content: contentFunc }
       const files = await $content('articles').only(['slug']).fetch<{ slug: string }[]>()
