@@ -1,5 +1,6 @@
 import { join } from 'path'
 
+import type { contentFunc } from '@nuxt/content'
 import { NuxtConfig } from '@nuxt/types'
 declare module '@nuxt/types/config/hooks' {
   interface NuxtOptionsHooks {
@@ -117,8 +118,8 @@ const config: NuxtConfig = {
   sitemap: {
     hostname: process.env.HOSTNAME,
     routes: async () => {
-      const { $content } = (await import('@nuxt/content')).default
-      const files = await $content('articles').only(['slug']).fetch()
+      const { $content } = (await import('@nuxt/content')).default as { $content: contentFunc }
+      const files = await $content('articles').only(['slug']).fetch<{ slug: string }[]>()
       return files.map(({ slug }) => `/${slug}`)
     },
     gzip: true
