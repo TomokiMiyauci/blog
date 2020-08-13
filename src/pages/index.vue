@@ -13,6 +13,10 @@
   import { Headline } from '@/types/article'
   import { defineComponent } from 'nuxt-composition-api'
   export default defineComponent({
+    head: {
+      title: 'Home'
+    },
+
     async asyncData({ $content }) {
       const headline: (keyof Headline)[] = ['title', 'description', 'slug', 'tags', 'readingTime', 'createdAt']
       const articles = await $content('articles').only(headline).fetch<Headline>()
