@@ -20,7 +20,8 @@
   },
   "lint-staged": {
     "*.{ts,vue}": "eslint",
-    "*.{scss,vue}": "stylelint"
+    "*.{scss,vue}": "stylelint",
+    "*.md": "markdownlint"
   },
   "husky": {
     "hooks": {
