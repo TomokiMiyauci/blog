@@ -106,6 +106,7 @@ jobs:
   notice:
       needs: deploy
       runs-on: ubuntu-latest
+      if: always()
       steps:
       - uses: actions/checkout@v2
       - name: Slack Notification

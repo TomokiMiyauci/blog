@@ -254,7 +254,7 @@ jobs:
   #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-export-nuxt-${{ github.sha }}
 
   deploy:
-    needs: build
+    needs: [lint, test-unit, build]
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -397,6 +397,7 @@ jobs:
   notice:
       needs: deploy
       runs-on: ubuntu-latest
+      if: always()
       steps:
       - uses: actions/checkout@v2
       - name: Slack Notification
