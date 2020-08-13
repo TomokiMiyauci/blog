@@ -28,13 +28,13 @@
 </template>
 
 <script lang="ts">
-  import { PrevNext } from '@/types/article'
+  import { PrevNext, Article } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { defineComponent } from 'nuxt-composition-api'
 
   export default defineComponent({
     async asyncData({ $content, params }) {
-      const article = await $content('articles', params.slug).fetch()
+      const article = await $content('articles', params.slug).fetch<Article>()
 
       const [prev, next] = await $content('articles')
         .only(['title', 'slug'])

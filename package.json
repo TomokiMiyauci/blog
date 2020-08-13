@@ -1,8 +1,10 @@
 {
   "name": "techsrc",
-  "version": "0.2.0",
+  "description": "Tech blog for engineer",
+  "version": "0.2.1",
   "private": true,
   "license": "MIT",
+  "author": "TomokiMiyauci",
   "scripts": {
     "dev": "nuxt-ts",
     "build": "nuxt-ts build",

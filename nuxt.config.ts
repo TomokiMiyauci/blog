@@ -8,6 +8,7 @@ declare module '@nuxt/types/config/hooks' {
   }
 }
 const HOSTNAME = process.env.HOSTNAME
+const PACKAGE_NAME = process.env.npm_package_name
 const isProduction = process.env.NODE_ENV === 'production'
 const config: NuxtConfig = {
   /*
@@ -28,16 +29,8 @@ const config: NuxtConfig = {
    ** See https://nuxtjs.org/api/configuration-head
    */
   head: {
-    title: process.env.npm_package_name || '',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || ''
-      }
-    ],
+    title: '',
+    titleTemplate: `%s | ${PACKAGE_NAME?.charAt(0).toUpperCase()}${PACKAGE_NAME?.slice(1)}`,
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
 
     bodyAttrs: {
@@ -92,6 +85,12 @@ const config: NuxtConfig = {
     '@nuxtjs/robots',
     '@nuxtjs/sitemap'
   ],
+
+  pwa: {
+    meta: {
+      nativeUI: true
+    }
+  },
 
   firebase: {
     config: {
