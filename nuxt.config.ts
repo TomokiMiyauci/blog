@@ -8,6 +8,7 @@ declare module '@nuxt/types/config/hooks' {
   }
 }
 const HOSTNAME = process.env.HOSTNAME
+const isProduction = process.env.NODE_ENV === 'production'
 const config: NuxtConfig = {
   /*
    ** Nuxt rendering mode
@@ -84,12 +85,32 @@ const config: NuxtConfig = {
    */
   modules: [
     '@nuxtjs/pwa',
+    '@nuxtjs/firebase',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
     '@nuxtjs/sentry',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap'
   ],
+
+  firebase: {
+    config: {
+      apiKey: process.env.API_KEY,
+      authDomain: process.env.AUTH_DOMAIN,
+      databaseURL: process.env.DATABASE_URL,
+      projectId: process.env.PROJECT_ID,
+      storageBucket: process.env.STORAGE_BUCKET,
+      messagingSenderId: process.env.MESSAGING_SENDER_ID,
+      appId: process.env.APP_ID,
+      measurementId: process.env.MEASUREMENT_ID
+    },
+    onFirebaseHosting: true,
+    services: {
+      analytics: {
+        collectionEnabled: isProduction
+      }
+    }
+  },
   /*
    ** Content module configuration
    ** See https://content.nuxtjs.org/configuration
