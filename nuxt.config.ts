@@ -180,7 +180,7 @@ const config: NuxtConfig = {
     fetch: false,
     clientOnline: false,
     clientPrefetch: true,
-    clientUseUrl: true,
+    clientUseUrl: false,
     componentAliases: false,
     componentClientOnly: false
   },
