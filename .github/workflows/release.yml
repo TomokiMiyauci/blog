@@ -61,6 +61,7 @@ jobs:
         run: yarn generate
         env:
           dsn: ${{ secrets.SENTRY }}
+          HOSTNAME: ${{ secrets.HOSTNAME }}
 
       - name: Cache building deliverable
         id: build_id
