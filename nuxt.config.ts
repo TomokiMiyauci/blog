@@ -119,8 +119,7 @@ const config: NuxtConfig = {
 
   robots: {
     UserAgent: '*',
-    Disallow: '/',
-    Sitemap: HOSTNAME
+    Sitemap: `${HOSTNAME}sitemap.xml`
   },
 
   sitemap: {
