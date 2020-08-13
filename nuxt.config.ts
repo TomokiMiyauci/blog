@@ -1,11 +1,13 @@
 import { join } from 'path'
 
+import type { contentFunc } from '@nuxt/content'
 import { NuxtConfig } from '@nuxt/types'
 declare module '@nuxt/types/config/hooks' {
   interface NuxtOptionsHooks {
     'content:file:beforeInsert'?: (document: { extension: string; text: string; readingTime: string }) => Promise<void>
   }
 }
+const HOSTNAME = process.env.HOSTNAME
 const config: NuxtConfig = {
   /*
    ** Nuxt rendering mode
@@ -84,7 +86,9 @@ const config: NuxtConfig = {
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt/content
     '@nuxt/content',
-    '@nuxtjs/sentry'
+    '@nuxtjs/sentry',
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap'
   ],
   /*
    ** Content module configuration
@@ -109,7 +113,23 @@ const config: NuxtConfig = {
   },
 
   sentry: {
-    dsn: process.env.dsn
+    dsn: process.env.dsn,
+    lazy: true
+  },
+
+  robots: {
+    UserAgent: '*',
+    Sitemap: `${HOSTNAME}sitemap.xml`
+  },
+
+  sitemap: {
+    hostname: HOSTNAME,
+    routes: async () => {
+      const { $content } = (await import('@nuxt/content')).default as { $content: contentFunc }
+      const files = await $content('articles').only(['slug']).fetch<{ slug: string }[]>()
+      return files.map(({ slug }) => `/${slug}`)
+    },
+    gzip: true
   },
   /*
    ** Build configuration

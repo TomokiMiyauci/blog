@@ -1,6 +1,6 @@
 {
   "name": "techsrc",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -32,7 +32,9 @@
     "@nuxt/typescript-runtime": "^1.0.0",
     "@nuxtjs/color-mode": "^1.0.3",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
+    "@nuxtjs/robots": "^2.4.2",
     "@nuxtjs/sentry": "^4.3.4",
+    "@nuxtjs/sitemap": "^2.4.0",
     "nuxt": "^2.14.0",
     "nuxt-composition-api": "^0.11.0",
     "prism-themes": "^1.4.0",
@@ -72,6 +74,7 @@
     "reading-time": "^1.2.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
+    "standard-version": "^8.0.2",
     "start-server-and-test": "^1.11.2",
     "stylelint": "^13.6.1",
     "stylelint-config-prettier": "^8.0.2",

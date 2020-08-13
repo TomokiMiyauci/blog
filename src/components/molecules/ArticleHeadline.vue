@@ -9,7 +9,7 @@
         {{ headline.title }}
       </base-nuxt-link>
       <p class="mt-5 mb-3">{{ headline.description }}</p>
-      <component :is="i" />
+      <component :is="tag" v-for="tag in tags" :key="tag" />
 
       <h2 class="mt-5 flex justify-between">
         <span><mdi-calendar-edit class="mr-1" />{{ formatDate(headline.createdAt) }}</span>
@@ -25,11 +25,13 @@
 <script lang="ts">
   import { Headline } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent, computed } from 'nuxt-composition-api'
 
   export default defineComponent({
     components: {
-      TagNuxtjs: () => import('@/components/atoms/tags/TagNuxtjs.vue')
+      TagNuxtjs: () => import('@/components/atoms/tags/TagNuxtjs.vue'),
+      TagBlog: () => import('@/components/atoms/tags/TagBlog.vue'),
+      TagTutorial: () => import('@/components/atoms/tags/TagTutorial.vue')
     },
     props: {
       headline: {
@@ -38,8 +40,9 @@
       }
     },
 
-    setup() {
-      return { i: 'TagNuxtjs', formatDate }
+    setup(props) {
+      const tags = computed(() => props.headline.tags.map((tag) => `Tag${tag}`))
+      return { tags, formatDate }
     }
   })
 </script>
