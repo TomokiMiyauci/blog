@@ -160,6 +160,14 @@ jobs:
         env:
           dsn: ${{ secrets.SENTRY_DEV }}
           HOSTNAME: ${{ secrets.HOSTNAME_DEV }}
+          API_KEY: ${{ secrets.API_KEY_DEV }}
+          AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN_DEV }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL_DEV }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID_DEV }}
+          STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET_DEV }}
+          MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID_DEV }}
+          APP_ID: ${{ secrets.APP_ID_DEV }}
+          MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID_DEV }}
 
       - name: Cache building deliverable
         id: build_id
