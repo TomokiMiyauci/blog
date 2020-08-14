@@ -1,5 +1,5 @@
 <template>
-  <button ref="button" @click="onClick">
+  <button ref="button" @click="onClick" @keypress="onClick">
     <transition name="fade-right" mode="out-in">
       <component :is="component" :class="{ 'text-green-500': copy }" />
     </transition>

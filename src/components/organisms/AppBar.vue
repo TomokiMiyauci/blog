@@ -4,7 +4,7 @@
   >
     <div class="container relative h-full flex items-center justify-between mx-auto px-4 lg:py-6">
       <nuxt-link class="font-mono inline-flex items-end" to="/">
-        <img width="56px" src="/icon.png" />
+        <img width="56px" src="/icon.png" alt="logo" />
         <span class="ml-2 text-3xl leading-none tracking-tighter lg:text-4xl text-teal-900 dark:text-white"
           ><span style="color: #72deaf;">T</span>ech<span style="color: #72deaf;">s</span>rc</span
         ></nuxt-link

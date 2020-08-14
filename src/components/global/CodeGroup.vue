@@ -7,6 +7,7 @@
         class="px-4 py-3 text-gray-400 font-bold font-mono hover:bg-green-800 transition border-transparent duration-300 border-b-2 focus:border-green-600 focus:bg-gray-700"
         :class="[{ 'bg-gray-700': activeTab === index }]"
         @click="switchTab(index)"
+        @keypress="switchTab(index)"
       >
         {{ label }}
       </button>
