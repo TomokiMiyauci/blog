@@ -325,82 +325,70 @@ jobs:
   #         publish_dir: packages/client/stats
   #         keep_files: true
 
-  # lighthouse-mobile:
-  #   runs-on: ubuntu-16.04
-  #   needs: deploy
+  lighthouse-mobile:
+    runs-on: ubuntu-latest
+    needs: deploy
 
-  #   steps:
-  #     - name: checkout
-  #       uses: actions/checkout@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #     - run: mkdir -p lighthouse
+      - run: mkdir -p lighthouse
 
-  #     - name: Run Lighthouse
-  #       uses: foo-software/lighthouse-check-action@master
-  #       with:
-  #         author: ${{ github.actor }}
-  #         branch: ${{ github.ref }}
-  #         outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
-  #         urls: 'https://markdown-editor-simple.web.app/'
-  #         sha: ${{ github.sha }}
-  #         slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
+      - name: Lighthouse
+        uses: foo-software/lighthouse-check-action@master
+        with:
+          author: ${{ github.actor }}
+          branch: ${{ github.ref }}
+          outputDirectory: ${{ github.workspace}}/lighthouse
+          urls: ${{ secrets.HOSTNAME_DEV }}
+          sha: ${{ github.sha }}
+          slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_LIGHTHOUSE }}
 
-  #     # - name: Upload artifacts
-  #     #   uses: actions/upload-artifact@master
-  #     #   with:
-  #     #     name: Lighthouse mobile reports
-  #     #     path: lighthouse
+      - name: Prepare deploy
+        run: |
+          rm  -f lighthouse/results.json
+          mv lighthouse/*.html lighthouse/lighthouse-mobile.html
 
-  #     - name: Prepare deploy
-  #       run: |
-  #         rm  -f lighthouse/results.json
-  #         mv lighthouse/*.html lighthouse/lighthouse-mobile.html
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3.6.4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: lighthouse
+          keep_files: true
 
-  #     - name: Deploy to Github Pages
-  #       uses: peaceiris/actions-gh-pages@v3.6.2
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         publish_dir: packages/client/lighthouse
-  #         keep_files: true
+  lighthouse-desktop:
+    runs-on: ubuntu-latest
+    needs: lighthouse-mobile
 
-  # lighthouse-desktop:
-  #   runs-on: ubuntu-16.04
-  #   needs: lighthouse-mobile
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
+      - run:  mkdir -p lighthouse
 
-  #     - run:  mkdir -p lighthouse
+      - name: Lighthouse
+        uses: foo-software/lighthouse-check-action@master
+        with:
+          author: ${{ github.actor }}
+          branch: ${{ github.ref }}
+          outputDirectory: ${{ github.workspace}}/lighthouse
+          emulatedFormFactor: desktop
+          urls: ${{ secrets.HOSTNAME_DEV }}
+          sha: ${{ github.sha }}
+          slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_LIGHTHOUSE }}
 
-  #     - name: Run Lighthouse
-  #       uses: foo-software/lighthouse-check-action@master
-  #       with:
-  #         author: ${{ github.actor }}
-  #         branch: ${{ github.ref }}
-  #         outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
-  #         emulatedFormFactor: desktop
-  #         urls: 'https://markdown-editor-simple.web.app/'
-  #         sha: ${{ github.sha }}
-  #         slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }}
+      - name: Prepare deploy
+        run: |
+          rm  -f lighthouse/results.json
+          mv lighthouse/*.html lighthouse/lighthouse-pc.html
 
-  #     - name: Prepare deploy
-  #       run: |
-  #         rm  -f lighthouse/results.json
-  #         mv lighthouse/*.html lighthouse/lighthouse-pc.html
-
-  #     - name: Deploy to Github Pages
-  #       uses: peaceiris/actions-gh-pages@v3.6.2
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         publish_dir: packages/client/lighthouse
-  #         keep_files: true
-
-  #     # - name: Upload artifacts
-  #     #   uses: actions/upload-artifact@master
-  #     #   with:
-  #     #     name: Lighthouse reports
-  #     #     path: /tmp/artifacts/desktop
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3.6.4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: lighthouse
+          keep_files: true
 
   notice:
       needs: deploy
@@ -516,22 +504,3 @@ jobs:
   #     #   run: yarn workspace client deploy-storybook -- --ci
   #     #   env:
   #     #     GH_TOKEN: ${ GITHUB_ACTOR }:${{ secrets.GITHUB_TOKEN }}
-
-  # notice:
-  #   needs: [lighthouse-mobile, lighthouse-desktop]
-  #   runs-on: ${{ matrix.os }}
-  #   if: always()
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-16.04]
-
-  #   steps:
-  #     - uses: technote-space/workflow-conclusion-action@v1
-  #     - uses: 8398a7/action-slack@v3
-  #       with:
-  #         status: ${{ env.WORKFLOW_CONCLUSION }}
-  #         fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # optional
-  #         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_DEV_LIGHTHOUSE }} # required
