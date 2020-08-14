@@ -29,6 +29,30 @@
   pre {
     @apply rounded static;
   }
+
+  & .nuxt-content-highlight {
+    @apply relative;
+
+    & > .filename {
+      @apply absolute right-0 text-gray-200 font-light z-10 mr-2 mt-1 text-sm;
+    }
+
+    & > button {
+      @apply opacity-0 absolute right-0 bottom-0 leading-none shadow-lg px-2 py-2 text-white bg-gray-800 text-sm uppercase rounded-md border border-white font-semibold mr-3 mb-3 transition duration-300 delay-100;
+
+      &:hover {
+        @apply bg-gray-700;
+      }
+      &:focus {
+        @apply outline-none;
+      }
+    }
+    &:hover {
+      & > button {
+        @apply opacity-100;
+      }
+    }
+  }
 }
 
 .icon.icon-link {
@@ -39,13 +63,7 @@
   background-size: 20px 20px;
 }
 
-.nuxt-content-highlight {
-  @apply relative;
 
-  .filename {
-    @apply absolute right-0 text-gray-200 font-light z-10 mr-2 mt-1 text-sm;
-  }
-}
 
 body {
   @apply text-gray-800;
