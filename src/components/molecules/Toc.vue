@@ -5,7 +5,7 @@
         目次
       </h3>
       <nav>
-        <scrollactive highlight-first-item active-class="text-primary-500" :offset="0" tag="ul">
+        <scrollactive highlight-first-item active-class="text-green-500" :offset="0" tag="ul">
           <li
             v-for="{ id, depth, text } of toc"
             :key="id"
