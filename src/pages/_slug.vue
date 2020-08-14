@@ -34,6 +34,10 @@
   import { defineComponent } from 'nuxt-composition-api'
 
   export default defineComponent({
+    head: {
+      meta: [{ hid: 'og:type', property: 'og:type', name: 'og:type', content: 'article' }]
+    },
+
     async asyncData({ $content, params }) {
       const article = await $content('articles', params.slug).fetch<Article>()
 
