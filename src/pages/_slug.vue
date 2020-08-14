@@ -30,6 +30,7 @@
 <script lang="ts">
   import { PrevNext, Article } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
+  import { useRegisterCopyButton } from '@/utils/register'
   import { defineComponent } from 'nuxt-composition-api'
 
   export default defineComponent({
@@ -46,6 +47,7 @@
     },
 
     setup() {
+      useRegisterCopyButton()
       return { formatDate }
     }
   })
