@@ -9,6 +9,7 @@ declare module '@nuxt/types/config/hooks' {
 }
 const HOSTNAME = process.env.HOSTNAME
 const PACKAGE_NAME = process.env.npm_package_name
+const TWITTER_ACCOUNT = '@techsrc_'
 const isProduction = process.env.NODE_ENV === 'production'
 const config: NuxtConfig = {
   /*
@@ -49,7 +50,7 @@ const config: NuxtConfig = {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['@/plugins/vue-scrollactive'],
+  plugins: ['@/plugins/vue-scrollactive', { src: '@/plugins/axe', mode: 'client' }],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -88,6 +89,10 @@ const config: NuxtConfig = {
 
   pwa: {
     meta: {
+      ogHost: HOSTNAME?.endsWith('/') ? HOSTNAME.slice(0, -1) : HOSTNAME,
+      twitterCard: 'summary',
+      twitterSite: TWITTER_ACCOUNT,
+      twitterCreator: TWITTER_ACCOUNT,
       nativeUI: true
     }
   },
