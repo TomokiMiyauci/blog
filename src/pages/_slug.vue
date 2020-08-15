@@ -2,7 +2,7 @@
   <div>
     <nuxt-link
       class="inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
-      to="/"
+      :to="localePath('/')"
       >← Back to Home</nuxt-link
     >
     <article class="mt-12">
