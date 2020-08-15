@@ -1,4 +1,7 @@
 {
+  "setupFiles": [
+    "<rootDir>/tests/unit/setups/i18n.ts"
+  ],
   "moduleNameMapper": {
     "^@/(.*)$": "<rootDir>/src/$1",
     "^vue$": "vue/dist/vue.common.js",
