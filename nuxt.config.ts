@@ -70,6 +70,10 @@ const config: NuxtConfig = {
     'nuxt-composition-api'
   ],
 
+  stylelint: {
+    lintDirtyModulesOnly: true
+  },
+
   tailwindcss: {
     cssPath: '@/assets/css/tailwind.scss',
     configPath: join(__dirname, 'tailwind.config.js')
@@ -78,6 +82,7 @@ const config: NuxtConfig = {
    ** Nuxt.js modules
    */
   modules: [
+    'nuxt-i18n',
     '@nuxtjs/pwa',
     '@nuxtjs/firebase',
     // Doc: https://github.com/nuxt/content
@@ -86,6 +91,15 @@ const config: NuxtConfig = {
     '@nuxtjs/robots',
     '@nuxtjs/sitemap'
   ],
+
+  i18n: {
+    locales: [{ file: 'ja.json', code: 'ja' }],
+    defaultLocale: 'ja',
+    vueI18n: {
+      fallbackLocale: 'ja'
+    },
+    strategy: 'prefix_except_default'
+  },
 
   pwa: {
     meta: {
@@ -170,13 +184,13 @@ const config: NuxtConfig = {
     }
   },
 
-  modern: 'client',
+  modern: isProduction ? 'client' : false,
 
   features: {
     store: false,
     layouts: true,
     meta: true,
-    middleware: false,
+    middleware: true,
     transitions: true,
     deprecations: false,
     validate: false,
