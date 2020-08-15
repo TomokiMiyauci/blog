@@ -26,7 +26,7 @@
               :key="article.slug"
               class="hover:text-green-500 hover:bg-gray-300 transition duration-300 cursor-pointer text-right p-1 rounded font-normal"
               tag="li"
-              :to="{ name: 'slug', params: { slug: article.slug } }"
+              :to="localePath({ name: 'slug', params: { slug: article.slug } })"
               @click.native.prevent="$emit('click')"
               v-html="highlight(article.title, keyword)"
             >
