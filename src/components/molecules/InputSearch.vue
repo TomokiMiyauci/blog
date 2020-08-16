@@ -9,7 +9,7 @@
       type="text"
       aria-label="search"
       class="px-1 bg-transparent focus:text-white outline-none w-full"
-      placeholder="Search"
+      :placeholder="$t('SEARCH.PLACEHOLDER')"
       autocomplete="off"
       spellcheck="false"
       role="combobox"
