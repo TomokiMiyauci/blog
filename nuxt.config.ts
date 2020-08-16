@@ -32,7 +32,19 @@ const config: NuxtConfig = {
   head: {
     title: '',
     titleTemplate: `%s | ${PACKAGE_NAME?.charAt(0).toUpperCase()}${PACKAGE_NAME?.slice(1)}`,
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'preconnect',
+        href: 'https://www.google-analytics.com/',
+        crossorigin: true
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://firebaseinstallations.googleapis.com/',
+        crossorigin: true
+      }
+    ],
 
     bodyAttrs: {
       class: ['font-sans font-medium']
