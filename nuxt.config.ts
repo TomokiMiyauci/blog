@@ -50,7 +50,7 @@ const config: NuxtConfig = {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['@/plugins/vue-scrollactive', { src: '@/plugins/axe', mode: 'client' }],
+  plugins: ['@/plugins/vue-scrollactive'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -93,12 +93,16 @@ const config: NuxtConfig = {
   ],
 
   i18n: {
-    locales: [{ file: 'ja.json', code: 'ja' }],
-    defaultLocale: 'ja',
+    locales: [
+      { file: 'ja.json', code: 'ja' },
+      { file: 'en.json', code: 'en' }
+    ],
+    defaultLocale: 'en',
     vueI18n: {
-      fallbackLocale: 'ja'
+      fallbackLocale: 'en'
     },
-    strategy: 'prefix_except_default'
+    lazy: true,
+    langDir: 'lang/'
   },
 
   pwa: {
