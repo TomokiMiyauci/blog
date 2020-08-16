@@ -111,6 +111,7 @@ const config: NuxtConfig = {
       twitterCard: 'summary',
       twitterSite: TWITTER_ACCOUNT,
       twitterCreator: TWITTER_ACCOUNT,
+      lang: 'ja',
       nativeUI: true
     }
   },
