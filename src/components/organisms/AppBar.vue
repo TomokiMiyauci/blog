@@ -12,6 +12,7 @@
       <div class="flex items-center">
         <fulltext-search />
         <button-color-mode class="ml-5" />
+        <lang-switcher class="hidden lg:block" />
       </div>
     </div>
   </header>
