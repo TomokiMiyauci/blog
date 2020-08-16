@@ -1528,15 +1528,20 @@
     update-notifier "^2.2.0"
     yargs "^8.0.2"
 
+"@iconify/icons-emojione@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@iconify/icons-emojione/-/icons-emojione-1.0.7.tgz#c413aac3091a3d583a06d948ddee6d064c9f6192"
+  integrity sha512-N6S7RO6OAAOQ+2kp5Ds1T0DqHtjzU0/TTMgDf/bT/oJ2QJy/7JtaLY2f8qckpxNHDDF5ed+U5VzOLRev2tCNiw==
+
 "@iconify/icons-logos@^1.0.12":
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/@iconify/icons-logos/-/icons-logos-1.0.12.tgz#0327f3e44c78aaa85c199e30881c84f26f3b3b07"
   integrity sha512-VC5hcZ2lw1D15iQX5AukQ0m5r6EmRJ5jg6zoTL+XCRwH1RTdu0jUw6uN35uPTKp7OohAj1eLIjjnZw0WPeBkJg==
 
 "@iconify/vue@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@iconify/vue/-/vue-1.0.2.tgz#8e35ee7fc1540d383ea9894384982f8e5b38ab70"
-  integrity sha512-KLDZRbcsyIFMdYFueHNRPiWBdg1NTKY09WN1Cy/Wqz+GG7voEl3Jxc5joWdBGRm7xR5CyMwDtg+JcAwwHeR3Wg==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@iconify/vue/-/vue-1.0.3.tgz#41e6ffb566b3c9462104862e6b8fde59d5f82a6e"
+  integrity sha512-EkEXaFRWN1t7xDuCgckSndVTjBbz2TJYBpYxANVEmwNxAAJXi+wTBlaX9QKgxoXLhUeJhCg6M9E2gwKyEHwJQw==
 
 "@intlify/vue-i18n-extensions@^1.0.1":
   version "1.0.2"
@@ -3701,10 +3706,18 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@26.x", "@types/jest@^26.0.7":
+"@types/jest@26.x":
   version "26.0.9"
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.9.tgz#0543b57da5f0cd949c5f423a00c56c492289c989"
   integrity sha512-k4qFfJ5AUKrWok5KYXp2EPm89b0P/KZpl7Vg4XuOTVVQEhLDBDBU3iBFrjjdgd8fLw96aAtmnwhXHl63bWeBQQ==
+  dependencies:
+    jest-diff "^25.2.1"
+    pretty-format "^25.2.1"
+
+"@types/jest@^26.0.7":
+  version "26.0.10"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-26.0.10.tgz#8faf7e9756c033c39014ae76a7329efea00ea607"
+  integrity sha512-i2m0oyh8w/Lum7wWK/YOZJakYF8Mx08UaKA1CtbmFeDquVhAEdA7znacsVSf2hJ1OQ/OfVMGN90pw/AtzF8s/Q==
   dependencies:
     jest-diff "^25.2.1"
     pretty-format "^25.2.1"
@@ -9004,9 +9017,9 @@ eslint@^6.8.0:
     v8-compile-cache "^2.0.3"
 
 eslint@^7.5.0:
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.6.0.tgz#522d67cfaea09724d96949c70e7a0550614d64d6"
-  integrity sha512-QlAManNtqr7sozWm5TF4wIH9gmUm2hE3vNRUvyoYAa4y1l5/jxD/PQStEjBMQtCqZmSep8UxrcecI60hOpe61w==
+  version "7.7.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-7.7.0.tgz#18beba51411927c4b64da0a8ceadefe4030d6073"
+  integrity sha512-1KUxLzos0ZVsyL81PnRN335nDtQ8/vZUD6uMtWbF+5zDtjKcsklIi78XoE0MVL93QvWTu+E5y44VyyCsOMBrIg==
   dependencies:
     "@babel/code-frame" "^7.0.0"
     ajv "^6.10.0"
@@ -9119,9 +9132,9 @@ estraverse@^4.1.0, estraverse@^4.1.1, estraverse@^4.2.0:
   integrity sha512-39nnKffWz8xN1BU/2c79n9nB9HDzo0niYUqx6xyqUnyoAnQyyWpOTdZEeiCch8BBu515t4wp9ZmgVfVhn9EBpw==
 
 estraverse@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-5.1.0.tgz#374309d39fd935ae500e7b92e8a6b4c720e59642"
-  integrity sha512-FyohXK+R0vE+y1nHLoBM7ZTyqRpqAlhdZHCWIWEviFLiGB8b04H6bQs8G+XTthacvT8VuwvteiP7RJSxMs8UEw==
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-5.2.0.tgz#307df42547e6cc7324d3cf03c155d5cdb8c53880"
+  integrity sha512-BxbNGGNm0RyRYvUdHpIwv9IWzeM9XClbOxwoATuFdOE7ZE6wHL+HQ5T8hoPM+zHvmKzzsEqhgy0GrQ5X13afiQ==
 
 esutils@^2.0.2:
   version "2.0.3"
@@ -14040,10 +14053,15 @@ lodash@4.17.15:
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
-lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
+lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.15, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.19"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
   integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
+
+lodash@^4.17.14, lodash@^4.17.19:
+  version "4.17.20"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
+  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
 log-symbols@^1.0.2:
   version "1.0.2"
