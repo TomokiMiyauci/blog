@@ -20,6 +20,7 @@
           class="cursor-pointer px-2 py-1 flex rounded items-center hover:bg-green-500 transition duration-300"
           tag="li"
           :to="switchLocalePath('en')"
+          @click.native.prevent="isShow = false"
         >
           <mdi-web class="inline-flex items-center justify-center bg-gray-700 rounded-full" width="36" height="36" />
 
