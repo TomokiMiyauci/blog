@@ -179,6 +179,7 @@ const config: NuxtConfig = {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
+    parallel: true,
     postcss: {
       preset: {
         autoprefixer: {
