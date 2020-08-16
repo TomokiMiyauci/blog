@@ -11,13 +11,26 @@
       >
       <div class="flex items-center">
         <fulltext-search />
-        <button-color-mode class="ml-5" />
+        <button-color-mode class="ml-5 hidden md:inline-block" />
         <lang-switcher class="hidden lg:block" />
+        <button-circle class="md:hidden" :class="{ 'z-10': isActive }" @click="isActive = !isActive">
+          <HamburgerClose :active="isActive" />
+        </button-circle>
+        <transition name="fade-right">
+          <navigation-drawer v-show="isActive" />
+        </transition>
       </div>
     </div>
   </header>
 </template>
 
-<script>
-  export default {}
+<script lang="ts">
+  import { defineComponent, ref } from 'nuxt-composition-api'
+
+  export default defineComponent({
+    setup() {
+      const isActive = ref(false)
+      return { isActive }
+    }
+  })
 </script>
