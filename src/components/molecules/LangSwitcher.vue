@@ -7,7 +7,7 @@
       <ul
         v-if="isShow"
         v-click-outside="() => (isShow = false)"
-        class="absolute mt-1 px-3 py-1 right-0 rounded shadow-md bg-white dark:bg-gray-600 hover:shadow-2xl transition-shadow duration-300"
+        class="absolute mt-1 px-3 py-1 left-0 rounded shadow-md bg-white dark:bg-gray-600 hover:shadow-2xl transition-shadow duration-300"
       >
         <nuxt-link
           class="cursor-pointer px-2 py-1 flex rounded items-center hover:bg-green-500 hover:shadow-xl transition duration-300"
