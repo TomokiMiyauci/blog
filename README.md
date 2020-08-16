@@ -11,7 +11,7 @@
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
 
-## Build Setup
+## :rocket: Build Setup
 
 ```bash
 # install dependencies
@@ -29,3 +29,12 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## :chart_with_upwards_trend: Stats
+
+You can check the latest performance in this project.
+
+### :traffic_light: Lighthouse
+
+- [:iphone: Mobile](https://tomokimiyauci.github.io/techsrc/lighthouse-mobile)
+- [:computer: PC](https://tomokimiyauci.github.io/techsrc/lighthouse-pc)
