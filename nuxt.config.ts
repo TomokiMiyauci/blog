@@ -97,9 +97,9 @@ const config: NuxtConfig = {
       { file: 'ja.json', code: 'ja' },
       { file: 'en.json', code: 'en' }
     ],
-    defaultLocale: 'ja',
+    defaultLocale: 'en',
     vueI18n: {
-      fallbackLocale: 'ja'
+      fallbackLocale: 'en'
     },
     lazy: true,
     langDir: 'lang/'
@@ -111,7 +111,6 @@ const config: NuxtConfig = {
       twitterCard: 'summary',
       twitterSite: TWITTER_ACCOUNT,
       twitterCreator: TWITTER_ACCOUNT,
-      lang: 'ja',
       nativeUI: true
     }
   },
