@@ -2,6 +2,8 @@ import { join } from 'path'
 
 import type { contentFunc } from '@nuxt/content'
 import { NuxtConfig } from '@nuxt/types'
+
+const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent')
 declare module '@nuxt/types/config/hooks' {
   interface NuxtOptionsHooks {
     'content:file:beforeInsert'?: (document: { extension: string; text: string; readingTime: string }) => Promise<void>
@@ -198,10 +200,18 @@ const config: NuxtConfig = {
           grid: 'autoplace'
         }
       }
+    },
+
+    extend: (config, { isDev, isServer }) => {
+      if (!isDev && !isServer) {
+        config.plugins?.push(new RelativeCiAgentWebpackPlugin({ enabled: true }))
+      }
+
+      return config
     }
   },
 
-  modern: isProduction ? 'client' : false,
+  // modern: isProduction ? 'client' : false,
 
   features: {
     store: false,
