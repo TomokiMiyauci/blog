@@ -105,7 +105,7 @@ jobs:
       - name: Deploy to hosting to Firebase
         uses: w9jds/firebase-action@v1.5.0
         with:
-          args: deploy --only hosting
+          args: deploy --only hosting,firestore:rules
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_PATH: ${{ github.workspace }}
