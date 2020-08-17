@@ -15,7 +15,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["node", "jest", "cypress", "nuxt-i18n", "@nuxt/types", "@nuxt/content"]
+    "types": ["node", "jest", "cypress", "nuxt-i18n", "@nuxt/types", "@nuxt/content", "@nuxtjs/firebase"]
   },
   "exclude": ["node_modules", ".nuxt", "dist"]
 }
