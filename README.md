@@ -10,6 +10,7 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
 [![Cypress.io](https://img.shields.io/badge/tested%20with-Cypress-04C38E.svg)](https://www.cypress.io/)
+[![RelativeCI](https://badges.relative-ci.com/badges/C3AE8ywl4E79uM0dKQLG?branch=develop)](https://app.relative-ci.com/projects/C3AE8ywl4E79uM0dKQLG)
 
 ## :rocket: Build Setup
 
@@ -36,5 +37,8 @@ You can check the latest performance in this project.
 
 ### :traffic_light: Lighthouse
 
-- [:iphone: Mobile](https://tomokimiyauci.github.io/techsrc/lighthouse-mobile)
-- [:computer: PC](https://tomokimiyauci.github.io/techsrc/lighthouse-pc)
+- [:scroll: History](https://www.foo.software/dashboard/page/5f3a7dba1a668f00246aeb59)
+
+- :zap: Latest
+  - [:iphone: Mobile](https://tomokimiyauci.github.io/techsrc/lighthouse-mobile)
+  - [:computer: PC](https://tomokimiyauci.github.io/techsrc/lighthouse-pc)
