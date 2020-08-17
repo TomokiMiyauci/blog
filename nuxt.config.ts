@@ -2,6 +2,8 @@ import { join } from 'path'
 
 import type { contentFunc } from '@nuxt/content'
 import { NuxtConfig } from '@nuxt/types'
+
+const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent')
 declare module '@nuxt/types/config/hooks' {
   interface NuxtOptionsHooks {
     'content:file:beforeInsert'?: (document: { extension: string; text: string; readingTime: string }) => Promise<void>
@@ -32,7 +34,19 @@ const config: NuxtConfig = {
   head: {
     title: '',
     titleTemplate: `%s | ${PACKAGE_NAME?.charAt(0).toUpperCase()}${PACKAGE_NAME?.slice(1)}`,
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      {
+        rel: 'preconnect',
+        href: 'https://www.google-analytics.com/',
+        crossorigin: true
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://firebaseinstallations.googleapis.com/',
+        crossorigin: true
+      }
+    ],
 
     bodyAttrs: {
       class: ['font-sans font-medium']
@@ -117,20 +131,21 @@ const config: NuxtConfig = {
 
   firebase: {
     config: {
-      apiKey: process.env.API_KEY,
-      authDomain: process.env.AUTH_DOMAIN,
-      databaseURL: process.env.DATABASE_URL,
-      projectId: process.env.PROJECT_ID,
-      storageBucket: process.env.STORAGE_BUCKET,
-      messagingSenderId: process.env.MESSAGING_SENDER_ID,
-      appId: process.env.APP_ID,
-      measurementId: process.env.MEASUREMENT_ID
+      apiKey: process.env.API_KEY!,
+      authDomain: process.env.AUTH_DOMAIN!,
+      databaseURL: process.env.DATABASE_URL!,
+      projectId: process.env.PROJECT_ID!,
+      storageBucket: process.env.STORAGE_BUCKET!,
+      messagingSenderId: process.env.MESSAGING_SENDER_ID!,
+      appId: process.env.APP_ID!,
+      measurementId: process.env.MEASUREMENT_ID!
     },
     onFirebaseHosting: true,
     services: {
       analytics: {
         collectionEnabled: isProduction
-      }
+      },
+      firestore: true
     }
   },
   /*
@@ -186,6 +201,14 @@ const config: NuxtConfig = {
           grid: 'autoplace'
         }
       }
+    },
+
+    extend: (config, { isDev, isServer }) => {
+      if (!isDev && !isServer) {
+        config.plugins?.push(new RelativeCiAgentWebpackPlugin({ enabled: true }))
+      }
+
+      return config
     }
   },
 

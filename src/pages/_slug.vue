@@ -11,10 +11,11 @@
         <div style="grid-column: 2 / 3;" class="p-2 overflow-hidden">
           <div class="mb-8">
             <BaseH1 :text="article.title" />
-            <p class="mt-1 dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary">
-              {{ formatDate(article.updatedAt) }}
+            <p class="mt-1 flex justify-between">
+              {{ formatDate(article.updatedAt) }}<viewer-counter :text="viewCount" />
             </p>
           </div>
+
           <nuxt-content :document="article" />
           <prev-next :prev="prev" :next="next" />
         </div>
@@ -31,7 +32,7 @@
   import { PrevNext, Article } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent, useAsync } from 'nuxt-composition-api'
 
   export default defineComponent({
     head: {
@@ -50,9 +51,22 @@
       return { article, prev, next }
     },
 
-    setup() {
+    setup(_, { root }) {
+      const slug = root.$route.params.slug
+      const docRef = root.$fireStore.collection('articles').doc(slug)
+      docRef.set(
+        {
+          view: root.$fireStoreObj.FieldValue.increment(1)
+        },
+        { merge: true }
+      )
+      const viewCount = useAsync(async () => {
+        const result = await docRef.get()
+        return result.data()!.view
+      })
+
       useRegisterCopyButton()
-      return { formatDate }
+      return { formatDate, viewCount }
     }
   })
 </script>
