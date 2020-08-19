@@ -225,7 +225,7 @@ jobs:
         id: build_id
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace}}/packages/client/dist
+          path: ${{ github.workspace }}/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
   # test-e2e:
@@ -334,7 +334,7 @@ jobs:
         id: build_id
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace }}/packages/client/dist
+          path: ${{ github.workspace }}/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
       - name: Deploy to hosting to Firebase
