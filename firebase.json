@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "packages/client/dist",
     "ignore": ["firebase.json", "**/.*"],
     "headers": [
       {
@@ -15,14 +15,14 @@
     ]
   },
   "firestore": {
-    "rules": "firebase/firestore.rules",
-    "indexes": "firebase/firestore.indexes.json"
+    "rules": "packages/firebase/firestore.rules",
+    "indexes": "packages/firebase/firestore.indexes.json"
   },
   "functions": {
     "predeploy": [
-      "yarn --cwd ./functions build"
+      "yarn --cwd packages/firebase build"
     ],
-    "source": "functions"
+    "source": "packages/firebase"
   },
   "emulators": {
     "firestore": {
