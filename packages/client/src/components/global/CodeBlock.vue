@@ -4,8 +4,9 @@
   </div>
 </template>
 
-<script>
-  export default {
+<script lang="ts">
+  import { defineComponent } from 'nuxt-composition-api'
+  export default defineComponent({
     props: {
       label: {
         type: String,
@@ -16,7 +17,7 @@
         default: false
       }
     }
-  }
+  })
 </script>
 
 <style scoped lang="scss">

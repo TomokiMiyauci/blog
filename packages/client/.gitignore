@@ -1,0 +1,29 @@
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# Nuxt generate
+dist
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless
+
+# IDE / Editor
+.idea
+
+# Service worker
+sw.*
+
+# Vim swap files
+*.swp
+
+*.cache
+
+.nuxt-storybook
+storybook-static
+node_modules
