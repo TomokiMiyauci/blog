@@ -1,0 +1,51 @@
+name: release-firestore
+
+on:
+  push:
+      branches:
+        - master
+      paths:
+        - 'packages/firebase/firestore/**'
+        - '.github/workflows/release-firestore.yml'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: packages/firebase/firestore
+
+jobs:
+  deploy:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [12]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Deploy to Firestore
+        uses: w9jds/firebase-action@v1.5.0
+        with:
+          args: deploy --only firestore:rules
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_PATH: ${{ github.workspace }}
+          PROJECT_ID: release
+
+  notice:
+      needs: deploy
+      runs-on: ubuntu-latest
+      if: always()
+      steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

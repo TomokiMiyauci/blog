@@ -1,0 +1,81 @@
+name: test-firestore
+
+on:
+  push:
+      branches:
+        - develop
+      paths:
+        - 'packages/firebase/firestore/**'
+        - '.github/workflows/test-firestore.yml'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: packages/firebase/firestore
+
+jobs:
+  # setup:
+  #   runs-on: ${{ matrix.os }}
+
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest]
+  #       node: [12]
+
+  #   steps:
+  #     - uses: actions/setup-node@v2-beta
+  #       with:
+  #         node-version: ${{ matrix.node }}
+
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+
+  #     - name: Cache node_modules
+  #       id: node_modules_cache_id
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           node_modules
+  #           */*/node_modules
+  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+  #     - name: Install
+  #       if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
+  #       run: yarn --check-files --frozen-lockfile --non-interactive
+
+  deploy:
+    # needs: [setup]
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [12]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Deploy to Firestore
+        uses: w9jds/firebase-action@v1.5.0
+        with:
+          args: deploy --only firestore:rules
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          PROJECT_PATH: ${{ github.workspace }}
+          PROJECT_ID: develop
+
+  notice:
+      needs: deploy
+      runs-on: ubuntu-latest
+      if: always()
+      steps:
+      - uses: actions/checkout@v2
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_DEV }}
