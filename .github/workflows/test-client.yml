@@ -216,11 +216,6 @@ jobs:
           APP_ID: ${{ secrets.APP_ID_DEV }}
           MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID_DEV }}
 
-      - name: Rebug
-        run: |
-          pwd
-          ls
-
       - name: Cache building deliverable
         id: build_id
         uses: actions/cache@v2
@@ -228,10 +223,6 @@ jobs:
           path: ${{ github.workspace }}/packages/client/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
-      - name: Rebug
-        run: |
-          pwd
-          cat ${{ github.workspace }}/packages/client/dist
   # test-e2e:
   #   needs: build
   #   runs-on: ${{ matrix.os }}
