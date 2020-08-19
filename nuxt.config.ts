@@ -60,6 +60,11 @@ const config: NuxtConfig = {
   pageTransition: {
     name: 'fade'
   },
+
+  router: {
+    middleware: 'auth'
+  },
+
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
@@ -145,7 +150,8 @@ const config: NuxtConfig = {
       analytics: {
         collectionEnabled: isProduction
       },
-      firestore: true
+      firestore: true,
+      auth: true
     }
   },
   /*
@@ -204,7 +210,7 @@ const config: NuxtConfig = {
     },
 
     extend: (config, { isDev, isServer }) => {
-      if (!isDev && !isServer) {
+      if (!isDev && !isServer && !process.env.DEBUG) {
         config.plugins?.push(new RelativeCiAgentWebpackPlugin({ enabled: true }))
       }
 
@@ -215,7 +221,7 @@ const config: NuxtConfig = {
   modern: isProduction ? 'client' : false,
 
   features: {
-    store: false,
+    store: true,
     layouts: true,
     meta: true,
     middleware: true,
