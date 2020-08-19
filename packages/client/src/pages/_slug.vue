@@ -5,10 +5,10 @@
       :to="localePath('/')"
       >← Back to Home</nuxt-link
     >
-    <div>
+    <!-- <div>
       <lazy-button-favorite v-if="liked" @click="liked = false" />
       <lazy-button-favorite v-else class="bg-gray-200" @click="onC">hellio</lazy-button-favorite>
-    </div>
+    </div> -->
     <article class="mt-12">
       <div class="flex md:grid grid-temp grid-cols-main">
         <toc class="hidden md:block" :toc="article.toc" />
