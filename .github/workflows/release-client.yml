@@ -1,9 +1,17 @@
-name: release
+name: release-client
 
 on:
   push:
       branches:
         - master
+      paths:
+        - 'packages/client/**'
+        - '.github/workflows/release-client.yml'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: packages/client
 
 jobs:
   setup:
@@ -26,7 +34,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Install
@@ -54,7 +64,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Build
@@ -75,7 +87,7 @@ jobs:
         id: build_id
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace}}/dist
+          path: ${{ github.workspace }}/packages/client/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
   deploy:
@@ -99,53 +111,20 @@ jobs:
         id: build_id
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace}}/dist
+          path: ${{ github.workspace }}/packages/client/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
       - name: Deploy to hosting to Firebase
         uses: w9jds/firebase-action@v1.5.0
         with:
-          args: deploy --only hosting,firestore:rules
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-          PROJECT_PATH: ${{ github.workspace }}
-          PROJECT_ID: release
-
-  deploy-functions:
-    needs: build
-    runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        shell: bash
-        working-directory: ${{ github.workspace }}/functions
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [12]
-
-    steps:
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: ${{ matrix.node }}
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Install
-        run: yarn --check-files --frozen-lockfile --non-interactive
-
-      - name: Deploy to Cloud Functions
-        uses: w9jds/firebase-action@v1.5.0
-        with:
-          args: deploy --only functions
+          args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_PATH: ${{ github.workspace }}
           PROJECT_ID: release
 
   notice:
-      needs: [deploy, deploy-functions]
+      needs: deploy
       runs-on: ubuntu-latest
       if: always()
       steps:
@@ -171,7 +150,9 @@ jobs:
       id: node_modules_cache_id
       uses: actions/cache@v2
       with:
-        path: node_modules
+        path: |
+          node_modules
+          */*/node_modules
         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
     - name: Semantic Release
