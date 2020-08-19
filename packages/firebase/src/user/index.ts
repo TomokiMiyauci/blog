@@ -6,14 +6,11 @@ const firestore = admin.firestore()
 export default functions
   .region('asia-northeast1')
   .auth.user()
-  .onCreate(user => {
+  .onCreate((user) => {
     const timestamp = admin.firestore.FieldValue.serverTimestamp()
 
-    return firestore
-      .collection('users')
-      .doc(user.uid)
-      .set({
-        createdAt: timestamp,
-        updatedAt: timestamp
-      })
+    return firestore.collection('users').doc(user.uid).set({
+      createdAt: timestamp,
+      updatedAt: timestamp
+    })
   })
