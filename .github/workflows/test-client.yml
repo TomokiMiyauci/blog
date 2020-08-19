@@ -34,7 +34,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Install
@@ -62,7 +64,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: lint by ESlint and Stylelint and VTI
@@ -89,7 +93,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Test unit
@@ -160,7 +166,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Analyze
@@ -189,7 +197,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Build
