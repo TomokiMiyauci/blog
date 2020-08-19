@@ -420,7 +420,7 @@ jobs:
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: ${{ github.workspace}}/lighthouse
+          outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
           urls: ${{ secrets.HOSTNAME_DEV }}
           sha: ${{ github.sha }}
           slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_LIGHTHOUSE }}
@@ -434,7 +434,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.6.4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: lighthouse
+          publish_dir: packages/client/lighthouse
           keep_files: true
 
   lighthouse-desktop:
@@ -452,7 +452,7 @@ jobs:
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: ${{ github.workspace}}/lighthouse
+          outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
           emulatedFormFactor: desktop
           urls: ${{ secrets.HOSTNAME_DEV }}
           sha: ${{ github.sha }}
@@ -467,7 +467,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.6.4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: lighthouse
+          publish_dir: packages/client/lighthouse
           keep_files: true
 
   notice:
