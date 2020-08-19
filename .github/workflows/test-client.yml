@@ -4,6 +4,14 @@ on:
   push:
       branches:
         - develop
+      paths:
+        - 'packages/client/**'
+        - '.github/workflows/test-client.yml'
+
+defaults:
+  run:
+    shell: bash
+    working-directory: packages/client
 
 jobs:
   setup:
@@ -12,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-16.04]
-        node: [10]
+        node: [12]
 
     steps:
       - uses: actions/setup-node@v2-beta
@@ -26,7 +34,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Install
@@ -40,7 +50,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-16.04]
-        node: [10]
+        node: [12]
 
     steps:
       - uses: actions/setup-node@v2-beta
@@ -54,7 +64,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: lint by ESlint and Stylelint and VTI
@@ -67,7 +79,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-16.04]
-        node: [10]
+        node: [12]
 
     steps:
       - uses: actions/setup-node@v2-beta
@@ -81,7 +93,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Test unit
@@ -104,7 +118,7 @@ jobs:
   #   strategy:
   #     matrix:
   #       os: [ubuntu-16.04]
-  #       node: [10]
+  #       node: [12]
 
   #   steps:
   #     - uses: actions/setup-node@v2-beta
@@ -138,7 +152,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-16.04]
-        node: [10]
+        node: [12]
 
     steps:
       - uses: actions/setup-node@v2-beta
@@ -152,7 +166,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Analyze
@@ -167,7 +183,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-16.04]
-        node: [10]
+        node: [12]
 
     steps:
       - uses: actions/setup-node@v2-beta
@@ -181,7 +197,9 @@ jobs:
         id: node_modules_cache_id
         uses: actions/cache@v2
         with:
-          path: node_modules
+          path: |
+            node_modules
+            */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Build
@@ -202,7 +220,7 @@ jobs:
         id: build_id
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace}}/dist
+          path: ${{ github.workspace }}/packages/client/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
   # test-e2e:
@@ -212,7 +230,7 @@ jobs:
   #   strategy:
   #     matrix:
   #       os: [ubuntu-16.04]
-  #       node: [10]
+  #       node: [12]
 
   #   steps:
   #     - uses: actions/setup-node@v2-beta
@@ -249,7 +267,7 @@ jobs:
   #   strategy:
   #     matrix:
   #       os: [ubuntu-16.04]
-  #       node: [10]
+  #       node: [12]
 
   #   steps:
   #     - uses: actions/setup-node@v2-beta
@@ -297,7 +315,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-16.04]
-        node: [10]
+        node: [12]
 
     steps:
       - uses: actions/setup-node@v2-beta
@@ -311,13 +329,13 @@ jobs:
         id: build_id
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace}}/dist
+          path: ${{ github.workspace }}/packages/client/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
       - name: Deploy to hosting to Firebase
-        uses: w9jds/firebase-action@v1.3.1
+        uses: w9jds/firebase-action@v1.5.0
         with:
-          args: deploy --only hosting,firestore:rules
+          args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_PATH: ${{ github.workspace }}
@@ -330,7 +348,7 @@ jobs:
   #   strategy:
   #     matrix:
   #       os: [ubuntu-16.04]
-  #       node: [10]
+  #       node: [12]
 
   #   steps:
   #     - uses: actions/setup-node@v2-beta
@@ -369,7 +387,7 @@ jobs:
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: ${{ github.workspace}}/lighthouse
+          outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
           urls: ${{ secrets.HOSTNAME_DEV }}
           sha: ${{ github.sha }}
           slackWebhookUrl: ${{ secrets.SLACK_WEBHOOK_LIGHTHOUSE }}
@@ -383,7 +401,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.6.4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: lighthouse
+          publish_dir: packages/client/lighthouse
           keep_files: true
 
   lighthouse-desktop:
@@ -401,7 +419,7 @@ jobs:
         with:
           author: ${{ github.actor }}
           branch: ${{ github.ref }}
-          outputDirectory: ${{ github.workspace}}/lighthouse
+          outputDirectory: ${{ github.workspace}}/packages/client/lighthouse
           emulatedFormFactor: desktop
           urls: ${{ secrets.HOSTNAME_DEV }}
           sha: ${{ github.sha }}
@@ -416,7 +434,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.6.4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: lighthouse
+          publish_dir: packages/client/lighthouse
           keep_files: true
 
   notice:
@@ -437,7 +455,7 @@ jobs:
   #   strategy:
   #     matrix:
   #       os: [ubuntu-16.04]
-  #       node: [10]
+  #       node: [12]
 
   #   steps:
   #     - uses: actions/setup-node@v2-beta
@@ -510,7 +528,7 @@ jobs:
   #   strategy:
   #     matrix:
   #       os: [ubuntu-16.04]
-  #       node: [10]
+  #       node: [12]
 
   #   steps:
   #     - uses: actions/setup-node@v2-beta

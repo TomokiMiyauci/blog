@@ -1,7 +1,7 @@
 # techsrc
 
 <div align="center">
-<img src="src/static/icon.png" alt="icon" title="icon-img">
+<img src="packages/client/src/static/icon.png" alt="icon" title="icon-img">
 </div>
 
 ![test](https://github.com/TomokiMiyauci/techxas/workflows/test/badge.svg?branch=develop)

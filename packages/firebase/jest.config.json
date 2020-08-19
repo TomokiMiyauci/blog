@@ -1,0 +1,8 @@
+{
+  "testMatch": ["<rootDir>/tests/**/*.spec.ts"],
+  "transform": {
+    "^.+\\.(ts|tsx)$": "ts-jest"
+  },
+  "moduleFileExtensions": ["ts", "js", "rules"],
+  "testEnvironment": "jest-environment-uint8array"
+}
