@@ -333,46 +333,13 @@ jobs:
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
       - name: Deploy to hosting to Firebase
-        uses: w9jds/firebase-action@v1.3.1
+        uses: w9jds/firebase-action@v1.5.0
         with:
           args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_PATH: ${{ github.workspace }}
           PROJECT_ID: develop
-
-  # deploy-functions:
-  #   needs: [lint, test-unit, build]
-  #   runs-on: ${{ matrix.os }}
-  #   defaults:
-  #     run:
-  #       shell: bash
-  #       working-directory: ${{ github.workspace }}/functions
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-16.04]
-  #       node: [12]
-
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
-
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Install
-  #       run: yarn --check-files --frozen-lockfile --non-interactive
-
-  #     - name: Deploy to Cloud Functions
-  #       uses: w9jds/firebase-action@v1.5.0
-  #       with:
-  #         args: deploy --only functions
-  #       env:
-  #         FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-  #         PROJECT_PATH: ${{ github.workspace }}
-  #         PROJECT_ID: develop
 
   # deploy-webpack-analyzer:
   #   needs: export
