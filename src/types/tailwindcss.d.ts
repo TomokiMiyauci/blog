@@ -7,10 +7,7 @@ interface ResolveConfigUtils {
 
 type ResolveThemePathFunction = <K extends keyof Omit<Theme, 'extend'>>(key: K) => Theme[K]
 
-type ResolveConfigFunction<Values extends object> = (
-  theme: ResolveThemePathFunction,
-  { utils: ResolveConfigUtils }
-) => Values
+type ResolveConfigFunction<Values extends object> = (theme: ResolveThemePathFunction) => Values
 
 type ThemeSection<Values extends object> = ResolveConfigFunction<Values> | Values | false
 
@@ -141,6 +138,7 @@ export interface Theme {
   transitionDuration?: ThemeSection<Record<string, string>>
   negativeMargin?: ThemeSection<Record<string, string>>
   textColor?: ThemeSection<Record<string, string>>
+  darkSelector?: string
 }
 
 export interface Screens {
