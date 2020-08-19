@@ -216,6 +216,11 @@ jobs:
           APP_ID: ${{ secrets.APP_ID_DEV }}
           MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID_DEV }}
 
+      - name: Rebug
+        run: |
+          pwd
+          ls
+
       - name: Cache building deliverable
         id: build_id
         uses: actions/cache@v2
@@ -329,7 +334,7 @@ jobs:
         id: build_id
         uses: actions/cache@v2
         with:
-          path: ${{ github.workspace}}/packages/client/dist
+          path: ${{ github.workspace }}/packages/client/dist
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
 
       - name: Deploy to hosting to Firebase
