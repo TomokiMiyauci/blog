@@ -5,6 +5,10 @@
       :to="localePath('/')"
       >← Back to Home</nuxt-link
     >
+    <div>
+      <lazy-button-favorite v-if="liked" @click="liked = false" />
+      <lazy-button-favorite v-else class="bg-gray-200" @click="onC">hellio</lazy-button-favorite>
+    </div>
     <article class="mt-12">
       <div class="flex md:grid grid-temp grid-cols-main">
         <toc class="hidden md:block" :toc="article.toc" />
@@ -12,7 +16,7 @@
           <div class="mb-8">
             <BaseH1 :text="article.title" />
             <p class="mt-1 flex justify-between">
-              {{ formatDate(article.updatedAt) }}<viewer-counter :text="viewCount" />
+              {{ formatDate(article.updatedAt) }}<span><viewer-counter :text="viewCount" /></span>
             </p>
           </div>
 
@@ -29,6 +33,7 @@
 </template>
 
 <script lang="ts">
+  import { user } from '@/store'
   import { PrevNext, Article } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
@@ -39,7 +44,7 @@
       meta: [{ hid: 'og:type', property: 'og:type', name: 'og:type', content: 'article' }]
     },
 
-    async asyncData({ $content, params }) {
+    async asyncData({ params, $content }) {
       const article = await $content('articles', params.slug).fetch<Article>()
 
       const [prev, next] = await $content('articles')
@@ -54,19 +59,24 @@
     setup(_, { root }) {
       const slug = root.$route.params.slug
       const docRef = root.$fireStore.collection('articles').doc(slug)
-      docRef.set(
-        {
-          view: root.$fireStoreObj.FieldValue.increment(1)
-        },
-        { merge: true }
-      )
+
+      const liked = useAsync(async () => {
+        const { exists } = await docRef.collection('likedUsers').doc(user.id).get()
+        return exists
+      })
+
+      const onC = async () => {
+        await docRef.collection('likedUsers').doc(user.id).delete()
+        liked.value = true
+      }
+
       const viewCount = useAsync(async () => {
         const result = await docRef.get()
         return result.data()!.view
       })
 
       useRegisterCopyButton()
-      return { formatDate, viewCount }
+      return { formatDate, viewCount, liked, onC }
     }
   })
 </script>
