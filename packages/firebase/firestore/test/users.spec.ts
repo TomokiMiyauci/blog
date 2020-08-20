@@ -1,8 +1,7 @@
 import fs from 'fs'
 
 import * as firebase from '@firebase/testing'
-
-const PROJECT_ID = 'test'
+import { PROJECT_ID } from './'
 const timestamp = firebase.firestore.FieldValue.serverTimestamp()
 
 describe('users/', () => {
@@ -30,13 +29,15 @@ describe('users/', () => {
       .firestore()
   }
 
-    it('[CREATE]', async () => {
-      const firestore = authedApp({ uid: 'admin', name: 'admin' })
-      const publicRooms = firestore.collection('users')
+  it('[CREATE]', async () => {
+    const firestore = authedApp({ uid: 'admin', name: 'admin' })
+    const publicRooms = firestore.collection('users')
 
-      await firebase.assertSucceeds(publicRooms.add({
+    await firebase.assertSucceeds(
+      publicRooms.add({
         createdAt: timestamp,
         updatedAt: timestamp
-      }))
-    })
+      })
+    )
+  })
 })
