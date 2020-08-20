@@ -17,7 +17,6 @@
       ]
     }
   },
-  "compileOnSave": true,
   "include": ["test/**/*"],
   "exclude": ["node_modules"],
 }
