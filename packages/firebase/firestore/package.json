@@ -8,9 +8,6 @@
     "start": "yarn shell",
     "test": "firebase emulators:exec --only firestore jest"
   },
-  "engines": {
-    "node": "12"
-  },
   "main": "lib/index.js",
   "devDependencies": {
     "@firebase/testing": "^0.20.11",
