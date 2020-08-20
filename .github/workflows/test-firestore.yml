@@ -14,37 +14,23 @@ defaults:
     working-directory: packages/firebase/firestore
 
 jobs:
-  # setup:
-  #   runs-on: ${{ matrix.os }}
+  test:
+    runs-on: ${{ matrix.os }}
 
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-latest]
-  #       node: [12]
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [12]
 
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Cache node_modules
-  #       id: node_modules_cache_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: |
-  #           node_modules
-  #           */*/node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-  #     - name: Install
-  #       if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
-  #       run: yarn --check-files --frozen-lockfile --non-interactive
+      - name: Test
+        uses: IIIMPACT/firebase-firestore-testing-action@v3.1.1
 
   deploy:
-    # needs: [setup]
+    needs: [test]
     runs-on: ${{ matrix.os }}
 
     strategy:
