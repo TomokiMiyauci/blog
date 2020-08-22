@@ -10,6 +10,7 @@
       </div>
     </main>
     <the-footer class="mt-64" />
+    <portal-target class="fixed rigth-0 bottom-0 mb-5 ml-5" name="notice" />
   </div>
 </template>
 
