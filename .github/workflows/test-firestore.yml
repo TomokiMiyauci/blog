@@ -14,22 +14,22 @@ defaults:
     working-directory: packages/firebase/firestore
 
 jobs:
-  test:
-    runs-on: ${{ matrix.os }}
+  # test:
+  #   runs-on: ${{ matrix.os }}
 
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+  #   strategy:
+  #     matrix:
+  #       os: [ubuntu-latest]
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
 
-      - name: Test
-        uses: IIIMPACT/firebase-firestore-testing-action@v3.1.1
+  #     - name: Test
+  #       uses: IIIMPACT/firebase-firestore-testing-action@v3.1.1
 
   deploy:
-    needs: [test]
+    # needs: [test]
     runs-on: ${{ matrix.os }}
 
     strategy:
