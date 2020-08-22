@@ -1,5 +1,5 @@
 <template>
-  <footer class="relative px-2 sm:px-10 py-10 flex justify-end bg-gray-300">
+  <footer class="relative px-2 sm:px-10 py-10 flex justify-end bg-gray-300 dark:bg-gray-900">
     <a
       :href="REPOSITORY_URL"
       target="_brank"
