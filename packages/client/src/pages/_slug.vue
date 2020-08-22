@@ -5,18 +5,18 @@
       :to="localePath('/')"
       >← Back to Home</nuxt-link
     >
-    <!-- <div>
-      <lazy-button-favorite v-if="liked" @click="liked = false" />
-      <lazy-button-favorite v-else class="bg-gray-200" @click="onC">hellio</lazy-button-favorite>
-    </div> -->
+
     <article class="mt-12">
       <div class="flex md:grid grid-temp grid-cols-main">
         <toc class="hidden md:block" :toc="article.toc" />
         <div style="grid-column: 2 / 3;" class="p-2 overflow-hidden">
-          <div class="mb-8">
+          <div class="mb-10 pb-10">
             <BaseH1 :text="article.title" />
             <p class="mt-1 flex justify-between">
-              {{ formatDate(article.updatedAt) }}<span><viewer-counter :text="viewCount" /></span>
+              {{ formatDate(article.updatedAt)
+              }}<span class="inline-flex items-center"
+                ><button-like /> <viewer-counter class="ml-8" :text="viewCount"
+              /></span>
             </p>
           </div>
 
