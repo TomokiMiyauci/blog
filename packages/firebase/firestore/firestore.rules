@@ -8,28 +8,36 @@ service cloud.firestore {
   }
 
   function isValidArticles(article) {
-    return article.size () == 2 &&
-    'view' in article && article.view is int &&
-    'like' in article && article.likes is int
+    return article.size () == 2 || article.size () == 1 &&
+    'view' in article && article.view is int ||
+    'like' in article && article.like is int
   }
 
   function isValidLikedUsers(likedUser) {
     return likedUser.size() == 1 &&
-    'userRef' in likedUser
+    'userRef' in likedUser && likedUser.userRef is path
   }
 
   match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
     match /users/{uid} {
       allow create: if isValidUsers(request.resource.data);
+
+      match /likedArticles/{likedArticle} {
+        allow get, list;
+      }
     }
 
     match /articles/{slug} {
-      allow get, read;
+      allow read;
 
       allow create, update: if isValidArticles(request.resource.data);
 
       match /likedUsers/{likedUser} {
-        allow get, read, delete;
+        allow read, delete;
 
         allow create, update: if isValidLikedUsers(request.resource.data);
       }

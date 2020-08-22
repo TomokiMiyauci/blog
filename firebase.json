@@ -22,7 +22,8 @@
     "predeploy": [
       "yarn --cwd packages/firebase/functions build"
     ],
-    "source": "packages/firebase/functions"
+    "source": "packages/firebase/functions",
+    "runtime": "nodejs12"
   },
   "emulators": {
     "firestore": {

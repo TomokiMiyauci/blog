@@ -13,9 +13,6 @@
     "logs": "firebase functions:log",
     "test": "jest --detectOpenHandles"
   },
-  "engines": {
-    "node": "12"
-  },
   "main": "lib/index.js",
   "dependencies": {
     "firebase-admin": "^9.1.0",

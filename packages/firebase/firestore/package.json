@@ -6,10 +6,7 @@
   "scripts": {
     "lint": "eslint --ext .ts .",
     "start": "yarn shell",
-    "test": "jest --detectOpenHandles"
-  },
-  "engines": {
-    "node": "12"
+    "test": "firebase emulators:exec --only firestore jest"
   },
   "main": "lib/index.js",
   "devDependencies": {

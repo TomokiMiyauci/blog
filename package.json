@@ -9,10 +9,10 @@
     "url": "https://github.com/TomokiMiyauci/techsrc.git"
   },
   "workspaces": [
-    "packages/*"
+    "packages/**"
   ],
   "engines": {
-    "node": "12"
+    "node": "12.x || 13.x"
   },
   "scripts": {
     "lint:markdown": "markdownlint **/*.md --ignore-path .gitignore"
