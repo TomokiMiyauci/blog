@@ -1,5 +1,11 @@
 {
   "SEARCH": {
     "PLACEHOLDER": "検索"
+  },
+
+  "INPUT": {
+    "TEXTAREA": {
+      "PLACEHOLDER": "コメントを入力"
+    }
   }
 }
