@@ -5,8 +5,8 @@
         <mdi-heart />
       </template>
       <template #default="isLike">
-        <button-favorite v-if="!isLike" class="text-red-500" @click="like" />
-        <button-circle v-else @click="disLike">
+        <button-favorite v-if="isLike" class="text-red-500" @click="disLike" />
+        <button-circle v-else @click="like">
           <mdi-heart-outline />
         </button-circle>
       </template>
@@ -49,7 +49,7 @@
     const disLike = async (): Promise<void> => {
       await articleLikedUserDoc(ctx).delete()
       promiseIsLike.value = Promise.resolve(false)
-      promiseLike.value = getCount()
+      promiseLike.value = Promise.resolve((await promiseLike.value) - 1)
     }
 
     const like = async (): Promise<void> => {
@@ -57,7 +57,7 @@
         userRef: userDoc(ctx)
       })
       promiseIsLike.value = Promise.resolve(true)
-      promiseLike.value = getCount()
+      promiseLike.value = Promise.resolve((await promiseLike.value) + 1)
     }
 
     const promiseIsLike = ref(existDoc())
