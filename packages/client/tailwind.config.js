@@ -12,6 +12,9 @@ const VUE_FILE = join('**', '*.vue')
  * @type {import("src/types/tailwindcss").TailwindcssConfiguration}
  */
 const config = {
+  future: {
+    removeDeprecatedGapUtilities: true
+  },
   theme: {
     darkSelector: '.dark-mode',
     extend: {
@@ -32,9 +35,19 @@ const config = {
     }
   },
   variants: {
-    backgroundColor: ['responsive', 'hover', 'focus', 'focus-within', 'dark', 'dark-hover', 'dark-focus-within'],
+    backgroundColor: [
+      'responsive',
+      'hover',
+      'focus',
+      'disabled',
+      'focus-within',
+      'dark',
+      'dark-hover',
+      'dark-focus-within'
+    ],
     boxShadow: ['responsive', 'hover', 'focus', 'focus-within'],
-    textColor: ['responsive', 'hover', 'focus', 'focus-within', 'dark', 'dark-hover', 'dark-focus-within']
+    textColor: ['responsive', 'hover', 'focus', 'disabled', 'focus-within', 'dark', 'dark-hover', 'dark-focus-within'],
+    cursor: ['responsive', 'disabled']
   },
   plugins: [require('tailwindcss-dark-mode')()],
   purge: {
