@@ -43,10 +43,23 @@ const config = {
       'focus-within',
       'dark',
       'dark-hover',
-      'dark-focus-within'
+      'dark-focus',
+      'dark-focus-within',
+      'dark-disabled'
     ],
-    boxShadow: ['responsive', 'hover', 'focus', 'focus-within'],
-    textColor: ['responsive', 'hover', 'focus', 'disabled', 'focus-within', 'dark', 'dark-hover', 'dark-focus-within'],
+    boxShadow: ['responsive', 'hover', 'focus', 'focus-within', 'dark', 'dark-hover', 'dark-focus-within'],
+    textColor: [
+      'responsive',
+      'hover',
+      'focus',
+      'disabled',
+      'focus-within',
+      'dark',
+      'dark-hover',
+      'dark-focus',
+      'dark-focus-within',
+      'dark-disabled'
+    ],
     cursor: ['responsive', 'disabled']
   },
   plugins: [require('tailwindcss-dark-mode')()],
