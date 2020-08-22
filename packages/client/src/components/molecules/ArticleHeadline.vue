@@ -12,7 +12,7 @@
       <component :is="tag" v-for="tag in tags" :key="tag" />
 
       <h2 class="mt-5 flex justify-between">
-        <span><mdi-calendar-edit class="mr-1" />{{ formatDate(headline.createdAt) }}</span>
+        <span><mdi-calendar-edit class="mr-1" />{{ formatDate(headline.createdAt, $i18n.locale) }}</span>
         <span> <mdi-timer class="mr-1" />{{ headline.readingTime }}</span>
       </h2>
     </div>
