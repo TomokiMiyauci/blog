@@ -14,3 +14,9 @@ export type User = {
 export type LikedArticle = {
   articleRef: firebase.firestore.DocumentReference
 }
+
+export type Comment = {
+  id: string
+  createdAt: Date
+  value: string
+}
