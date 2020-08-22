@@ -25,6 +25,10 @@ service cloud.firestore {
 
     match /users/{uid} {
       allow create: if isValidUsers(request.resource.data);
+
+      match /likedArticles/{likedArticle} {
+        allow get, list;
+      }
     }
 
     match /articles/{slug} {
