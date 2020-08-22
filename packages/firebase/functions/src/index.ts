@@ -3,7 +3,8 @@ admin.initializeApp()
 
 const files = {
   onCreateUser: './user',
-  onCreateArticleLikedUser: './article/likedUser'
+  onCreateArticleLikedUser: './article/likedUser/onCreate',
+  onDeleteArticleLikedUser: './article/likedUser/onDelete'
 }
 
 const loadFunctions = (filesObj: { [key: string]: string }): void => {
