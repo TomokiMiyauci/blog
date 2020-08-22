@@ -10,7 +10,8 @@ declare module '@nuxt/types/config/hooks' {
   }
 }
 const HOSTNAME = process.env.HOSTNAME
-const PACKAGE_NAME = process.env.npm_package_name
+const PACKAGE_NAME = process.env.npm_package_name!
+const PROJECT_NAME = PACKAGE_NAME.substring(0, 1).toUpperCase() + PACKAGE_NAME.substring(1).toLocaleLowerCase()
 const TWITTER_ACCOUNT = '@techsrc_'
 const isProduction = process.env.NODE_ENV === 'production'
 const config: NuxtConfig = {
@@ -33,7 +34,7 @@ const config: NuxtConfig = {
    */
   head: {
     title: '',
-    titleTemplate: `%s | ${PACKAGE_NAME?.charAt(0).toUpperCase()}${PACKAGE_NAME?.slice(1)}`,
+    titleTemplate: `%s | ${PROJECT_NAME}`,
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
@@ -63,6 +64,10 @@ const config: NuxtConfig = {
 
   router: {
     middleware: 'auth'
+  },
+
+  publicRuntimeConfig: {
+    PROJECT_NAME
   },
 
   /*
@@ -101,6 +106,7 @@ const config: NuxtConfig = {
    ** Nuxt.js modules
    */
   modules: [
+    'portal-vue/nuxt',
     'nuxt-i18n',
     '@nuxtjs/pwa',
     '@nuxtjs/firebase',
