@@ -42,6 +42,7 @@
     "nuxt": "^2.14.0",
     "nuxt-composition-api": "^0.11.0",
     "nuxt-i18n": "^6.13.8",
+    "portal-vue": "^2.1.7",
     "prism-themes": "^1.4.0",
     "tailwindcss-dark-mode": "^1.1.6",
     "vue-promised": "^1.2.2",
