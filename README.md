@@ -2,8 +2,9 @@
 <img src="packages/client/src/static/icon.png" alt="icon" title="icon-img">
 </div>
 
-<div align="center" style="margin-top:10px;margin-bottom:80px;font-size: 120px;line-height:1;color: #234e52;">
-<span style="color: #72deaf;">T</span>ech<span style="color: #72deaf;">s</span>rc</div>
+<div align="center">
+<font size="7">Techsrc</font>
+</div>
 
 ![test](https://github.com/TomokiMiyauci/techxas/workflows/test/badge.svg?branch=develop)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
