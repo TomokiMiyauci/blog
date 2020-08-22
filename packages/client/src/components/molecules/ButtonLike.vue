@@ -2,7 +2,7 @@
   <div class="inline-flex items-center">
     <Promised :promise="promiseIsLike">
       <template #pending>
-        <lazy-mdi-heart />
+        <mdi-heart />
       </template>
       <template #default="isLike">
         <button-favorite v-if="!isLike" class="text-red-500" @click="like" />
