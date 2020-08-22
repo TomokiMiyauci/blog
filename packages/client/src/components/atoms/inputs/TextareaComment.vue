@@ -1,9 +1,9 @@
 <template>
   <textarea
-    class="w-full p-3 rounded-md bg-gray-200 focus:text-white resize-none focus:bg-gray-800 outline-none transition duration-300 shadow hover:shadow-xl"
+    class="w-full p-3 text-lg rounded-md bg-gray-200 focus:text-white resize-none focus:bg-gray-800 dark-focus:bg-gray-400 dark:text-teal-900 outline-none transition duration-300 shadow hover:shadow-xl dark-hover:shadow-lg"
     required
-    rows="1"
-    placeholder="Comment"
+    :rows="rows"
+    :placeholder="$t('INPUT.TEXTAREA.PLACEHOLDER')"
     autocomplete="off"
     spellcheck="false"
     aria-label="hello"
@@ -13,13 +13,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent, computed } from 'nuxt-composition-api'
   export default defineComponent({
     props: {
       value: {
-        type: [String, Number],
+        type: String,
         default: ''
       }
+    },
+
+    setup(props) {
+      const rows = computed(() => {
+        return props.value.split('\n').length
+      })
+      return { rows }
     }
   })
 </script>
