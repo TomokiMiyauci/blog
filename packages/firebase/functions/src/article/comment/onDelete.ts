@@ -6,7 +6,6 @@ export default functions
   .firestore.document('articles/{slug}/comments/{comment}')
   .onDelete((snapshot) => {
     const articleRef = snapshot.ref.parent.parent
-    console.log(2222222222222222)
 
     if (!articleRef) return
 

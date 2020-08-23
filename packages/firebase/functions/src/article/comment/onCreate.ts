@@ -7,13 +7,13 @@ const webhook = new IncomingWebhook(functions.config().slack.url)
 export default functions
   .region('asia-northeast1')
   .firestore.document('articles/{slug}/comments/{comment}')
-  .onCreate(async (snapshot, { auth }) => {
+  .onCreate(async (snapshot) => {
     const text = snapshot.data().text as string
+    const userRef = snapshot.data().userRef as admin.firestore.DocumentReference
+
     const articleRef = snapshot.ref.parent.parent
 
-    console.log(111111111111111111)
-
-    if (!articleRef) return
+    if (!articleRef || !text || !userRef) return
 
     const batch = admin.firestore().batch()
 
@@ -24,9 +24,8 @@ export default functions
     await batch.commit()
     const message = {
       icon_emoji: ':simple_smile:',
-      username: auth.uid,
-      text: `${articleRef.id}
-${text}`
+      username: `${userRef.id} / ${articleRef.id}`,
+      text
     }
 
     return webhook.send(message)
