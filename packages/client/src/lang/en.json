@@ -11,7 +11,11 @@
 
   "COMMENT": {
     "HEADER": "Comments",
-    "NO": "No Comment"
+    "NO": "No Comment",
+    "DELETE": {
+      "HEADER": "Comment Delete",
+      "ALERT": "Are you really?"
+    }
   },
 
   "USER": {
