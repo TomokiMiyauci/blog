@@ -12,12 +12,15 @@
         >
           <lazy-mdi-account />
           <div class="ml-4 w-full">
-            <p class="flex justify-between">
-              <span class="font-bold text-md">***</span><span>{{ formatDate(comment.createdAt, $i18n.locale) }}</span>
+            <p class="flex">
+              <span class="font-bold text-md">*** ・</span
+              ><span>{{ formatDate(timestamp2Date(comment.createdAt), $i18n.locale) }}</span>
             </p>
-            <div class="break-all whitespace-pre-wrap">{{ comment.value }}</div>
+            <div class="break-all whitespace-pre-wrap">{{ comment.text }}</div>
           </div>
           <lazy-button-report class="ml-1" />
+
+          <lazy-comment-delete :id="comment.id" v-on="$listeners" />
         </div>
       </transition-group>
     </transition>
@@ -26,7 +29,7 @@
 
 <script lang="ts">
   import { Comment } from '@/types/firestore'
-  import { formatDate } from '@/utils/formatter'
+  import { formatDate, timestamp2Date } from '@/utils/formatter'
   import { defineComponent } from 'nuxt-composition-api'
 
   export default defineComponent({
@@ -38,7 +41,7 @@
     },
 
     setup() {
-      return { formatDate }
+      return { formatDate, timestamp2Date }
     }
   })
 </script>
