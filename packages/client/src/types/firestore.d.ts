@@ -1,3 +1,5 @@
+import type { userDoc } from '@/utils/firestore-reference'
+
 export type Article = {
   like: number
   view: number
@@ -16,7 +18,8 @@ export type LikedArticle = {
 }
 
 export type Comment = {
-  id: string
-  createdAt: Date
-  value: string
+  id?: string
+  userRef: ReturnType<typeof userDoc>
+  createdAt: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+  text: string
 }
