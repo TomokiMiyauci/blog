@@ -18,6 +18,17 @@ service cloud.firestore {
     'userRef' in likedUser && likedUser.userRef is path
   }
 
+  function isValideComments(comment) {
+    return comment.size() == 3 &&
+    'text' in comment && comment.text is string &&
+    'userRef' in comment && comment.userRef is path &&
+    'createdAt' in comment && comment.createdAt is timestamp
+  }
+
+  function isAuthenticated(request) {
+    return request.auth.uid != null;
+  }
+
   match /databases/{database}/documents {
     match /{document=**} {
       allow read, write: if false;
@@ -40,6 +51,14 @@ service cloud.firestore {
         allow read, delete;
 
         allow create, update: if isValidLikedUsers(request.resource.data);
+      }
+
+      match /comments/{comment} {
+        allow list, get;
+
+        allow create: if isAuthenticated(request) && isValideComments(request.resource.data);
+
+        allow delete: if isAuthenticated(request);
       }
     }
   }
