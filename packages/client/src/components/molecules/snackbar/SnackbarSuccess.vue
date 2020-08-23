@@ -4,7 +4,7 @@
       <lazy-mdi-check-circle class="text-teal-500" />
     </template>
     <template #text>
-      <span class="text-white dark:text-teal-900">Success! Posted</span>
+      <span class="text-white dark:text-teal-900">{{ $t('NOTICE.SUCCESS.POST') }}</span>
     </template>
   </lazy-base-snackbar>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="mb-5 text-2xl">
-      <lazy-mdi-comment-text-multiple /><span class="ml-2">Comments</span
+      <lazy-mdi-comment-text-multiple /><span class="ml-2">{{ $t('COMMENT.HEADER') }}</span
       ><span class="px-2 shadow ml-2 rounded-full bg-red-500">{{ commentCount }}</span>
     </h2>
     <portal to="notice">

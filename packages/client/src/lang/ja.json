@@ -7,5 +7,20 @@
     "TEXTAREA": {
       "PLACEHOLDER": "コメントを入力"
     }
+  },
+
+  "COMMENT": {
+    "HEADER": "コメント",
+    "NO": "コメントはまだありません"
+  },
+
+  "USER": {
+    "ANONYMOUS": "名無し"
+  },
+
+  "NOTICE": {
+    "SUCCESS": {
+      "POST": "コメントを投稿しました"
+    }
   }
 }
