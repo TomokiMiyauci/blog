@@ -18,9 +18,9 @@
             </p>
             <div class="break-all whitespace-pre-wrap">{{ comment.text }}</div>
           </div>
-          <lazy-button-report class="ml-1" />
+          <!-- <lazy-button-report class="ml-1" /> -->
 
-          <lazy-comment-delete :id="comment.id" v-on="$listeners" />
+          <lazy-comment-delete v-if="isEqual(comment.userRef)" :id="comment.id" v-on="$listeners" />
         </div>
       </transition-group>
     </transition>
@@ -29,8 +29,18 @@
 
 <script lang="ts">
   import { Comment } from '@/types/firestore'
+  import { userDoc } from '@/utils/firestore-reference'
   import { formatDate, timestamp2Date } from '@/utils/formatter'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent, useContext } from 'nuxt-composition-api'
+
+  const useUser = () => {
+    const ctx = useContext()
+    const isEqual = (reference: ReturnType<typeof userDoc>) => {
+      return userDoc(ctx).isEqual(reference)
+    }
+
+    return { isEqual }
+  }
 
   export default defineComponent({
     props: {
@@ -41,7 +51,7 @@
     },
 
     setup() {
-      return { formatDate, timestamp2Date }
+      return { formatDate, timestamp2Date, ...useUser() }
     }
   })
 </script>
