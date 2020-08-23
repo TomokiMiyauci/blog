@@ -4,25 +4,26 @@ service cloud.firestore {
   function isValidUsers(user) {
     return user.size () == 2 &&
     'createdAt' in user && user.createdAt is timestamp &&
-    'updatedAt' in user && user.updatedAt is timestamp
+    'updatedAt' in user && user.updatedAt is timestamp;
   }
 
   function isValidArticles(article) {
-    return article.size () == 2 || article.size () == 1 &&
-    'view' in article && article.view is int ||
-    'like' in article && article.like is int
+    return
+    ('view' in article && article.view is int) ||
+    ('like' in article && article.like is int) ||
+    ('comment' in article && article.comment is int);
   }
 
   function isValidLikedUsers(likedUser) {
     return likedUser.size() == 1 &&
-    'userRef' in likedUser && likedUser.userRef is path
+    'userRef' in likedUser && likedUser.userRef is path;
   }
 
   function isValideComments(comment) {
     return comment.size() == 3 &&
     'text' in comment && comment.text is string &&
     'userRef' in comment && comment.userRef is path &&
-    'createdAt' in comment && comment.createdAt is timestamp
+    'createdAt' in comment && comment.createdAt is timestamp;
   }
 
   function isAuthenticated(request) {
