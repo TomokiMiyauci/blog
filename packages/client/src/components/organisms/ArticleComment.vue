@@ -19,6 +19,7 @@
 
 <script lang="ts">
   import type BaseSnackbar from '@/components/molecules/BaseSnackbar.vue'
+  import { user } from '@/store'
   import { Comment } from '@/types/firestore'
   import { articleCommentRef, userDoc } from '@/utils/firestore-reference'
   import { defineComponent, ref, computed, useContext } from 'nuxt-composition-api'
@@ -61,7 +62,7 @@
     const isPostable = computed<boolean>(() => {
       const result = newCommentRef.value.trim().match(/\S/g)
 
-      return !!result && !!result.length
+      return user.login && !!result && !!result.length
     })
 
     const commentCount = computed(() => {
