@@ -23,3 +23,8 @@ export type Comment = {
   createdAt: firebase.firestore.Timestamp | firebase.firestore.FieldValue
   text: string
 }
+
+export type ReportedUser = {
+  userRef: ReturnType<typeof userDoc>
+  createdAt: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+}
