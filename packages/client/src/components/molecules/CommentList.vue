@@ -18,9 +18,9 @@
             </p>
             <div class="break-all whitespace-pre-wrap">{{ comment.text }}</div>
           </div>
-          <!-- <lazy-button-report class="ml-1" /> -->
 
           <lazy-comment-delete v-if="isEqual(comment.userRef)" :id="comment.id" v-on="$listeners" />
+          <lazy-report-violation v-else :id="comment.id" />
         </div>
       </transition-group>
     </transition>
