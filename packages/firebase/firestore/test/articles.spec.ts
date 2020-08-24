@@ -234,7 +234,21 @@ describe('firestore', () => {
                 createdAt: timestamp
               })
             )
+
           })
+          it('[UPDATE: OK]userRef:path, createdAt: timestamp', () => {
+            firebase.assertSucceeds(
+              reportedUserRef.doc('report').set({
+                userRef: firestore.collection('users').doc('user'),
+                createdAt: timestamp
+              })
+            )
+            firebase.assertSucceeds(
+              reportedUserRef.doc('report').set({
+                userRef: firestore.collection('users').doc('user'),
+                createdAt: timestamp
+              })
+            )
         })
       })
     })

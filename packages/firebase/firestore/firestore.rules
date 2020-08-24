@@ -70,7 +70,7 @@ service cloud.firestore {
         allow delete: if isAuthenticated(request);
 
          match /reportedUsers/{reportedUser} {
-           allow create: if isAuthenticated(request) && isValideReportedUsers(request.resource.data);
+           allow create, update: if isAuthenticated(request) && isValideReportedUsers(request.resource.data);
          }
       }
     }
