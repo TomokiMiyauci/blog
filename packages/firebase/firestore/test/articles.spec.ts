@@ -190,6 +190,67 @@ describe('firestore', () => {
           firebase.assertSucceeds(commentDoc.delete())
         })
       })
+
+      describe('reportedUser', () => {
+        describe('[UNAUTH]', () => {
+          const firestore = unauthApp()
+          const reportedUserRef = firestore
+            .collection('articles')
+            .doc('slug')
+            .collection('comments')
+            .doc('comment')
+            .collection('reportedUsers')
+
+          it('[POST: NG]', () => {
+            firebase.assertFails(
+              reportedUserRef.add({
+                userRef: firestore.collection('users').doc('user'),
+                createdAt: timestamp
+              })
+            )
+          })
+        })
+        describe('[AUTH]', () => {
+          const firestore = authApp()
+          const reportedUserRef = firestore
+            .collection('articles')
+            .doc('slug')
+            .collection('comments')
+            .doc('comment')
+            .collection('reportedUsers')
+
+          it('[POST: NG]', () => {
+            firebase.assertFails(
+              reportedUserRef.add({
+                createdAt: timestamp
+              })
+            )
+          })
+
+          it('[POST: OK]userRef:path, createdAt: timestamp', () => {
+            firebase.assertSucceeds(
+              reportedUserRef.add({
+                userRef: firestore.collection('users').doc('user'),
+                createdAt: timestamp
+              })
+            )
+
+          })
+          it('[UPDATE: OK]userRef:path, createdAt: timestamp', () => {
+            firebase.assertSucceeds(
+              reportedUserRef.doc('report').set({
+                userRef: firestore.collection('users').doc('user'),
+                createdAt: timestamp
+              })
+            )
+            firebase.assertSucceeds(
+              reportedUserRef.doc('report').set({
+                userRef: firestore.collection('users').doc('user'),
+                createdAt: timestamp
+              })
+            )
+        })
+      })
     })
 
     describe('likedUsers/', () => {

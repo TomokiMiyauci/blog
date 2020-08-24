@@ -36,7 +36,7 @@ jobs:
       - name: Set env to Cloud Functions
         uses: w9jds/firebase-action@v1.5.0
         with:
-          args: functions:config:set slack.url=${{ secrets.SLACK_WEBHOOK_COMMENT }}
+          args: functions:config:set slack.url=${{ secrets.SLACK_WEBHOOK_DEV_COMMENT }} slack.report=${{ secrets.SLACK_WEBHOOK_REPORT }}
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           PROJECT_PATH: ${{ github.workspace }}
