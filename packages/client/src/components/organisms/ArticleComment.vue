@@ -13,6 +13,16 @@
       <lazy-button-send :disabled="!isPostable" @click="onSend" />
     </div>
 
+    <portal v-if="isProcessing" to="center">
+      <transition name="zoom-in">
+        <div
+          class="bg-gray-300 shadow-md dark:bg-gray-900 bg-opacity-75 transition-shadow duration-300 p-10 rounded-lg"
+        >
+          <spin-loader width="80" height="80" />
+        </div>
+      </transition>
+    </portal>
+
     <lazy-comment-list :comments="commentsRef" class="mt-8" @delete="getComment" />
   </div>
 </template>
@@ -69,12 +79,12 @@
       return commentsRef.value.length
     })
 
-    return { onSend, commentsRef, newCommentRef, isPostable, commentCount, getComment }
+    return { onSend, commentsRef, newCommentRef, isPostable, commentCount, getComment, isProcessing }
   }
 
   export default defineComponent({
     setup() {
-      const { onSend, commentsRef, newCommentRef, isPostable, commentCount, getComment } = useComment()
+      const { onSend, commentsRef, newCommentRef, isPostable, commentCount, getComment, isProcessing } = useComment()
 
       const snackbar = ref<InstanceType<typeof BaseSnackbar>>()
 
@@ -85,6 +95,7 @@
         snackbar,
         commentCount,
         getComment,
+        isProcessing,
         onSend: async () => {
           await onSend()
           if (!snackbar.value) return
