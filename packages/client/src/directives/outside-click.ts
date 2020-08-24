@@ -17,8 +17,19 @@ const bind: DirectiveFunction = (el: HTMLElement, binding: DirectiveBinding): vo
     e.stopPropagation()
   }
 
+  el.ontouchstart = (e) => {
+    e.stopPropagation()
+  }
+
   document.addEventListener(
     'click',
+    () => {
+      binding.value()
+    },
+    { once: true }
+  )
+  document.addEventListener(
+    'touchstart',
     () => {
       binding.value()
     },
