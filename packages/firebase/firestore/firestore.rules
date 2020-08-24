@@ -26,6 +26,14 @@ service cloud.firestore {
     'createdAt' in comment && comment.createdAt is timestamp;
   }
 
+    function isValideReportedUsers(reportedUser) {
+    return reportedUser.size() == 2 &&
+    'userRef' in reportedUser && reportedUser.userRef is path &&
+    'createdAt' in reportedUser && reportedUser.createdAt is timestamp;
+  }
+
+
+
   function isAuthenticated(request) {
     return request.auth.uid != null;
   }
@@ -60,6 +68,10 @@ service cloud.firestore {
         allow create: if isAuthenticated(request) && isValideComments(request.resource.data);
 
         allow delete: if isAuthenticated(request);
+
+         match /reportedUsers/{reportedUser} {
+           allow create: if isAuthenticated(request) && isValideReportedUsers(request.resource.data);
+         }
       }
     }
   }
