@@ -15,6 +15,10 @@
     "DELETE": {
       "HEADER": "Comment Delete",
       "ALERT": "Are you really?"
+    },
+    "REPORT": {
+      "HEADER": "Report Violation",
+      "ALERT": "Report the comment as a violation?"
     }
   },
 
