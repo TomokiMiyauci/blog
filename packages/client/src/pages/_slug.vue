@@ -13,7 +13,7 @@
           <div class="mb-10 pb-10">
             <BaseH1 :text="article.title" />
             <p class="mt-1 flex justify-between">
-              {{ formatDate(article.updatedAt)
+              {{ formatDate(article.updatedAt, $i18n.locale)
               }}<span class="inline-flex items-center"
                 ><button-like /> <viewer-counter class="ml-8" :text="viewCount"
               /></span>
@@ -22,6 +22,7 @@
 
           <nuxt-content :document="article" />
           <prev-next :prev="prev" :next="next" />
+          <lazy-article-comment />
         </div>
 
         <div class="hidden md:block p-4" style="grid-column: 3 / 3;">

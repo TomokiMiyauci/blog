@@ -1,5 +1,30 @@
 {
   "SEARCH": {
     "PLACEHOLDER": "Search"
+  },
+
+  "INPUT": {
+    "TEXTAREA": {
+      "PLACEHOLDER": "Enter Comment"
+    }
+  },
+
+  "COMMENT": {
+    "HEADER": "Comments",
+    "NO": "No Comment",
+    "DELETE": {
+      "HEADER": "Comment Delete",
+      "ALERT": "Are you really?"
+    }
+  },
+
+  "USER": {
+    "ANONYMOUS": "Anonymous"
+  },
+
+  "NOTICE": {
+    "SUCCESS": {
+      "POST": "Comment posted"
+    }
   }
 }
