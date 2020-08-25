@@ -1,6 +1,5 @@
 {
   "name": "techsrc",
-  "version": "0.7.1",
   "license": "MIT",
   "private": true,
   "author": "TomokiMiyauci",
@@ -11,9 +10,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "engines": {
-    "node": "12.x || 13.x"
-  },
   "scripts": {
     "lint:markdown": "markdownlint **/*.md --ignore-path .gitignore"
   },
@@ -22,7 +18,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lerna exec yarn lint-staged"
     }
   },
   "devDependencies": {
