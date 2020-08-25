@@ -232,38 +232,6 @@ jobs:
   #     - name: Audit
   #       run: yarn run audit
 
-  # analyze:
-  #   needs: setup
-  #   runs-on: ${{ matrix.os }}
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-16.04]
-  #       node: [12]
-
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
-
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Restore node_modules
-  #       id: node_modules_cache_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: |
-  #           node_modules
-  #           */*/node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-  #     - name: Analyze
-  #       run: DEBUG=relative-ci:agent yarn build
-  #       env:
-  #         ANALYZE: true
-  #         RELATIVE_CI_KEY: ${{ secrets.RELATIVE_CI_KEY }}
-
   build:
     runs-on: ${{ matrix.os }}
 
@@ -346,54 +314,6 @@ jobs:
   #       with:
   #         start: yarn start
   #         wait-on: 'http://localhost:3000'
-
-  # export:
-  #   needs: [lint, audit, build]
-  #   runs-on: ${{ matrix.os }}
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-16.04]
-  #       node: [12]
-
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
-
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Restore node_modules
-  #       id: node_modules_cache_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-  #     - name: Restore node_modules of client
-  #       id: node_modules_cache_client_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-  #     - name: Restore building deliverable
-  #       id: build_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/.nuxt
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
-
-  #     - name: Export static site
-  #       run: yarn export
-
-  #     - name: Cache exporting deliverable
-  #       id: export_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/dist
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-export-nuxt-${{ github.sha }}
 
   deploy:
     needs: [lint-markup, test-unit, build]
@@ -545,11 +465,10 @@ jobs:
             fields: workflow,job,commit,repo,ref,author,took
             custom_payload: |
               {
-                username: 'action-slack',
-                icon_emoji: ':octocat:',
+                username: 'action',
+                icon_emoji: ':children_crossing:',
                 attachments: [{
-                  color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                  text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+                  color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning'
                 }]
               }
           env:
