@@ -9,7 +9,7 @@
     <article class="mt-12">
       <div class="flex md:grid grid-temp grid-cols-main">
         <toc class="hidden md:block" :toc="article.toc" />
-        <div style="grid-column: 2 / 3;" class="p-2 overflow-hidden">
+        <div style="grid-column: 2 / 3" class="p-2 overflow-hidden">
           <div class="mb-10 pb-10">
             <BaseH1 :text="article.title" />
             <p class="mt-1 flex justify-between">
@@ -25,7 +25,7 @@
           <lazy-article-comment />
         </div>
 
-        <div class="hidden md:block p-4" style="grid-column: 3 / 3;">
+        <div class="hidden md:block p-4" style="grid-column: 3 / 3">
           <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" />
         </div>
       </div>

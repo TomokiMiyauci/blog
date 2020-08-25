@@ -4,7 +4,7 @@
       :href="REPOSITORY_URL"
       target="_brank"
       class="absolute hover:text-green-400 transition-colors duration-300"
-      style="top: 50%; left: 50%; transform: translate(-50%, -50%);"
+      style="top: 50%; left: 50%; transform: translate(-50%, -50%)"
       ><mdi-github height="48" width="48"
     /></a>
     <span>©{{ new Date().getFullYear() }} {{ PROJECT_NAME }}</span>

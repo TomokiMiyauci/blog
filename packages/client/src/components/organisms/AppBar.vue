@@ -6,7 +6,7 @@
       <nuxt-link class="font-mono inline-flex items-end" :to="localePath('/')">
         <img width="56px" src="/icon.png" alt="logo" />
         <span class="ml-2 text-3xl leading-none tracking-tighter lg:text-4xl text-teal-900 dark:text-white"
-          ><span style="color: #72deaf;">T</span>ech<span style="color: #72deaf;">s</span>rc</span
+          ><span style="color: #72deaf">T</span>ech<span style="color: #72deaf">s</span>rc</span
         ></nuxt-link
       >
       <div class="flex items-center">

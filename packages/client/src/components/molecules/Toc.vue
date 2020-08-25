@@ -1,9 +1,7 @@
 <template>
   <div v-if="toc.length" class="w-full py-4 lg:py-8 lg:px-8">
     <div class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24">
-      <h3 class="mb-3 lg:mb-2 text-gray-500 uppercase tracking-wider font-bold text-sm lg:text-xs">
-        目次
-      </h3>
+      <h3 class="mb-3 lg:mb-2 text-gray-500 uppercase tracking-wider font-bold text-sm lg:text-xs">目次</h3>
       <nav>
         <scrollactive highlight-first-item active-class="text-green-500" :offset="0" tag="ul">
           <li

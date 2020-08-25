@@ -6,7 +6,7 @@
         v-if="isOpen"
         v-click-outside="onClose"
         class="card-anotation text-gray-900 absolute rounded-lg bg-white px-6 py-4 whitespace-no-wrap right-0 shadow hover:shadow-xl"
-        style="bottom: 65px;"
+        style="bottom: 65px"
       >
         <lazy-button-close class="absolute dark-hover:text-white right-0 top-0" @click="onClose" />
         <h2 class="text-lg pr-10">{{ $t('COMMENT.DELETE.HEADER') }}</h2>
