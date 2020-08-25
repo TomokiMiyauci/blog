@@ -2,7 +2,7 @@
 
 <div align="center">
 <img src="packages/client/src/static/icon.png" alt="icon" title="icon-img">
-<img src="packages/client/src/assets/css/logo.png" alt="icon" title="icon-img">
+<img src="packages/client/src/assets/img/logo-letter.png" alt="icon" title="icon-img">
 </div>
 
 <div align="center">
