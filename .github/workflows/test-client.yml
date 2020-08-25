@@ -290,7 +290,7 @@ jobs:
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Build
-        run: yarn generate
+        run: DEBUG=relative-ci:agent yarn generate
         env:
           dsn: ${{ secrets.SENTRY_DEV }}
           HOSTNAME: ${{ secrets.HOSTNAME_DEV }}
@@ -302,6 +302,8 @@ jobs:
           MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID_DEV }}
           APP_ID: ${{ secrets.APP_ID_DEV }}
           MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID_DEV }}
+          ANALYZE: true
+          RELATIVE_CI_KEY: ${{ secrets.RELATIVE_CI_KEY }}
 
       - uses: actions/upload-artifact@v2
         with:
