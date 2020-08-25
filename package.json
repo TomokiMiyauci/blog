@@ -9,7 +9,7 @@
     "url": "https://github.com/TomokiMiyauci/techsrc.git"
   },
   "workspaces": [
-    "packages/**"
+    "packages/*"
   ],
   "engines": {
     "node": "12.x || 13.x"
@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "husky": "^4.2.5",
+    "lerna": "^3.22.1",
     "lint-staged": "^10.2.11",
     "markdownlint-cli": "^0.23.2"
   }
