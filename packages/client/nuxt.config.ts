@@ -3,7 +3,6 @@ import { join } from 'path'
 import type { contentFunc } from '@nuxt/content'
 import { NuxtConfig } from '@nuxt/types'
 
-const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent')
 declare module '@nuxt/types/config/hooks' {
   interface NuxtOptionsHooks {
     'content:file:beforeInsert'?: (document: { extension: string; text: string; readingTime: string }) => Promise<void>
@@ -218,6 +217,7 @@ const config: NuxtConfig = {
 
     extend: (config, { isDev, isServer }) => {
       if (!isDev && !isServer && process.env.ANALYZE) {
+        const { RelativeCiAgentWebpackPlugin } = require('@relative-ci/agent')
         config.plugins?.push(new RelativeCiAgentWebpackPlugin({ enabled: true }))
       }
 
