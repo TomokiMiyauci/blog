@@ -308,13 +308,6 @@ jobs:
           name: dist
           path: packages/client/dist
 
-      # - name: Cache building deliverable
-      #   id: build_id
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ${{ github.workspace }}/packages/client/dist
-      #     key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
-
   # test-e2e:
   #   needs: build
   #   runs-on: ${{ matrix.os }}
@@ -417,15 +410,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      # - name: Restore building deliverable
-      #   id: build_id
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: ${{ github.workspace }}/packages/client/dist
-      #     key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
       - uses: actions/download-artifact@v2
         with:
           name: dist
+          path: packages/client/dist
 
       - name: Deploy to hosting to Firebase
         uses: w9jds/firebase-action@v1.5.0
@@ -551,7 +539,7 @@ jobs:
       steps:
         - uses: 8398a7/action-slack@v3
           with:
-            status: ${{ job.status }}
+            status: custom
             fields: repo,message,commit,author,action,eventName,ref,workflow
             custom_payload: |
               {
@@ -559,7 +547,6 @@ jobs:
                 icon_emoji: ':octocat:',
                 attachments: [{
                   color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                  text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
                 }]
               }
           env:
