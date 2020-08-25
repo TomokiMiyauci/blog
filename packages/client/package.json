@@ -13,7 +13,7 @@
     "lint:markup": "vti diagnostics",
     "lint:script": "eslint --ext .ts,.vue --ignore-path .gitignore .",
     "lint:style": "stylelint **/*.{vue,scss} --ignore-path .gitignore",
-    "lint:markdown": "markdownlint **/*.md --ignore-path .gitignore",
+    "lint:markdown": "markdownlint src/**/*.md --ignore-path .gitignore",
     "lint": "yarn lint:markup && yarn lint:script && yarn lint:style && yarn lint:markdown",
     "test:unit": "jest",
     "test:e2e": "cypress run",
@@ -21,8 +21,8 @@
     "ci:e2e": "server-test 'dev' :3000 'test:e2e'"
   },
   "lint-staged": {
-    "*.{ts,vue}": "eslint",
-    "*.{scss,vue}": "stylelint"
+    "*.{ts,vue}": "eslint --fix",
+    "*.{scss,vue}": "stylelint --fix"
   },
   "husky": {
     "hooks": {
