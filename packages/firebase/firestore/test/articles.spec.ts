@@ -234,7 +234,6 @@ describe('firestore', () => {
                 createdAt: timestamp
               })
             )
-
           })
           it('[UPDATE: OK]userRef:path, createdAt: timestamp', () => {
             firebase.assertSucceeds(
@@ -249,33 +248,34 @@ describe('firestore', () => {
                 createdAt: timestamp
               })
             )
+          })
         })
       })
-    })
 
-    describe('likedUsers/', () => {
-      const firestore = authedApp({ uid: 'admin', name: 'admin' })
-      const likedUsersRef = firestore.collection('articles').doc('slug').collection('likedUsers')
-      it('[GET: OK]', async () => {
-        await firebase.assertSucceeds(likedUsersRef.get())
-      })
-
-      describe('{likedUser}/', () => {
-        const likedUserRef = likedUsersRef.doc('likedUser')
+      describe('likedUsers/', () => {
+        const firestore = authedApp({ uid: 'admin', name: 'admin' })
+        const likedUsersRef = firestore.collection('articles').doc('slug').collection('likedUsers')
         it('[GET: OK]', async () => {
-          await firebase.assertSucceeds(likedUserRef.get())
+          await firebase.assertSucceeds(likedUsersRef.get())
         })
 
-        it('[POST: OK]userRef', async () => {
-          await firebase.assertSucceeds(
-            likedUserRef.set({
-              userRef: likedUserRef
-            })
-          )
-        })
+        describe('{likedUser}/', () => {
+          const likedUserRef = likedUsersRef.doc('likedUser')
+          it('[GET: OK]', async () => {
+            await firebase.assertSucceeds(likedUserRef.get())
+          })
 
-        it('[DELETE: OK]', async () => {
-          await firebase.assertSucceeds(likedUserRef.delete())
+          it('[POST: OK]userRef', async () => {
+            await firebase.assertSucceeds(
+              likedUserRef.set({
+                userRef: likedUserRef
+              })
+            )
+          })
+
+          it('[DELETE: OK]', async () => {
+            await firebase.assertSucceeds(likedUserRef.delete())
+          })
         })
       })
     })
