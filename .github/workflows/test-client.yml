@@ -461,16 +461,8 @@ jobs:
       steps:
         - uses: 8398a7/action-slack@v3
           with:
-            status: custom
+            status: ${{ job.status }}
             fields: workflow,job,commit,repo,ref,author,took
-            custom_payload: |
-              {
-                username: 'action',
-                icon_emoji: ':children_crossing:',
-                attachments: [{
-                  color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning'
-                }]
-              }
           env:
             GITHUB_TOKEN: ${{ github.token }}
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_DEV }}
