@@ -43,7 +43,7 @@ jobs:
         if: steps.node_modules_cache_id.outputs.cache-hit != 'true'
         run: yarn --check-files --frozen-lockfile --non-interactive
 
-  lint:
+  lint-markup:
     needs: setup
     runs-on: ${{ matrix.os }}
 
@@ -69,8 +69,95 @@ jobs:
             */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
-      - name: lint by ESlint and Stylelint and VTI
-        run: yarn lint
+      - name: lint by VTI
+        run: yarn lint:markup
+
+  lint-style:
+    needs: setup
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [12]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: lint by Stylelint
+        run: yarn lint:style
+
+  lint-script:
+    needs: setup
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [12]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: lint by ESlint
+        run: yarn lint:script
+
+  lint-markdown:
+    needs: setup
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [12]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: lint by Markdownlint
+        run: yarn lint:markdown
 
   test-unit:
     needs: setup
@@ -145,41 +232,9 @@ jobs:
   #     - name: Audit
   #       run: yarn run audit
 
-  analyze:
-    needs: setup
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-16.04]
-        node: [12]
-
-    steps:
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: ${{ matrix.node }}
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Restore node_modules
-        id: node_modules_cache_id
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-      - name: Analyze
-        run: DEBUG=relative-ci:agent yarn build
-        env:
-         RELATIVE_CI_KEY: ${{ secrets.RELATIVE_CI_KEY }}
-
   build:
-    needs: setup
     runs-on: ${{ matrix.os }}
-
+    needs: setup
     strategy:
       matrix:
         os: [ubuntu-16.04]
@@ -203,7 +258,7 @@ jobs:
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Build
-        run: yarn generate
+        run: DEBUG=relative-ci:agent yarn generate
         env:
           dsn: ${{ secrets.SENTRY_DEV }}
           HOSTNAME: ${{ secrets.HOSTNAME_DEV }}
@@ -215,13 +270,13 @@ jobs:
           MESSAGING_SENDER_ID: ${{ secrets.MESSAGING_SENDER_ID_DEV }}
           APP_ID: ${{ secrets.APP_ID_DEV }}
           MEASUREMENT_ID: ${{ secrets.MEASUREMENT_ID_DEV }}
+          ANALYZE: true
+          RELATIVE_CI_KEY: ${{ secrets.RELATIVE_CI_KEY }}
 
-      - name: Cache building deliverable
-        id: build_id
-        uses: actions/cache@v2
+      - uses: actions/upload-artifact@v2
         with:
-          path: ${{ github.workspace }}/packages/client/dist
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+          name: dist
+          path: packages/client/dist
 
   # test-e2e:
   #   needs: build
@@ -260,56 +315,8 @@ jobs:
   #         start: yarn start
   #         wait-on: 'http://localhost:3000'
 
-  # export:
-  #   needs: [lint, audit, build]
-  #   runs-on: ${{ matrix.os }}
-
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-16.04]
-  #       node: [12]
-
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
-
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Restore node_modules
-  #       id: node_modules_cache_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-  #     - name: Restore node_modules of client
-  #       id: node_modules_cache_client_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-  #     - name: Restore building deliverable
-  #       id: build_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/.nuxt
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
-
-  #     - name: Export static site
-  #       run: yarn export
-
-  #     - name: Cache exporting deliverable
-  #       id: export_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/dist
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-export-nuxt-${{ github.sha }}
-
   deploy:
-    needs: [lint, test-unit, build]
+    needs: [lint-markup, test-unit, build]
     runs-on: ${{ matrix.os }}
 
     strategy:
@@ -325,12 +332,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Restore building deliverable
-        id: build_id
-        uses: actions/cache@v2
+      - uses: actions/download-artifact@v2
         with:
-          path: ${{ github.workspace }}/packages/client/dist
-          key: ${{ matrix.os }}-node-v${{ matrix.node }}-build-nuxt-${{ github.sha }}
+          name: dist
+          path: packages/client/dist
 
       - name: Deploy to hosting to Firebase
         uses: w9jds/firebase-action@v1.5.0
@@ -437,17 +442,30 @@ jobs:
           publish_dir: packages/client/lighthouse
           keep_files: true
 
+  # notice:
+  #     needs: deploy
+  #     runs-on: ubuntu-latest
+  #     if: always()
+  #     steps:
+  #     - uses: actions/checkout@v2
+  #     - name: Slack Notification
+  #       uses: rtCamp/action-slack-notify@master
+  #       env:
+  #         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_DEV }}
+
   notice:
       needs: deploy
       runs-on: ubuntu-latest
       if: always()
-      steps:
-      - uses: actions/checkout@v2
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@master
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_DEV }}
 
+      steps:
+        - uses: 8398a7/action-slack@v3
+          with:
+            status: ${{ job.status }}
+            fields: workflow,job,commit,repo,ref,author
+          env:
+            GITHUB_TOKEN: ${{ github.token }}
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_DEV }}
   # test-snapshot:
   #   needs: setup
   #   runs-on: ${{ matrix.os }}

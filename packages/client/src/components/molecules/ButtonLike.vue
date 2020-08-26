@@ -13,9 +13,7 @@
     </Promised>
 
     <promised :promise="promiseLike">
-      <template #pending>
-        ...
-      </template>
+      <template #pending> ... </template>
       <template #default="likeCount">
         <span>{{ likeCount ? likeCount : '' }}</span>
       </template>

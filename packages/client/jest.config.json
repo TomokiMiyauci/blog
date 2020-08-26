@@ -15,5 +15,5 @@
   },
   "testMatch": ["<rootDir>/tests/unit/**/*.spec.ts?(x)"],
   "collectCoverage": true,
-  "collectCoverageFrom": ["<rootDir>/components/**/*.vue", "<rootDir>/pages/**/*.vue"]
+  "collectCoverageFrom": ["<rootDir>/src/components/**/*.vue"]
 }

@@ -36,7 +36,10 @@
           .default()
           .filter((slot) => Boolean(slot.componentOptions))
           .map(({ componentOptions, elm }) => {
-            const option = componentOptions?.propsData as { label: string }
+            if (!componentOptions || !componentOptions.propsData) {
+              return { label: '', elm: elm as HTMLElement }
+            }
+            const option = componentOptions.propsData as { label: string }
             return { label: option.label, elm: elm as HTMLElement }
           })
       })
