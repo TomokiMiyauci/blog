@@ -8,6 +8,12 @@ declare module '@nuxt/types/config/hooks' {
     'content:file:beforeInsert'?: (document: { extension: string; text: string; readingTime: string }) => Promise<void>
   }
 }
+
+declare module '@nuxtjs/firebase/types' {
+  interface StoreServiceConfig {
+    memoryOnly: boolean
+  }
+}
 const HOSTNAME = process.env.HOSTNAME
 const PACKAGE_NAME = process.env.npm_package_name!
 const PROJECT_NAME = PACKAGE_NAME.substring(0, 1).toUpperCase() + PACKAGE_NAME.substring(1).toLocaleLowerCase()
@@ -155,7 +161,9 @@ const config: NuxtConfig = {
       analytics: {
         collectionEnabled: isProduction
       },
-      firestore: true,
+      firestore: {
+        memoryOnly: true
+      },
       auth: true
     }
   },
