@@ -1,9 +1,9 @@
 <template>
-  <button-circle @click="onClick">
+  <lazy-button-circle @click="onClick">
     <transition name="fade-right" mode="out-in">
       <component :is="component" />
     </transition>
-  </button-circle>
+  </lazy-button-circle>
 </template>
 
 <script lang="ts">

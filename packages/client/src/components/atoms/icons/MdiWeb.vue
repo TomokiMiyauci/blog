@@ -1,7 +1,7 @@
 <template>
-  <base-svg v-bind="$attrs">
+  <lazy-base-svg v-bind="$attrs">
     <path :d="mdiWeb" />
-  </base-svg>
+  </lazy-base-svg>
 </template>
 
 <script lang="ts">

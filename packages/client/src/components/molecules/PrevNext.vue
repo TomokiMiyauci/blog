@@ -1,33 +1,33 @@
 <template>
   <div class="flex justify-between flex-col items-center mb-64">
     <div class="self-start p-2 shadow-xs rounded">
-      <base-nuxt-link
+      <lazy-base-nuxt-link
         v-if="prev"
         :to="localePath({ name: 'slug', params: { slug: prev.slug } })"
         class="hover:text-red-500 inline-flex items-center"
       >
-        <mdi-chevron-left class="h-5 mr-2" />
+        <lazy-mdi-chevron-left class="h-5 mr-2" />
         {{ prev.title }}
-      </base-nuxt-link>
-      <base-nuxt-link v-else :to="localePath('/')" class="inline-flex items-center">
-        <mdi-home class="h-5 mr-2" />
+      </lazy-base-nuxt-link>
+      <lazy-base-nuxt-link v-else :to="localePath('/')" class="inline-flex items-center">
+        <lazy-mdi-home class="h-5 mr-2" />
         一覧へ戻る
-      </base-nuxt-link>
+      </lazy-base-nuxt-link>
     </div>
 
     <div class="self-end p-2 shadow-xs rounded">
-      <base-nuxt-link
+      <lazy-base-nuxt-link
         v-if="next"
         :to="localePath({ name: 'slug', params: { slug: next.slug } })"
         class="hover:text-red-500 inline-flex items-center"
       >
         {{ next.title }}
-        <mdi-chevron-right class="h-5 ml-2" />
-      </base-nuxt-link>
-      <base-nuxt-link v-else :to="localePath('/')" class="inline-flex items-center">
-        <mdi-home class="h-5 mr-2" />
+        <lazy-mdi-chevron-right class="h-5 ml-2" />
+      </lazy-base-nuxt-link>
+      <lazy-base-nuxt-link v-else :to="localePath('/')" class="inline-flex items-center">
+        <lazy-mdi-home class="h-5 mr-2" />
         一覧へ戻る
-      </base-nuxt-link>
+      </lazy-base-nuxt-link>
     </div>
   </div>
 </template>
