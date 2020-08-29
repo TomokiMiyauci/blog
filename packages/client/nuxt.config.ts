@@ -208,6 +208,7 @@ const config: NuxtConfig = {
    */
   build: {
     parallel: true,
+    extractCSS: true,
     postcss: {
       preset: {
         autoprefixer: {
