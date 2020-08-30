@@ -14,15 +14,13 @@
             <BaseH1 :text="article.title" />
             <p class="mt-1 flex justify-between">
               {{ formatDate(article.updatedAt, $i18n.locale)
-              }}<span class="inline-flex items-center"
-                ><button-like /> <viewer-counter class="ml-8" :text="viewCount"
-              /></span>
+              }}<span class="inline-flex items-center"><button-like /></span>
             </p>
           </div>
 
           <nuxt-content :document="article" />
           <prev-next :prev="prev" :next="next" />
-          <lazy-article-comment />
+          <!-- <lazy-article-comment /> -->
         </div>
 
         <div class="hidden md:block p-4" style="grid-column: 3 / 3">
@@ -34,11 +32,10 @@
 </template>
 
 <script lang="ts">
-  import { user } from '@/store'
   import { PrevNext, Article } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
-  import { defineComponent, useAsync } from 'nuxt-composition-api'
+  import { defineComponent } from 'nuxt-composition-api'
 
   export default defineComponent({
     head: {
@@ -57,27 +54,9 @@
       return { article, prev, next }
     },
 
-    setup(_, { root }) {
-      const slug = root.$route.params.slug
-      const docRef = root.$fireStore.collection('articles').doc(slug)
-
-      const liked = useAsync(async () => {
-        const { exists } = await docRef.collection('likedUsers').doc(user.id).get()
-        return exists
-      })
-
-      const onC = async () => {
-        await docRef.collection('likedUsers').doc(user.id).delete()
-        liked.value = true
-      }
-
-      const viewCount = useAsync(async () => {
-        const result = await docRef.get()
-        return result.data()!.view
-      })
-
+    setup() {
       useRegisterCopyButton()
-      return { formatDate, viewCount, liked, onC }
+      return { formatDate }
     }
   })
 </script>
