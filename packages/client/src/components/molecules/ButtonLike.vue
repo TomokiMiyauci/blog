@@ -27,59 +27,47 @@
 </template>
 
 <script lang="ts">
-  import { user } from '@/store'
-  import { defineComponent, useContext, ref, onBeforeMount } from 'nuxt-composition-api'
+  import { articleDoc, articleLikedUserDoc, userDoc, userLikedArticleDoc } from '@/utils/firestore-reference'
+  import { defineComponent, useContext, ref } from 'nuxt-composition-api'
   import { Promised } from 'vue-promised'
 
   const useFavarite = () => {
-    const { $db, params } = useContext()
-
+    const ctx = useContext()
     const existDoc = async (): Promise<boolean> => {
-      const articleDoc = $db.ref('articles').child(params.value.slug)
-      const likedUserDoc = articleDoc.child('likedUsers').child(user.id)
-      const doc = await likedUserDoc.get().catch(() => false)
-
-      return Boolean(doc)
+      const { exists } = await userLikedArticleDoc(ctx).get()
+      return exists
     }
 
     const getCount = async (): Promise<number> => {
-      const articleDoc = $db.ref('articles').child(params.value.slug)
-
-      const result = await articleDoc.get()
-      return result.like as number
+      const result = await articleDoc(ctx).get()
+      const article = result.data()
+      if (article) {
+        return article.like
+      } else {
+        throw new Error('Fatal error')
+      }
     }
 
     const disLike = async (): Promise<void> => {
-      await $db.ref('articles').child(params.value.slug).child('likedUsers').child(user.id).delete({ exists: true })
-
+      await articleLikedUserDoc(ctx).delete()
       promiseIsLike.value = Promise.resolve(false)
-      promiseLike.value = Promise.resolve(((await promiseLike.value) || 0) - 1)
+      promiseLike.value = Promise.resolve((await promiseLike.value) - 1)
     }
 
     const like = async (): Promise<void> => {
-      await $db
-        .ref('articles')
-        .child(params.value.slug)
-        .child('likedUsers')
-        .child(user.id)
-        .set({
-          userRef: $db.ref('users').child(user.id)
-        })
-
+      await articleLikedUserDoc(ctx).set({
+        userRef: userDoc(ctx)
+      })
       promiseIsLike.value = Promise.resolve(true)
-      promiseLike.value = Promise.resolve(((await promiseLike.value) || 0) + 1)
+      promiseLike.value = Promise.resolve((await promiseLike.value) + 1)
     }
 
-    onBeforeMount(() => {
-      promiseIsLike.value = existDoc()
-      promiseLike.value = getCount()
-    })
-
-    const promiseIsLike = ref<Promise<boolean>>()
-    const promiseLike = ref<Promise<number>>()
+    const promiseIsLike = ref<Promise<boolean>>(existDoc())
+    const promiseLike = ref<Promise<number>>(getCount())
 
     return { promiseIsLike, promiseLike, like, disLike }
   }
+
   export default defineComponent({
     components: {
       Promised

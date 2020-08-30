@@ -16,16 +16,20 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, onBeforeMount, ref, useContext } from 'nuxt-composition-api'
+  import { articleDoc } from '@/utils/firestore-reference'
+  import { defineComponent, ref, useContext } from 'nuxt-composition-api'
   import { Promised } from 'vue-promised'
 
   const useViewCounter = () => {
-    const { $db, route } = useContext()
-    const promiseViewCount = ref()
+    const ctx = useContext()
+    const promiseViewCount = ref<Promise<number>>()
 
-    onBeforeMount(() => {
-      promiseViewCount.value = $db.ref(`articles/${route.value.params.slug}`).get()
-    })
+    const viewCount = async () => {
+      const result = await articleDoc(ctx).get()
+      return result.data()!.view
+    }
+
+    promiseViewCount.value = viewCount()
 
     return { promiseViewCount }
   }
