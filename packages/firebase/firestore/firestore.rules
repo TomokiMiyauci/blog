@@ -68,7 +68,7 @@ service cloud.firestore {
       }
 
       match /viewedUsers/{viewedUser} {
-        allow create: if isAuthenticated(request) && isValidUserRef(request.resource.data);
+        allow create, update: if isAuthenticated(request) && isValidUserRef(request.resource.data);
       }
 
       match /comments/{comment} {
