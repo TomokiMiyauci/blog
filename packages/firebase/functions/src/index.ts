@@ -7,7 +7,8 @@ const files = {
   onDeleteArticleLikedUser: './article/likedUser/onDelete',
   onCreateArticleComment: './article/comment/onCreate',
   onDeleteArticleComment: './article/comment/onDelete',
-  onCreateArticleCommentReportedUser: './article/comment/reportedUser/onCreate'
+  onCreateArticleCommentReportedUser: './article/comment/reportedUser/onCreate',
+  onCreateViewedUser: './article/viewedUser'
 }
 
 const loadFunctions = (filesObj: { [key: string]: string }): void => {
