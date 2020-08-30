@@ -207,7 +207,8 @@ const config: NuxtConfig = {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
-    parallel: true,
+    parallel: !isProduction,
+    cache: !isProduction,
     extractCSS: isProduction,
     postcss: {
       preset: {
