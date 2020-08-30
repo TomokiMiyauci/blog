@@ -39,6 +39,7 @@
     "@nuxtjs/sentry": "^4.3.4",
     "@nuxtjs/sitemap": "^2.4.0",
     "firebase": "^7.17.2",
+    "firebase-firestore-lite": "^1.0.0-RC2.1",
     "nuxt": "2.14.3",
     "nuxt-composition-api": "^0.11.0",
     "nuxt-i18n": "^6.13.8",

@@ -67,14 +67,15 @@ const config: NuxtConfig = {
   },
 
   publicRuntimeConfig: {
-    PROJECT_NAME
+    PROJECT_NAME,
+    PROJECT_ID: process.env.PROJECT_ID
   },
 
   /*
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: ['@/plugins/vue-scrollactive'],
+  plugins: ['@/plugins/vue-scrollactive', { src: '@/plugins/firebase-lite', mode: 'client' }],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -156,7 +157,6 @@ const config: NuxtConfig = {
       analytics: {
         collectionEnabled: isProduction
       },
-      firestore: true,
       auth: true
     }
   },
@@ -208,7 +208,7 @@ const config: NuxtConfig = {
    */
   build: {
     parallel: true,
-    extractCSS: true,
+    extractCSS: isProduction,
     postcss: {
       preset: {
         autoprefixer: {
@@ -243,7 +243,7 @@ const config: NuxtConfig = {
     clientPrefetch: true,
     clientUseUrl: false,
     componentAliases: false,
-    componentClientOnly: false
+    componentClientOnly: true
   },
 
   generate: {
