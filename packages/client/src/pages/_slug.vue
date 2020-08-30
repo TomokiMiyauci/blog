@@ -14,7 +14,10 @@
             <BaseH1 :text="article.title" />
             <p class="mt-1 flex justify-between">
               {{ formatDate(article.updatedAt, $i18n.locale)
-              }}<span class="inline-flex items-center"><button-like /></span>
+              }}<span class="inline-flex items-center">
+                <button-like />
+                <view-counter />
+              </span>
             </p>
           </div>
 
