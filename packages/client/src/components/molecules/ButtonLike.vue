@@ -1,6 +1,6 @@
 <template>
-  <div class="inline-flex items-center">
-    <Promised :promise="promiseIsLike">
+  <span class="inline-flex items-center">
+    <promised :promise="promiseIsLike">
       <template #pending>
         <mdi-heart />
       </template>
@@ -10,56 +10,73 @@
           <mdi-heart-outline />
         </button-circle>
       </template>
-    </Promised>
+    </promised>
 
     <promised :promise="promiseLike">
-      <template #pending> ... </template>
+      <template #pending>
+        <spin-loader />
+      </template>
       <template #default="likeCount">
-        <span>{{ likeCount ? likeCount : '' }}</span>
+        <span>{{ likeCount ? likeCount : 0 }}</span>
+      </template>
+      <template #rejected>
+        <mdi-help />
       </template>
     </promised>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
-  import { articleDoc, articleLikedUserDoc, userDoc, userLikedArticleDoc } from '@/utils/firestore-reference'
-  import { defineComponent, useContext, ref } from 'nuxt-composition-api'
+  import { user } from '@/store'
+  import { defineComponent, useContext, ref, onBeforeMount } from 'nuxt-composition-api'
   import { Promised } from 'vue-promised'
 
   const useFavarite = () => {
-    const ctx = useContext()
-    const existDoc = async (): Promise<Boolean> => {
-      const { exists } = await userLikedArticleDoc(ctx).get()
+    const { $db, params } = useContext()
 
-      return exists
+    const existDoc = async (): Promise<boolean> => {
+      const articleDoc = $db.ref('articles').child(params.value.slug)
+      const likedUserDoc = articleDoc.child('likedUsers').child(user.id)
+      const doc = await likedUserDoc.get().catch(() => false)
+
+      return Boolean(doc)
     }
 
     const getCount = async (): Promise<number> => {
-      const result = await articleDoc(ctx).get()
-      const article = result.data()
-      if (article) {
-        return article.like
-      } else {
-        throw new Error('e')
-      }
+      const articleDoc = $db.ref('articles').child(params.value.slug)
+
+      const result = await articleDoc.get()
+      return result.like as number
     }
 
     const disLike = async (): Promise<void> => {
-      await articleLikedUserDoc(ctx).delete()
+      await $db.ref('articles').child(params.value.slug).child('likedUsers').child(user.id).delete({ exists: true })
+
       promiseIsLike.value = Promise.resolve(false)
-      promiseLike.value = Promise.resolve((await promiseLike.value) - 1)
+      promiseLike.value = Promise.resolve(((await promiseLike.value) || 0) - 1)
     }
 
     const like = async (): Promise<void> => {
-      await articleLikedUserDoc(ctx).set({
-        userRef: userDoc(ctx)
-      })
+      await $db
+        .ref('articles')
+        .child(params.value.slug)
+        .child('likedUsers')
+        .child(user.id)
+        .set({
+          userRef: $db.ref('users').child(user.id)
+        })
+
       promiseIsLike.value = Promise.resolve(true)
-      promiseLike.value = Promise.resolve((await promiseLike.value) + 1)
+      promiseLike.value = Promise.resolve(((await promiseLike.value) || 0) + 1)
     }
 
-    const promiseIsLike = ref(existDoc())
-    const promiseLike = ref(getCount())
+    onBeforeMount(() => {
+      promiseIsLike.value = existDoc()
+      promiseLike.value = getCount()
+    })
+
+    const promiseIsLike = ref<Promise<boolean>>()
+    const promiseLike = ref<Promise<number>>()
 
     return { promiseIsLike, promiseLike, like, disLike }
   }
