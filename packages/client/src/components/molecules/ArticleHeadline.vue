@@ -12,23 +12,28 @@
         {{ headline.title }}
       </lazy-base-nuxt-link>
       <p class="mt-5 mb-3">{{ headline.description }}</p>
-      <component :is="tag" v-for="tag in tags" :key="tag" />
+      <tags :tags="headline.tags" />
 
       <h2 class="mt-5 flex justify-between">
         <span><lazy-mdi-calendar-edit class="mr-1" />{{ formatDate(headline.createdAt, $i18n.locale) }}</span>
         <span> <lazy-mdi-timer class="mr-1" />{{ headline.readingTime }}</span>
       </h2>
     </div>
-    <div class="w-full p-4 bg-green-200 rounded shadow flex justify-center items-center lg:w-1/3">
+    <img
+      class="rounded-md hover:shadow-xl transition-shadow duration-300 shadow lg:w-1/3"
+      :alt="headline.alt"
+      src="@/assets/img/composition-api.png"
+    />
+    <!-- <div class="w-full p-4 bg-green-200 rounded shadow flex justify-center items-center lg:w-1/3">
       <lazy-nuxt-icon height="100" />
-    </div>
+    </div> -->
   </nuxt-link>
 </template>
 
 <script lang="ts">
   import { Headline } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
-  import { defineComponent, computed } from 'nuxt-composition-api'
+  import { defineComponent } from 'nuxt-composition-api'
 
   export default defineComponent({
     components: {
@@ -43,9 +48,8 @@
       }
     },
 
-    setup(props) {
-      const tags = computed(() => props.headline.tags.map((tag) => `Tag${tag}`))
-      return { tags, formatDate }
+    setup() {
+      return { formatDate }
     }
   })
 </script>

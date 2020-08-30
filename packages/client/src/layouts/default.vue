@@ -2,9 +2,12 @@
   <div class="relative">
     <lazy-app-bar />
     <main class="pt-16 lg:pt-24 transition-colors duration-300 ease-linear">
-      <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
-        <lazy-sub-logo />
+      <div class="bg-gradient-to-r from-teal-300 to-gray-700 dark:from-gray-800 dark:to-gray-900">
+        <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
+          <lazy-sub-logo />
+        </div>
       </div>
+
       <div class="block max-w-screen-xl mx-auto">
         <Nuxt />
       </div>
