@@ -1,7 +1,7 @@
 <template>
-  <base-svg>
+  <lazy-base-svg>
     <path :d="mdiSlashForward" />
-  </base-svg>
+  </lazy-base-svg>
 </template>
 
 <script lang="ts">

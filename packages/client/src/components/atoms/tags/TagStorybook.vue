@@ -1,7 +1,7 @@
 <template>
-  <base-tag name="Storybook">
-    <storybook-icon />
-  </base-tag>
+  <lazy-base-tag name="Storybook">
+    <lazy-storybook-icon />
+  </lazy-base-tag>
 </template>
 
 <script lang="ts">

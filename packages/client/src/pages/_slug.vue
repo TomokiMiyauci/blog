@@ -1,7 +1,7 @@
 <template>
   <div>
     <nuxt-link
-      class="inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
+      class="anchor inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
       :to="localePath('/')"
       >← Back to Home</nuxt-link
     >
@@ -14,9 +14,10 @@
             <BaseH1 :text="article.title" />
             <p class="mt-1 flex justify-between">
               {{ formatDate(article.updatedAt, $i18n.locale)
-              }}<span class="inline-flex items-center"
-                ><button-like /> <viewer-counter class="ml-8" :text="viewCount"
-              /></span>
+              }}<span class="inline-flex items-center">
+                <button-like />
+                <view-counter class="ml-6" />
+              </span>
             </p>
           </div>
 
@@ -30,15 +31,25 @@
         </div>
       </div>
     </article>
+    <portal to="bottom-right">
+      <transition name="zoom-in">
+        <button-circle
+          v-show="isShow"
+          class="bg-teal-800 animate-bounce text-white hover:bg-gray-900 hover:shadow-2xl shadow"
+          @click="scroll"
+        >
+          <lazy-mdi-transfer-up />
+        </button-circle>
+      </transition>
+    </portal>
   </div>
 </template>
 
 <script lang="ts">
-  import { user } from '@/store'
   import { PrevNext, Article } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
-  import { defineComponent, useAsync } from 'nuxt-composition-api'
+  import { defineComponent, onMounted, ref } from 'nuxt-composition-api'
 
   export default defineComponent({
     head: {
@@ -57,27 +68,38 @@
       return { article, prev, next }
     },
 
-    setup(_, { root }) {
-      const slug = root.$route.params.slug
-      const docRef = root.$fireStore.collection('articles').doc(slug)
+    setup() {
+      useRegisterCopyButton()
+      const isShow = ref(false)
 
-      const liked = useAsync(async () => {
-        const { exists } = await docRef.collection('likedUsers').doc(user.id).get()
-        return exists
+      onMounted(() => {
+        const images = document.querySelectorAll('.anchor')
+        images.forEach((target) => onIntersect(target))
       })
 
-      const onC = async () => {
-        await docRef.collection('likedUsers').doc(user.id).delete()
-        liked.value = true
+      const onIntersect = (target: Element, options = {}) => {
+        const observer = new IntersectionObserver(addShowClass, options)
+        observer.observe(target)
       }
 
-      const viewCount = useAsync(async () => {
-        const result = await docRef.get()
-        return result.data()!.view
-      })
+      const addShowClass = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            isShow.value = false
+          } else {
+            isShow.value = true
+          }
+        })
+      }
 
-      useRegisterCopyButton()
-      return { formatDate, viewCount, liked, onC }
+      const scroll = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })
+      }
+
+      return { formatDate, isShow, scroll }
     }
   })
 </script>

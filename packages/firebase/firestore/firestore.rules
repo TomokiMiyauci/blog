@@ -14,6 +14,11 @@ service cloud.firestore {
     ('comment' in article && article.comment is int);
   }
 
+  function isValidUserRef(user) {
+    return user.size() == 1 &&
+    'userRef' in user && user.userRef is path;
+  }
+
   function isValidLikedUsers(likedUser) {
     return likedUser.size() == 1 &&
     'userRef' in likedUser && likedUser.userRef is path;
@@ -60,6 +65,10 @@ service cloud.firestore {
         allow read, delete;
 
         allow create, update: if isValidLikedUsers(request.resource.data);
+      }
+
+      match /viewedUsers/{viewedUser} {
+        allow create, update: if isAuthenticated(request) && isValidUserRef(request.resource.data);
       }
 
       match /comments/{comment} {

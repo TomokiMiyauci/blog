@@ -207,7 +207,9 @@ const config: NuxtConfig = {
    ** See https://nuxtjs.org/api/configuration-build/
    */
   build: {
-    parallel: true,
+    parallel: !isProduction,
+    cache: !isProduction,
+    extractCSS: isProduction,
     postcss: {
       preset: {
         autoprefixer: {
@@ -242,7 +244,7 @@ const config: NuxtConfig = {
     clientPrefetch: true,
     clientUseUrl: false,
     componentAliases: false,
-    componentClientOnly: false
+    componentClientOnly: true
   },
 
   generate: {

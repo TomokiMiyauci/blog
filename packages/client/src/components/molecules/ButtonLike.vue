@@ -1,6 +1,6 @@
 <template>
-  <div class="inline-flex items-center">
-    <Promised :promise="promiseIsLike">
+  <span class="inline-flex items-center">
+    <promised :promise="promiseIsLike">
       <template #pending>
         <mdi-heart />
       </template>
@@ -10,15 +10,20 @@
           <mdi-heart-outline />
         </button-circle>
       </template>
-    </Promised>
+    </promised>
 
     <promised :promise="promiseLike">
-      <template #pending> ... </template>
+      <template #pending>
+        <spin-loader />
+      </template>
       <template #default="likeCount">
-        <span>{{ likeCount ? likeCount : '' }}</span>
+        <span>{{ likeCount ? likeCount : 0 }}</span>
+      </template>
+      <template #rejected>
+        <mdi-help />
       </template>
     </promised>
-  </div>
+  </span>
 </template>
 
 <script lang="ts">
@@ -28,9 +33,8 @@
 
   const useFavarite = () => {
     const ctx = useContext()
-    const existDoc = async (): Promise<Boolean> => {
+    const existDoc = async (): Promise<boolean> => {
       const { exists } = await userLikedArticleDoc(ctx).get()
-
       return exists
     }
 
@@ -40,7 +44,7 @@
       if (article) {
         return article.like
       } else {
-        throw new Error('e')
+        throw new Error('Fatal error')
       }
     }
 
@@ -58,11 +62,12 @@
       promiseLike.value = Promise.resolve((await promiseLike.value) + 1)
     }
 
-    const promiseIsLike = ref(existDoc())
-    const promiseLike = ref(getCount())
+    const promiseIsLike = ref<Promise<boolean>>(existDoc())
+    const promiseLike = ref<Promise<number>>(getCount())
 
     return { promiseIsLike, promiseLike, like, disLike }
   }
+
   export default defineComponent({
     components: {
       Promised

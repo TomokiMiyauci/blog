@@ -1,7 +1,7 @@
 <template>
-  <base-icon-text v-bind="$attrs">
+  <lazy-base-icon-text v-bind="$attrs">
     <mdi-eye />
-  </base-icon-text>
+  </lazy-base-icon-text>
 </template>
 
 <script lang="ts">

@@ -3,7 +3,7 @@
     <transition name="fade-down">
       <div v-if="isShow" class="absolute px-3 inset-0 bg-white md:hidden">
         <div class="relative w-full h-full flex justify-center items-center">
-          <input-search
+          <lazy-input-search
             ref="inputSearch"
             v-model="searchQuery"
             :force-close="true"
@@ -11,7 +11,7 @@
             @close="isShow = false"
           />
 
-          <search-result
+          <lazy-search-result
             v-show="searchQuery"
             class="absolute w-full top-11/12 right-auto left-0"
             :keyword="searchQuery"
@@ -24,18 +24,18 @@
           />
         </div>
       </div>
-      <button-circle v-else class="md:hidden" @click="onClick">
-        <mdi-magnify />
-      </button-circle>
+      <lazy-button-circle v-else class="md:hidden" @click="onClick">
+        <lazy-mdi-magnify />
+      </lazy-button-circle>
     </transition>
     <div class="relative hidden md:inline-flex">
-      <input-search
+      <lazy-input-search
         v-model="searchQuery"
         class="items-center justify-center"
         @blur="isShow = false"
         @focus="isShow = true"
       />
-      <search-result
+      <lazy-search-result
         v-show="isShow && searchQuery"
         class="absolute top-full w-full right-0"
         :keyword="searchQuery"

@@ -9,6 +9,10 @@ export type LikedUser = {
   userRef: firebase.firestore.DocumentReference
 }
 
+export type ViewedUser = {
+  userRef: firebase.firestore.DocumentReference
+}
+
 export type User = {
   createdAt: Date
 }

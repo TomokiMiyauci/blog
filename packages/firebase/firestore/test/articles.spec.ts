@@ -279,5 +279,38 @@ describe('firestore', () => {
         })
       })
     })
+
+
+      describe('viewedUser', () => {
+
+        describe('UNAUTH', () => {
+          const firestore = unauthApp()
+          const userDoc = firestore.collection('users').doc('user')
+          const viewedUserRef = firestore.collection('articles').doc('slug').collection('viewedUsers')
+          const viewedUserDoc = viewedUserRef.doc('user')
+          it('POST: NG', () => {
+            firebase.assertFails(viewedUserDoc.set({
+              userRef: userDoc
+            }))
+          })
+        })
+
+        describe('AUTH', () => {
+          const firestore = authApp()
+          const userDoc = firestore.collection('users').doc('user')
+          const viewedUserRef = firestore.collection('articles').doc('slug').collection('viewedUsers')
+          const viewedUserDoc = viewedUserRef.doc('user')
+
+          it('[POST: NG]', () => {
+            firebase.assertFails(viewedUserDoc.set({}))
+        })
+
+        it('[POST: OK]userRef: path', () => {
+          firebase.assertSucceeds(viewedUserDoc.set({
+            userRef: userDoc
+          }))
+        })
+      })
+    })
   })
 })

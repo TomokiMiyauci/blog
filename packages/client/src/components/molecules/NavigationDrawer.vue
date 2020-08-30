@@ -1,7 +1,7 @@
 <template>
   <div class="absolute px-3 flex items-center inset-0 bg-white dark:bg-gray-800 md:hidden">
-    <lang-switcher />
-    <button-color-mode />
+    <lazy-lang-switcher />
+    <lazy-button-color-mode />
   </div>
 </template>
 

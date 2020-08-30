@@ -1,7 +1,7 @@
 <template>
-  <base-svg>
+  <lazy-base-svg>
     <path :d="mdiMagnify" />
-  </base-svg>
+  </lazy-base-svg>
 </template>
 
 <script lang="ts">
