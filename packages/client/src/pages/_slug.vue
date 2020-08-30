@@ -1,7 +1,7 @@
 <template>
   <div>
     <nuxt-link
-      class="inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
+      class="anchor inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
       :to="localePath('/')"
       >← Back to Home</nuxt-link
     >
@@ -16,14 +16,14 @@
               {{ formatDate(article.updatedAt, $i18n.locale)
               }}<span class="inline-flex items-center">
                 <button-like />
-                <view-counter />
+                <view-counter class="ml-6" />
               </span>
             </p>
           </div>
 
           <nuxt-content :document="article" />
           <prev-next :prev="prev" :next="next" />
-          <!-- <lazy-article-comment /> -->
+          <lazy-article-comment />
         </div>
 
         <div class="hidden md:block p-4" style="grid-column: 3 / 3">
@@ -31,6 +31,17 @@
         </div>
       </div>
     </article>
+    <portal to="bottom-right">
+      <transition name="zoom-in">
+        <button-circle
+          v-show="isShow"
+          class="bg-teal-800 animate-bounce text-white hover:bg-gray-900 hover:shadow-2xl shadow"
+          @click="scroll"
+        >
+          <lazy-mdi-transfer-up />
+        </button-circle>
+      </transition>
+    </portal>
   </div>
 </template>
 
@@ -38,7 +49,7 @@
   import { PrevNext, Article } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent, onMounted, ref } from 'nuxt-composition-api'
 
   export default defineComponent({
     head: {
@@ -59,7 +70,36 @@
 
     setup() {
       useRegisterCopyButton()
-      return { formatDate }
+      const isShow = ref(false)
+
+      onMounted(() => {
+        const images = document.querySelectorAll('.anchor')
+        images.forEach((target) => onIntersect(target))
+      })
+
+      const onIntersect = (target: Element, options = {}) => {
+        const observer = new IntersectionObserver(addShowClass, options)
+        observer.observe(target)
+      }
+
+      const addShowClass = (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            isShow.value = false
+          } else {
+            isShow.value = true
+          }
+        })
+      }
+
+      const scroll = () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        })
+      }
+
+      return { formatDate, isShow, scroll }
     }
   })
 </script>
