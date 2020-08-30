@@ -197,7 +197,7 @@ const config: NuxtConfig = {
     hostname: HOSTNAME,
     routes: async () => {
       const { $content } = (await import('@nuxt/content')).default as { $content: contentFunc }
-      const files = await $content('articles').only(['slug']).fetch<{ slug: string }[]>()
+      const files = await $content('articles').only(['slug']).where({ private: false }).fetch<{ slug: string }[]>()
       return files.map(({ slug }) => `/${slug}`)
     },
     gzip: true
