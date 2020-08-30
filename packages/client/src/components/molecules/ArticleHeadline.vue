@@ -2,7 +2,7 @@
   <nuxt-link
     tag="article"
     :to="localePath({ name: 'slug', params: { slug: headline.slug } })"
-    class="bg-gray-100 dark:bg-blue-900 p-4 m-4 rounded-md flex flex-col-reverse lg:flex-row shadow-md cursor-pointer hover:bg-gray-300 hover:shadow-xl transition duration-300 ease-linear"
+    class="bg-gray-100 dark:bg-gray-900 p-4 m-4 rounded-md flex flex-col-reverse lg:flex-row shadow-md cursor-pointer hover:bg-gray-300 hover:shadow-xl transition duration-300 ease-linear"
   >
     <div class="lg:w-2/3 mx-2">
       <lazy-base-nuxt-link

@@ -1,6 +1,6 @@
 <template>
   <span>
-    <lazy-mdi-eye class="mr-4" />
+    <lazy-mdi-eye class="mr-2" />
     <promised :promise="promiseViewCount">
       <template #pending>
         <spin-loader />
