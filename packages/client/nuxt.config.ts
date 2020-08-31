@@ -91,7 +91,7 @@ const config: NuxtConfig = {
     '@nuxtjs/color-mode',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
-    'nuxt-composition-api'
+    '@nuxtjs/composition-api'
   ],
 
   stylelint: {

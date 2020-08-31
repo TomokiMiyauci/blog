@@ -33,7 +33,7 @@
 <script lang="ts">
   import { user } from '@/store'
   import { Headline } from '@/types/article'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
 
   const headline: (keyof Headline)[] = [
     'title',

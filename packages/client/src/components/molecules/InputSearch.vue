@@ -29,7 +29,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, onBeforeMount, onBeforeUnmount } from 'nuxt-composition-api'
+  import { defineComponent, ref, onBeforeMount, onBeforeUnmount } from '@nuxtjs/composition-api'
   export default defineComponent({
     props: {
       value: {

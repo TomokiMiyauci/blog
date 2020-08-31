@@ -30,7 +30,7 @@
 
 <script lang="ts">
   import { Toc } from '@/types/article'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
   export default defineComponent({
     props: {
       toc: {

@@ -62,7 +62,7 @@
   import { PrevNext, Article } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
-  import { defineComponent, onMounted, ref } from 'nuxt-composition-api'
+  import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     head: {

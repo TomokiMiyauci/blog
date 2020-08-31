@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
   export default defineComponent({
     async asyncData({ $content, params }) {
       const articles = await $content('articles')

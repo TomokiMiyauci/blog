@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import { REPOSITORY_URL } from '@/utils/constants'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
   export default defineComponent({
     setup(_, { root }) {
       return { REPOSITORY_URL, PROJECT_NAME: root.$config.PROJECT_NAME }

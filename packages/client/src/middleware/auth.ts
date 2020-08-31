@@ -1,6 +1,6 @@
 import { user as userStore } from '@/store'
+import { defineNuxtMiddleware } from '@nuxtjs/composition-api'
 import type firebase from 'firebase'
-import { defineNuxtMiddleware } from 'nuxt-composition-api'
 
 declare module '@nuxt/types' {
   interface Context {

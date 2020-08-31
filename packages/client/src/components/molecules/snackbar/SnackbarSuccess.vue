@@ -11,7 +11,7 @@
 
 <script lang="ts">
   import type BaseSnackbar from '@/components/molecules/BaseSnackbar.vue'
-  import { defineComponent, ref } from 'nuxt-composition-api'
+  import { defineComponent, ref } from '@nuxtjs/composition-api'
   export default defineComponent({
     setup() {
       const snackbar = ref<InstanceType<typeof BaseSnackbar>>()

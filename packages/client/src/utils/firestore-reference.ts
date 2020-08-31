@@ -1,6 +1,6 @@
 import { user } from '@/store'
 import { Article, LikedArticle, Comment, User, LikedUser, ViewedUser, ReportedUser } from '@/types/firestore'
-import type { useContext } from 'nuxt-composition-api'
+import type { useContext } from '@nuxtjs/composition-api'
 
 export const articleRef = (
   $fireStore: firebase.firestore.Firestore

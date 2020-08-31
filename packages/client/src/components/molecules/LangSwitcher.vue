@@ -37,7 +37,7 @@
 
 <script lang="ts">
   import out from '@/directives/outside-click'
-  import { defineComponent, ref } from 'nuxt-composition-api'
+  import { defineComponent, ref } from '@nuxtjs/composition-api'
   export default defineComponent({
     setup() {
       const isShow = ref(false)

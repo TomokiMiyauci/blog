@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import nuxtIcon from '@iconify/icons-logos/nuxt-icon'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     setup() {

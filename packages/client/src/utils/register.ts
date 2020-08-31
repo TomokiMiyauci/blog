@@ -1,6 +1,6 @@
 import ButtonCopy2Clipboard from '@/components/atoms/buttons/ButtonCopy2Clipboard.vue'
 import { wait } from '@/utils/timer'
-import { onMounted } from 'nuxt-composition-api'
+import { onMounted } from '@nuxtjs/composition-api'
 import Vue from 'vue'
 
 export const useRegisterCopyButton = (): void => {

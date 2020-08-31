@@ -34,7 +34,7 @@
 <script lang="ts">
   import { Headline } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     components: {
