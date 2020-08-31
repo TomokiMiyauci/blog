@@ -21,8 +21,9 @@
     </div>
     <img
       class="rounded-md hover:shadow-xl transition-shadow duration-300 shadow lg:w-1/3"
+      loading="lazy"
       :alt="headline.alt"
-      src="@/assets/img/composition-api.png"
+      :src="headline.img"
     />
     <!-- <div class="w-full p-4 bg-green-200 rounded shadow flex justify-center items-center lg:w-1/3">
       <lazy-nuxt-icon height="100" />
