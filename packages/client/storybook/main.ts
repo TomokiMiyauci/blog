@@ -13,7 +13,6 @@ module.exports = {
       options: {
         actions: false
       }
-    },
-    '@storybook/addon-knobs'
+    }
   ]
 }

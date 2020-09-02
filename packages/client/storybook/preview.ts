@@ -32,3 +32,7 @@ const withLocale = (_: any, { globals }: any) => {
 }
 
 export const decorators = [withLocale]
+
+export const parameters = {
+  controls: { expanded: true }
+}
