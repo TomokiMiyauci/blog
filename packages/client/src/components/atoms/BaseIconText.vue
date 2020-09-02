@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span class="inline-flex">
     <slot />
     <span class="ml-1">{{ text }}</span>
   </span>
