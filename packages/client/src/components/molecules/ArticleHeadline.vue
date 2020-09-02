@@ -15,19 +15,18 @@
       <tags :tags="headline.tags" />
 
       <h2 class="mt-5 flex justify-between">
-        <span><lazy-mdi-calendar-edit class="mr-1" />{{ formatDate(headline.createdAt, $i18n.locale) }}</span>
-        <span> <lazy-mdi-timer class="mr-1" />{{ headline.readingTime }}</span>
+        <lazy-calendar-edit-date :date="new Date(headline.createdAt)" />
+        <lazy-timer-reading-time :text="headline.readingTime" />
       </h2>
     </div>
     <img
-      class="rounded-md hover:shadow-xl transition-shadow duration-300 shadow lg:w-1/3"
+      class="rounded-md hover:shadow-xl transition-shadow duration-300 shadow lg:w-1/2"
+      height="300"
       loading="lazy"
+      style="height: 100%; max-height: 300px"
       :alt="headline.alt"
       :src="headline.img"
     />
-    <!-- <div class="w-full p-4 bg-green-200 rounded shadow flex justify-center items-center lg:w-1/3">
-      <lazy-nuxt-icon height="100" />
-    </div> -->
   </nuxt-link>
 </template>
 
@@ -37,11 +36,6 @@
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
-    components: {
-      TagNuxtjs: () => import('@/components/atoms/tags/TagNuxtjs.vue'),
-      TagBlog: () => import('@/components/atoms/tags/TagBlog.vue'),
-      TagTutorial: () => import('@/components/atoms/tags/TagTutorial.vue')
-    },
     props: {
       headline: {
         type: Object as () => Headline,
