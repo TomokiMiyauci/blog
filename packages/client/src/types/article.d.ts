@@ -11,8 +11,8 @@ type BaseContent = {
   slug: string
   toc: Toc[]
   extension: '.md'
-  createdAt: Date
-  updated: Date
+  createdAt: string
+  updated: string
 }
 
 type Frontmatter = {
