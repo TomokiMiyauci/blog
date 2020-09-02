@@ -33,9 +33,18 @@
 <script lang="ts">
   import { user } from '@/store'
   import { Headline } from '@/types/article'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
 
-  const headline: (keyof Headline)[] = ['title', 'description', 'slug', 'tags', 'readingTime', 'createdAt']
+  const headline: (keyof Headline)[] = [
+    'title',
+    'description',
+    'slug',
+    'tags',
+    'alt',
+    'img',
+    'readingTime',
+    'createdAt'
+  ]
 
   // const useFavariteArticle = async () => {
   //   const { $content } = useContext()
@@ -48,7 +57,7 @@
     },
 
     async asyncData({ $content }) {
-      const articles = await $content('articles').only(headline).fetch<Headline[]>()
+      const articles = await $content('articles').only(headline).where({ private: false }).fetch<Headline[]>()
 
       return { articles }
     },

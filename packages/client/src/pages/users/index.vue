@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import { user } from '@/store'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
   export default defineComponent({
     setup(_, { root }) {
       root.$router.push(user.id)

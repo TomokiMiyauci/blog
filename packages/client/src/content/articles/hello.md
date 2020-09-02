@@ -4,6 +4,7 @@ description: Google アナリティクスを使うには？
 category: configuration
 position: 9
 tags: []
+private: true
 ---
 
 はじめに、Nuxt.js用の [公式 Google アナリティクスモジュール](https://github.com/nuxt-community/analytics-module) があるのでそちらを確認してください。

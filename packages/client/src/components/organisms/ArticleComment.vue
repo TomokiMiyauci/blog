@@ -32,7 +32,7 @@
   import { user } from '@/store'
   import { Comment } from '@/types/firestore'
   import { articleCommentRef, userDoc } from '@/utils/firestore-reference'
-  import { defineComponent, ref, computed, useContext } from 'nuxt-composition-api'
+  import { defineComponent, ref, computed, useContext } from '@nuxtjs/composition-api'
 
   const useComment = () => {
     const ctx = useContext()

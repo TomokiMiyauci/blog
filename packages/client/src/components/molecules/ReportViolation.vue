@@ -26,7 +26,7 @@
 <script lang="ts">
   import outsideClick from '@/directives/outside-click'
   import { reportedUserDoc, userDoc } from '@/utils/firestore-reference'
-  import { defineComponent, ref, useContext } from 'nuxt-composition-api'
+  import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
 
   const useDialog = () => {
     const isOpen = ref<boolean>(false)

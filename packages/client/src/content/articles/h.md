@@ -3,6 +3,7 @@ title: Hello world
 description: このブログは、技術情報を発信するために作られました
 tags: 
   - Blog
+private: true
 ---
 ## このブログについて
 

@@ -8,7 +8,7 @@
 
 <script lang="ts">
   import { wait } from '@/utils/timer'
-  import { defineComponent, ref, watch, computed } from 'nuxt-composition-api'
+  import { defineComponent, ref, watch, computed } from '@nuxtjs/composition-api'
 
   const useClipboard = () => {
     const button = ref<HTMLButtonElement>()

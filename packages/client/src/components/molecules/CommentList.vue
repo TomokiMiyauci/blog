@@ -31,7 +31,7 @@
   import { Comment } from '@/types/firestore'
   import { userDoc } from '@/utils/firestore-reference'
   import { formatDate, timestamp2Date } from '@/utils/formatter'
-  import { defineComponent, useContext } from 'nuxt-composition-api'
+  import { defineComponent, useContext } from '@nuxtjs/composition-api'
 
   const useUser = () => {
     const ctx = useContext()

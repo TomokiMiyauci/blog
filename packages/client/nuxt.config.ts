@@ -91,7 +91,7 @@ const config: NuxtConfig = {
     '@nuxtjs/color-mode',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
-    'nuxt-composition-api'
+    '@nuxtjs/composition-api'
   ],
 
   stylelint: {
@@ -197,7 +197,7 @@ const config: NuxtConfig = {
     hostname: HOSTNAME,
     routes: async () => {
       const { $content } = (await import('@nuxt/content')).default as { $content: contentFunc }
-      const files = await $content('articles').only(['slug']).fetch<{ slug: string }[]>()
+      const files = await $content('articles').only(['slug']).where({ private: false }).fetch<{ slug: string }[]>()
       return files.map(({ slug }) => `/${slug}`)
     },
     gzip: true

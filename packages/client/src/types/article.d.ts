@@ -11,14 +11,16 @@ type BaseContent = {
   slug: string
   toc: Toc[]
   extension: '.md'
-  createdAt: Date
-  updated: Date
+  createdAt: string
+  updated: string
 }
 
 type Frontmatter = {
   title: string
   description: string
   tags: string[]
+  img: string
+  alt: string
 }
 
 type Toc = {
@@ -34,4 +36,7 @@ export type Article = BaseContent &
 
 export type PrevNext = Pick<Article, 'title' | 'slug'>
 
-export type Headline = Pick<Article, 'title' | 'description' | 'slug' | 'tags' | 'readingTime' | 'createdAt'>
+export type Headline = Pick<
+  Article,
+  'title' | 'description' | 'slug' | 'tags' | 'readingTime' | 'createdAt' | 'img' | 'alt'
+>

@@ -60,6 +60,7 @@ const config = {
       'dark-focus-within',
       'dark-disabled'
     ],
+    gradientColorStops: ['responsive', 'hover', 'focus', 'dark'],
     cursor: ['responsive', 'disabled']
   },
   plugins: [require('tailwindcss-dark-mode')()],

@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent, ref, onMounted } from 'nuxt-composition-api'
+  import { defineComponent, ref, onMounted } from '@nuxtjs/composition-api'
   export default defineComponent({
     setup(_, { slots }) {
       const tabs = ref<{ label: any; elm: HTMLElement }[]>([])

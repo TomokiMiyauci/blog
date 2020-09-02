@@ -68,7 +68,7 @@
 
 <script lang="ts">
   import type InputSearch from '@/components/molecules/InputSearch.vue'
-  import { defineComponent, ref } from 'nuxt-composition-api'
+  import { defineComponent, ref } from '@nuxtjs/composition-api'
   export default defineComponent({
     setup(_, { root }) {
       const searchQuery = ref('')

@@ -44,7 +44,7 @@
 
 <script lang="ts">
   // import { Article } from '@/types/article'
-  import { defineComponent, watch, ref } from 'nuxt-composition-api'
+  import { defineComponent, watch, ref } from '@nuxtjs/composition-api'
   import { Promised } from 'vue-promised'
 
   // const wait = (milliseconds: number) => {

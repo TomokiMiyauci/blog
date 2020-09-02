@@ -7,6 +7,7 @@ position: 1
 category: Getting started
 version: 1.4
 fullscreen: false
+private: true
 ---
 
 ## Svelteとは

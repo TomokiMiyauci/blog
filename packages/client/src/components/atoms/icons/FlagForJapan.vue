@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import flagForJapan from '@iconify/icons-emojione/flag-for-japan'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
   export default defineComponent({
     setup() {
       return { flagForJapan }

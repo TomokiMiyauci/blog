@@ -17,7 +17,7 @@
 
 <script lang="ts">
   import { articleDoc, viewedUserDoc, userDoc } from '@/utils/firestore-reference'
-  import { defineComponent, ref, useContext, onBeforeMount } from 'nuxt-composition-api'
+  import { defineComponent, ref, useContext, onBeforeMount } from '@nuxtjs/composition-api'
   import { Promised } from 'vue-promised'
 
   const useViewCounter = () => {

@@ -34,7 +34,7 @@
 
 <script lang="ts">
   import { PrevNext } from '@/types/article'
-  import { defineComponent } from 'nuxt-composition-api'
+  import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     props: {

@@ -28,7 +28,7 @@
 
 <script lang="ts">
   import { articleDoc, articleLikedUserDoc, userDoc, userLikedArticleDoc } from '@/utils/firestore-reference'
-  import { defineComponent, useContext, ref } from 'nuxt-composition-api'
+  import { defineComponent, useContext, ref } from '@nuxtjs/composition-api'
   import { Promised } from 'vue-promised'
 
   const useFavarite = () => {
