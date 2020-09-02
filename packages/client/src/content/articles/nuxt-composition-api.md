@@ -6,7 +6,7 @@ tags:
   - Nuxtjs
   - Tutorial
   - CompositionApi
-img: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w_500/v1598874649/composition-api.png
+img: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w_400/v1598874649/composition-api.png
 private: false
 alt: cover
 ---
