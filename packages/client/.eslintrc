@@ -18,6 +18,8 @@
       "error",
       { "alphabetize": { "order": "asc", "caseInsensitive": true }, "newlines-between": "always" }
     ],
-    "vue/no-v-html": "off"
+    "vue/no-v-html": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["off"]
   }
 }
