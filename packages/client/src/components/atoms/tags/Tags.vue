@@ -12,7 +12,8 @@
       TagNuxtjs: () => import('@/components/atoms/tags/TagNuxtjs.vue'),
       TagBlog: () => import('@/components/atoms/tags/TagBlog.vue'),
       TagTutorial: () => import('@/components/atoms/tags/TagTutorial.vue'),
-      TagCompositionApi: () => import('@/components/atoms/tags/TagCompositionApi.vue')
+      TagCompositionApi: () => import('@/components/atoms/tags/TagCompositionApi.vue'),
+      TagNuxtI18n: () => import('@/components/atoms/tags/TagNuxtI18n.vue')
     },
 
     props: {
