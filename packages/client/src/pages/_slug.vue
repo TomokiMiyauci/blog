@@ -14,8 +14,8 @@
             <base-h-1 :text="article.title" />
             <tags :tags="article.tags" />
             <p class="mt-1 flex justify-between">
-              {{ formatDate(article.updatedAt, $i18n.locale)
-              }}<span class="inline-flex items-center">
+              <CalendarEditDate :date="new Date(article.updatedAt)" />
+              <span class="inline-flex items-center">
                 <button-like />
                 <view-counter class="ml-6" />
               </span>
@@ -25,11 +25,11 @@
             >
               <img
                 loading="lazy"
-                alt="aaa"
+                alt="cover"
                 height="400"
                 class="rounded-md"
                 style="max-width: 100%; max-height: 400px"
-                src="@/assets/img/composition-api.png"
+                :src="article.thumbnail"
               />
             </div>
           </div>
