@@ -7,6 +7,13 @@ const i18n = new VueI18n({
   locale: 'en'
 })
 
+Vue.mixin({
+  i18n,
+  methods: {
+    localePath: (route: any, locale?: string | undefined) => ({ route, locale })
+  }
+})
+
 export const globalTypes = {
   locale: {
     name: 'locale',
