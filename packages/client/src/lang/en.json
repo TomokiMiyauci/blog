@@ -30,5 +30,12 @@
     "SUCCESS": {
       "POST": "Comment posted"
     }
+  },
+
+  "UNIT": {
+    "MINUTE": {
+      "SINGULAR": "min",
+      "MULTIPLE": "mins"
+    }
   }
 }
