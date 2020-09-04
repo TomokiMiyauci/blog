@@ -278,6 +278,32 @@ jobs:
           name: dist
           path: packages/client/dist
 
+  test-visual:
+    runs-on: ${{ matrix.os }}
+    needs: setup
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [12]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   # test-e2e:
   #   needs: build
   #   runs-on: ${{ matrix.os }}
