@@ -278,7 +278,7 @@ jobs:
           name: dist
           path: packages/client/dist
 
-  test-visual:
+  build-storybook:
     runs-on: ${{ matrix.os }}
     needs: setup
     strategy:
@@ -287,6 +287,10 @@ jobs:
         node: [12]
 
     steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -299,10 +303,36 @@ jobs:
             */*/node_modules
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
+      - name: Build
+        run: yarn build-storybook
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: storybook
+          path: packages/client/storybook-static
+
+  test-visual:
+    runs-on: ${{ matrix.os }}
+    needs: build-storybook
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [12]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: storybook
+          path: packages/client/storybook-static
+
       - uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          storybookBuildDir: packages/client/storybook-static
 
   # test-e2e:
   #   needs: build
