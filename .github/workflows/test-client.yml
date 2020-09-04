@@ -328,11 +328,14 @@ jobs:
           name: storybook
           path: packages/client/storybook-static
 
-      - uses: chromaui/action@v1
-        with:
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          storybookBuildDir: packages/client/storybook-static
+      - name: Run
+        run: yarn chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+
+      # - uses: chromaui/action@v1
+      #   with:
+      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     storybookBuildDir: packages/client/storybook-static
 
   # test-e2e:
   #   needs: build
