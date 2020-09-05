@@ -10,9 +10,12 @@
           <mdi-heart-outline />
         </button-circle>
       </template>
+      <template #rejected>
+        <mdi-heart />
+      </template>
     </promised>
 
-    <promised :promise="promiseLike">
+    <promised class="ml-2" :promise="promiseLike">
       <template #pending>
         <spin-loader />
       </template>

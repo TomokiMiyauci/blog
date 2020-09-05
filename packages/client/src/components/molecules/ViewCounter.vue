@@ -26,13 +26,22 @@
 
     const viewCount = async () => {
       const result = await articleDoc(ctx).get()
-      return result.data()!.view
+      const data = result.data()
+
+      if (!data) throw new Error('Data are not exist')
+
+      return data.view
     }
 
-    const view = () =>
-      viewedUserDoc(ctx).set({
-        userRef: userDoc(ctx)
-      })
+    const view = (): void => {
+      const doc = viewedUserDoc(ctx)
+      if (!doc) return
+      doc
+        .set({
+          userRef: userDoc(ctx)
+        })
+        .catch(() => {})
+    }
 
     onBeforeMount(() => view())
     promiseViewCount.value = viewCount()
