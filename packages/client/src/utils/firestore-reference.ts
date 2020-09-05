@@ -9,6 +9,7 @@ export const articleRef = (
 }
 
 export const articleDoc = (ctx: ReturnType<typeof useContext>): firebase.firestore.DocumentReference<Article> => {
+  if (!ctx.params.value) throw new Error('Parameter Error')
   return articleRef(ctx.$fireStore).doc(ctx.params.value.slug)
 }
 
@@ -21,6 +22,7 @@ export const articleLikedUserRef = (
 export const articleLikedUserDoc = (
   ctx: ReturnType<typeof useContext>
 ): firebase.firestore.DocumentReference<LikedUser> => {
+  if (!user.id) throw new Error('User')
   return articleLikedUserRef(ctx).doc(user.id)
 }
 
@@ -30,7 +32,10 @@ export const viewedUserRef = (
   return articleDoc(ctx).collection('viewedUsers') as firebase.firestore.CollectionReference<ViewedUser>
 }
 
-export const viewedUserDoc = (ctx: ReturnType<typeof useContext>): firebase.firestore.DocumentReference<ViewedUser> => {
+export const viewedUserDoc = (
+  ctx: ReturnType<typeof useContext>
+): firebase.firestore.DocumentReference<ViewedUser> | undefined => {
+  if (!user.id) return
   return viewedUserRef(ctx).doc(user.id)
 }
 
