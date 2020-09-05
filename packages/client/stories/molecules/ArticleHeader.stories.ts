@@ -20,7 +20,7 @@ export const DEFAULT = () => ({
   template: '<article-headline :headline="headline" />',
   props: {
     headline: {
-      default: headline
+      default: () => headline
     }
   }
 })
