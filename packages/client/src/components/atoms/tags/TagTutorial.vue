@@ -1,7 +1,7 @@
 <template>
-  <lazy-base-tag name="tutorial">
-    <lazy-mdi-sprout class="text-green-400" />
-  </lazy-base-tag>
+  <base-tag name="tutorial">
+    <mdi-sprout class="text-green-400" />
+  </base-tag>
 </template>
 
 <script lang="ts">

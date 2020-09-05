@@ -1,7 +1,7 @@
 <template>
-  <lazy-base-tag name="Nuxtjs">
-    <lazy-nuxt-icon />
-  </lazy-base-tag>
+  <base-tag name="Nuxtjs">
+    <nuxt-icon />
+  </base-tag>
 </template>
 
 <script lang="ts">

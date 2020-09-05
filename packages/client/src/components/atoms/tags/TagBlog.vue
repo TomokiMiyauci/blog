@@ -1,7 +1,7 @@
 <template>
-  <lazy-base-tag name="Blog">
-    <lazy-mdi-post />
-  </lazy-base-tag>
+  <base-tag name="Blog">
+    <mdi-post />
+  </base-tag>
 </template>
 
 <script lang="ts">

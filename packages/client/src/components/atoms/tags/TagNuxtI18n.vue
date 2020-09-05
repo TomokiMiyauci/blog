@@ -1,7 +1,7 @@
 <template>
-  <lazy-base-tag name="nuxt-i18n">
+  <base-tag name="nuxt-i18n">
     <lazy-mdi-package-variant-closed />
-  </lazy-base-tag>
+  </base-tag>
 </template>
 
 <script lang="ts">

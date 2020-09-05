@@ -1,7 +1,7 @@
 <template>
-  <lazy-base-tag name="composition-api">
+  <base-tag name="composition-api">
     <MdiPackageVariantClosed />
-  </lazy-base-tag>
+  </base-tag>
 </template>
 
 <script lang="ts">
