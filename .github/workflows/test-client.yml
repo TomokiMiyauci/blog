@@ -338,7 +338,7 @@ jobs:
           key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
 
       - name: Run
-        run: yarn chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+        run: yarn chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --exit-once-uploaded develop --exit-zero-on-changes develop
 
       # - uses: chromaui/action@v1
       #   with:
