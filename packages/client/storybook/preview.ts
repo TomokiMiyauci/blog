@@ -1,18 +1,6 @@
 import '~~/.nuxt-storybook/storybook/preview.js'
+import { DecoratorFunction } from '@storybook/addons'
 import Vue from 'vue'
-import VueI18n from 'vue-i18n'
-
-Vue.use(VueI18n)
-const i18n = new VueI18n({
-  locale: 'en'
-})
-
-Vue.mixin({
-  i18n,
-  methods: {
-    localePath: (route: any, locale?: string | undefined) => ({ route, locale })
-  }
-})
 
 export const globalTypes = {
   locale: {
@@ -29,16 +17,14 @@ export const globalTypes = {
   }
 }
 
-const withLocale = (_: any, { globals }: any) => {
-  i18n.locale = globals.locale
-
+const withLocale: DecoratorFunction = (_, { globals }) => {
+  Vue.prototype.$nuxt.$i18n.locale = globals.locale
   return {
-    template: '<story />',
-    i18n
+    template: '<story />'
   }
 }
 
-export const decorators = [withLocale]
+export const decorators: DecoratorFunction[] = [withLocale]
 
 export const parameters = {
   controls: { expanded: true }
