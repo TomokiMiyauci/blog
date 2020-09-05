@@ -1,7 +1,7 @@
 <template>
-  <lazy-base-icon-text :text="formatDate(date, $i18n.locale)">
-    <lazy-mdi-calendar-edit />
-  </lazy-base-icon-text>
+  <base-icon-text :text="formatDate(date, $i18n.locale)">
+    <mdi-calendar-edit />
+  </base-icon-text>
 </template>
 
 <script lang="ts">

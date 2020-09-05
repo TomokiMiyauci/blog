@@ -1,7 +1,7 @@
 import { join } from 'path'
 
 import type { contentFunc } from '@nuxt/content'
-import { NuxtConfig } from '@nuxt/types'
+import type { NuxtConfig } from '@nuxt/types'
 
 declare module '@nuxt/types/config/hooks' {
   interface NuxtOptionsHooks {
@@ -119,9 +119,10 @@ const config: NuxtConfig = {
 
   i18n: {
     locales: [
-      { file: 'ja.json', code: 'ja' },
-      { file: 'en.json', code: 'en' }
+      { file: 'ja.json', code: 'ja', iso: 'ja-JP' },
+      { file: 'en.json', code: 'en', iso: 'en-US' }
     ],
+    vueI18nLoader: true,
     defaultLocale: 'en',
     vueI18n: {
       fallbackLocale: 'en'

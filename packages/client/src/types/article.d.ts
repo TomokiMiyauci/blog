@@ -20,6 +20,7 @@ type Frontmatter = {
   description: string
   tags: string[]
   img: string
+  thumbnail: string
   alt: string
 }
 

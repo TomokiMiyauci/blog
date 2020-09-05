@@ -10,28 +10,8 @@
       <div class="flex md:grid grid-temp grid-cols-main">
         <toc class="hidden md:block" :toc="article.toc" />
         <div style="grid-column: 2 / 3" class="p-2 overflow-hidden">
-          <div class="mb-10 pb-10">
-            <base-h-1 :text="article.title" />
-            <tags :tags="article.tags" />
-            <p class="mt-1 flex justify-between">
-              {{ formatDate(article.updatedAt, $i18n.locale)
-              }}<span class="inline-flex items-center">
-                <button-like />
-                <view-counter class="ml-6" />
-              </span>
-            </p>
-            <div
-              class="rounded-md bg-gray-200 hover:shadow-lg transition-shadow duration-300 shadow-md flex justify-center"
-            >
-              <img
-                loading="lazy"
-                alt="aaa"
-                height="400"
-                class="rounded-md"
-                style="max-width: 100%; max-height: 400px"
-                src="@/assets/img/composition-api.png"
-              />
-            </div>
+          <div class="mb-5 pb-5">
+            <article-header v-bind="article" />
           </div>
 
           <nuxt-content :document="article" />

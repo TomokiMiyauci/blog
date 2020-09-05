@@ -278,6 +278,74 @@ jobs:
           name: dist
           path: packages/client/dist
 
+  build-storybook:
+    runs-on: ${{ matrix.os }}
+    needs: setup
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [12]
+
+    steps:
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Build
+        run: yarn build-storybook
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: storybook
+          path: packages/client/storybook-static
+
+  test-visual:
+    runs-on: ${{ matrix.os }}
+    needs: build-storybook
+    strategy:
+      matrix:
+        os: [ubuntu-16.04]
+        node: [12]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: storybook
+          path: packages/client/storybook-static
+
+      - name: Restore node_modules
+        id: node_modules_cache_id
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+
+      - name: Run
+        run: yarn chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --exit-once-uploaded develop --exit-zero-on-changes develop
+
+      # - uses: chromaui/action@v1
+      #   with:
+      #     projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     storybookBuildDir: packages/client/storybook-static
+
   # test-e2e:
   #   needs: build
   #   runs-on: ${{ matrix.os }}

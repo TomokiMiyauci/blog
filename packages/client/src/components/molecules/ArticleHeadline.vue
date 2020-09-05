@@ -5,18 +5,15 @@
     class="bg-gray-100 dark:bg-gray-900 p-4 m-4 rounded-md flex flex-col-reverse lg:flex-row shadow-md cursor-pointer hover:bg-gray-300 hover:shadow-xl transition duration-300 ease-linear"
   >
     <div class="lg:w-2/3 mx-2">
-      <lazy-base-nuxt-link
-        class="text-2xl font-bold"
-        :to="localePath({ name: 'slug', params: { slug: headline.slug } })"
-      >
+      <nuxt-link class="text-2xl font-bold" :to="localePath({ name: 'slug', params: { slug: headline.slug } })">
         {{ headline.title }}
-      </lazy-base-nuxt-link>
+      </nuxt-link>
       <p class="mt-5 mb-3">{{ headline.description }}</p>
       <tags :tags="headline.tags" />
 
       <h2 class="mt-5 flex justify-between">
-        <lazy-calendar-edit-date :date="new Date(headline.createdAt)" />
-        <lazy-timer-reading-time :text="headline.readingTime" />
+        <calendar-edit-date :date="new Date(headline.createdAt)" />
+        <timer-reading-time :text="headline.readingTime" />
       </h2>
     </div>
     <img

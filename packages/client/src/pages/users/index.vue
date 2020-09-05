@@ -7,7 +7,7 @@
   import { defineComponent } from '@nuxtjs/composition-api'
   export default defineComponent({
     setup(_, { root }) {
-      root.$router.push(user.id)
+      root.$router.push(user.id!)
     }
   })
 </script>

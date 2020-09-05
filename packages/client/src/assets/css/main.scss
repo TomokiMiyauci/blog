@@ -2,6 +2,11 @@
    p {
      @apply py-1 mb-2 leading-relaxed transition-colors duration-300 ease-linear;
   }
+
+  a {
+    @apply text-green-600 font-bold;
+  }
+
   h2, h3 {
     @apply relative mt-6 mb-4 text-2xl;
 

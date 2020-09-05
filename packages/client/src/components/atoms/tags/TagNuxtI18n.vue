@@ -1,6 +1,6 @@
 <template>
-  <base-tag name="composition-api">
-    <MdiPackageVariantClosed />
+  <base-tag name="nuxt-i18n">
+    <lazy-mdi-package-variant-closed />
   </base-tag>
 </template>
 

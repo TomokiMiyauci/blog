@@ -1,16 +1,12 @@
 <template>
-  <lazy-base-icon-text :text="minuteText" v-bind="$attrs">
-    <lazy-mdi-timer />
-  </lazy-base-icon-text>
+  <base-icon-text :text="minuteText" v-bind="$attrs">
+    <mdi-timer />
+  </base-icon-text>
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed } from '@nuxtjs/composition-api'
+  import { defineComponent, computed, getCurrentInstance } from '@nuxtjs/composition-api'
 
-  // const useTimePrefix = () => {
-  //   const ct = useContext()
-  //   ct.app.i18n.locale
-  // }
   export default defineComponent({
     props: {
       text: {
@@ -19,23 +15,32 @@
       }
     },
 
-    setup(props) {
+    setup(props, { root }) {
       const minuteText = computed(() => {
-        // switch (root.$i18n.locale) {
-        //   case 'en': {
-        //     return
-        //   }
-        // }
+        const minute = props.text.split(' ')[0]
+        const vm = getCurrentInstance()!
+        switch (vm.$i18n.locale) {
+          case 'ja': {
+            return `${minute} ${vm.$t('MINUTE')}`
+          }
 
-        return `${props.text}min`
-        // if (root.$i18n.locale === 'en') {
-        //   return `${props.text}min`
-        // } else if (root.$i18n.locale === 'ja') {
-        //   return `${props.text}分`
-        // }
+          default: {
+            const suffix = Number(minute) > 1 ? vm.$t('MULTIPLE') : vm.$t('SINGULAR')
+            return `${minute} ${suffix}`
+          }
+        }
       })
 
       return { minuteText }
     }
   })
 </script>
+
+<i18n lang="yml">
+en:
+  SINGULAR: 'min'
+  MULTIPLE: 'mins'
+
+ja:
+  MINUTE: '分'
+</i18n>
