@@ -6,7 +6,7 @@ import { Module, Mutation, VuexModule } from 'vuex-module-decorators'
   namespaced: true
 })
 export default class User extends VuexModule {
-  private _id: string = ''
+  private _id?: string
 
   @Mutation
   setId(id: string): void {
@@ -22,7 +22,7 @@ export default class User extends VuexModule {
     return !!this._id
   }
 
-  get id(): firebase.User['uid'] {
+  get id(): firebase.User['uid'] | undefined {
     return this._id
   }
 }
