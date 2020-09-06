@@ -20,6 +20,8 @@ export default {
     langDir: 'lang/'
   },
 
+  css: ['@/assets/css/transitions.scss', '@/assets/css/main.scss'],
+
   tailwindcss: {
     configPath: join(__dirname, 'tailwind.config.js')
   },
