@@ -1,5 +1,4 @@
 const path = require('path')
-
 module.exports = {
   webpackFinal(config: any, options: any) {
     config = options.nuxtStorybookConfig.webpackFinal(config, options)
@@ -13,6 +12,8 @@ module.exports = {
       options: {
         actions: false
       }
-    }
+    },
+    '@storybook/addon-a11y',
+    '@storybook/addon-storysource'
   ]
 }
