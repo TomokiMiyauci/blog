@@ -5,13 +5,13 @@ on:
       branches:
         - develop
       paths:
-        - 'packages/firebase/firestore/**'
+        - 'packages/firestore/**'
         - '.github/workflows/test-firestore.yml'
 
 defaults:
   run:
     shell: bash
-    working-directory: packages/firebase/firestore
+    working-directory: packages/firestore
 
 jobs:
   # test:

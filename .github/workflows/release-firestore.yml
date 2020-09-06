@@ -5,13 +5,13 @@ on:
       branches:
         - master
       paths:
-        - 'packages/firebase/firestore/**'
+        - 'packages/firestore/**'
         - '.github/workflows/release-firestore.yml'
 
 defaults:
   run:
     shell: bash
-    working-directory: packages/firebase/firestore
+    working-directory: packages/firestore
 
 jobs:
   deploy:
