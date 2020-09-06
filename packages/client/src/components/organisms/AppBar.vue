@@ -10,14 +10,14 @@
         ></nuxt-link
       >
       <div class="flex items-center">
-        <lazy-fulltext-search />
-        <lazy-button-color-mode class="ml-5 hidden md:inline-block" />
-        <lazy-lang-switcher class="hidden lg:block" />
-        <lazy-button-circle class="md:hidden" :class="{ 'z-10': isActive }" @click="isActive = !isActive">
-          <lazy-hamburger-close :active="isActive" />
-        </lazy-button-circle>
+        <fulltext-search />
+        <button-color-mode class="ml-5 hidden md:inline-block" />
+        <lang-switcher class="hidden lg:block" />
+        <button-circle class="md:hidden" :class="{ 'z-10': isActive }" @click="isActive = !isActive">
+          <hamburger-close :active="isActive" />
+        </button-circle>
         <transition name="fade-right">
-          <lazy-navigation-drawer v-show="isActive" />
+          <navigation-drawer v-show="isActive" />
         </transition>
       </div>
     </div>

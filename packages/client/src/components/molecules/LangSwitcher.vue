@@ -1,8 +1,8 @@
 <template>
   <div class="relative">
-    <lazy-button-circle @click.stop="isShow = !isShow">
-      <lazy-mdi-translate />
-    </lazy-button-circle>
+    <button-circle @click.stop="isShow = !isShow">
+      <mdi-translate />
+    </button-circle>
     <transition name="fade-down">
       <ul
         v-if="isShow"
@@ -14,7 +14,7 @@
           tag="li"
           :to="switchLocalePath('ja')"
           @click.native.prevent="isShow = false"
-          ><lazy-flag-for-japan class="text-red-500" height="36" /><span class="ml-1">Japanese</span></nuxt-link
+          ><flag-for-japan class="text-red-500" height="36" /><span class="ml-1">Japanese</span></nuxt-link
         >
         <nuxt-link
           class="cursor-pointer px-2 py-1 flex rounded items-center hover:bg-green-500 transition duration-300"
@@ -22,11 +22,7 @@
           :to="switchLocalePath('en')"
           @click.native.prevent="isShow = false"
         >
-          <lazy-mdi-web
-            class="inline-flex items-center justify-center bg-gray-700 rounded-full"
-            width="36"
-            height="36"
-          />
+          <mdi-web class="inline-flex items-center justify-center bg-gray-700 rounded-full" width="36" height="36" />
 
           <span class="ml-1">English</span></nuxt-link
         >

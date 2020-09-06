@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h2><lazy-mdi-tag-multiple class="mr-1 text-green-700" />Tags</h2>
-    <lazy-tag-nuxtjs />
-    <lazy-tag-storybook />
+    <h2><mdi-tag-multiple class="mr-1 text-green-700" />Tags</h2>
+    <tag-nuxtjs />
+    <tag-storybook />
   </div>
 </template>
 

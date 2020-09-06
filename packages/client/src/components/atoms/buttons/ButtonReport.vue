@@ -1,7 +1,7 @@
 <template>
-  <lazy-button-circle v-bind="$attrs" v-on="$listeners">
-    <lazy-mdi-alert-octagram />
-  </lazy-button-circle>
+  <button-circle v-bind="$attrs" v-on="$listeners">
+    <mdi-alert-octagram />
+  </button-circle>
 </template>
 
 <script lang="ts">

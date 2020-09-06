@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <lazy-button-delete @click.stop="isOpen ? close() : open()" />
+    <button-delete @click.stop="isOpen ? close() : open()" />
     <transition name="fade-up">
       <div
         v-if="isOpen"
@@ -8,15 +8,15 @@
         class="card-anotation text-gray-900 absolute rounded-lg bg-white px-6 py-4 whitespace-no-wrap right-0 shadow hover:shadow-xl"
         style="bottom: 65px"
       >
-        <lazy-button-close class="absolute dark-hover:text-white right-0 top-0" @click="onClose" />
+        <button-close class="absolute dark-hover:text-white right-0 top-0" @click="onClose" />
         <h2 class="text-lg pr-10">{{ $t('COMMENT.DELETE.HEADER') }}</h2>
         <hr class="mt-1" />
         <p class="mt-3">
-          <lazy-mdi-alert /><span class="ml-2">{{ $t('COMMENT.DELETE.ALERT') }}</span>
+          <mdi-alert /><span class="ml-2">{{ $t('COMMENT.DELETE.ALERT') }}</span>
         </p>
         <div class="flex justify-center mt-1">
-          <lazy-spin-loader v-show="state" width="48" height="48" />
-          <lazy-button-delete v-show="!state" class="dark-hover:text-white" @click="onDelete" />
+          <spin-loader v-show="state" width="48" height="48" />
+          <button-delete v-show="!state" class="dark-hover:text-white" @click="onDelete" />
         </div>
       </div>
     </transition>

@@ -1,5 +1,5 @@
 <template>
-  <lazy-button-circle v-bind="$attrs" v-on="$listeners"><lazy-mdi-heart /></lazy-button-circle>
+  <button-circle v-bind="$attrs" v-on="$listeners"><mdi-heart /></button-circle>
 </template>
 
 <script lang="ts">

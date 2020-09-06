@@ -1,16 +1,16 @@
 <template>
   <div>
     <h2 class="mb-5 text-2xl">
-      <lazy-mdi-comment-text-multiple /><span class="ml-2">{{ $t('COMMENT.HEADER') }}</span
+      <mdi-comment-text-multiple /><span class="ml-2">{{ $t('COMMENT.HEADER') }}</span
       ><span class="px-2 shadow ml-2 rounded-full bg-red-500">{{ commentCount }}</span>
     </h2>
     <portal to="notice">
-      <lazy-snackbar-success ref="snackbar" />
+      <snackbar-success ref="snackbar" />
     </portal>
     <div class="flex items-start">
-      <lazy-mdi-account width="48" height="48" class="p-3 bg-gray-300 rounded-md shadow dark:text-teal-900" />
-      <lazy-textarea-comment v-model="newCommentRef" class="ml-2" />
-      <lazy-button-send :disabled="!isPostable" @click="onSend" />
+      <mdi-account width="48" height="48" class="p-3 bg-gray-300 rounded-md shadow dark:text-teal-900" />
+      <textarea-comment v-model="newCommentRef" class="ml-2" />
+      <button-send :disabled="!isPostable" @click="onSend" />
     </div>
 
     <portal v-if="isProcessing" to="center">
@@ -23,7 +23,7 @@
       </transition>
     </portal>
 
-    <lazy-comment-list :comments="commentsRef" class="mt-8" @delete="getComment" />
+    <comment-list :comments="commentsRef" class="mt-8" @delete="getComment" />
   </div>
 </template>
 

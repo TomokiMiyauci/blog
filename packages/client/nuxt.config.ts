@@ -210,7 +210,7 @@ const config: NuxtConfig = {
   build: {
     parallel: !isProduction,
     cache: !isProduction,
-    extractCSS: isProduction,
+    // extractCSS: isProduction,
     postcss: {
       preset: {
         autoprefixer: {

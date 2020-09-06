@@ -1,7 +1,7 @@
 <template>
-  <lazy-button-circle v-bind="$attrs" v-on="$listeners">
-    <lazy-mdi-delete-sweep />
-  </lazy-button-circle>
+  <button-circle v-bind="$attrs" v-on="$listeners">
+    <mdi-delete-sweep />
+  </button-circle>
 </template>
 
 <script lang="ts">

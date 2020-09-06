@@ -16,7 +16,7 @@
 
           <nuxt-content :document="article" />
           <prev-next :prev="prev" :next="next" />
-          <lazy-article-comment />
+          <article-comment />
         </div>
 
         <div class="hidden md:block p-4" style="grid-column: 3 / 3">
@@ -31,7 +31,7 @@
           class="bg-teal-800 animate-bounce text-white hover:bg-gray-900 hover:shadow-2xl shadow"
           @click="scroll"
         >
-          <lazy-mdi-transfer-up />
+          <mdi-transfer-up />
         </button-circle>
       </transition>
     </portal>
