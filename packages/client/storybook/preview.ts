@@ -1,7 +1,6 @@
 import '~~/.nuxt-storybook/storybook/preview.js'
 import { DecoratorFunction } from '@storybook/addons'
 import Vue from 'vue'
-
 export const globalTypes = {
   locale: {
     name: 'locale',
@@ -14,6 +13,19 @@ export const globalTypes = {
         { value: 'ja', right: '🇯🇵', title: '日本語' }
       ]
     }
+  },
+
+  theme: {
+    name: 'theme',
+    description: 'color mode',
+    defaultValue: 'light',
+    toolbar: {
+      icon: 'circlehollow',
+      items: [
+        { value: 'light', right: '🔆', title: 'Light' },
+        { value: 'dark', right: '🌙', title: 'Dark' }
+      ]
+    }
   }
 }
 
@@ -24,7 +36,14 @@ const withLocale: DecoratorFunction = (_, { globals }) => {
   }
 }
 
-export const decorators: DecoratorFunction[] = [withLocale]
+const withTheme: DecoratorFunction = (_, { globals }) => {
+  Vue.prototype.$nuxt.$colorMode.preference = globals.theme
+  return {
+    template: '<story />'
+  }
+}
+
+export const decorators: DecoratorFunction[] = [withLocale, withTheme]
 
 export const parameters = {
   controls: { expanded: true }

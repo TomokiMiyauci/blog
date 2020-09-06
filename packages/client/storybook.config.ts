@@ -3,8 +3,8 @@ import { join } from 'path'
 export default {
   srcDir: 'src',
   components: true,
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/tailwindcss', '@nuxtjs/composition-api'],
-  modules: ['nuxt-i18n'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/tailwindcss', '@nuxtjs/color-mode', '@nuxtjs/composition-api'],
+  modules: ['nuxt-i18n', '@nuxt/content'],
 
   i18n: {
     locales: [
@@ -22,5 +22,10 @@ export default {
 
   tailwindcss: {
     configPath: join(__dirname, 'tailwind.config.js')
+  },
+
+  content: {
+    apiPrefix: '',
+    dir: ''
   }
 }
