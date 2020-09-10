@@ -15,7 +15,7 @@
           </div>
 
           <nuxt-content :document="article" />
-          <prev-next :prev="prev" :next="next" />
+          <prev-next class="my-32" :prev="prev" :next="next" />
           <article-comment />
         </div>
 
