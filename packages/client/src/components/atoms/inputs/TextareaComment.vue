@@ -3,10 +3,10 @@
     class="w-full p-3 text-lg rounded-md bg-gray-200 focus:text-white resize-none focus:bg-gray-800 dark-focus:bg-gray-400 dark:text-teal-900 outline-none transition duration-300 shadow hover:shadow-xl dark-hover:shadow-lg"
     required
     :rows="rows"
-    :placeholder="$t('INPUT.TEXTAREA.PLACEHOLDER')"
+    :placeholder="$t('PLACEHOLDER')"
     autocomplete="off"
     spellcheck="false"
-    aria-label="hello"
+    aria-label="input comment"
     :value="value"
     @input="$emit('input', $event.target.value)"
   />
@@ -30,3 +30,11 @@
     }
   })
 </script>
+
+<i18n lang="yml">
+en:
+  PLACEHOLDER: Enter Comment
+
+ja:
+  PLACEHOLDER: コメントを入力
+</i18n>
