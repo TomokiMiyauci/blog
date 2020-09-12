@@ -4,7 +4,6 @@
   },
 
   "COMMENT": {
-    "HEADER": "Comments",
     "NO": "No Comment",
     "DELETE": {
       "HEADER": "Comment Delete",
