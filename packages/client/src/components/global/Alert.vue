@@ -1,5 +1,5 @@
 <template>
-  <div class="alert rounded border-l-4 p-4 mb-4 mt-4" :class="`alert-${type}`">
+  <div class="alert rounded border-l-4 p-4 mb-4 mt-4" :class="className">
     <div class="flex items-start">
       <div class="flex-shrink-0">
         <component :is="icon" class="alert-icon mt-px w-6 h-6" />
@@ -36,130 +36,141 @@
       const icon = computed(() => {
         return {
           info: 'MdiInformation',
-          success: 'IconCheckCircle',
-          warning: 'IconExclamationCircle',
-          danger: 'IconXCircle'
+          success: 'MdiCheckCircle',
+          warning: 'MdiAlert',
+          danger: 'MdiAlertOctagram'
         }[props.type as AlertType]
       })
 
-      return { icon }
+      const className = computed(() => {
+        return `alert-${props.type}`
+      })
+
+      return { icon, className }
     }
   })
 </script>
 
-<style>
-  .alert p {
-    @apply m-0 !important;
-  }
-
-  .alert a {
-    @apply text-gray-700 !important;
-  }
+<style lang="scss" scoped>
   .dark-mode .alert a {
-    @apply text-gray-300 !important;
-  }
-
-  .alert strong {
-    @apply text-current;
+    @apply text-gray-300;
   }
 
   .alert-content pre code {
-    background-color: inherit !important;
+    background-color: inherit;
   }
 
-  /* Info */
+  .alert {
+    p {
+      @apply m-0;
+    }
+
+    a {
+      @apply text-gray-700;
+    }
+
+    + strong {
+      @apply text-current;
+    }
+  }
 
   .alert-info {
     @apply bg-blue-100 border-blue-400;
-  }
-  .alert-info code {
-    @apply bg-blue-200 shadow-none border-0 text-current;
-  }
-  .alert-info .alert-icon {
-    @apply text-blue-400;
-  }
-  .alert-info .alert-content {
-    @apply text-blue-700;
-  }
-  .dark-mode .alert-info {
-    @apply bg-blue-900 border-blue-700;
-  }
-  .dark-mode .alert-info code {
-    @apply bg-blue-800;
-  }
-  .dark-mode .alert-info .alert-content {
-    @apply text-blue-300;
+
+    code {
+      @apply bg-blue-200 shadow-none border-0 text-current;
+    }
+
+    .alert-icon {
+      @apply text-blue-400;
+    }
+
+    .alert-content {
+      @apply text-blue-700;
+    }
   }
 
-  /* Success */
+  .dark-mode {
+    .alert-info {
+      @apply bg-blue-900 border-blue-700;
+      code {
+        @apply bg-blue-800;
+      }
+
+      .alert-content {
+        @apply text-blue-300;
+      }
+    }
+
+    .alert-success {
+      @apply bg-green-900 border-green-700;
+
+      code {
+        @apply bg-green-800;
+      }
+      .alert-content {
+        @apply text-green-300;
+      }
+    }
+
+    .alert-warning {
+      @apply bg-yellow-900 border-yellow-700;
+      code {
+        @apply bg-yellow-800;
+      }
+      .alert-content {
+        @apply text-orange-300;
+      }
+    }
+
+    .alert-danger {
+      @apply bg-red-900 border-red-700;
+      code {
+        @apply bg-red-800;
+      }
+      .alert-content {
+        @apply text-red-300;
+      }
+    }
+  }
 
   .alert-success {
     @apply bg-green-100 border-green-400;
-  }
-  .alert-success code {
-    @apply bg-green-200 shadow-none border-0 text-current;
-  }
-  .alert-success .alert-icon {
-    @apply text-green-400;
-  }
-  .alert-success .alert-content {
-    @apply text-green-700;
-  }
-  .dark-mode .alert-success {
-    @apply bg-green-900 border-green-700;
-  }
-  .dark-mode .alert-success code {
-    @apply bg-green-800;
-  }
-  .dark-mode .alert-success .alert-content {
-    @apply text-green-300;
-  }
 
-  /* Warning */
+    code {
+      @apply bg-green-200 shadow-none border-0 text-current;
+    }
+    .alert-icon {
+      @apply text-green-400;
+    }
+    .alert-content {
+      @apply text-green-700;
+    }
+  }
 
   .alert-warning {
     @apply bg-orange-100 border-orange-400;
+    code {
+      @apply bg-orange-200 shadow-none border-0 text-current;
+    }
+    .alert-icon {
+      @apply text-orange-400;
+    }
+    .alert-content {
+      @apply text-orange-700;
+    }
   }
-  .alert-warning code {
-    @apply bg-orange-200 shadow-none border-0 text-current;
-  }
-  .alert-warning .alert-icon {
-    @apply text-orange-400;
-  }
-  .alert-warning .alert-content {
-    @apply text-orange-700;
-  }
-  .dark-mode .alert-warning {
-    @apply bg-yellow-900 border-yellow-700;
-  }
-  .dark-mode .alert-warning code {
-    @apply bg-yellow-800;
-  }
-  .dark-mode .alert-warning .alert-content {
-    @apply text-orange-300;
-  }
-
-  /* Danger */
 
   .alert-danger {
     @apply bg-red-100 border-red-400;
-  }
-  .alert-danger code {
-    @apply bg-red-200 shadow-none border-0 text-current;
-  }
-  .alert-danger .alert-icon {
-    @apply text-red-400;
-  }
-  .alert-danger .alert-content {
-    @apply text-red-700;
-  }
-  .dark-mode .alert-danger {
-    @apply bg-red-900 border-red-700;
-  }
-  .dark-mode .alert-danger code {
-    @apply bg-red-800;
-  }
-  .dark-mode .alert-danger .alert-content {
-    @apply text-red-300;
+    code {
+      @apply bg-red-200 shadow-none border-0 text-current;
+    }
+    .alert-icon {
+      @apply text-red-400;
+    }
+    .alert-content {
+      @apply text-red-700;
+    }
   }
 </style>

@@ -8,15 +8,17 @@ export const articleRef = (
   return $fireStore.collection('articles') as firebase.firestore.CollectionReference<Article>
 }
 
-export const articleDoc = (ctx: ReturnType<typeof useContext>): firebase.firestore.DocumentReference<Article> => {
-  if (!ctx.params.value) throw new Error('Parameter Error')
+export const articleDoc = (
+  ctx: ReturnType<typeof useContext>
+): firebase.firestore.DocumentReference<Article> | undefined => {
+  if (!ctx.params.value) return
   return articleRef(ctx.$fireStore).doc(ctx.params.value.slug)
 }
 
 export const articleLikedUserRef = (
   ctx: ReturnType<typeof useContext>
 ): firebase.firestore.CollectionReference<LikedUser> => {
-  return articleDoc(ctx).collection('likedUsers') as firebase.firestore.CollectionReference<LikedUser>
+  return articleDoc(ctx)!.collection('likedUsers') as firebase.firestore.CollectionReference<LikedUser>
 }
 
 export const articleLikedUserDoc = (
@@ -29,7 +31,7 @@ export const articleLikedUserDoc = (
 export const viewedUserRef = (
   ctx: ReturnType<typeof useContext>
 ): firebase.firestore.CollectionReference<ViewedUser> => {
-  return articleDoc(ctx).collection('viewedUsers') as firebase.firestore.CollectionReference<ViewedUser>
+  return articleDoc(ctx)!.collection('viewedUsers') as firebase.firestore.CollectionReference<ViewedUser>
 }
 
 export const viewedUserDoc = (
@@ -41,15 +43,17 @@ export const viewedUserDoc = (
 
 export const articleCommentRef = (
   ctx: ReturnType<typeof useContext>
-): firebase.firestore.CollectionReference<Comment> => {
-  return articleDoc(ctx).collection('comments') as firebase.firestore.CollectionReference<Comment>
+): firebase.firestore.CollectionReference<Comment> | undefined => {
+  const doc = articleDoc(ctx)
+  if (!doc) return
+  return doc.collection('comments') as firebase.firestore.CollectionReference<Comment>
 }
 
 export const articleCommentDoc = (
   ctx: ReturnType<typeof useContext>,
   docId: string
 ): firebase.firestore.DocumentReference<Comment> => {
-  return articleCommentRef(ctx).doc(docId)
+  return articleCommentRef(ctx)!.doc(docId)
 }
 
 export const reportedUserRef = (

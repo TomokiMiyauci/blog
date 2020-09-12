@@ -1,7 +1,7 @@
 <template>
-  <lazy-base-svg v-bind="$attrs">
+  <base-svg v-bind="$attrs">
     <path :d="mdiClipboardCheck" />
-  </lazy-base-svg>
+  </base-svg>
 </template>
 
 <script lang="ts">

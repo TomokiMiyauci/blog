@@ -2,7 +2,7 @@
   <div
     class="flex justify-center items-center py-2 px-3 relative shadow leading-5 bg-gray-300 hover:bg-gray-400 hover:shadow-md transition duration-300 rounded-full focus-within:bg-gray-800 focus-within:shadow-md focus-within:text-white dark:text-gray-800"
   >
-    <lazy-mdi-magnify class="transition duration-300 delay-100" />
+    <mdi-magnify class="transition duration-300 delay-100" />
     <input
       ref="input"
       :value="value"
@@ -19,11 +19,11 @@
     />
     <transition name="fade" mode="out-in">
       <button v-if="forceClose || value" class="focus:outline-none" @click="onClick" @keypress="onClick">
-        <lazy-mdi-close class="hover:text-green-500 transition duration-500" />
+        <mdi-close class="hover:text-green-500 transition duration-500" />
       </button>
 
-      <lazy-mdi-slash-forward v-else-if="!isShow" class="hidden md:block bg-gray-500 rounded" />
-      <lazy-base-svg v-else> </lazy-base-svg>
+      <mdi-slash-forward v-else-if="!isShow" class="hidden md:block bg-gray-500 rounded" />
+      <base-svg v-else> </base-svg>
     </transition>
   </div>
 </template>

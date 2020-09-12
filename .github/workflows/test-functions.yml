@@ -5,13 +5,13 @@ on:
       branches:
         - develop
       paths:
-        - 'packages/firebase/functions/**'
+        - 'packages/functions/**'
         - '.github/workflows/test-functions.yml'
 
 defaults:
   run:
     shell: bash
-    working-directory: packages/firebase/functions
+    working-directory: packages/functions
 
 jobs:
   # setup:

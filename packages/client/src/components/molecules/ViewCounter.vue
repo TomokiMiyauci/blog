@@ -1,6 +1,6 @@
 <template>
   <span>
-    <lazy-mdi-eye class="mr-2" />
+    <mdi-eye class="mr-2" />
     <promised :promise="promiseViewCount">
       <template #pending>
         <spin-loader />
@@ -25,7 +25,7 @@
     const promiseViewCount = ref<Promise<number>>()
 
     const viewCount = async () => {
-      const result = await articleDoc(ctx).get()
+      const result = await articleDoc(ctx)!.get()
       const data = result.data()
 
       if (!data) throw new Error('Data are not exist')

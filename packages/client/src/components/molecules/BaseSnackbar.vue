@@ -8,10 +8,7 @@
       <div class="ml-3">
         <slot name="text" />
       </div>
-      <lazy-button-close
-        class="ml-10 bg-white hover:bg-teal-500 dark:bg-gray-800 dark-hover:bg-teal-500"
-        @click="close"
-      />
+      <button-close class="ml-10 bg-white hover:bg-teal-500 dark:bg-gray-800 dark-hover:bg-teal-500" @click="close" />
     </div>
   </transition>
 </template>

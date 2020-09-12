@@ -3,12 +3,6 @@
     "PLACEHOLDER": "Search"
   },
 
-  "INPUT": {
-    "TEXTAREA": {
-      "PLACEHOLDER": "Enter Comment"
-    }
-  },
-
   "COMMENT": {
     "HEADER": "Comments",
     "NO": "No Comment",
@@ -29,13 +23,6 @@
   "NOTICE": {
     "SUCCESS": {
       "POST": "Comment posted"
-    }
-  },
-
-  "UNIT": {
-    "MINUTE": {
-      "SINGULAR": "min",
-      "MULTIPLE": "mins"
     }
   }
 }

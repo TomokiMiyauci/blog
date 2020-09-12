@@ -3,8 +3,8 @@ import { join } from 'path'
 export default {
   srcDir: 'src',
   components: true,
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/tailwindcss', '@nuxtjs/composition-api'],
-  modules: ['nuxt-i18n'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/tailwindcss', '@nuxtjs/color-mode', '@nuxtjs/composition-api'],
+  modules: ['portal-vue/nuxt', 'nuxt-i18n', '@nuxtjs/firebase'],
 
   i18n: {
     locales: [
@@ -20,7 +20,21 @@ export default {
     langDir: 'lang/'
   },
 
+  css: ['@/assets/css/transitions.scss', '@/assets/css/main.scss'],
+
   tailwindcss: {
     configPath: join(__dirname, 'tailwind.config.js')
+  },
+
+  firebase: {
+    config: {
+      apiKey: 'test',
+      projectId: 'test'
+    },
+    onFirebaseHosting: true,
+    services: {
+      firestore: true,
+      auth: true
+    }
   }
 }

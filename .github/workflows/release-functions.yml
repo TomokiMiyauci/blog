@@ -5,13 +5,13 @@ on:
       branches:
         - master
       paths:
-        - 'packages/firebase/functions/**'
+        - 'packages/functions/**'
         - '.github/workflows/release-functions.yml'
 
 defaults:
   run:
     shell: bash
-    working-directory: packages/firebase/functions
+    working-directory: packages/functions
 
 jobs:
   deploy:

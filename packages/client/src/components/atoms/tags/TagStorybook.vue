@@ -1,6 +1,6 @@
 <template>
   <base-tag name="Storybook">
-    <lazy-storybook-icon />
+    <storybook-icon />
   </base-tag>
 </template>
 
