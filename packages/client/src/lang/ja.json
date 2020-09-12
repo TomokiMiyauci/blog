@@ -3,12 +3,6 @@
     "PLACEHOLDER": "検索"
   },
 
-  "INPUT": {
-    "TEXTAREA": {
-      "PLACEHOLDER": "コメントを入力"
-    }
-  },
-
   "COMMENT": {
     "HEADER": "コメント",
     "NO": "コメントはまだありません",
@@ -30,9 +24,5 @@
     "SUCCESS": {
       "POST": "コメントを投稿しました"
     }
-  },
-
-  "UNIT": {
-    "MINUTE":  "分"
   }
 }
