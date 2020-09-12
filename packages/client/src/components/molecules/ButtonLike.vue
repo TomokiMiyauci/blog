@@ -42,7 +42,7 @@
     }
 
     const getCount = async (): Promise<number> => {
-      const result = await articleDoc(ctx).get()
+      const result = await articleDoc(ctx)!.get()
       const article = result.data()
       if (article) {
         return article.like

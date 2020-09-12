@@ -46,7 +46,12 @@
     const onSend = async (): Promise<void> => {
       if (!isPostable.value || isProcessing.value) return
       isProcessing.value = true
-      await articleCommentRef(ctx).add({
+      if (!articleCommentRef(ctx)) {
+        isProcessing.value = false
+        return
+      }
+
+      await articleCommentRef(ctx)!.add({
         userRef: userDoc(ctx),
         text: newCommentRef.value,
         createdAt: ctx.$fireStoreObj.FieldValue.serverTimestamp()
@@ -59,7 +64,10 @@
     }
 
     const getComment = async (): Promise<void> => {
-      const result = await articleCommentRef(ctx).orderBy('createdAt', 'desc').limit(2).get()
+      if (!articleCommentRef(ctx)) {
+        return
+      }
+      const result = await articleCommentRef(ctx)!.orderBy('createdAt', 'desc').limit(2).get()
 
       commentsRef.value = []
 
