@@ -4,7 +4,7 @@ export default {
   srcDir: 'src',
   components: true,
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/tailwindcss', '@nuxtjs/color-mode', '@nuxtjs/composition-api'],
-  modules: ['nuxt-i18n', '@nuxt/content'],
+  modules: ['portal-vue/nuxt', 'nuxt-i18n', '@nuxtjs/firebase'],
 
   i18n: {
     locales: [
@@ -26,8 +26,15 @@ export default {
     configPath: join(__dirname, 'tailwind.config.js')
   },
 
-  content: {
-    apiPrefix: '',
-    dir: ''
+  firebase: {
+    config: {
+      apiKey: 'test',
+      projectId: 'test'
+    },
+    onFirebaseHosting: true,
+    services: {
+      firestore: true,
+      auth: true
+    }
   }
 }
