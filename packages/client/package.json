@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@iconify/icons-emojione": "^1.0.7",
+    "@iconify/icons-flat-color-icons": "^1.0.5",
     "@iconify/icons-logos": "^1.0.12",
     "@iconify/vue": "^1.0.2",
     "@mdi/js": "^5.4.55",
