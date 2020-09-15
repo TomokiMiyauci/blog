@@ -27,6 +27,9 @@
     <div style="grid-column: 3 / 3" class="p-4">
       <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" />
     </div>
+    <portal to="bottom-right">
+      <chat />
+    </portal>
   </div>
 </template>
 
