@@ -1939,6 +1939,11 @@
   resolved "https://registry.yarnpkg.com/@iconify/icons-emojione/-/icons-emojione-1.0.7.tgz#c413aac3091a3d583a06d948ddee6d064c9f6192"
   integrity sha512-N6S7RO6OAAOQ+2kp5Ds1T0DqHtjzU0/TTMgDf/bT/oJ2QJy/7JtaLY2f8qckpxNHDDF5ed+U5VzOLRev2tCNiw==
 
+"@iconify/icons-flat-color-icons@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@iconify/icons-flat-color-icons/-/icons-flat-color-icons-1.0.5.tgz#53af638061648e97111ffcfa22906878086d4cec"
+  integrity sha512-zgNK4Wnzynbihb6QOLEf9uAWm7bAc/IzrUOi+Q8EFF8JJX/F/m/qqyWm8EFzp0wVAU6Qgu6I5IBjjDXTyYWkrw==
+
 "@iconify/icons-logos@^1.0.12":
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/@iconify/icons-logos/-/icons-logos-1.0.12.tgz#0327f3e44c78aaa85c199e30881c84f26f3b3b07"
