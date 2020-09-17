@@ -32,3 +32,10 @@ export type ReportedUser = {
   userRef: ReturnType<typeof userDoc>
   createdAt: firebase.firestore.Timestamp | firebase.firestore.FieldValue
 }
+
+export type Other = {
+  name: string
+  text: string
+  isUser: boolean
+  createdAt: firebase.firestore.Timestamp | firebase.firestore.FieldValue
+}

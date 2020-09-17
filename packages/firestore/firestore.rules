@@ -37,7 +37,18 @@ service cloud.firestore {
     'createdAt' in reportedUser && reportedUser.createdAt is timestamp;
   }
 
+  function isValidMessages(message) {
+    return message.size() == 4 &&
+    'name' in message && message.name is string &&
+    'text' in message && message.text is string &&
+    'isUser' in message && message.isUser is bool &&
+    'createdAt' in message && message.createdAt is timestamp
+  }
 
+
+  function isOwner(request, userId) {
+    return request.auth.uid == userId
+  }
 
   function isAuthenticated(request) {
     return request.auth.uid != null;
@@ -81,6 +92,14 @@ service cloud.firestore {
          match /reportedUsers/{reportedUser} {
            allow create, update: if isAuthenticated(request) && isValideReportedUsers(request.resource.data);
          }
+      }
+    }
+
+    match /messages/{userId} {
+      match /other/{messageId} {
+        allow read;
+
+        allow create: if isAuthenticated(request) && isValidMessages(request.resource.data);
       }
     }
   }

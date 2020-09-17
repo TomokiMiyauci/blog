@@ -68,6 +68,7 @@ export interface CorePlugins {
   gridAutoFlow?: false
   verticalAlign?: false
   borderCollapse?: false
+  borderColor?: false
   float: false
   outline?: false
   pointerEvents?: false

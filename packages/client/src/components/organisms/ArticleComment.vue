@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div ref="div">
     <h2 class="mb-5 text-2xl">
-      <mdi-comment-text-multiple /><span class="ml-2">{{ $t('COMMENT.HEADER') }}</span
+      <mdi-comment-text-multiple /><span class="ml-2">{{ $t('HEADER') }}</span
       ><span class="px-2 shadow ml-2 rounded-full bg-red-500">{{ commentCount }}</span>
     </h2>
     <portal to="notice">
@@ -29,10 +29,11 @@
 
 <script lang="ts">
   import type BaseSnackbar from '@/components/molecules/BaseSnackbar.vue'
+  import useIntersection from '@/core/intersection'
   import { user } from '@/store'
   import { Comment } from '@/types/firestore'
   import { articleCommentRef, userDoc } from '@/utils/firestore-reference'
-  import { defineComponent, ref, computed, useContext } from '@nuxtjs/composition-api'
+  import { defineComponent, ref, computed, useContext, getCurrentInstance } from '@nuxtjs/composition-api'
 
   const useComment = () => {
     const ctx = useContext()
@@ -67,7 +68,7 @@
       if (!articleCommentRef(ctx)) {
         return
       }
-      const result = await articleCommentRef(ctx)!.orderBy('createdAt', 'desc').limit(2).get()
+      const result = await articleCommentRef(ctx)!.orderBy('createdAt', 'desc').limit(3).get()
 
       commentsRef.value = []
 
@@ -95,8 +96,16 @@
       const { onSend, commentsRef, newCommentRef, isPostable, commentCount, getComment, isProcessing } = useComment()
 
       const snackbar = ref<InstanceType<typeof BaseSnackbar>>()
+      const div = ref<HTMLDivElement>()
+
+      getCurrentInstance()!.$once('outersect', () => {
+        getComment()
+      })
+
+      useIntersection(div)
 
       return {
+        div,
         commentsRef,
         newCommentRef,
         isPostable,
@@ -113,3 +122,10 @@
     }
   })
 </script>
+
+<i18n lang="yml">
+en:
+  HEADER: Comments
+ja:
+  HEADER: コメント
+</i18n>

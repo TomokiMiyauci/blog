@@ -1,6 +1,7 @@
 <template>
   <div>
     <nuxt-link
+      ref="scrollAnchor"
       class="anchor inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
       :to="localePath('/')"
       >← Back to Home</nuxt-link
@@ -39,10 +40,11 @@
 </template>
 
 <script lang="ts">
+  import useIntersection from '@/core/intersection'
   import { PrevNext, Article } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
-  import { defineComponent, onMounted, ref } from '@nuxtjs/composition-api'
+  import { defineComponent, ref, getCurrentInstance } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     head: {
@@ -61,29 +63,21 @@
       return { article, prev, next }
     },
 
-    setup() {
+    setup(_, { root }) {
       useRegisterCopyButton()
+
       const isShow = ref(false)
 
-      onMounted(() => {
-        const images = document.querySelectorAll('.anchor')
-        images.forEach((target) => onIntersect(target))
+      getCurrentInstance()!.$on('intersect', () => {
+        isShow.value = true
       })
 
-      const onIntersect = (target: Element, options = {}) => {
-        const observer = new IntersectionObserver(addShowClass, options)
-        observer.observe(target)
-      }
+      getCurrentInstance()!.$on('outersect', () => {
+        isShow.value = false
+      })
 
-      const addShowClass = (entries: IntersectionObserverEntry[]) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            isShow.value = false
-          } else {
-            isShow.value = true
-          }
-        })
-      }
+      const scrollAnchor = ref()
+      useIntersection(scrollAnchor)
 
       const scroll = () => {
         window.scrollTo({
@@ -92,7 +86,7 @@
         })
       }
 
-      return { formatDate, isShow, scroll }
+      return { formatDate, isShow, scroll, scrollAnchor }
     }
   })
 </script>

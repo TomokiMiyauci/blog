@@ -1,5 +1,5 @@
 import { user } from '@/store'
-import { Article, LikedArticle, Comment, User, LikedUser, ViewedUser, ReportedUser } from '@/types/firestore'
+import { Article, LikedArticle, Comment, User, LikedUser, ViewedUser, ReportedUser, Other } from '@/types/firestore'
 import type { useContext } from '@nuxtjs/composition-api'
 
 export const articleRef = (
@@ -90,4 +90,25 @@ export const userLikedArticleDoc = (
   ctx: ReturnType<typeof useContext>
 ): firebase.firestore.DocumentReference<LikedArticle> => {
   return userLikedArticleRef(ctx).doc(ctx.params.value.slug)
+}
+
+export const messageRef = ($fireStore: firebase.firestore.Firestore): firebase.firestore.CollectionReference => {
+  return $fireStore.collection('messages') as firebase.firestore.CollectionReference
+}
+
+export const messageDoc = (
+  ctx: ReturnType<typeof useContext>
+): firebase.firestore.DocumentReference<firebase.firestore.DocumentData> | undefined => {
+  if (!user.id) return
+
+  return messageRef(ctx.$fireStore).doc(user.id)
+}
+
+export const otherRef = (
+  ctx: ReturnType<typeof useContext>
+): firebase.firestore.CollectionReference<Other> | undefined => {
+  const doc = messageDoc(ctx)
+  if (!doc) return
+
+  return doc.collection('other') as firebase.firestore.CollectionReference<Other>
 }

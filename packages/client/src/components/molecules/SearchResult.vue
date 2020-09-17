@@ -87,7 +87,7 @@
           .fetch<{ slug: string; title: string }[]>()
       }
 
-      const articlesPromise = ref<Promise<{ slug: string; title: string }[]> | null>(null)
+      const articlesPromise = ref<any>(null)
 
       watch(
         () => props.keyword,
