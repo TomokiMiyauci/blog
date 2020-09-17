@@ -1,13 +1,7 @@
 import { join } from 'path'
 
-import type { contentFunc } from '@nuxt/content'
+import { $content } from '@nuxt/content'
 import type { NuxtConfig } from '@nuxt/types'
-
-declare module '@nuxt/types/config/hooks' {
-  interface NuxtOptionsHooks {
-    'content:file:beforeInsert'?: (document: { extension: string; text: string; readingTime: string }) => Promise<void>
-  }
-}
 
 const HOSTNAME = process.env.HOSTNAME
 const PACKAGE_NAME = process.env.npm_package_name!
@@ -19,7 +13,6 @@ const config: NuxtConfig = {
    ** Nuxt rendering mode
    ** See https://nuxtjs.org/api/configuration-mode
    */
-  mode: 'universal',
 
   srcDir: 'src',
 
@@ -197,9 +190,11 @@ const config: NuxtConfig = {
   sitemap: {
     hostname: HOSTNAME,
     routes: async () => {
-      const { $content } = (await import('@nuxt/content')).default as { $content: contentFunc }
-      const files = await $content('articles').only(['slug']).where({ private: false }).fetch<{ slug: string }[]>()
-      return files.map(({ slug }) => `/${slug}`)
+      // const { $content } = (await import('@nuxt/content')).default as { $content: $content }
+      const files = await $content('articles').only(['slug']).where({ private: false }).fetch()
+      if (Array.isArray(files)) {
+        return files.map(({ slug }) => `/${slug}`)
+      }
     },
     gzip: true
   },

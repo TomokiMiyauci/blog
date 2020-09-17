@@ -60,6 +60,17 @@ const config = {
       'dark-focus-within',
       'dark-disabled'
     ],
+    borderColor: [
+      'responsive',
+      'hover',
+      'focus',
+      'disabled',
+      'focus-within',
+      'dark',
+      'dark-hover',
+      'dark-focus',
+      'dark-focus-within'
+    ],
     gradientColorStops: ['responsive', 'hover', 'focus', 'dark'],
     cursor: ['responsive', 'disabled']
   },
