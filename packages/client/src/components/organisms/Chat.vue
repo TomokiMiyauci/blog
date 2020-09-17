@@ -1,11 +1,12 @@
 <template>
   <div class="relative">
-    <button-chat v-show="!$route.hash" class="relative" @click="onClick" />
+    <button-chat v-show="!$route.hash" class="relative w-24 h-24 bg-gray-400 dark:bg-gray-700" @click="onClick" />
+    <!-- <button @click="user.switch()">hoge</button> -->
 
     <transition name="sp">
       <messenger
         v-show="$route.hash"
-        :is-login="true"
+        :is-login="!user.isAnonymous"
         :step="swichState($route.hash)"
         class="transform"
         @back="onBack"
@@ -17,6 +18,7 @@
 </template>
 
 <script lang="ts">
+  import { user } from '@/store'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
 
   const useState = () => {
@@ -63,7 +65,7 @@
 
       const onClick = () => {
         root.$router.push({
-          hash: 'message:dialog'
+          hash: 'message:entrance'
         })
       }
 
@@ -81,7 +83,7 @@
         })
       }
 
-      return { state, onClick, off, onClose, onBack, onSelect, swichState }
+      return { state, onClick, off, onClose, onBack, onSelect, swichState, user }
     }
   })
 </script>

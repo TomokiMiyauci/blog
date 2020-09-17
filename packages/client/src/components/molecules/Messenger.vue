@@ -17,7 +17,11 @@
     </div>
     <div ref="div" style="height: 80%" class="relative flex flex-col-reverse overflow-x-scroll">
       <div v-if="isLogin">
-        <transition-group tag="div" name="fade-right">
+        <transition tag="div" name="fade-right">
+          <message-other v-if="step === 'other'" class="inset-0 absolute" />
+        </transition>
+
+        <!-- <transition-group v-if="step === 'other'" tag="div" name="fade-right">
           <message-set
             v-for="(message, index) in messages"
             :key="index"
@@ -25,15 +29,19 @@
             v-bind="message"
             :is-user="false"
           />
-        </transition-group>
+        </transition-group> -->
 
         <transition name="slide-in">
-          <topic-select v-if="step === 'entrance'" class="inset-0 absolute bg-white" v-on="$listeners" />
+          <topic-select
+            v-if="step === 'entrance'"
+            class="inset-0 absolute bg-white dark:bg-gray-900"
+            v-on="$listeners"
+          />
         </transition>
       </div>
 
       <transition v-else name="slide-in">
-        <sign-in class="inset-0 absolute bg-white" />
+        <sign-in class="inset-0 absolute bg-white dark:bg-gray-900" />
       </transition>
     </div>
 
@@ -72,7 +80,7 @@
       const message = ref('')
       const ctx = useContext()
 
-      const onPost = () => {
+      const onPost = async () => {
         messages.value = [...messages.value, { text: message.value, name: 'Techsrc' }]
 
         const ref = otherRef(ctx)
@@ -80,12 +88,12 @@
 
         div.value!.scrollTop = div.value!.scrollHeight
 
-        // await ref.add({
-        //   name: 'name',
-        //   text: message.value,
-        //   isUser: true,
-        //   createdAt: ctx.$fireStoreObj.FieldValue.serverTimestamp()
-        // })
+        await ref.add({
+          name: 'name',
+          text: message.value,
+          isUser: true,
+          createdAt: ctx.$fireStoreObj.FieldValue.serverTimestamp()
+        })
 
         message.value = ''
       }

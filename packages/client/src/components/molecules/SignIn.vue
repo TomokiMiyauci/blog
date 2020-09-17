@@ -7,26 +7,42 @@
 
     <div class="flex flex-1 flex-col py-10 justify-between">
       <div class="flex justify-center items-center">
-        <button-google />
+        <button-google @signin="onSignin" />
       </div>
 
-      <p class="text-center text-2xl">or</p>
+      <!-- <p class="text-center text-2xl">or</p>
 
       <div class="inline-flex items-center rounded-full shadow hover:shadow-md transition-shadow duration-300">
         <mdi-email class="ml-3" />
-        <input class="p-2 pl-3 outline-none w-full" :placeholder="$t('PLACEHOLDER')" />
-        <base-button class="mr-2">
+        <input v-model="email" class="p-2 pl-3 outline-none w-full" :placeholder="$t('PLACEHOLDER')" />
+        <base-button class="mr-2" @click="onSend">
           <mdi-send />
         </base-button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
-  import { defineComponent } from '@nuxtjs/composition-api'
+  import { user } from '@/store'
+  import { defineComponent, ref } from '@nuxtjs/composition-api'
 
-  export default defineComponent({})
+  export default defineComponent({
+    setup(_, { root }) {
+      const email = ref('')
+      const onSignin = (e: firebase.User) => {
+        user.setId(e.uid)
+        user.setIsAnonymous(e.isAnonymous)
+      }
+
+      // const onSend = async () => {
+      //   const result = await root.$fireAuth.signInWithEmailLink(email.value, 'https://tech-xas.web.app')
+      //   console.log(result)
+      // }
+
+      return { onSignin, email }
+    }
+  })
 </script>
 
 <i18n lang="yml">

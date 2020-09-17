@@ -8,9 +8,13 @@
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
-    setup(_, { root }) {
-      const onClick = () => {
-        root.$fireAuth.signInWithPopup(new root.$fireAuthObj.GoogleAuthProvider())
+    setup(_, { root, emit }) {
+      const onClick = async (): Promise<void> => {
+        const { user } = await root.$fireAuth.signInWithPopup(new root.$fireAuthObj.GoogleAuthProvider())
+
+        if (user) {
+          emit('signin', user)
+        }
       }
 
       return { onClick }

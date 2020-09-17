@@ -1,6 +1,6 @@
 <template>
   <button-circle v-bind="$attrs" v-on="$listeners">
-    <mdi-forum />
+    <mdi-forum class="w-12 h-12" />
   </button-circle>
 </template>
 
