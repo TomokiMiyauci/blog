@@ -31,6 +31,7 @@ export default defineNuxtMiddleware(({ $fireAuth }) => {
   $fireAuth.onAuthStateChanged(async (user) => {
     if (user) {
       userStore.setId(user.uid)
+      userStore.setIsAnonymous(user.isAnonymous)
     } else {
       const { user } = await $fireAuth.signInAnonymously()
       if (!user) return
