@@ -97,7 +97,9 @@ service cloud.firestore {
 
     match /messages/{userId} {
       match /other/{messageId} {
-        allow create: if isAuthenticated(request) && isOwner(request, userId) && isValidMessages(request.resource.data);
+        allow read;
+
+        allow create: if isAuthenticated(request) && isValidMessages(request.resource.data);
       }
     }
   }
