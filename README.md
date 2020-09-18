@@ -20,6 +20,7 @@
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 [![RelativeCI](https://badges.relative-ci.com/badges/C3AE8ywl4E79uM0dKQLG?branch=develop)](https://app.relative-ci.com/projects/C3AE8ywl4E79uM0dKQLG)
 [![DeepScan grade](https://deepscan.io/api/teams/10684/projects/13513/branches/230629/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10684&pid=13513&bid=230629)
+[![CodeFactor](https://www.codefactor.io/repository/github/tomokimiyauci/techsrc/badge)](https://www.codefactor.io/repository/github/tomokimiyauci/techsrc)
 </div>
 
 ## :rocket: Build Setup
