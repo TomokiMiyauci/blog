@@ -188,49 +188,31 @@ jobs:
       - name: Test unit
         run: yarn test:unit --ci
 
-      # - name: upload coverage
-      #   if: matrix.node == 14
-      #   uses: codecov/codecov-action@master
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     file: ./coverage/clover.xml
+      - uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: packages/client/coverage
 
-      # - name: Test e2e
-      #   run: yarn ci:e2e
+  codecov:
+    runs-on: ${{ matrix.os }}
+    needs: test-unit
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
 
-  # audit:
-  #   needs: setup
-  #   runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-  #   strategy:
-  #     matrix:
-  #       os: [ubuntu-16.04]
-  #       node: [12]
+      - uses: actions/download-artifact@v2
+        with:
+          name: coverage
+          path: packages/client/coverage
 
-  #   steps:
-  #     - uses: actions/setup-node@v2-beta
-  #       with:
-  #         node-version: ${{ matrix.node }}
-
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-
-  #     - name: Restore node_modules
-  #       id: node_modules_cache_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-  #     - name: Restore node_modules of client
-  #       id: node_modules_cache_client_id
-  #       uses: actions/cache@v2
-  #       with:
-  #         path: ${{ github.workspace}}/packages/client/node_modules
-  #         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-client-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
-
-  #     - name: Audit
-  #       run: yarn run audit
+      - uses: codecov/codecov-action@v1.0.13
+        with:
+          file: coverage/clover.xml
+          fail_ci_if_error: true
 
   build:
     runs-on: ${{ matrix.os }}
