@@ -1,12 +1,16 @@
 <template>
   <div class="relative">
-    <button-chat v-show="!$route.hash" class="relative w-24 h-24 bg-gray-400 dark:bg-gray-700" @click="onClick" />
-    <!-- <button @click="user.switch()">hoge</button> -->
+    <button-chat
+      v-show="!$route.hash"
+      class="relative invisible md:visible w-12 h-12 md:w-24 md:h-24 bg-gray-400 dark:bg-gray-700"
+      @click="onClick"
+    />
 
     <transition name="sp">
       <messenger
         v-show="$route.hash"
         :is-login="!user.isAnonymous"
+        :enable-close="true"
         :step="swichState($route.hash)"
         class="transform"
         @back="onBack"

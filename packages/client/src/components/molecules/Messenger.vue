@@ -2,7 +2,11 @@
   <div
     class="relative shadow rounded-md hover:shadow-xl bg-white dark:bg-gray-900 transition-shadow duration-300 w-72 h-108 md:w-96 md:h-144"
   >
-    <div style="height: 10%" class="border-b cursor-move flex items-center justify-between py-2 px-2">
+    <div
+      style="height: 10%"
+      :class="{ 'border-b': enableClose || (!enableClose && step === 'other') }"
+      class="cursor-move flex items-center justify-between py-2 px-2"
+    >
       <div>
         <transition name="fade">
           <span v-if="isLogin && step === 'other'" class="flex items-center">
@@ -12,7 +16,7 @@
         </transition>
       </div>
 
-      <button-close @click="$emit('close')" />
+      <button-close v-show="enableClose" @click="$emit('close')" />
     </div>
     <div ref="div" style="height: 80%" class="relative flex flex-col-reverse overflow-x-scroll">
       <div v-if="isLogin">
@@ -70,6 +74,11 @@
       },
 
       isLogin: {
+        type: Boolean,
+        default: false
+      },
+
+      enableClose: {
         type: Boolean,
         default: false
       }
