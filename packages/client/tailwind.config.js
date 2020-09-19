@@ -13,7 +13,8 @@ const VUE_FILE = join('**', '*.vue')
  */
 const config = {
   future: {
-    removeDeprecatedGapUtilities: true
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true
   },
   theme: {
     darkSelector: '.dark-mode',
