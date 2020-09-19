@@ -10,7 +10,7 @@
   },
   "main": "lib/index.js",
   "devDependencies": {
-    "@firebase/testing": "^0.20.11",
+    "@firebase/rules-unit-testing": "^1.0.3",
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
