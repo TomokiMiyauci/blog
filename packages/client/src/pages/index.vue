@@ -1,6 +1,12 @@
 <template>
-  <div class="flex flex-col justify-center lg:grid grid-temp">
-    <!-- <div v-if="favariteArticle">
+  <div>
+    <div class="bg-gradient-to-r from-teal-300 to-gray-700 dark:from-gray-800 dark:to-gray-900">
+      <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
+        <sub-logo />
+      </div>
+    </div>
+    <div class="flex flex-col justify-center lg:grid grid-temp">
+      <!-- <div v-if="favariteArticle">
       <h2>
         <nuxt-link
           :to="
@@ -16,20 +22,21 @@
       </h2>
       <article-headline v-for="article in favariteArticle" :key="article.slug" :headline="article" />
     </div> -->
-    <!--
+      <!--
     <portal to="hello">
       <div>hello</div>
     </portal> -->
 
-    <section style="grid-column: 2 / 3">
-      <article-headline v-for="article in articles" :key="article.id" :headline="article" />
-    </section>
-    <div style="grid-column: 3 / 3" class="p-4">
-      <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" />
+      <section style="grid-column: 2 / 3">
+        <article-headline v-for="article in articles" :key="article.id" :headline="article" />
+      </section>
+      <div style="grid-column: 3 / 3" class="p-4">
+        <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" />
+      </div>
+      <portal to="bottom-right">
+        <chat />
+      </portal>
     </div>
-    <portal to="bottom-right">
-      <chat />
-    </portal>
   </div>
 </template>
 

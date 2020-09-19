@@ -2,17 +2,11 @@
   <div class="relative">
     <app-bar />
     <main class="pt-16 lg:pt-24 transition-colors duration-300 ease-linear">
-      <div class="bg-gradient-to-r from-teal-300 to-gray-700 dark:from-gray-800 dark:to-gray-900">
-        <div class="max-w-screen-sm mx-auto px-4 sm:px-6 md:px-8 pt-12 pb-20 flex flex-col items-center">
-          <sub-logo />
-        </div>
-      </div>
-
       <div class="block max-w-screen-xl mx-auto">
         <Nuxt />
       </div>
     </main>
-    <the-footer class="mt-64" />
+    <app-footer class="mt-64 mb-16 md:mb-0" />
     <portal-target class="fixed" style="top: 50%; left: 50%; transform: translate(-50%, -50%)" name="center" />
     <portal-target class="fixed rigth-0 bottom-0 mb-5 ml-5" name="notice" />
     <portal-target class="fixed right-0 mb-6 mr-6 bottom-0" name="bottom-right" />
