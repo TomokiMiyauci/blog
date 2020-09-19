@@ -1,7 +1,6 @@
 <template>
   <div
-    class="relative shadow rounded-md hover:shadow-xl bg-white dark:bg-gray-900 transition-shadow duration-300"
-    style="width: 400px; height: 600px"
+    class="relative shadow rounded-md hover:shadow-xl bg-white dark:bg-gray-900 transition-shadow duration-300 w-72 h-108 md:w-96 md:h-144"
   >
     <div style="height: 10%" class="border-b cursor-move flex items-center justify-between py-2 px-2">
       <div>
