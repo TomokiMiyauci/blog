@@ -1,18 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-auto relative flex-col max-w-full" style="min-height: calc(var(--vh, 1vh) * 100)">
     <header class="p-2 fixed items-center flex top-0 h-56px left-0 w-full bg-white">
-      <ButtonChevronLeft
-        @click="
-          $router.replace(
-            localePath({
-              name: 'chat-uid',
-              params: {
-                uid: user.id
-              }
-            })
-          )
-        "
-      />
+      <ButtonChevronLeft @click="onClick" />
       Other
     </header>
 
@@ -36,7 +25,19 @@
         document.documentElement.style.setProperty('--vh', `${vh}px`)
       })
 
-      return { user }
+      const onClick = (): void => {
+        if (!user.id) return
+        root.$router.replace(
+          root.localePath({
+            name: 'chat-uid',
+            params: {
+              uid: user.id
+            }
+          })
+        )
+      }
+
+      return { user, onClick }
     }
   })
 </script>
