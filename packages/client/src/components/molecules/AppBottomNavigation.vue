@@ -4,13 +4,13 @@
       v-for="{ title, path, icon } in navigations"
       :key="path"
       class="px-8 flex justify-center items-center flex-col"
-      :class="{ 'text-green-500': $route.path === path }"
+      :class="{ 'text-green-500': $route.path === path || (path !== '/' && $route.path.startsWith(path)) }"
       @click="$router.push(path)"
     >
       <component
         :is="icon"
         class="transform transition-all duration-300"
-        :class="{ 'scale-125': $route.path === path }"
+        :class="{ 'scale-125': $route.path === path || (path !== '/' && $route.path.startsWith(path)) }"
       />
       <span>{{ title }}</span></base-button
     >

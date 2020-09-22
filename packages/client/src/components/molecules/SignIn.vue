@@ -28,11 +28,12 @@
   import { defineComponent, ref } from '@nuxtjs/composition-api'
 
   export default defineComponent({
-    setup(_, { root }) {
+    setup(_, { root, emit }) {
       const email = ref('')
       const onSignin = (e: firebase.User) => {
         user.setId(e.uid)
         user.setIsAnonymous(e.isAnonymous)
+        emit('signin')
       }
 
       // const onSend = async () => {
