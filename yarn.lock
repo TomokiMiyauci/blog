@@ -3272,9 +3272,9 @@
     std-env "^2.2.1"
 
 "@nuxt/types@^2.14.4", "@nuxt/types@^2.14.5":
-  version "2.14.5"
-  resolved "https://registry.yarnpkg.com/@nuxt/types/-/types-2.14.5.tgz#426236eda1790f15c123110421c6d222c3d02c8f"
-  integrity sha512-1gOiwv6K4eNJbrYb68jtmZup/0gw6dGeu6fhUykyCcJS3emt+tzf6V0Lvg7WblJ/1xkzQfnNfbrbCm1CJpRAHg==
+  version "2.14.6"
+  resolved "https://registry.yarnpkg.com/@nuxt/types/-/types-2.14.6.tgz#0b6626acdecf83ddf1d288272f8e97d7127ac2f0"
+  integrity sha512-wK2B71TkbNAWxIcxdaueMfSIubqQ1DK/Yzix1MbXMLp5JM+fQTPofU/o+PQ9cl1vESPmh79bV/PC/JHYC6xK3w==
   dependencies:
     "@types/autoprefixer" "^9.7.2"
     "@types/babel__core" "^7.1.9"
@@ -3284,7 +3284,7 @@
     "@types/file-loader" "^4.2.0"
     "@types/html-minifier" "^4.0.0"
     "@types/less" "^3.0.1"
-    "@types/node" "^12.12.56"
+    "@types/node" "^12.12.62"
     "@types/node-sass" "^4.11.1"
     "@types/optimize-css-assets-webpack-plugin" "^5.0.1"
     "@types/pug" "^2.0.4"
@@ -5372,7 +5372,7 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.17.35.tgz#58058f29b870e6ae57b20e4f6e928f02b7129f56"
   integrity sha512-gXx7jAWpMddu0f7a+L+txMplp3FnHl53OhQIF9puXKq3hDGY/GjH+MF04oWnV/adPSCrbtHumDCFwzq2VhltWA==
 
-"@types/node@^12.0.2", "@types/node@^12.12.47", "@types/node@^12.12.56":
+"@types/node@^12.0.2", "@types/node@^12.12.47", "@types/node@^12.12.62":
   version "12.12.62"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.12.62.tgz#733923d73669188d35950253dd18a21570085d2b"
   integrity sha512-qAfo81CsD7yQIM9mVyh6B/U47li5g7cfpVQEDMfQeF8pSZVwzbhwU3crc0qG4DmpsebpJPR49AKOExQyJ05Cpg==
@@ -19261,11 +19261,6 @@ posix-character-classes@^0.1.0:
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
-postcss-100vh-fix@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-100vh-fix/-/postcss-100vh-fix-1.0.0.tgz#e9283449f6dc8098c07fc97393f1fc4bb1b160f7"
-  integrity sha512-8DpkUD9RVAzRs4U1mG1LfIvVhaIOd3i/y0OZMY40uKxEyOVyRqpSsqd8eRjkb8nNwB1KMwg7jZ2cHufTDH617Q==
-
 postcss-attribute-case-insensitive@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/postcss-attribute-case-insensitive/-/postcss-attribute-case-insensitive-4.0.2.tgz#d93e46b504589e94ac7277b0463226c68041a880"
@@ -20011,13 +20006,6 @@ postcss-values-parser@^2.0.0, postcss-values-parser@^2.0.1:
     flatten "^1.0.2"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
-
-postcss-viewport-height-correction@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/postcss-viewport-height-correction/-/postcss-viewport-height-correction-2.0.2.tgz#7991699fe82fba8c33d7d4b2e685265e1ed57459"
-  integrity sha512-tx2ViBmeBOcQ4pBV6DgFdKG3BHr0jnKZsNQTdzsf/yUk9wLU5ZCY1E0evVCVZHLTPtEatNAvX6cFGCcEbmoG9g==
-  dependencies:
-    postcss "^7.0.18"
 
 postcss@7.0.32:
   version "7.0.32"
