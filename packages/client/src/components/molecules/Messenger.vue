@@ -49,17 +49,15 @@
     </div>
 
     <transition name="fade-up">
-      <div v-if="isLogin && step === 'other'" style="height: 10%" class="flex border-t items-center">
-        <textarea-chat v-model="message" />
-        <button-send :disabled="!postable" @click="onPost" />
-      </div>
+      <sender v-if="isLogin && step === 'other'" ref="sender" style="height: 10%" class="border-t" @post="onPost" />
     </transition>
   </div>
 </template>
 
 <script lang="ts">
+  import Sender from '@/components/molecules/Sender.vue'
   import { otherRef } from '@/utils/firestore-reference'
-  import { computed, defineComponent, ref, useContext } from '@nuxtjs/composition-api'
+  import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
 
   type Message = {
     name: string
@@ -85,11 +83,12 @@
     },
 
     setup() {
-      const message = ref('')
       const ctx = useContext()
 
-      const onPost = async () => {
-        messages.value = [...messages.value, { text: message.value, name: 'Techsrc' }]
+      const sender = ref<InstanceType<typeof Sender>>()
+
+      const onPost = async (message: string): Promise<void> => {
+        messages.value = [...messages.value, { text: message, name: 'Techsrc' }]
 
         const ref = otherRef(ctx)
         if (!ref) return
@@ -98,20 +97,19 @@
 
         await ref.add({
           name: 'name',
-          text: message.value,
+          text: message,
           isUser: true,
           createdAt: ctx.$fireStoreObj.FieldValue.serverTimestamp()
         })
 
-        message.value = ''
+        sender.value!.clearMessage()
       }
 
       const messages = ref<Message[]>([])
 
-      const postable = computed(() => !!message.value)
       const div = ref<HTMLDivElement>()
 
-      return { message, postable, messages, onPost, div }
+      return { messages, onPost, div, sender }
     }
   })
 </script>
