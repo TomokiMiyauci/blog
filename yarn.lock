@@ -5363,9 +5363,9 @@
     "@types/node" "*"
 
 "@types/node@*", "@types/node@>= 8", "@types/node@>=8.9.0", "@types/node@^14.6.0":
-  version "14.11.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.1.tgz#56af902ad157e763f9ba63d671c39cda3193c835"
-  integrity sha512-oTQgnd0hblfLsJ6BvJzzSL+Inogp3lq9fGgqRkMB/ziKMgEUaFl801OncOzUmalfzt14N0oPHMK47ipl+wbTIw==
+  version "14.11.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.11.2.tgz#2de1ed6670439387da1c9f549a2ade2b0a799256"
+  integrity sha512-jiE3QIxJ8JLNcb1Ps6rDbysDhN4xa8DJJvuC9prr6w+1tIh+QAbYyNF3tyiZNLDBIuBCf4KEcV2UvQm/V60xfA==
 
 "@types/node@^10.10.0":
   version "10.17.35"
@@ -19261,11 +19261,6 @@ posix-character-classes@^0.1.0:
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
   integrity sha1-AerA/jta9xoqbAL+q7jB/vfgDqs=
 
-postcss-100vh-fix@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-100vh-fix/-/postcss-100vh-fix-1.0.0.tgz#e9283449f6dc8098c07fc97393f1fc4bb1b160f7"
-  integrity sha512-8DpkUD9RVAzRs4U1mG1LfIvVhaIOd3i/y0OZMY40uKxEyOVyRqpSsqd8eRjkb8nNwB1KMwg7jZ2cHufTDH617Q==
-
 postcss-attribute-case-insensitive@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/postcss-attribute-case-insensitive/-/postcss-attribute-case-insensitive-4.0.2.tgz#d93e46b504589e94ac7277b0463226c68041a880"
@@ -20011,13 +20006,6 @@ postcss-values-parser@^2.0.0, postcss-values-parser@^2.0.1:
     flatten "^1.0.2"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
-
-postcss-viewport-height-correction@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/postcss-viewport-height-correction/-/postcss-viewport-height-correction-2.0.2.tgz#7991699fe82fba8c33d7d4b2e685265e1ed57459"
-  integrity sha512-tx2ViBmeBOcQ4pBV6DgFdKG3BHr0jnKZsNQTdzsf/yUk9wLU5ZCY1E0evVCVZHLTPtEatNAvX6cFGCcEbmoG9g==
-  dependencies:
-    postcss "^7.0.18"
 
 postcss@7.0.32:
   version "7.0.32"
