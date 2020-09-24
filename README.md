@@ -13,6 +13,7 @@
 ![test](https://github.com/TomokiMiyauci/techxas/workflows/test/badge.svg?branch=develop)
 [![codecov](https://codecov.io/gh/TomokiMiyauci/techsrc/branch/develop/graph/badge.svg)](https://codecov.io/gh/TomokiMiyauci/techsrc)
 [![CodeFactor](https://www.codefactor.io/repository/github/tomokimiyauci/techsrc/badge)](https://www.codefactor.io/repository/github/tomokimiyauci/techsrc)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3aa70358bd4742e892901cec7d65657c)](https://www.codacy.com/manual/development.operation.6.6.6/techsrc?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TomokiMiyauci/techsrc&amp;utm_campaign=Badge_Grade)
 [![DeepScan grade](https://deepscan.io/api/teams/10684/projects/13513/branches/230629/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10684&pid=13513&bid=230629)
 [![RelativeCI](https://badges.relative-ci.com/badges/C3AE8ywl4E79uM0dKQLG?branch=develop)](https://app.relative-ci.com/projects/C3AE8ywl4E79uM0dKQLG)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
