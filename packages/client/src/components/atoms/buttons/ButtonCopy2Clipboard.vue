@@ -1,12 +1,15 @@
 <template>
-  <button ref="button" @click="onClick" @keypress="onClick">
+  <base-button ref="button" @click="onClick" @keypress="onClick">
     <transition name="fade-right" mode="out-in">
       <component :is="component" :class="{ 'text-green-500': copy }" />
     </transition>
-  </button>
+  </base-button>
 </template>
 
 <script lang="ts">
+  import BaseButton from '@/components/atoms/BaseButton.vue'
+  import MdiClipboardCheck from '@/components/atoms/icons/MdiClipboardCheck.vue'
+  import MdiClipboardText from '@/components/atoms/icons/MdiClipboardText.vue'
   import { wait } from '@/utils/timer'
   import { defineComponent, ref, watch, computed } from '@nuxtjs/composition-api'
 
@@ -42,11 +45,14 @@
       component
     }
   }
+
   export default defineComponent({
     components: {
-      MdiClipboardCheck: () => import('@/components/atoms/icons/MdiClipboardCheck.vue'),
-      MidClipboardText: () => import('@/components/atoms/icons/MdiClipboardText.vue')
+      BaseButton,
+      MdiClipboardCheck,
+      MdiClipboardText
     },
+
     setup() {
       return useClipboard()
     }

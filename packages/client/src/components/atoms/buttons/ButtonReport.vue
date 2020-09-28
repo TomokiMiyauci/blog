@@ -5,6 +5,14 @@
 </template>
 
 <script lang="ts">
+  import MdiAlertOctagram from '@/components/atoms/atoms/MdiAlertOctagram.vue'
+  import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
-  export default defineComponent({})
+
+  export default defineComponent({
+    components: {
+      ButtonCircle,
+      MdiAlertOctagram
+    }
+  })
 </script>

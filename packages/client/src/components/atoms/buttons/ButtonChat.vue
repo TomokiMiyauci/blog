@@ -5,6 +5,14 @@
 </template>
 
 <script lang="ts">
+  import MdiForum from '@/components/atoms/atoms/MdiForum.vue'
+  import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
-  export default defineComponent({})
+
+  export default defineComponent({
+    components: {
+      ButtonCircle,
+      MdiForum
+    }
+  })
 </script>

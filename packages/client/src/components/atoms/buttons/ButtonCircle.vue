@@ -9,6 +9,12 @@
 </template>
 
 <script lang="ts">
+  import BaseButton from '@/components/atoms/BaseButton.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
-  export default defineComponent({})
+
+  export default defineComponent({
+    components: {
+      BaseButton
+    }
+  })
 </script>
