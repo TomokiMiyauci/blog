@@ -10,7 +10,8 @@
     "prettier/vue",
     "plugin:prettier/recommended",
     "plugin:nuxt/recommended",
-    "plugin:vue-a11y/base"
+    "plugin:vue-a11y/base",
+    "plugin:@intlify/vue-i18n/recommended"
   ],
   "plugins": ["prettier", "vue-a11y"],
   "rules": {
@@ -21,5 +22,10 @@
     "vue/no-v-html": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["off"]
+  },
+  "settings": {
+    "vue-i18n": {
+      "localeDir": "./src/lang/*.{json,json5,yaml,yml}" // extension is glob formatting!
+    }
   }
 }
