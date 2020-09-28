@@ -1,8 +1,9 @@
 <template>
-  <base-textarea :value="value" area-label="chat" :placeholder="$t('PLACEHOLDER')" v-on="$listeners" />
+  <base-textarea :value="value" area-label="chat" :placeholder="$t('placeholder').toString()" v-on="$listeners" />
 </template>
 
 <script lang="ts">
+  import BaseTextarea from '@/components/atoms/BaseTextarea.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
@@ -11,14 +12,18 @@
         type: String,
         default: ''
       }
+    },
+
+    components: {
+      BaseTextarea
     }
   })
 </script>
 
 <i18n lang="yml">
 en:
-  PLACEHOLDER: Enter Message
+  placeholder: Enter Message
 
 ja:
-  PLACEHOLDER: メッセージを入力
+  placeholder: メッセージを入力
 </i18n>

@@ -3,6 +3,12 @@
 </template>
 
 <script lang="ts">
+  import MdiLoading from '@/components/atoms/icons/MdiLoading.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
-  export default defineComponent({})
+
+  export default defineComponent({
+    components: {
+      MdiLoading
+    }
+  })
 </script>
