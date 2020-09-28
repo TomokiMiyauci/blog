@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-  import MdiChevronLeft from '@/components/atoms/atoms/MdiChevronLeft.vue'
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
+  import MdiChevronLeft from '@/components/atoms/icons/MdiChevronLeft.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({

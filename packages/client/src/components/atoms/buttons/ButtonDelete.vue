@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-  import MdiDeleteSweep from '@/components/atoms/atoms/MdiDeleteSweep.vue'
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
+  import MdiDeleteSweep from '@/components/atoms/icons/MdiDeleteSweep.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({

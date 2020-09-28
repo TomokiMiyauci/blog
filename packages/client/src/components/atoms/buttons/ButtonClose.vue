@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-  import MdiCloseCircle from '@/components/atoms/atoms/MdiCloseCircle.vue'
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
+  import MdiCloseCircle from '@/components/atoms/icons/MdiCloseCircle.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({

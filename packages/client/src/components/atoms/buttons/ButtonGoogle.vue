@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-  import GoogleIcon from '@/components/atoms/atoms/GoogleIcon.vue'
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
+  import GoogleIcon from '@/components/atoms/icons/GoogleIcon.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({

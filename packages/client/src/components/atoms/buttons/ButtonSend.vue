@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-  import MdiSend from '@/components/atoms/atoms/MdiSend.vue'
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
+  import MdiSend from '@/components/atoms/icons/MdiSend.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({

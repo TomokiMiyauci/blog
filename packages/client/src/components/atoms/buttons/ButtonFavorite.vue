@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-  import MdiHeart from '@/components/atoms/atoms/MdiHeart.vue'
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
+  import MdiHeart from '@/components/atoms/icons/MdiHeart.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({

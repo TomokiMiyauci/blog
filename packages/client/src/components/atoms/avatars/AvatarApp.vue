@@ -3,9 +3,14 @@
 </template>
 
 <script lang="ts">
+  import BaseAvatar from '@/components/atoms/BaseAvatar.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
+    components: {
+      BaseAvatar
+    },
+
     setup() {
       return {
         src:
