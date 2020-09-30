@@ -41,7 +41,7 @@
     props: {
       id: {
         type: String,
-        requried: true
+        required: true
       }
     },
 
