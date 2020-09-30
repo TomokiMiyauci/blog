@@ -1,24 +1,7 @@
 {
-  "SEARCH": {
-    "PLACEHOLDER": "Search"
-  },
-
-  "COMMENT": {
-    "NO": "No Comment",
-    "DELETE": {
-      "HEADER": "Comment Delete",
-      "ALERT": "Are you really?"
-    },
-    "REPORT": {
-      "HEADER": "Report Violation",
-      "ALERT": "Report the comment as a violation?"
-    }
-  },
-
   "USER": {
     "ANONYMOUS": "Anonymous"
   },
-
   "NOTICE": {
     "SUCCESS": {
       "POST": "Comment posted"
