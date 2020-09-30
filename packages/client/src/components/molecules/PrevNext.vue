@@ -10,7 +10,7 @@
       <div class="flex items-center">
         <mdi-chevron-left />
       </div>
-      <img width="64" alt="hoge" style="max-height: 64px" :src="prev.img" />
+      <!-- <img width="64" alt="hoge" style="max-height: 64px" :src="prev.img" /> -->
       <div class="ml-2">
         <div>{{ prev.title }}</div>
       </div>
@@ -26,7 +26,7 @@
         class="hover:text-red-500 flex justify-end"
       >
         <h2>{{ next.title }}</h2>
-        <img width="64" alt="hoge" style="max-height: 64px" :src="prev.img" />
+        <!-- <img width="64" alt="hoge" style="max-height: 64px" :src="prev.img" /> -->
         <div class="flex items-center">
           <mdi-chevron-right class="h-5 ml-2" />
         </div>

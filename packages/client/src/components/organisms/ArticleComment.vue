@@ -1,7 +1,7 @@
 <template>
   <div ref="div">
     <h2 class="mb-5 text-2xl">
-      <mdi-comment-text-multiple /><span class="ml-2">{{ $t('HEADER') }}</span
+      <mdi-comment-text-multiple /><span class="ml-2">{{ $t('title') }}</span
       ><span class="px-2 shadow ml-2 rounded-full bg-red-500">{{ commentCount }}</span>
     </h2>
     <portal to="notice">
@@ -125,7 +125,7 @@
 
 <i18n lang="yml">
 en:
-  HEADER: Comments
+  title: Comments
 ja:
-  HEADER: コメント
+  title: コメント
 </i18n>
