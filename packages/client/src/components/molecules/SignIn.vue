@@ -2,7 +2,7 @@
   <div class="flex flex-col px-8">
     <div class="text-center mt-6">
       <h2 class="font-extrabold text-5xl mb-6">Login</h2>
-      <div>{{ $t('DESCRIPTION') }}</div>
+      <div>{{ $t('description') }}</div>
     </div>
 
     <div class="flex flex-1 flex-col py-10 justify-between">
@@ -24,11 +24,16 @@
 </template>
 
 <script lang="ts">
+  import ButtonGoogle from '@/components/atoms/buttons/ButtonGoogle.vue'
   import { user } from '@/store'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
 
   export default defineComponent({
-    setup(_, { root, emit }) {
+    components: {
+      ButtonGoogle
+    },
+
+    setup(_, { emit }) {
       const email = ref('')
       const onSignin = (e: firebase.User) => {
         user.setId(e.uid)
@@ -48,10 +53,8 @@
 
 <i18n lang="yml">
 en:
-  DESCRIPTION: You can contact the creator of this blog
-  PLACEHOLDER: Enter email
+  description: You can contact the creator of this blog
 
 ja:
-  DESCRIPTION: このブログの製作者に問い合わせが行えます
-  PLACEHOLDER: メールアドレスを入力
+  description: このブログの製作者に問い合わせが行えます
 </i18n>

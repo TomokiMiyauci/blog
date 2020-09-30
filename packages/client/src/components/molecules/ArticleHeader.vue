@@ -19,8 +19,8 @@
         loading="lazy"
         alt="cover"
         height="400"
-        class="rounded-md"
-        style="max-width: 100%; max-height: 400px"
+        class="rounded-md max-w-full"
+        style="max-height: 400px"
         :src="thumbnail"
       />
     </div>
@@ -28,6 +28,11 @@
 </template>
 
 <script lang="ts">
+  import BaseH1 from '@/components/atoms/BaseH1.vue'
+  import CalendarEditDate from '@/components/atoms/icontexts/CalendarEditDate.vue'
+  import TimerReadingTime from '@/components/atoms/icontexts/TimerReadingTime.vue'
+  import ButtonLike from '@/components/molecules/ButtonLike.vue'
+  import ViewCounter from '@/components/molecules/ViewCounter.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
@@ -56,6 +61,14 @@
         type: String,
         default: ''
       }
+    },
+
+    components: {
+      BaseH1,
+      ButtonLike,
+      ViewCounter,
+      TimerReadingTime,
+      CalendarEditDate
     }
   })
 </script>

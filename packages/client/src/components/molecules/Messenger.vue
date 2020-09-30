@@ -11,7 +11,7 @@
         <transition name="fade">
           <span v-if="isLogin && step === 'other'" class="flex items-center">
             <button-chevron-left @click="$emit('back')" />
-            <span>Other</span>
+            <span>{{ $t('other') }}</span>
           </span>
         </transition>
       </div>
@@ -55,7 +55,12 @@
 </template>
 
 <script lang="ts">
+  import ButtonChevronLeft from '@/components/atoms/buttons/ButtonChevronLeft.vue'
+  import ButtonClose from '@/components/atoms/buttons/ButtonClose.vue'
+  import MessageOther from '@/components/molecules/MessageOther.vue'
   import Sender from '@/components/molecules/Sender.vue'
+  import SignIn from '@/components/molecules/SignIn.vue'
+  import TopicSelect from '@/components/molecules/TopicSelect.vue'
   import { otherRef } from '@/utils/firestore-reference'
   import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
 
@@ -80,6 +85,15 @@
         type: Boolean,
         default: false
       }
+    },
+
+    components: {
+      ButtonChevronLeft,
+      ButtonClose,
+      MessageOther,
+      Sender,
+      SignIn,
+      TopicSelect
     },
 
     setup() {
@@ -113,3 +127,11 @@
     }
   })
 </script>
+
+<i18n lang="yml">
+en:
+  other: Other
+
+ja:
+  other: その他
+</i18n>

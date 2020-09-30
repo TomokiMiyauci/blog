@@ -1,13 +1,13 @@
 <template>
   <speech v-on="$listeners">
     <template #title>
-      <h2>{{ $t('HEADER') }}</h2>
+      <h2>{{ $t('title') }}</h2>
     </template>
 
     <template #body>
       <div>
         <p class="mt-1">
-          <mdi-alert /><span class="ml-2">{{ $t('ALERT') }}</span>
+          <mdi-alert /><span class="ml-2">{{ $t('alert') }}</span>
         </p>
         <div class="flex flex-col items-center mt-1" style="min-height: 48px">
           <button-delete-comment :id="id" v-on="$listeners" />
@@ -18,6 +18,9 @@
 </template>
 
 <script lang="ts">
+  import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
+  import ButtonDeleteComment from '@/components/molecules/ButtonDeleteComment.vue'
+  import Speech from '@/components/molecules/Speech.vue'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
 
   const useSwitch = () => {
@@ -42,7 +45,13 @@
       }
     },
 
-    setup(props) {
+    components: {
+      MdiAlert,
+      ButtonDeleteComment,
+      Speech
+    },
+
+    setup() {
       const { state, on, off } = useSwitch()
 
       return { state, on, off }
@@ -52,10 +61,10 @@
 
 <i18n lang="yml">
 en:
-  HEADER: Comments
-  ALERT: Are you really?
+  title: Comment Delete
+  alert: Are you really?
 
 ja:
-  HEADER: コメントを削除
-  ALERT: 削除しますか？
+  title: コメントを削除
+  alert: 削除しますか？
 </i18n>

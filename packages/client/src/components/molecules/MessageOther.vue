@@ -28,13 +28,17 @@
 </template>
 
 <script lang="ts">
+  import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
+  import MessageSet from '@/components/molecules/MessageSet.vue'
   import { otherRef } from '@/utils/firestore-reference'
   // import { wait } from '@/utils/timer'
   import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
   import { Promised } from 'vue-promised'
   export default defineComponent({
     components: {
-      Promised
+      Promised,
+      MdiAlert,
+      MessageSet
     },
 
     setup() {

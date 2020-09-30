@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts">
+  import ButtonClose from '@/components/atoms/buttons/ButtonClose.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
@@ -23,6 +24,10 @@
         type: Boolean,
         default: true
       }
+    },
+
+    components: {
+      ButtonClose
     }
   })
 </script>

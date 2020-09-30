@@ -16,6 +16,8 @@
 </template>
 
 <script lang="ts">
+  import ButtonDelete from '@/components/atoms/buttons/ButtonDelete.vue'
+  import SpeechCommentDelete from '@/components/molecules/SpeechCommentDelete.vue'
   import outsideClick from '@/directives/outside-click'
   import { wait } from '@/utils/timer'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
@@ -42,11 +44,16 @@
       }
     },
 
+    components: {
+      SpeechCommentDelete,
+      ButtonDelete
+    },
+
     directives: {
       'click-outside': outsideClick
     },
 
-    setup(props, { emit }) {
+    setup(_, { emit }) {
       const { isOpen, open, close } = useDialog()
 
       const onClose = () => {

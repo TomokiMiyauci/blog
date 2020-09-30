@@ -9,7 +9,7 @@
       />
       <div class="px-1 pt-1 text-xs flex" :class="isUser ? 'flex-row-reverse' : 'flex-row'">
         <span>{{ name }}</span
-        ><span>・</span>
+        ><span>{{ separator }}</span>
         <!-- <span>{{ date.toLocaleString() }}</span> -->
       </div>
     </div>
@@ -17,7 +17,10 @@
 </template>
 
 <script lang="ts">
+  import AvatarApp from '@/components/atoms/avatars/AvatarApp.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
+
+  const separator = '・'
 
   export default defineComponent({
     props: {
@@ -40,6 +43,14 @@
         type: Boolean,
         default: true
       }
+    },
+
+    components: {
+      AvatarApp
+    },
+
+    setup() {
+      return { separator }
     }
   })
 </script>

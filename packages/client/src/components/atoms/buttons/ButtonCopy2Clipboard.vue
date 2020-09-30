@@ -35,7 +35,7 @@
     }
 
     const component = computed(() => {
-      return copy.value ? 'mdi-clipboard-check' : 'mid-clipboard-text'
+      return copy.value ? 'mdi-clipboard-check' : 'mdi-clipboard-text'
     })
 
     return {

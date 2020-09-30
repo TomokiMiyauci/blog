@@ -1,5 +1,5 @@
 <template>
-  <Promised
+  <promised
     tag="div"
     :promise="articlesPromise"
     class="bg-white dark:bg-gray-600 shadow-md mt-1 rounded-md p-3 hover:shadow-lg transition duration-300"
@@ -17,7 +17,7 @@
     <template #default="articles">
       <transition name="fade">
         <div v-if="articles.length">
-          <h2 class="font-bold">Articles</h2>
+          <h2 class="font-bold">{{ $t('articles') }}</h2>
 
           <ul class="divide-y">
             <nuxt-link
@@ -35,25 +35,19 @@
         </div>
 
         <h2 v-else class="flex">
-          <mdi-information /><span class="ml-1">No hit {{ keyword }}</span>
+          <mdi-information /><span class="ml-1">{{ $t('no_hit') }} {{ keyword }}</span>
         </h2>
       </transition>
     </template>
-  </Promised>
+  </promised>
 </template>
 
 <script lang="ts">
-  // import { Article } from '@/types/article'
+  import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
+  import MdiInformation from '@/components/atoms/icons/MdiInformation.vue'
+  import SpinLoader from '@/components/atoms/loaders/SpinLoader.vue'
   import { defineComponent, watch, ref } from '@nuxtjs/composition-api'
   import { Promised } from 'vue-promised'
-
-  // const wait = (milliseconds: number) => {
-  //   return new Promise((resolve) => {
-  //     setTimeout(() => {
-  //       resolve()
-  //     }, milliseconds)
-  //   })
-  // }
 
   const highlight = (text: string, search: string): string => {
     if (search) {
@@ -65,6 +59,7 @@
     }
     return text
   }
+
   export default defineComponent({
     props: {
       keyword: {
@@ -74,7 +69,10 @@
     },
 
     components: {
-      Promised
+      Promised,
+      MdiAlert,
+      MdiInformation,
+      SpinLoader
     },
 
     setup(props, { root }) {
@@ -104,6 +102,15 @@
     }
   })
 </script>
+
+<i18n lang="yml">
+en:
+  articles: Articles
+  no_hit: No hit
+ja:
+  articles: 記事
+  no_hit: 見つかりませんでした
+</i18n>
 
 <style scoped lang="scss">
   div {

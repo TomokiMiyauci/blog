@@ -4,15 +4,15 @@
     <transition name="fade-up">
       <div
         v-if="isOpen"
-        v-click-outside="onClose"
+        v-outside-click="onClose"
         class="card-anotation text-gray-900 absolute rounded-lg bg-white px-6 py-4 right-0 shadow hover:shadow-xl"
         style="bottom: 65px"
       >
         <button-close class="absolute dark-hover:text-white right-0 top-0" @click="onClose" />
-        <h2 class="text-lg pr-10 whitespace-no-wrap">{{ $t('COMMENT.REPORT.HEADER') }}</h2>
+        <h2 class="text-lg pr-10 whitespace-no-wrap">{{ $t('title') }}</h2>
         <hr class="mt-1" />
         <p class="mt-3">
-          <mdi-alert /><span class="ml-2">{{ $t('COMMENT.REPORT.ALERT') }}</span>
+          <mdi-alert /><span class="ml-2">{{ $t('alert') }}</span>
         </p>
         <div class="flex justify-center mt-1">
           <spin-loader v-show="state" width="48" height="48" />
@@ -24,6 +24,11 @@
 </template>
 
 <script lang="ts">
+  import ButtonClose from '@/components/atoms/buttons/ButtonClose.vue'
+  import ButtonReport from '@/components/atoms/buttons/ButtonReport.vue'
+  import ButtonSend from '@/components/atoms/buttons/ButtonSend.vue'
+  import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
+  import SpinLoader from '@/components/atoms/loaders/SpinLoader.vue'
   import outsideClick from '@/directives/outside-click'
   import { reportedUserDoc, userDoc } from '@/utils/firestore-reference'
   import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
@@ -76,8 +81,16 @@
       }
     },
 
+    components: {
+      ButtonReport,
+      ButtonClose,
+      ButtonSend,
+      MdiAlert,
+      SpinLoader
+    },
+
     directives: {
-      'click-outside': outsideClick
+      outsideClick
     },
 
     setup(props, { emit }) {
@@ -101,6 +114,15 @@
     }
   })
 </script>
+
+<i18n lang="yml">
+en:
+  title: Report Violation
+  alert: Report the comment as a violation?
+ja:
+  title: コメントを報告
+  alert: コメントを違反として報告しますか？
+</i18n>
 
 <style scoped lang="scss">
   .card-anotation {
