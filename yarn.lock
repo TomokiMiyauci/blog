@@ -25625,7 +25625,7 @@ vfile@^4.0.0, vfile@^4.0.1:
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
 
-vls@^0.5.3:
+vls@^0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/vls/-/vls-0.5.4.tgz#52a1093f63b4df3838704a2fb5c5d5279ce084e9"
   integrity sha512-BAdsW9uYaMIEQcAK3cZsuoA+jMapOxc3RFNqiZtRDunbkv+sWrCs4xrydiPIiLHY7Pi8I/yNqBPlR/8LDlFmhA==
@@ -25766,14 +25766,14 @@ vscode-web-custom-data@^0.3.1:
   resolved "https://registry.yarnpkg.com/vscode-web-custom-data/-/vscode-web-custom-data-0.3.1.tgz#e340b720952bb84d3b9557851eb95cc98ca6f0c6"
   integrity sha512-pFWfUyoJoROfzk7l8+QK1aHsAcfb8fJP8iaEghMbASbYieaGOOnfovNjPIrJmhNf84RGn36R6r2030i9Eld7vA==
 
-vti@^0.0.12:
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/vti/-/vti-0.0.12.tgz#c82a959318b9b50dc612dc96068578b34252f751"
-  integrity sha512-Ls+CFFM1W9Q+A24tJl5Pkgo37b2xiRoo3Ip5IJJpp09UyVyUy3hByND+SuPOJJxfIC9imOHRLBwS7QnVndJTPg==
+vti@^0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/vti/-/vti-0.0.13.tgz#c73d4dc9dd0e69580b15d97604558429dfc20963"
+  integrity sha512-ROe9NzG+t5W4Pb+bnqNzxSIt7ay2zr3aUsJ4zVdQjpwSMP1W5nJ7JNcm3ol8hRlE3uAcPj5KlWQvDV0RF53WnQ==
   dependencies:
     chalk "^4.1.0"
     glob "^7.1.2"
-    vls "^0.5.3"
+    vls "^0.5.4"
     vscode-languageserver "^6.1.1"
     vscode-languageserver-protocol "^3.15.3"
     vscode-languageserver-types "^3.15.1"
