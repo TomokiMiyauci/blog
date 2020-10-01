@@ -1,5 +1,5 @@
 <template>
-  <speech v-on="$listeners">
+  <speech :enable-close="true" v-on="$listeners">
     <template #title>
       <h2>{{ $t('title') }}</h2>
     </template>
