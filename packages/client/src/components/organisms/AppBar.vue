@@ -13,8 +13,8 @@
       >
       <div class="flex items-center">
         <fulltext-search />
-        <button-color-mode class="ml-5 hidden md:inline-block" />
-        <lang-switcher class="hidden lg:block" />
+        <lang-switcher class="hidden ml-2 lg:block" />
+        <button-color-mode class="ml-2 hidden md:inline-block" />
         <button-circle class="md:hidden" :class="{ 'z-10': isActive }" @click="isActive = !isActive">
           <hamburger-close :active="isActive" />
         </button-circle>
