@@ -23,26 +23,9 @@
 
 <script lang="ts">
   import ButtonChat from '@/components/atoms/buttons/ButtonChat.vue'
+  import useSwitch from '@/core/switch'
   import { user } from '@/store'
-  import { defineComponent, ref } from '@nuxtjs/composition-api'
-
-  const useState = () => {
-    const state = ref(false)
-
-    const on = (): void => {
-      state.value = true
-    }
-
-    const off = (): void => {
-      state.value = false
-    }
-
-    return {
-      state,
-      on,
-      off
-    }
-  }
+  import { defineComponent } from '@nuxtjs/composition-api'
 
   type MessageState = 'entrance' | 'other'
 
@@ -70,7 +53,7 @@
     },
 
     setup(_, { root }) {
-      const { state, off } = useState()
+      const { state, off } = useSwitch()
 
       const onClick = () => {
         root.$router.push({

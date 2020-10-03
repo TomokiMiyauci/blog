@@ -20,21 +20,7 @@
 <script lang="ts">
   import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
   import ButtonDeleteComment from '@/components/molecules/ButtonDeleteComment.vue'
-  import { defineComponent, ref } from '@nuxtjs/composition-api'
-
-  const useSwitch = () => {
-    const state = ref<boolean>(false)
-
-    const on = (): void => {
-      state.value = true
-    }
-
-    const off = (): void => {
-      state.value = false
-    }
-
-    return { state, on, off }
-  }
+  import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     props: {
@@ -47,12 +33,6 @@
     components: {
       MdiAlert,
       ButtonDeleteComment
-    },
-
-    setup() {
-      const { state, on, off } = useSwitch()
-
-      return { state, on, off }
     }
   })
 </script>

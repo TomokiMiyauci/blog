@@ -1,9 +1,9 @@
 <template>
   <div class="relative">
-    <button-report @click.stop="isOpen ? close() : open()" />
+    <button-report @click.stop="dialog ? hideDialog() : showDialog()" />
     <transition name="fade-up">
       <div
-        v-if="isOpen"
+        v-if="dialog"
         v-outside-click="onClose"
         class="card-anotation text-gray-900 absolute rounded-lg bg-white px-6 py-4 right-0 shadow hover:shadow-xl"
         style="bottom: 65px"
@@ -29,37 +29,10 @@
   import ButtonSend from '@/components/atoms/buttons/ButtonSend.vue'
   import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
   import SpinLoader from '@/components/atoms/loaders/SpinLoader.vue'
+  import useSwitch from '@/core/switch'
   import outsideClick from '@/directives/outside-click'
   import { reportedUserDoc, userDoc } from '@/utils/firestore-reference'
-  import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
-
-  const useDialog = () => {
-    const isOpen = ref<boolean>(false)
-
-    const open = (): void => {
-      isOpen.value = true
-    }
-
-    const close = (): void => {
-      isOpen.value = false
-    }
-
-    return { isOpen, open, close }
-  }
-
-  const useSwitch = () => {
-    const state = ref<boolean>(false)
-
-    const on = (): void => {
-      state.value = true
-    }
-
-    const off = (): void => {
-      state.value = false
-    }
-
-    return { state, on, off }
-  }
+  import { defineComponent, useContext } from '@nuxtjs/composition-api'
 
   const useReportViolation = (props: { id: string }) => {
     const ctx = useContext()
@@ -95,22 +68,22 @@
 
     setup(props, { emit }) {
       const { reportViolation } = useReportViolation(props)
-      const { isOpen, open, close } = useDialog()
       const { state, on, off } = useSwitch()
+      const { state: dialog, on: showDialog, off: hideDialog } = useSwitch()
 
       const onClose = () => {
-        close()
+        hideDialog()
         off()
       }
       const onReport = async () => {
         on()
         await reportViolation()
         emit('report')
-        close()
+        hideDialog()
         off()
       }
 
-      return { isOpen, open, close, state, on, off, onReport, onClose }
+      return { dialog, state, on, off, onReport, onClose, showDialog, hideDialog }
     }
   })
 </script>
