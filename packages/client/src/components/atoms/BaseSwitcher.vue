@@ -1,8 +1,8 @@
 <template>
   <label
     for="checkbox"
-    class="flex items-center p-1 rounded-full bg-gray-300 w-16 cursor-pointer shadow-xs hover:shadow transition-all duration-300"
-    :class="{ 'bg-green-500': value }"
+    class="flex items-center p-1 rounded-full bg-gray-300 hover:bg-gray-400 w-16 cursor-pointer shadow-xs hover:shadow transition duration-300"
+    :class="{ 'bg-green-500 hover:bg-green-600': value }"
   >
     <input id="checkbox" :value="value" role="switch" type="checkbox" class="hidden" v-on="$listeners" />
 
