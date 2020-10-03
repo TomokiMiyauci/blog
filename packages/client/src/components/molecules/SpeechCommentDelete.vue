@@ -20,7 +20,6 @@
 <script lang="ts">
   import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
   import ButtonDeleteComment from '@/components/molecules/ButtonDeleteComment.vue'
-  import Speech from '@/components/molecules/Speech.vue'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
 
   const useSwitch = () => {
@@ -47,8 +46,7 @@
 
     components: {
       MdiAlert,
-      ButtonDeleteComment,
-      Speech
+      ButtonDeleteComment
     },
 
     setup() {

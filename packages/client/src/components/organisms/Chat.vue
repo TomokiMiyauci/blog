@@ -23,7 +23,6 @@
 
 <script lang="ts">
   import ButtonChat from '@/components/atoms/buttons/ButtonChat.vue'
-  import Messenger from '@/components/molecules/Messenger.vue'
   import { user } from '@/store'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
 
@@ -67,8 +66,7 @@
 
   export default defineComponent({
     components: {
-      ButtonChat,
-      Messenger
+      ButtonChat
     },
 
     setup(_, { root }) {
