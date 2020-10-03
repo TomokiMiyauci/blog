@@ -1,20 +1,4 @@
 {
-  "SEARCH": {
-    "PLACEHOLDER": "検索"
-  },
-
-  "COMMENT": {
-    "NO": "コメントはまだありません",
-    "DELETE": {
-      "HEADER": "コメントを削除",
-      "ALERT": "削除しますか？"
-    },
-    "REPORT": {
-      "HEADER": "コメントを報告",
-      "ALERT": "コメントを違反として報告しますか？"
-    }
-  },
-
   "USER": {
     "ANONYMOUS": "名無し"
   },

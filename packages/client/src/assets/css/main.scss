@@ -1,6 +1,10 @@
 .nuxt-content {
    p {
      @apply py-1 mb-2 leading-relaxed transition-colors duration-300 ease-linear;
+
+     code {
+      @apply p-1 bg-gray-400 bg-opacity-25 rounded-md;
+    }
   }
 
   a {

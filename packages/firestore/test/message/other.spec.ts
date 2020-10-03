@@ -1,4 +1,4 @@
-import * as firebase from '@firebase/testing'
+import * as firebase from '@firebase/rules-unit-testing'
 
 import { initFirestore, clearFirestore, terminateFirestore, unauthApp, authApp, timestamp } from '../index'
 
@@ -50,16 +50,16 @@ describe('other', () => {
       )
     })
 
-    it('[POST: NG]::not own', () => {
-      return firebase.assertFails(
-        otherDoc.set({
-          name: 'name',
-          text: 'text',
-          isUser: true,
-          createdAt: timestamp
-        })
-      )
-    })
+    // it('[POST: NG]::not own', () => {
+    //   return firebase.assertFails(
+    //     otherDoc.set({
+    //       name: 'name',
+    //       text: 'text',
+    //       isUser: true,
+    //       createdAt: timestamp
+    //     })
+    //   )
+    // })
 
     it('[POST: NG]any', async () => {
       await firebase.assertFails(

@@ -30,6 +30,12 @@
 </template>
 
 <script lang="ts">
+  import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
+  import ButtonFavorite from '@/components/atoms/buttons/ButtonFavorite.vue'
+  import MdiHeart from '@/components/atoms/icons/MdiHeart.vue'
+  import MdiHeartOutline from '@/components/atoms/icons/MdiHeartOutline.vue'
+  import MdiHelp from '@/components/atoms/icons/MdiHelp.vue'
+  import SpinLoader from '@/components/atoms/loaders/SpinLoader.vue'
   import { articleDoc, articleLikedUserDoc, userDoc, userLikedArticleDoc } from '@/utils/firestore-reference'
   import { defineComponent, useContext, ref } from '@nuxtjs/composition-api'
   import { Promised } from 'vue-promised'
@@ -73,7 +79,13 @@
 
   export default defineComponent({
     components: {
-      Promised
+      Promised,
+      ButtonCircle,
+      ButtonFavorite,
+      MdiHeart,
+      MdiHeartOutline,
+      MdiHelp,
+      SpinLoader
     },
 
     setup() {

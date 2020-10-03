@@ -18,6 +18,10 @@
 </template>
 
 <script lang="ts">
+  import ButtonDelete from '@/components/atoms/buttons/ButtonDelete.vue'
+  import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
+  import MdiCheckCircle from '@/components/atoms/icons/MdiCheckCircle.vue'
+  import SpinLoader from '@/components/atoms/loaders/SpinLoader.vue'
   import { articleCommentRef } from '@/utils/firestore-reference'
   import { defineComponent, useContext, ref, getCurrentInstance } from '@nuxtjs/composition-api'
   import { Promised } from 'vue-promised'
@@ -48,7 +52,11 @@
 
   export default defineComponent({
     components: {
-      Promised
+      Promised,
+      SpinLoader,
+      MdiAlert,
+      MdiCheckCircle,
+      ButtonDelete
     },
 
     props: {

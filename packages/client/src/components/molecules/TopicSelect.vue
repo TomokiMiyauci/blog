@@ -7,7 +7,7 @@
     <div class="flex flex-1 flex-col p-10 justify-center items-center">
       <base-button class="py-2 pl-3 pr-4 rounded-full shadow hover:shadow-md" @click="$emit('select', 'other')">
         <mdi-help-circle />
-        <span class="ml-1">{{ $t('OTHER') }}</span></base-button
+        <span class="ml-1">{{ $t('other') }}</span></base-button
       >
     </div>
   </div>
@@ -21,8 +21,8 @@
 
 <i18n lang="yml">
 en:
-  OTHER: Other
+  other: Other
 
 ja:
-  OTHER: その他
+  other: その他
 </i18n>

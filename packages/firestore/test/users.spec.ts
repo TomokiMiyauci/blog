@@ -1,6 +1,6 @@
 import fs from 'fs'
 
-import * as firebase from '@firebase/testing'
+import * as firebase from '@firebase/rules-unit-testing'
 import { PROJECT_ID } from './'
 const timestamp = firebase.firestore.FieldValue.serverTimestamp()
 

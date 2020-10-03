@@ -5,7 +5,8 @@
     <mdi-account />
     <div class="ml-4 w-full">
       <p class="flex">
-        <span class="font-bold text-md">***</span><span class="mx-1">・</span
+        <span class="font-bold text-md">{{ mask }}</span
+        ><span class="mx-1">{{ separation }}</span
         ><span>{{ formatDate(timestamp2Date(createdAt), $i18n.locale) }}</span>
       </p>
       <div class="break-all whitespace-pre-wrap">{{ text }}</div>
@@ -17,15 +18,21 @@
 </template>
 
 <script lang="ts">
+  import MdiAccount from '@/components/atoms/icons/MdiAccount.vue'
+  import CommentDelete from '@/components/molecules/CommentDelete.vue'
+  import ReportViolation from '@/components/molecules/ReportViolation.vue'
   import { Comment } from '@/types/firestore'
   import { formatDate, timestamp2Date } from '@/utils/formatter'
   import { defineComponent } from '@nuxtjs/composition-api'
 
+  const mask = '***'
+  const separation = '・'
+
   export default defineComponent({
     props: {
       id: {
-        type: String as () => Comment['id'],
-        default: ''
+        type: String,
+        required: true
       },
 
       text: {
@@ -44,8 +51,14 @@
       }
     },
 
+    components: {
+      MdiAccount,
+      CommentDelete,
+      ReportViolation
+    },
+
     setup() {
-      return { formatDate, timestamp2Date }
+      return { formatDate, timestamp2Date, mask, separation }
     }
   })
 </script>

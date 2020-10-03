@@ -14,6 +14,7 @@
 </template>
 
 <script lang="ts">
+  import ButtonClose from '@/components/atoms/buttons/ButtonClose.vue'
   import { defineComponent, ref, watch } from '@nuxtjs/composition-api'
 
   const useAutoClose = (milliseconeds: number) => {
@@ -51,6 +52,11 @@
         default: 5000
       }
     },
+
+    components: {
+      ButtonClose
+    },
+
     setup(props) {
       return useAutoClose(props.milliseconeds)
     }

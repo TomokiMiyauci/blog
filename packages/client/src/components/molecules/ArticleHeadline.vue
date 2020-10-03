@@ -17,10 +17,10 @@
       </h2>
     </div>
     <img
-      class="rounded-md hover:shadow-xl transition-shadow duration-300 shadow lg:w-1/2"
+      class="rounded-md hover:shadow-xl transition-shadow duration-300 shadow lg:w-1/2 h-full"
       height="300"
       loading="lazy"
-      style="height: 100%; max-height: 300px"
+      style="max-height: 300px"
       :alt="headline.alt"
       :src="headline.img"
     />
@@ -28,6 +28,8 @@
 </template>
 
 <script lang="ts">
+  import CalendarEditDate from '@/components/atoms/icontexts/CalendarEditDate.vue'
+  import TimerReadingTime from '@/components/atoms/icontexts/TimerReadingTime.vue'
   import { Headline } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { defineComponent } from '@nuxtjs/composition-api'
@@ -38,6 +40,11 @@
         type: Object as () => Headline,
         required: true
       }
+    },
+
+    components: {
+      CalendarEditDate,
+      TimerReadingTime
     },
 
     setup() {

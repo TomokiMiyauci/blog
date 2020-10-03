@@ -10,7 +10,8 @@
     "prettier/vue",
     "plugin:prettier/recommended",
     "plugin:nuxt/recommended",
-    "plugin:vue-a11y/base"
+    "plugin:vue-a11y/base",
+    "plugin:@intlify/vue-i18n/recommended"
   ],
   "plugins": ["prettier", "vue-a11y"],
   "rules": {
@@ -20,6 +21,25 @@
     ],
     "vue/no-v-html": "off",
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["off"]
+    "@typescript-eslint/no-unused-vars": ["off"],
+    "@intlify/vue-i18n/key-format-style": ["error", "snake_case", {
+        "allowArray": false
+      }
+    ],
+    "@intlify/vue-i18n/no-duplicate-keys-in-locale": ["error", {
+      "ignoreI18nBlock": false
+    }],
+    "@intlify/vue-i18n/no-dynamic-keys": "error",
+    "@intlify/vue-i18n/no-unused-keys": ["error", {
+      "src": "./src",
+      "extensions": [".ts", ".vue"],
+      "enableFix": true
+    }]
+
+  },
+  "settings": {
+    "vue-i18n": {
+      "localeDir": "./src/lang/*.{json,json5,yaml,yml}"
+    }
   }
 }

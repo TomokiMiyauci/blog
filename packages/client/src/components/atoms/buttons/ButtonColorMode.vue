@@ -7,6 +7,9 @@
 </template>
 
 <script lang="ts">
+  import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
+  import MdiWeatherNight from '@/components/atoms/icons/MdiWeatherNight.vue'
+  import MdiWeatherSunny from '@/components/atoms/icons/MdiWeatherSunny.vue'
   import { defineComponent, computed } from '@nuxtjs/composition-api'
   import Vue from 'vue'
   declare module 'vue/types/vue' {
@@ -23,9 +26,11 @@
   type Mode = 'light' | 'dark'
   export default defineComponent({
     components: {
-      MdiWeatherSunny: () => import('@/components/atoms/icons/MdiWeatherSunny.vue'),
-      MdiWeatherNight: () => import('@/components/atoms/icons/MdiWeatherNight.vue')
+      ButtonCircle,
+      MdiWeatherSunny,
+      MdiWeatherNight
     },
+
     setup(_, { root }) {
       const onClick = (): void => {
         root.$colorMode.value === 'light'

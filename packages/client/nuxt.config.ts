@@ -233,7 +233,7 @@ const config: NuxtConfig = {
     middleware: true,
     transitions: true,
     deprecations: false,
-    validate: false,
+    validate: true,
     asyncData: true,
     fetch: false,
     clientOnline: false,

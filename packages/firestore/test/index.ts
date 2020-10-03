@@ -1,5 +1,5 @@
 export const PROJECT_ID = 'test'
-import * as firebase from '@firebase/testing'
+import * as firebase from '@firebase/rules-unit-testing'
 import fs from 'fs'
 
 export const timestamp = firebase.firestore.FieldValue.serverTimestamp()

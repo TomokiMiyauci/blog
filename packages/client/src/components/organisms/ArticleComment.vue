@@ -1,7 +1,7 @@
 <template>
   <div ref="div">
     <h2 class="mb-5 text-2xl">
-      <mdi-comment-text-multiple /><span class="ml-2">{{ $t('HEADER') }}</span
+      <mdi-comment-text-multiple /><span class="ml-2">{{ $t('title') }}</span
       ><span class="px-2 shadow ml-2 rounded-full bg-red-500">{{ commentCount }}</span>
     </h2>
     <portal to="notice">
@@ -28,7 +28,14 @@
 </template>
 
 <script lang="ts">
+  import ButtonSend from '@/components/atoms/buttons/ButtonSend.vue'
+  import MdiAccount from '@/components/atoms/icons/MdiAccount.vue'
+  import MdiCommentTextMultiple from '@/components/atoms/icons/MdiCommentTextMultiple.vue'
+  import TextareaComment from '@/components/atoms/inputs/TextareaComment.vue'
+  import SpinLoader from '@/components/atoms/loaders/SpinLoader.vue'
   import type BaseSnackbar from '@/components/molecules/BaseSnackbar.vue'
+  import CommentList from '@/components/molecules/CommentList.vue'
+  import SnackbarSuccess from '@/components/molecules/snackbar/SnackbarSuccess.vue'
   import useIntersection from '@/core/intersection'
   import { user } from '@/store'
   import { Comment } from '@/types/firestore'
@@ -92,6 +99,16 @@
   }
 
   export default defineComponent({
+    components: {
+      MdiCommentTextMultiple,
+      MdiAccount,
+      SpinLoader,
+      TextareaComment,
+      ButtonSend,
+      CommentList,
+      SnackbarSuccess
+    },
+
     setup() {
       const { onSend, commentsRef, newCommentRef, isPostable, commentCount, getComment, isProcessing } = useComment()
 
@@ -125,7 +142,7 @@
 
 <i18n lang="yml">
 en:
-  HEADER: Comments
+  title: Comments
 ja:
-  HEADER: コメント
+  title: コメント
 </i18n>

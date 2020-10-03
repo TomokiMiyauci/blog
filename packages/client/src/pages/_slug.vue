@@ -48,7 +48,10 @@
 
   export default defineComponent({
     head: {
-      meta: [{ hid: 'og:type', property: 'og:type', name: 'og:type', content: 'article' }]
+      meta: [{ hid: 'og:type', property: 'og:type', name: 'og:type', content: 'article' }],
+      htmlAttrs: {
+        lang: 'ja'
+      }
     },
 
     async asyncData({ params, $content }) {

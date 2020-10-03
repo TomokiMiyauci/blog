@@ -1,19 +1,22 @@
 <template>
   <div
-    class="relative shadow rounded-md hover:shadow-xl bg-white dark:bg-gray-900 transition-shadow duration-300"
-    style="width: 400px; height: 600px"
+    class="relative shadow rounded-md hover:shadow-xl bg-white dark:bg-gray-900 transition-shadow duration-300 w-72 h-108 md:w-96 md:h-144"
   >
-    <div style="height: 10%" class="border-b cursor-move flex items-center justify-between py-2 px-2">
+    <div
+      style="height: 10%"
+      :class="{ 'border-b': enableClose || (!enableClose && step === 'other') }"
+      class="cursor-move flex items-center justify-between py-2 px-2"
+    >
       <div>
         <transition name="fade">
           <span v-if="isLogin && step === 'other'" class="flex items-center">
             <button-chevron-left @click="$emit('back')" />
-            <span>Other</span>
+            <span>{{ $t('other') }}</span>
           </span>
         </transition>
       </div>
 
-      <button-close @click="$emit('close')" />
+      <button-close v-show="enableClose" @click="$emit('close')" />
     </div>
     <div ref="div" style="height: 80%" class="relative flex flex-col-reverse overflow-x-scroll">
       <div v-if="isLogin">
@@ -46,17 +49,20 @@
     </div>
 
     <transition name="fade-up">
-      <div v-if="isLogin && step === 'other'" style="height: 10%" class="flex border-t items-center">
-        <textarea-chat v-model="message" />
-        <button-send :disabled="!postable" @click="onPost" />
-      </div>
+      <sender v-if="isLogin && step === 'other'" ref="sender" style="height: 10%" class="border-t" @post="onPost" />
     </transition>
   </div>
 </template>
 
 <script lang="ts">
+  import ButtonChevronLeft from '@/components/atoms/buttons/ButtonChevronLeft.vue'
+  import ButtonClose from '@/components/atoms/buttons/ButtonClose.vue'
+  import MessageOther from '@/components/molecules/MessageOther.vue'
+  import Sender from '@/components/molecules/Sender.vue'
+  import SignIn from '@/components/molecules/SignIn.vue'
+  import TopicSelect from '@/components/molecules/TopicSelect.vue'
   import { otherRef } from '@/utils/firestore-reference'
-  import { computed, defineComponent, ref, useContext } from '@nuxtjs/composition-api'
+  import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
 
   type Message = {
     name: string
@@ -73,15 +79,30 @@
       isLogin: {
         type: Boolean,
         default: false
+      },
+
+      enableClose: {
+        type: Boolean,
+        default: false
       }
     },
 
+    components: {
+      ButtonChevronLeft,
+      ButtonClose,
+      MessageOther,
+      Sender,
+      SignIn,
+      TopicSelect
+    },
+
     setup() {
-      const message = ref('')
       const ctx = useContext()
 
-      const onPost = async () => {
-        messages.value = [...messages.value, { text: message.value, name: 'Techsrc' }]
+      const sender = ref<InstanceType<typeof Sender>>()
+
+      const onPost = async (message: string): Promise<void> => {
+        messages.value = [...messages.value, { text: message, name: 'Techsrc' }]
 
         const ref = otherRef(ctx)
         if (!ref) return
@@ -90,20 +111,27 @@
 
         await ref.add({
           name: 'name',
-          text: message.value,
+          text: message,
           isUser: true,
           createdAt: ctx.$fireStoreObj.FieldValue.serverTimestamp()
         })
 
-        message.value = ''
+        sender.value!.clearMessage()
       }
 
       const messages = ref<Message[]>([])
 
-      const postable = computed(() => !!message.value)
       const div = ref<HTMLDivElement>()
 
-      return { message, postable, messages, onPost, div }
+      return { messages, onPost, div, sender }
     }
   })
 </script>
+
+<i18n lang="yml">
+en:
+  other: Other
+
+ja:
+  other: その他
+</i18n>

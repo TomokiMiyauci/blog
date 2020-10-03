@@ -1,11 +1,13 @@
 <template>
-  <base-icon-text :text="minuteText" v-bind="$attrs">
+  <base-icon-text :text="`${min} ${$tc('minute', min)}`" v-bind="$attrs">
     <mdi-timer />
   </base-icon-text>
 </template>
 
 <script lang="ts">
-  import { defineComponent, computed, getCurrentInstance } from '@nuxtjs/composition-api'
+  import BaseIconText from '@/components/atoms/BaseIconText.vue'
+  import MdiTimer from '@/components/atoms/icons/MdiTimer.vue'
+  import { defineComponent, computed } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     props: {
@@ -15,32 +17,25 @@
       }
     },
 
-    setup(props, { root }) {
-      const minuteText = computed(() => {
-        const minute = props.text.split(' ')[0]
-        const vm = getCurrentInstance()!
-        switch (vm.$i18n.locale) {
-          case 'ja': {
-            return `${minute} ${vm.$t('MINUTE')}`
-          }
+    components: {
+      BaseIconText,
+      MdiTimer
+    },
 
-          default: {
-            const suffix = Number(minute) > 1 ? vm.$t('MULTIPLE') : vm.$t('SINGULAR')
-            return `${minute} ${suffix}`
-          }
-        }
+    setup(props) {
+      const min = computed(() => {
+        return Number(props.text.split(' ')[0])
       })
 
-      return { minuteText }
+      return { min }
     }
   })
 </script>
 
 <i18n lang="yml">
 en:
-  SINGULAR: 'min'
-  MULTIPLE: 'mins'
+  minute: min | mins
 
 ja:
-  MINUTE: '分'
+  minute: 分
 </i18n>

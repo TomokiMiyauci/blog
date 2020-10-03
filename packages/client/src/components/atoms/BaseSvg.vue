@@ -8,7 +8,7 @@
     role="presentation"
     class="inline"
   >
-    <title lang="en">{{ iconName }} icon</title>
+    <title lang="en">{{ iconName }}</title>
     <g :fill="iconColor">
       <slot />
     </g>
@@ -21,16 +21,19 @@
     props: {
       iconName: {
         type: String,
-        default: 'box'
+        default: 'icon'
       },
+
       width: {
         type: [Number, String],
         default: 24
       },
+
       height: {
         type: [Number, String],
         default: 24
       },
+
       iconColor: {
         type: String,
         default: 'currentColor'
