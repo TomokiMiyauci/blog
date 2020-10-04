@@ -1,14 +1,14 @@
 <template>
   <div
-    class="flex justify-center items-center py-2 px-3 relative shadow leading-5 bg-gray-300 hover:bg-gray-400 hover:shadow-md transition duration-300 rounded-full focus-within:bg-gray-800 focus-within:shadow-md focus-within:text-white dark:text-gray-800"
+    class="flex justify-center items-center py-2 px-3 relative shadow leading-5 bg-gray-300 hover:bg-gray-400 dark-hover:hover:bg-gray-500 hover:shadow-md transition duration-300 rounded-full focus-within:bg-gray-800 focus-within:shadow-md focus-within:text-white dark:text-gray-800 dark-focus-within:bg-gray-700"
   >
-    <mdi-magnify class="transition duration-300 delay-100" />
+    <mdi-magnify />
     <input
       ref="input"
       :value="value"
       type="text"
       aria-label="search"
-      class="px-1 bg-transparent focus:text-white outline-none w-full"
+      class="px-1 bg-transparent flex-1 focus:text-white outline-none"
       :placeholder="$t('placeholder')"
       autocomplete="off"
       spellcheck="false"
@@ -19,10 +19,16 @@
     />
     <transition name="fade" mode="out-in">
       <base-button v-if="forceClose || value" @click="onClick" @keypress="onClick">
-        <mdi-close class="hover:text-green-500 transition duration-500" />
+        <mdi-close
+          class="hover:text-green-500 transition duration-500"
+          :class="{ 'dark:text-white': forceClose || value }"
+        />
       </base-button>
 
-      <mdi-slash-forward v-else-if="!isShow" class="hidden md:block bg-gray-500 rounded" />
+      <mdi-slash-forward
+        v-else-if="!isShow"
+        class="hidden md:block bg-gray-500 rounded border-b-2 shadow border-gray-600"
+      />
       <base-svg v-else />
     </transition>
   </div>
