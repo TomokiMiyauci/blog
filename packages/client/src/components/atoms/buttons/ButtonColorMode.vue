@@ -1,16 +1,23 @@
 <template>
-  <base-switcher :value="isLight" @change="onChange">
-    <template #on>
-      <mdi-weather-night />
+  <base-tooltip>
+    <template #activator>
+      <base-switcher :value="isLight" @change="onChange">
+        <template #on>
+          <mdi-weather-night />
+        </template>
+        <template #off>
+          <mdi-weather-sunny />
+        </template>
+      </base-switcher>
     </template>
-    <template #off>
-      <mdi-weather-sunny />
-    </template>
-  </base-switcher>
+
+    <span>{{ $t('tooltip') }}</span>
+  </base-tooltip>
 </template>
 
 <script lang="ts">
   import BaseSwitcher from '@/components/atoms/BaseSwitcher.vue'
+  import BaseTooltip from '@/components/atoms/BaseTooltip.vue'
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
   import MdiWeatherNight from '@/components/atoms/icons/MdiWeatherNight.vue'
   import MdiWeatherSunny from '@/components/atoms/icons/MdiWeatherSunny.vue'
@@ -32,6 +39,7 @@
     components: {
       ButtonCircle,
       BaseSwitcher,
+      BaseTooltip,
       MdiWeatherSunny,
       MdiWeatherNight
     },
@@ -48,3 +56,10 @@
     }
   })
 </script>
+
+<i18n lang="yml">
+en:
+  tooltip: Color Mode
+ja:
+  tooltip: カラーモード
+</i18n>
