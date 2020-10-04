@@ -1,24 +1,27 @@
 <template>
   <div class="relative inline-block" @blur="autoClose" @mouseleave="autoClose">
-    <button-circle
-      type="button"
-      class="inline-flex items-center justify-between"
-      @click="show"
-      @mouseover="autoOpen"
-      @focus="autoOpen"
-      @keydown.enter="switchState"
-    >
-      <slot name="icon" />
-      <svg fill="currentColor" viewBox="0 0 20 20" class="flex-shrink-0 w-5 h-5 ml-1">
-        <path
-          :class="{ 'rotate-180': isVisible }"
-          class="transition duration-300 ease-in-out origin-center transform"
-          fill-rule="evenodd"
-          d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-          clip-rule="evenodd"
-        ></path>
-      </svg>
-    </button-circle>
+    <slot name="activator">
+      <button-circle
+        type="button"
+        class="inline-flex items-center justify-between"
+        @click="show"
+        @mouseover="autoOpen"
+        @focus="autoOpen"
+        @keydown.enter="switchState"
+      >
+        <slot name="icon" />
+        <svg fill="currentColor" viewBox="0 0 20 20" class="flex-shrink-0 w-5 h-5 ml-1">
+          <path
+            :class="{ 'rotate-180': isVisible }"
+            class="transition duration-300 ease-in-out origin-center transform"
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </button-circle>
+    </slot>
+
     <transition
       enter-active-class="transition duration-300 ease-out transform"
       enter-class="-translate-y-3 scale-95 opacity-0"
@@ -68,7 +71,7 @@
         }
       }
 
-      return { isVisible, autoOpen, autoClose, show, switchState, onClick: () => {} }
+      return { isVisible, autoOpen, autoClose, show, hide, switchState }
     }
   })
 </script>
