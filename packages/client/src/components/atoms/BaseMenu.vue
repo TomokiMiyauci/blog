@@ -40,6 +40,7 @@
   import BaseSpeech from '@/components/atoms/BaseSpeech.vue'
   import useSwitch from '@/core/switch'
   import { defineComponent } from '@nuxtjs/composition-api'
+
   export default defineComponent({
     props: {
       openOnHover: {

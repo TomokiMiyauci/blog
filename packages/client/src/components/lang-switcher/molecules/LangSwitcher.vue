@@ -15,7 +15,6 @@
 </template>
 
 <script lang="ts">
-  import BaseMenu from '@/components/atoms/BaseMenu.vue'
   import MdiTranslate from '@/components/atoms/icons/MdiTranslate.vue'
   import English from '@/components/lang-switcher/atoms/English.vue'
   import Japanese from '@/components/lang-switcher/atoms/Japanese.vue'
@@ -24,7 +23,6 @@
   export default defineComponent({
     components: {
       MdiTranslate,
-      BaseMenu,
       Japanese,
       English
     }
