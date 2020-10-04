@@ -29,8 +29,8 @@
 <script lang="ts">
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
   import HamburgerClose from '@/components/atoms/icons/HamburgerClose.vue'
+  import LangSwitcher from '@/components/lang-switcher/molecules/LangSwitcher.vue'
   import FulltextSearch from '@/components/molecules/FulltextSearch.vue'
-  import LangSwitcher from '@/components/molecules/LangSwitcher.vue'
   import NavigationDrawer from '@/components/molecules/NavigationDrawer.vue'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
   const t = 'T'
