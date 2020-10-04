@@ -15,7 +15,7 @@
   export default defineComponent({
     props: {
       articles: {
-        type: Array,
+        type: Array as () => { title: string; slug: string; keyword: string }[],
         default: () => []
       }
     },

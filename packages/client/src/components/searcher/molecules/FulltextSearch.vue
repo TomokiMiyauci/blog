@@ -60,7 +60,6 @@
     components: {
       InputSearch,
       MdiMagnify,
-      BaseMenu,
       SearchResult,
       ButtonCircle
     },
