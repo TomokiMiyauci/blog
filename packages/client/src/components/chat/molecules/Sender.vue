@@ -7,7 +7,7 @@
 
 <script lang="ts">
   import ButtonSend from '@/components/atoms/buttons/ButtonSend.vue'
-  import TextareaChat from '@/components/atoms/inputs/TextareaChat.vue'
+  import TextareaChat from '@/components/chat/atoms/TextareaChat.vue'
   import { defineComponent, ref, computed } from '@nuxtjs/composition-api'
 
   export default defineComponent({

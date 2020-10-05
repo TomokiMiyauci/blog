@@ -29,7 +29,7 @@
 
 <script lang="ts">
   import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
-  import MessageSet from '@/components/molecules/MessageSet.vue'
+  import MessageSet from '@/components/chat/molecules/MessageSet.vue'
   import { otherRef } from '@/utils/firestore-reference'
   // import { wait } from '@/utils/timer'
   import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'

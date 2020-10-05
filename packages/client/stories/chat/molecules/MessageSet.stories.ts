@@ -1,5 +1,8 @@
+import MessageSet from '@/components/chat/molecules/MessageSet.vue'
+
 export default {
-  title: 'MessageSet',
+  title: 'chat/molecules/MessageSet',
+  components: MessageSet,
 
   argTypes: {
     name: {

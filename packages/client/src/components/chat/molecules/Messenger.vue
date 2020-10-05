@@ -57,10 +57,10 @@
 <script lang="ts">
   import ButtonChevronLeft from '@/components/atoms/buttons/ButtonChevronLeft.vue'
   import ButtonClose from '@/components/atoms/buttons/ButtonClose.vue'
-  import MessageOther from '@/components/molecules/MessageOther.vue'
-  import Sender from '@/components/molecules/Sender.vue'
-  import SignIn from '@/components/molecules/SignIn.vue'
-  import TopicSelect from '@/components/molecules/TopicSelect.vue'
+  import MessageOther from '@/components/chat/molecules/MessageOther.vue'
+  import Sender from '@/components/chat/molecules/Sender.vue'
+  import SignIn from '@/components/chat/molecules/SignIn.vue'
+  import TopicSelect from '@/components/chat/molecules/TopicSelect.vue'
   import { otherRef } from '@/utils/firestore-reference'
   import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
 

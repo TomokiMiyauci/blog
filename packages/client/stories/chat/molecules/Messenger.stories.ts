@@ -1,5 +1,8 @@
+import Messenger from '@/components/chat/molecules/Messenger.vue'
+
 export default {
-  title: 'Messenger',
+  title: 'chat/molecules/Messenger',
+  components: Messenger,
 
   argTypes: {
     step: {
