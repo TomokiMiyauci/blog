@@ -1,5 +1,7 @@
 <template>
-  <div class="flex bottom-0 left-0 fixed bg-white border-t w-full justify-center shadow-md h-56px text-xs">
+  <div
+    class="flex bottom-0 left-0 fixed bg-white dark:bg-gray-800 border-t w-full justify-center shadow-md h-56px text-xs"
+  >
     <base-button
       v-for="{ title, path, icon } in navigations"
       :key="path"
