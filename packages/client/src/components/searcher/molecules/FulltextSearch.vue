@@ -66,8 +66,7 @@
       InputSearch,
       MdiMagnify,
       SearchResult,
-      ButtonCircle,
-      BaseMenu
+      ButtonCircle
     },
 
     setup(_, { root }) {
