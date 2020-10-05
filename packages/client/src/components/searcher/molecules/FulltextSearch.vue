@@ -4,13 +4,13 @@
       <div v-if="isShow" class="absolute px-3 inset-0 bg-white dark:bg-gray-800 md:hidden">
         <div class="flex justify-center items-center h-full w-full">
           <base-menu ref="menu2" class="w-full">
-            <template #activator>
+            <template #activator="{ show, hide }">
               <input-search
                 ref="inputSearch"
                 v-model="searchQuery"
                 :force-close="true"
                 @blur="hide"
-                @focus="show"
+                @focus="searchQuery ? show() : ''"
                 @close="isShow = false"
               />
             </template>
@@ -36,8 +36,13 @@
     </transition>
     <div class="relative hidden md:inline-flex">
       <base-menu ref="menu" :open-on-hover="false">
-        <template #activator>
-          <input-search v-model="searchQuery" class="items-center justify-center" @blur="hide" @focus="show" />
+        <template #activator="{ show, hide }">
+          <input-search
+            v-model="searchQuery"
+            class="items-center justify-center"
+            @focus="searchQuery ? show() : ''"
+            @blur="hide"
+          />
         </template>
 
         <template #menu>
@@ -61,7 +66,8 @@
       InputSearch,
       MdiMagnify,
       SearchResult,
-      ButtonCircle
+      ButtonCircle,
+      BaseMenu
     },
 
     setup(_, { root }) {
@@ -83,17 +89,17 @@
         }
       }
 
-      const hide = (): void => {
-        if (menu.value) {
-          menu.value.hide()
-        }
-      }
-
       watch(searchQuery, (now) => {
         if (now) {
           show()
         } else {
-          hide()
+          if (menu.value) {
+            menu.value.hide()
+          }
+
+          if (menu2.value) {
+            menu2.value.hide()
+          }
         }
       })
 
@@ -104,7 +110,7 @@
         inputSearch.value.focus()
       }
 
-      return { isShow, searchQuery, onClick, inputSearch, menu, show, hide, menu2 }
+      return { isShow, searchQuery, onClick, inputSearch, menu, menu2 }
     }
   })
 </script>
