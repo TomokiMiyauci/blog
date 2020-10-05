@@ -1,6 +1,6 @@
 <template>
   <div class="relative inline-block" @blur="autoClose" @mouseleave="autoClose">
-    <slot name="activator">
+    <slot name="activator" :show="show" :hide="hide">
       <button-circle
         type="button"
         class="inline-flex items-center justify-between"
@@ -32,7 +32,7 @@
     >
       <div v-show="isVisible" class="absolute pt-2">
         <base-speech>
-          <slot name="menu" />
+          <slot name="menu" :show="show" :hide="hide" />
         </base-speech>
       </div>
     </transition>
