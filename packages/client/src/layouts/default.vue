@@ -3,7 +3,7 @@
     <app-bar />
     <main class="pt-16 lg:pt-24 transition-colors duration-300 ease-linear">
       <div class="block max-w-screen-xl mx-auto">
-        <Nuxt />
+        <nuxt />
       </div>
     </main>
     <app-footer :class="{ hidden: $route.path.startsWith('/chat') }" class="mt-64 mb-56px md:mb-0" />
@@ -15,6 +15,14 @@
 </template>
 
 <script lang="ts">
+  import AppBottomNavigation from '@/components/app/molecules/AppBottomNavigation.vue'
+  import AppFooter from '@/components/app/molecules/AppFooter.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
-  export default defineComponent({})
+
+  export default defineComponent({
+    components: {
+      AppFooter,
+      AppBottomNavigation
+    }
+  })
 </script>
