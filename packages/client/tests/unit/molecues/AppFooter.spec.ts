@@ -1,4 +1,4 @@
-import AppFooter from '@/components/molecules/AppFooter.vue'
+import AppFooter from '@/components/app/molecules/AppFooter.vue'
 import { shallowMount } from '@vue/test-utils'
 
 describe('AppFooter', () => {
