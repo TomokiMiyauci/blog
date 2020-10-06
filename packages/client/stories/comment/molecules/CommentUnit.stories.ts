@@ -1,7 +1,9 @@
+import CommentUnit from '@/components/comment/molecules/CommentUnit.vue'
 import { firestore } from 'firebase'
 
 export default {
-  title: 'CommentUnit',
+  title: 'comment/molecules/CommentUnit',
+  components: CommentUnit,
 
   argTypes: {
     isOwn: {

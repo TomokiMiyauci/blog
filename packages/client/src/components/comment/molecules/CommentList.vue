@@ -13,7 +13,7 @@
 
 <script lang="ts">
   import MdiCommentProcessing from '@/components/atoms/icons/MdiCommentProcessing.vue'
-  import CommentUnit from '@/components/molecules/CommentUnit.vue'
+  import CommentUnit from '@/components/comment/molecules/CommentUnit.vue'
   import { Comment } from '@/types/firestore'
   import { userDoc } from '@/utils/firestore-reference'
   import { formatDate, timestamp2Date } from '@/utils/formatter'

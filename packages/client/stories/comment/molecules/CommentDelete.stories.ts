@@ -1,5 +1,8 @@
+import CommentDelete from '@/components/comment/molecules/CommentDelete.vue'
+
 export default {
-  title: 'CommentDelete'
+  title: 'comment/molecules/CommentDelete',
+  components: CommentDelete
 }
 
 export const DEFAULT = () => ({

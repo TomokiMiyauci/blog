@@ -19,7 +19,7 @@
 
 <script lang="ts">
   import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
-  import ButtonDeleteComment from '@/components/molecules/ButtonDeleteComment.vue'
+  import ButtonDeleteComment from '@/components/comment/molecules/ButtonDeleteComment.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({

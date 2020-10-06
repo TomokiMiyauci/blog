@@ -19,8 +19,8 @@
 
 <script lang="ts">
   import MdiAccount from '@/components/atoms/icons/MdiAccount.vue'
-  import CommentDelete from '@/components/molecules/CommentDelete.vue'
-  import ReportViolation from '@/components/molecules/ReportViolation.vue'
+  import CommentDelete from '@/components/comment/molecules/CommentDelete.vue'
+  import ReportViolation from '@/components/comment/molecules/ReportViolation.vue'
   import { Comment } from '@/types/firestore'
   import { formatDate, timestamp2Date } from '@/utils/formatter'
   import { defineComponent } from '@nuxtjs/composition-api'

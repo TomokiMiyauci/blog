@@ -1,5 +1,8 @@
+import SpeechCommentDelete from '@/components/comment/molecules/SpeechCommentDelete.vue'
+
 export default {
-  title: 'SpeechCommentDelete',
+  title: 'comment/molecules/SpeechCommentDelete',
+  components: SpeechCommentDelete,
 
   argType: { onClick: { action: 'clicked' } },
 
