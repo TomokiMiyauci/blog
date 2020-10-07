@@ -1,23 +1,28 @@
 <template>
-  <speech :enable-close="true" v-on="$listeners">
+  <base-card>
     <template #title>
-      <h2>{{ $t('title') }}</h2>
+      <div class="flex items-center">
+        <span>{{ $t('title') }}</span>
+
+        <button-square class="ml-4" v-on="$listeners">
+          <mdi-close-circle />
+        </button-square>
+      </div>
     </template>
 
     <template #body>
-      <div>
-        <p class="mt-1">
-          <mdi-alert /><span class="ml-2">{{ $t('alert') }}</span>
-        </p>
-        <div class="flex flex-col items-center mt-1" style="min-height: 48px">
-          <button-delete-comment :id="id" v-on="$listeners" />
-        </div>
+      <div class="mt-1">
+        <mdi-alert /><span class="ml-2">{{ $t('alert') }}</span>
+      </div>
+      <div class="flex flex-col items-center mt-1" style="min-height: 48px">
+        <button-delete-comment :id="id" v-on="$listeners" />
       </div>
     </template>
-  </speech>
+  </base-card>
 </template>
 
 <script lang="ts">
+  import BaseCard from '@/components/atoms/BaseCard.vue'
   import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
   import ButtonDeleteComment from '@/components/comment/molecules/ButtonDeleteComment.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
@@ -32,7 +37,8 @@
 
     components: {
       MdiAlert,
-      ButtonDeleteComment
+      ButtonDeleteComment,
+      BaseCard
     }
   })
 </script>
@@ -43,6 +49,6 @@ en:
   alert: Are you really?
 
 ja:
-  title: コメントを削除
+  title: コメントの削除
   alert: 削除しますか？
 </i18n>
