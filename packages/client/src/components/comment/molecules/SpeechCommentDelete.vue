@@ -4,9 +4,15 @@
       <div class="flex items-center">
         <span>{{ $t('title') }}</span>
 
-        <button-square class="ml-4" v-on="$listeners">
-          <mdi-close-circle />
-        </button-square>
+        <base-tooltip top>
+          <template #activator>
+            <button-square class="ml-4" v-on="$listeners">
+              <mdi-close-circle />
+            </button-square>
+          </template>
+
+          <span>{{ $t('close') }}</span>
+        </base-tooltip>
       </div>
     </template>
 
@@ -23,6 +29,7 @@
 
 <script lang="ts">
   import BaseCard from '@/components/atoms/BaseCard.vue'
+  import BaseTooltip from '@/components/atoms/BaseTooltip.vue'
   import MdiAlert from '@/components/atoms/icons/MdiAlert.vue'
   import ButtonDeleteComment from '@/components/comment/molecules/ButtonDeleteComment.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
@@ -38,7 +45,8 @@
     components: {
       MdiAlert,
       ButtonDeleteComment,
-      BaseCard
+      BaseCard,
+      BaseTooltip
     }
   })
 </script>
@@ -47,8 +55,10 @@
 en:
   title: Comment Delete
   alert: Are you really?
+  close: Close
 
 ja:
   title: コメントの削除
   alert: 削除しますか？
+  close: 閉じる
 </i18n>
