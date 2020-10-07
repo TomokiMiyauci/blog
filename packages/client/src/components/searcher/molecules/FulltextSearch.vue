@@ -35,7 +35,7 @@
       </button-circle>
     </transition>
     <div class="relative hidden md:inline-flex">
-      <base-menu ref="menu" :open-on-hover="false">
+      <base-menu ref="menu" :autoopen="false">
         <template #activator="{ show, hide }">
           <input-search
             v-model="searchQuery"
@@ -64,6 +64,7 @@
   export default defineComponent({
     components: {
       InputSearch,
+      BaseMenu,
       MdiMagnify,
       SearchResult,
       ButtonCircle

@@ -10,7 +10,7 @@
     <article class="mt-12">
       <div class="flex md:grid grid-temp grid-cols-main">
         <toc class="hidden md:block" :toc="article.toc" />
-        <div style="grid-column: 2 / 3" class="p-2 overflow-hidden">
+        <div style="grid-column: 2 / 3" class="p-2 overflow-hidden pb-12">
           <div class="mb-5 pb-5">
             <article-header v-bind="article" />
           </div>
