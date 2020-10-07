@@ -1,6 +1,6 @@
 <template>
   <div class="relative inline-block" @blur="autoClose" @mouseleave="autoClose">
-    <slot name="activator" :show="show" :hide="hide">
+    <slot name="activator" :show="show" :hide="hide" :switchState="switchState">
       <button-circle
         type="button"
         class="inline-flex items-center justify-between"
@@ -30,8 +30,8 @@
       leave-class="translate-y-0 opacity-100"
       leave-to-class="-translate-y-3 opacity-0"
     >
-      <div v-show="isVisible" class="absolute pt-2">
-        <base-speech>
+      <div v-show="isVisible" class="absolute" :class="[xClass, yClass]">
+        <base-speech :ydirection="yDirection" :xdirection="xDirection">
           <slot name="menu" :show="show" :hide="hide" />
         </base-speech>
       </div>
@@ -42,13 +42,77 @@
 <script lang="ts">
   import BaseSpeech from '@/components/atoms/BaseSpeech.vue'
   import useSwitch from '@/core/switch'
-  import { defineComponent } from '@nuxtjs/composition-api'
+  import { defineComponent, toRefs, computed } from '@nuxtjs/composition-api'
+  import { Ref } from '@vue/composition-api'
+
+  const useDirection = (direction: {
+    top: Ref<boolean>
+    bottom: Ref<boolean>
+    right: Ref<boolean>
+    left: Ref<boolean>
+  }) => {
+    const { top, bottom, right, left } = direction
+
+    const xClass = computed(() => {
+      if (right.value) {
+        return 'right-0'
+      } else if (left.value) {
+        return 'left-0'
+      }
+    })
+
+    const yClass = computed(() => {
+      if (top.value) {
+        return 'bottom-0 mb-12'
+      } else if (bottom.value) {
+        return 'top-0 mt-12'
+      }
+    })
+
+    const yDirection = computed(() => {
+      if (top.value) {
+        return 'top'
+      } else if (bottom.value) {
+        return 'bottom'
+      }
+    })
+
+    const xDirection = computed(() => {
+      if (right.value) {
+        return 'right'
+      } else if (left.value) {
+        return 'left'
+      }
+    })
+
+    return { xClass, yClass, xDirection, yDirection }
+  }
 
   export default defineComponent({
     props: {
-      openOnHover: {
+      autoopen: {
         type: Boolean,
         default: true
+      },
+
+      top: {
+        type: Boolean,
+        default: false
+      },
+
+      bottom: {
+        type: Boolean,
+        default: true
+      },
+
+      left: {
+        type: Boolean,
+        default: true
+      },
+
+      right: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -57,21 +121,30 @@
     },
 
     setup(props) {
+      const { top, bottom, left, right, autoopen } = toRefs(props)
       const { state: isVisible, on: show, off: hide, switchState } = useSwitch()
 
       const autoOpen = (): void => {
-        if (props.openOnHover) {
+        if (autoopen.value) {
           show()
         }
       }
 
       const autoClose = (): void => {
-        if (props.openOnHover) {
+        if (autoopen.value) {
           hide()
         }
       }
 
-      return { isVisible, autoOpen, autoClose, show, hide, switchState }
+      return {
+        isVisible,
+        autoOpen,
+        autoClose,
+        show,
+        hide,
+        switchState,
+        ...useDirection({ top, bottom, left, right })
+      }
     }
   })
 </script>
