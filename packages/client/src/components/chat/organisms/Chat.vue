@@ -2,7 +2,7 @@
   <div class="relative">
     <button-chat
       v-show="!$route.hash"
-      class="relative invisible md:visible w-12 h-12 md:w-24 md:h-24 bg-gray-400 dark:bg-gray-700"
+      class="relative invisible md:visible w-12 h-12 md:w-20 md:h-20 bg-gradient-to-t from-green-300 dark:from-gray-700 dark:to-blue-700 to-teal-400"
       @click="onClick"
     />
 

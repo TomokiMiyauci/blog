@@ -2,12 +2,11 @@
   <div>
     <nuxt-link
       ref="scrollAnchor"
-      class="anchor inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
+      class="inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
       :to="localePath('/')"
-      >← Back to Home</nuxt-link
-    >
+    ></nuxt-link>
 
-    <article class="mt-12">
+    <article>
       <div class="flex md:grid grid-temp grid-cols-main">
         <toc class="hidden md:block" :toc="article.toc" />
         <div style="grid-column: 2 / 3" class="p-2 overflow-hidden pb-12">
