@@ -15,6 +15,7 @@
 </template>
 
 <script lang="ts">
+  import AppBar from '@/components/app/molecules/AppBar.vue'
   import AppBottomNavigation from '@/components/app/molecules/AppBottomNavigation.vue'
   import AppFooter from '@/components/app/molecules/AppFooter.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
@@ -22,6 +23,7 @@
   export default defineComponent({
     components: {
       AppFooter,
+      AppBar,
       AppBottomNavigation
     }
   })

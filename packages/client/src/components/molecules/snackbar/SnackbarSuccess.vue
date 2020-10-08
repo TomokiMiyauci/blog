@@ -10,9 +10,13 @@
 </template>
 
 <script lang="ts">
-  import type BaseSnackbar from '@/components/molecules/BaseSnackbar.vue'
+  import BaseSnackbar from '@/components/atoms/BaseSnackbar.vue'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
   export default defineComponent({
+    components: {
+      BaseSnackbar
+    },
+
     setup() {
       const snackbar = ref<InstanceType<typeof BaseSnackbar>>()
 
