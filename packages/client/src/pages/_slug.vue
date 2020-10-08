@@ -1,5 +1,6 @@
 <template>
   <div>
+    <readling-progress />
     <nuxt-link
       ref="scrollAnchor"
       class="inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
