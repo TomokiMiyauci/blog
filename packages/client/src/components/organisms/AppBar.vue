@@ -13,8 +13,8 @@
       >
       <div class="flex items-center">
         <fulltext-search />
-        <button-color-mode class="ml-5 hidden md:inline-block" />
-        <lang-switcher class="hidden lg:block" />
+        <lang-switcher class="hidden ml-2 lg:block" />
+        <button-color-mode class="ml-2 hidden md:inline-block" />
         <button-circle class="md:hidden" :class="{ 'z-10': isActive }" @click="isActive = !isActive">
           <hamburger-close :active="isActive" />
         </button-circle>
@@ -29,9 +29,9 @@
 <script lang="ts">
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
   import HamburgerClose from '@/components/atoms/icons/HamburgerClose.vue'
-  import FulltextSearch from '@/components/molecules/FulltextSearch.vue'
-  import LangSwitcher from '@/components/molecules/LangSwitcher.vue'
+  import LangSwitcher from '@/components/lang-switcher/molecules/LangSwitcher.vue'
   import NavigationDrawer from '@/components/molecules/NavigationDrawer.vue'
+  import FulltextSearch from '@/components/searcher/molecules/FulltextSearch.vue'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
   const t = 'T'
   const ech = 'ech'

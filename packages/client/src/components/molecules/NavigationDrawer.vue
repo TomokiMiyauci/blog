@@ -7,7 +7,7 @@
 
 <script lang="ts">
   import ButtonColorMode from '@/components/atoms/buttons/ButtonColorMode.vue'
-  import LangSwitcher from '@/components/molecules/LangSwitcher.vue'
+  import LangSwitcher from '@/components/lang-switcher/molecules/LangSwitcher.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
