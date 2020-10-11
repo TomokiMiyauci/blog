@@ -1,64 +1,54 @@
 <template>
-  <transition name="fade-left">
-    <div
-      v-show="isOpen"
-      class="flex items-center hover:shadow-lg transition-shadow duration-700 rounded-full shadow dark:shadow-lg p-1 pl-5"
-    >
-      <slot name="icon" />
-      <div class="ml-3">
-        <slot name="text" />
-      </div>
-      <button-close class="ml-10 bg-white hover:bg-teal-500 dark:bg-gray-800 dark-hover:bg-teal-500" @click="close" />
-    </div>
-  </transition>
+  <div
+    class="bg-white dark:bg-gray-700 border pl-5 items-center shadow hover:shadow-xl transition-shadow duration-700 rounded-full flex justify-between p-1"
+  >
+    <span class="flex">
+      <component :is="iconComponent" :class="iconClass" />
+      <span class="whitespace-pre-line ml-2">{{ message }}</span>
+    </span>
+    <button-close class="ml-10" v-on="$listeners" />
+  </div>
 </template>
 
 <script lang="ts">
-  import ButtonClose from '@/components/atoms/buttons/ButtonClose.vue'
-  import { defineComponent, ref, watch } from '@nuxtjs/composition-api'
-
-  const useAutoClose = (milliseconeds: number) => {
-    const isOpen = ref(false)
-    const timeoutId = ref<NodeJS.Timeout>()
-
-    const open = (): void => {
-      isOpen.value = true
-    }
-
-    const close = (): void => {
-      if (timeoutId.value) {
-        clearTimeout(timeoutId.value)
-      }
-      isOpen.value = false
-    }
-
-    watch(isOpen, (now, prev) => {
-      if (now && !prev) {
-        timeoutId.value = setTimeout(() => {
-          isOpen.value = false
-          if (timeoutId.value) {
-            clearTimeout(timeoutId.value)
-          }
-        }, milliseconeds)
-      }
-    })
-
-    return { isOpen, open, close, timeoutId }
-  }
+  import MdiCheckCircle from '@/components/atoms/icons/MdiCheckCircle.vue'
+  import { defineComponent, toRefs, computed } from '@nuxtjs/composition-api'
   export default defineComponent({
     props: {
-      milliseconeds: {
-        type: Number,
-        default: 5000
+      message: {
+        type: String,
+        default: ''
+      },
+
+      icon: {
+        type: String,
+        default: 'check'
       }
     },
 
     components: {
-      ButtonClose
+      MdiCheckCircle
     },
 
     setup(props) {
-      return useAutoClose(props.milliseconeds)
+      const { icon } = toRefs(props)
+      const iconComponent = computed(() => {
+        switch (icon.value) {
+          case 'check': {
+            return 'mdi-check-circle'
+          }
+        }
+      })
+
+      const iconClass = computed(() => {
+        switch (icon.value) {
+          case 'check': {
+            return 'text-teal-500'
+          }
+        }
+      })
+
+      return { iconComponent, iconClass }
     }
   })
 </script>
