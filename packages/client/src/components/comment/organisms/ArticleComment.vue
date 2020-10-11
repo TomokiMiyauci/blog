@@ -4,9 +4,7 @@
       <mdi-comment-text-multiple /><span class="ml-2">{{ $t('title') }}</span
       ><span class="px-2 shadow ml-2 rounded-full bg-red-500">{{ commentCount }}</span>
     </h2>
-    <portal to="notice">
-      <snackbar-success ref="snackbar" />
-    </portal>
+
     <div class="flex items-start">
       <mdi-account width="48" height="48" class="p-3 bg-gray-300 rounded-md shadow dark:text-teal-900" />
       <textarea-comment v-model="newCommentRef" class="ml-2" />
@@ -28,16 +26,14 @@
 </template>
 
 <script lang="ts">
-  import type BaseSnackbar from '@/components/atoms/BaseSnackbar.vue'
   import ButtonSend from '@/components/atoms/buttons/ButtonSend.vue'
   import MdiAccount from '@/components/atoms/icons/MdiAccount.vue'
   import MdiCommentTextMultiple from '@/components/atoms/icons/MdiCommentTextMultiple.vue'
   import TextareaComment from '@/components/atoms/inputs/TextareaComment.vue'
   import SpinLoader from '@/components/atoms/loaders/SpinLoader.vue'
   import CommentList from '@/components/comment/molecules/CommentList.vue'
-  import SnackbarSuccess from '@/components/molecules/snackbar/SnackbarSuccess.vue'
   import useIntersection from '@/core/intersection'
-  import { user } from '@/store'
+  import { user, notice } from '@/store'
   import { Comment } from '@/types/firestore'
   import { articleCommentRef, userDoc } from '@/utils/firestore-reference'
   import { defineComponent, ref, computed, useContext, getCurrentInstance } from '@nuxtjs/composition-api'
@@ -105,17 +101,16 @@
       SpinLoader,
       TextareaComment,
       ButtonSend,
-      CommentList,
-      SnackbarSuccess
+      CommentList
     },
 
     setup() {
       const { onSend, commentsRef, newCommentRef, isPostable, commentCount, getComment, isProcessing } = useComment()
 
-      const snackbar = ref<InstanceType<typeof BaseSnackbar>>()
       const div = ref<HTMLDivElement>()
+      const vm = getCurrentInstance()
 
-      getCurrentInstance()!.$once('outersect', () => {
+      vm!.$once('outersect', () => {
         getComment()
       })
 
@@ -126,14 +121,12 @@
         commentsRef,
         newCommentRef,
         isPostable,
-        snackbar,
         commentCount,
         getComment,
         isProcessing,
         onSend: async () => {
           await onSend()
-          if (!snackbar.value) return
-          snackbar.value.open()
+          notice.setNotice({ message: vm!.$t('success').toString() })
         }
       }
     }
@@ -143,6 +136,8 @@
 <i18n lang="yml">
 en:
   title: Comments
+  success: Comment has posted
 ja:
   title: コメント
+  success: コメントを投稿しました
 </i18n>
