@@ -1,10 +1,5 @@
 {
   "USER": {
     "ANONYMOUS": "Anonymous"
-  },
-  "NOTICE": {
-    "SUCCESS": {
-      "POST": "Comment posted"
-    }
   }
 }
