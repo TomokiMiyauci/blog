@@ -14,8 +14,9 @@
   import BaseMenu from '@/components/atoms/BaseMenu.vue'
   import ButtonDelete from '@/components/atoms/buttons/ButtonDelete.vue'
   import SpeechCommentDelete from '@/components/comment/molecules/SpeechCommentDelete.vue'
+  import { notice } from '@/store'
   import { wait } from '@/utils/timer'
-  import { defineComponent } from '@nuxtjs/composition-api'
+  import { defineComponent, getCurrentInstance } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     props: {
@@ -32,7 +33,9 @@
     },
 
     setup(_, { emit }) {
+      const vm = getCurrentInstance()
       const onSuccess = async () => {
+        notice.setNotice({ message: vm!.$t('success').toString(), timeout: 3000 })
         await wait(1500)
         emit('delete')
       }
@@ -41,3 +44,10 @@
     }
   })
 </script>
+
+<i18n lang="yml">
+en:
+  success: Comment has Deleted
+ja:
+  success: コメントを削除しました
+</i18n>

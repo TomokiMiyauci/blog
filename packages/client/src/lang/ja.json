@@ -1,11 +1,5 @@
 {
   "USER": {
     "ANONYMOUS": "名無し"
-  },
-
-  "NOTICE": {
-    "SUCCESS": {
-      "POST": "コメントを投稿しました"
-    }
   }
 }

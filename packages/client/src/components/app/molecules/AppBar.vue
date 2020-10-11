@@ -19,7 +19,7 @@
           <hamburger-close :active="isActive" />
         </button-circle>
         <transition name="fade-right">
-          <navigation-drawer v-show="isActive" />
+          <app-navigation-drawer v-show="isActive" />
         </transition>
       </div>
     </div>
@@ -27,10 +27,10 @@
 </template>
 
 <script lang="ts">
+  import AppNavigationDrawer from '@/components/app/molecules/AppNavigationDrawer.vue'
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
   import HamburgerClose from '@/components/atoms/icons/HamburgerClose.vue'
   import LangSwitcher from '@/components/lang-switcher/molecules/LangSwitcher.vue'
-  import NavigationDrawer from '@/components/molecules/NavigationDrawer.vue'
   import FulltextSearch from '@/components/searcher/molecules/FulltextSearch.vue'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
   const t = 'T'
@@ -44,7 +44,7 @@
       FulltextSearch,
       LangSwitcher,
       HamburgerClose,
-      NavigationDrawer
+      AppNavigationDrawer
     },
 
     setup() {

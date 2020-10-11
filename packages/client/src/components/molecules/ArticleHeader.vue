@@ -31,7 +31,7 @@
   import BaseH1 from '@/components/atoms/BaseH1.vue'
   import CalendarEditDate from '@/components/atoms/icontexts/CalendarEditDate.vue'
   import TimerReadingTime from '@/components/atoms/icontexts/TimerReadingTime.vue'
-  import ButtonLike from '@/components/molecules/ButtonLike.vue'
+  import ButtonLike from '@/components/favorite/molecules/ButtonLike.vue'
   import ViewCounter from '@/components/molecules/ViewCounter.vue'
   import { defineComponent } from '@nuxtjs/composition-api'
 

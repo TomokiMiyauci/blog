@@ -2,28 +2,28 @@
   <nuxt-link
     tag="article"
     :to="localePath({ name: 'slug', params: { slug: headline.slug } })"
-    class="bg-gray-100 dark:bg-gray-900 p-4 m-4 rounded-md flex flex-col-reverse lg:flex-row shadow-md cursor-pointer hover:bg-gray-300 hover:shadow-xl transition duration-300 ease-linear"
+    class="bg-gray-100 dark:bg-gray-900 m-2 max-w-sm rounded-md overflow-hidden flex mx-auto shadow-md cursor-pointer hover:bg-gray-200 hover:scale-105 transform hover:shadow-xl hover:opacity-90 transition duration-200 ease-in"
   >
-    <div class="lg:w-2/3 mx-2">
-      <nuxt-link class="text-2xl font-bold" :to="localePath({ name: 'slug', params: { slug: headline.slug } })">
-        {{ headline.title }}
-      </nuxt-link>
-      <p class="mt-5 mb-3">{{ headline.description }}</p>
-      <tags :tags="headline.tags" />
+    <div>
+      <img class="h-48 w-full" loading="lazy" style="max-height: 300px" :alt="headline.alt" :src="headline.img" />
 
-      <h2 class="mt-5 flex justify-between">
-        <calendar-edit-date :date="new Date(headline.createdAt)" />
-        <timer-reading-time :text="headline.readingTime" />
-      </h2>
+      <div class="p-4">
+        <div class="flex justify-end mb-1">
+          <calendar-edit-date :date="new Date(headline.createdAt)" />
+          <timer-reading-time class="pl-2" :text="headline.readingTime" />
+        </div>
+        <nuxt-link
+          tag="h2"
+          class="text-2xl hover:text-green-500 transition duration-300 font-bold"
+          :to="localePath({ name: 'slug', params: { slug: headline.slug } })"
+        >
+          {{ headline.title }}
+        </nuxt-link>
+        <p class="mt-3 mb-3">{{ headline.description }}</p>
+        <!-- <nuxt-link :to="localePath({ name: 'slug', params: { slug: headline.slug } })">Learn More</nuxt-link> -->
+        <!-- <tags :tags="headline.tags" /> -->
+      </div>
     </div>
-    <img
-      class="rounded-md hover:shadow-xl transition-shadow duration-300 shadow lg:w-1/2 h-full"
-      height="300"
-      loading="lazy"
-      style="max-height: 300px"
-      :alt="headline.alt"
-      :src="headline.img"
-    />
   </nuxt-link>
 </template>
 
