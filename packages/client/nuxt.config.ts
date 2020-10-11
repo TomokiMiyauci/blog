@@ -115,13 +115,14 @@ const config: NuxtConfig = {
       { file: 'ja.json', code: 'ja', iso: 'ja-JP' },
       { file: 'en.json', code: 'en', iso: 'en-US' }
     ],
-    vueI18nLoader: true,
     defaultLocale: 'en',
+    vueI18nLoader: true,
     vueI18n: {
       fallbackLocale: 'en'
     },
     lazy: true,
-    langDir: 'lang/'
+    langDir: 'lang/',
+    vuex: false
   },
 
   pwa: {
