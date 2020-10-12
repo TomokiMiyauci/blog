@@ -54,8 +54,8 @@
       }
     },
 
-    async asyncData({ params, $content }) {
-      const article = await $content('articles', params.slug).fetch<Article>()
+    async asyncData({ params, app, $content }) {
+      const article = await $content('articles', app.i18n.locale, params.slug).fetch<Article>()
 
       const [prev, next] = await $content('articles')
         .only(['title', 'slug'])

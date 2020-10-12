@@ -27,6 +27,12 @@
       <div>hello</div>
     </portal> -->
 
+      <nuxt-link
+        v-for="article in articles"
+        :key="article.id"
+        :to="localePath({ name: 'slug', params: { slug: article.slug } })"
+      />
+
       <section class="grid grid-cols-1 sm:grid-cols-2 mt-5 lg:grid-cols-3">
         <article-headline v-for="article in articles" :key="article.id" :headline="article" />
       </section>
@@ -66,8 +72,11 @@
       title: 'Home'
     },
 
-    async asyncData({ $content }) {
-      const articles = await $content('articles').only(headline).where({ private: false }).fetch<Headline[]>()
+    async asyncData({ $content, app }) {
+      const articles = await $content('articles', app.i18n.locale)
+        .only(headline)
+        .where({ private: false })
+        .fetch<Headline[]>()
 
       return { articles }
     },
