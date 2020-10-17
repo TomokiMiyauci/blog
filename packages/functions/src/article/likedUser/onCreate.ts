@@ -14,9 +14,13 @@ export default functions
       articleRef
     })
 
-    batch.update(articleRef, {
-      like: admin.firestore.FieldValue.increment(1)
-    })
+    batch.set(
+      articleRef,
+      {
+        like: admin.firestore.FieldValue.increment(1)
+      },
+      { merge: true }
+    )
 
     return batch.commit()
   })

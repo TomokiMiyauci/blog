@@ -8,7 +8,10 @@ export default functions
     const articleRef = snapshot.ref.parent.parent
     if (!articleRef) return
 
-    return articleRef.update({
-      view: admin.firestore.FieldValue.increment(1)
-    })
+    return articleRef.set(
+      {
+        view: admin.firestore.FieldValue.increment(1)
+      },
+      { merge: true }
+    )
   })
