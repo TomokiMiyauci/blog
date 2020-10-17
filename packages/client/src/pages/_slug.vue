@@ -16,8 +16,9 @@
           </div>
 
           <nuxt-content :document="article" />
-          <prev-next class="my-32" :prev="prev" :next="next" />
-          <article-comment />
+          <!-- <prev-next class="my-32" :prev="prev" :next="next" /> -->
+          <current-articles class="my-20" :articles="currentArticles" />
+          <article-comment class="mt-20" />
         </div>
 
         <div class="hidden md:block p-4" style="grid-column: 3 / 3">
@@ -41,7 +42,7 @@
 
 <script lang="ts">
   import useIntersection from '@/core/intersection'
-  import { PrevNext, Article } from '@/types/article'
+  import { PrevNext, Article, Current } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
   import { defineComponent, ref, getCurrentInstance } from '@nuxtjs/composition-api'
@@ -63,7 +64,12 @@
         .surround(params.slug, { before: 1, after: 1 })
         .fetch<[PrevNext, PrevNext]>()
 
-      return { article, prev, next }
+      const currentArticles = await $content('articles', app.i18n.locale)
+        .where({ private: false })
+        .limit(4)
+        .fetch<Current[]>()
+
+      return { article, prev, next, currentArticles }
     },
 
     setup(_, { root }) {
