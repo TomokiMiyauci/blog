@@ -1,9 +1,5 @@
 <template>
-  <progress
-    class="h-1 border-none bg-transparent transition duration-300 appearance-none w-full"
-    :max="max"
-    :value="value"
-  />
+  <progress class="h-1 appearance-none w-full" :max="max" :value="value" />
 </template>
 
 <script lang="ts">
