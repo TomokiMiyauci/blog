@@ -14,7 +14,7 @@
   import { defineComponent, ref, watch, computed } from '@nuxtjs/composition-api'
 
   const useClipboard = () => {
-    const button = ref<HTMLButtonElement>()
+    const button = ref<InstanceType<typeof BaseButton>>()
     const copy = ref(false)
 
     watch(copy, async (now) => {
@@ -26,9 +26,9 @@
 
     const onClick = (): void => {
       if (!button.value) return
-      const pre = button.value.previousElementSibling
+      const pre = button.value.$parent.$el.previousElementSibling
 
-      if (navigator.clipboard && pre && pre.textContent) {
+      if (navigator.clipboard && pre?.textContent) {
         navigator.clipboard.writeText(pre.textContent)
         copy.value = true
       }

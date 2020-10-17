@@ -41,3 +41,5 @@ export type Headline = Pick<
   Article,
   'title' | 'description' | 'slug' | 'tags' | 'readingTime' | 'createdAt' | 'img' | 'alt'
 >
+
+export type Current = Pick<Article, 'title' | 'slug' | 'img' | 'alt'>

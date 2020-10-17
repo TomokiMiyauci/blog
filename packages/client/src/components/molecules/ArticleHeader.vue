@@ -12,15 +12,12 @@
         <timer-reading-time :text="readingTime" />
       </div>
     </div>
-    <div
-      class="mt-3 rounded-md bg-gray-200 hover:shadow-lg transition-shadow duration-300 shadow-md flex justify-center"
-    >
+    <div class="mt-3 mx-auto">
       <img
         loading="lazy"
         alt="cover"
-        height="400"
-        class="rounded-md max-w-full"
-        style="max-height: 400px"
+        width="1600"
+        class="rounded-md shadow-md transition-shadow duration-300 hover:shadow-xl"
         :src="thumbnail"
       />
     </div>
