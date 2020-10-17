@@ -1,4 +1,5 @@
-import { Module, Mutation, VuexModule } from 'vuex-module-decorators'
+import type { User as UserInfo } from 'firebase'
+import { Module, Mutation, VuexModule, Action } from 'vuex-module-decorators'
 
 @Module({
   name: 'user',
@@ -6,12 +7,23 @@ import { Module, Mutation, VuexModule } from 'vuex-module-decorators'
   namespaced: true
 })
 export default class User extends VuexModule {
-  private _id?: string
-  private _isAnonymous: boolean = true
+  private _id?: UserInfo['uid']
+  private _isAnonymous: UserInfo['isAnonymous'] = true
 
   @Mutation
-  setId(id: string): void {
+  setId(id: UserInfo['uid']): void {
     this._id = id
+  }
+
+  @Mutation
+  setIsAnonymous(isAnonymous: UserInfo['isAnonymous']): void {
+    this._isAnonymous = isAnonymous
+  }
+
+  @Action
+  setUser({ uid, isAnonymous }: UserInfo): void {
+    this.setId(uid)
+    this.setIsAnonymous(isAnonymous)
   }
 
   @Mutation
@@ -24,11 +36,6 @@ export default class User extends VuexModule {
     this._isAnonymous = !this._isAnonymous
   }
 
-  @Mutation
-  setIsAnonymous(isAnonymous: boolean): void {
-    this._isAnonymous = isAnonymous
-  }
-
   get login(): boolean {
     return !!this._id
   }
@@ -37,7 +44,7 @@ export default class User extends VuexModule {
     return this._id
   }
 
-  get isAnonymous(): boolean {
+  get isAnonymous(): UserInfo['isAnonymous'] {
     return this._isAnonymous
   }
 }
