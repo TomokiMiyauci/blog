@@ -5,6 +5,10 @@
      code {
       @apply p-1 bg-gray-400 bg-opacity-25 rounded-md;
     }
+
+     img {
+       @apply mx-auto rounded;
+     }
   }
 
   a {
