@@ -34,7 +34,7 @@
   "dependencies": {
     "@nuxt/content": "^1.5.0",
     "@nuxt/typescript-runtime": "^2.0.0",
-    "@nuxtjs/color-mode": "^1.0.3",
+    "@nuxtjs/color-mode": "^2.0.0",
     "@nuxtjs/composition-api": "^0.12.3",
     "@nuxtjs/firebase": "^6.1.1",
     "@nuxtjs/pwa": "^3.0.0-beta.20",
