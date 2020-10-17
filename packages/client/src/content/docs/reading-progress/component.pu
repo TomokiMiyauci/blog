@@ -1,0 +1,16 @@
+@startuml component
+
+package "Reading Progress" {
+  frame "Presentational Component" {
+    [BaseProgress] as BaseProgress
+    note left of BaseProgress : props:\nvalue: number\nmax: number
+  }
+
+  frame "Container Component" {
+    [ReadingProgress] as ReadingProgress
+    note left of ReadingProgress : state & logic:\nCulculate max and value
+  }
+  ReadingProgress -->BaseProgress:props
+}
+
+@enduml

@@ -17,7 +17,7 @@
     }
 
     const getValue = (): number => {
-      return document.scrollingElement?.scrollTop || 0
+      return document.scrollingElement?.scrollTop ?? 0
     }
 
     const setStates = (): void => {
