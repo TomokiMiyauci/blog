@@ -26243,9 +26243,9 @@ vti@^0.0.13:
     vscode-uri "^2.1.2"
 
 vue-axe@^2.4.0:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/vue-axe/-/vue-axe-2.4.1.tgz#000317d8c3087cff3b5eaf0eb619f0d8eda2325f"
-  integrity sha512-3G+sz5dB2UFzFCVFTwBL+sLb+XtGvMysZQQZWGYBNpraEvSiJ6iOlcSpeMcFelM60dPuOxexal1OQrAkb6jadg==
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/vue-axe/-/vue-axe-2.4.2.tgz#cb2e23bc209a2b7fb71cd33cb41829752046719b"
+  integrity sha512-qrt94fk55GUcoDefoIL9fd+UkZ3CFWgXd42PyiWb22ZeV8pHxrZ3WkQz/ekmjO/nKXVya546QywNX0LW6RmWkA==
 
 vue-client-only@^2.0.0:
   version "2.0.0"
