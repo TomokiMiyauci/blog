@@ -122,6 +122,7 @@ const config: NuxtConfig = {
     },
     lazy: true,
     langDir: 'lang/',
+    seo: true,
     vuex: false
   },
 
