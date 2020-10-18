@@ -13,11 +13,16 @@ alt: cover
 
 ## はじめに
 
-できあがったテンプレートはこちらにあります。
+ViteはVue.jsの作者のEvan You氏が開発しているビルドツールです。
+ネイティブのES Moduleのインポートを利用し、バンドル不要で高速に動作するビルド環境を提供します。
+Vue3はもちろん、ReactやPreactも対応しています。
+今回はそんなViteを使って、Preactプロジェクトの環境構築をします。
+
+できあがったテンプレートは[こちら](https://github.com/TomokiMiyauci/vite-preact)にあります。
 
 ## やること
 
-preact/cliのdefaultテンプレートに近づけながらも、最低限開発に必要なツールを導入していきます。
+preact/cliのdefaultテンプレートに近づけることを目標に、最低限開発に必要なツールを導入していきます。
 ツールを個別に導入できるよう、それぞれ順を追って説明しています。
 
 - Typescript
@@ -34,17 +39,21 @@ preact/cliのdefaultテンプレートに近づけながらも、最低限開発
 <code-group>
   <code-block label="Yarn" active>
 
-    yarn create vite-app <project-name> --template preact
-    cd <project-name>
-    yarn
+  ```bash
+  yarn create vite-app <project-name> --template preact
+  cd <project-name>
+  yarn
+  ```
 
   </code-block>
 
   <code-block label="NPM">
 
-    npm init vite-app <project-name> --template preact
-    cd <project-name>
-    npm i
+  ```bash
+  npm init vite-app <project-name> --template preact
+  cd <project-name>
+  npm i
+  ```
 
   </code-block>
 </code-group>
@@ -157,13 +166,17 @@ export default config
 <code-group>
   <code-block label="Yarn" active>
 
-    yarn add -D eslint eslint-config-preact @typescript-eslint/parser typescript
+  ```bash
+  yarn add -D eslint eslint-config-preact @typescript-eslint/parser typescript
+  ```
 
   </code-block>
 
   <code-block label="NPM">
 
-    npm i -D eslint eslint-config-preact @typescript-eslint/parser typescript
+  ```bash
+  npm i -D eslint eslint-config-preact @typescript-eslint/parser typescript
+  ```
 
   </code-block>
 
@@ -206,16 +219,19 @@ export default config
 <code-group>
   <code-block label="Yarn" active>
 
-    yarn lint:script --fix
+  ```bash
+  yarn lint:script --fix
+  ```
 
   </code-block>
 
   <code-block label="NPM">
 
+  ```bash
     npm run lint:script --fix
+  ```
 
   </code-block>
-
 </code-group>
 
 VSCodeユーザーは以下の設定もすることで、自動フォーマットを効かせることができます。
@@ -238,14 +254,18 @@ ESLintの拡張が必要なので、なければ[ここを参考に](https://mar
 <code-group>
   <code-block label="Yarn" active>
 
-    yarn add -D husky lint-staged
+  ```bash
+  yarn add -D husky lint-staged
+  ```
 
   </code-block>
 
   <code-block label="NPM">
 
-    npm i -D husky lint-staged
-
+  ```bash
+  npm i -D husky lint-staged
+  ```
+  
   </code-block>
 </code-group>
 
@@ -276,13 +296,17 @@ Prettierにプロジェクト全体のフォーマットを任せましょう。
 <code-group>
   <code-block label="Yarn" active>
 
-    yarn add -D prettier eslint-config-prettier
+  ```bash
+  yarn add -D prettier eslint-config-prettier
+  ```
 
   </code-block>
 
   <code-block label="NPM">
 
-    npm i -D prettier eslint-config-prettier
+  ```bash
+  npm i -D prettier eslint-config-prettier
+  ```
 
   </code-block>
 </code-group>
@@ -295,7 +319,7 @@ Prettierにプロジェクト全体のフォーマットを任せましょう。
 }
 ```
 
-ESLintをPrettierを併用する場合は、ルールがバッティングする可能性があるため、`.eslintrc`を修正します。
+ESLintをPrettierを併用する場合、ルールのバッティングがあるため、`.eslintrc`を修正します。
 
 ```json[.eslintrc]
 {
@@ -314,13 +338,17 @@ ESLintをPrettierを併用する場合は、ルールがバッティングする
 <code-group>
   <code-block label="Yarn" active>
 
-    yarn prettier -w -u .
+  ```bash
+  yarn prettier -w -u .
+  ```
 
   </code-block>
 
   <code-block label="NPM">
 
-    npm run prettier -w -u .
+  ```bash
+  npm run prettier -w -u .
+  ```
 
   </code-block>
 </code-group>
@@ -353,13 +381,17 @@ VSCodeユーザーは次の設定によって、自動的にフォーマット�
 <code-group>
   <code-block label="Yarn" active>
 
-    yarn add -D stylelint stylelint-config-recommended stylelint-config-standard
+  ```bash
+  yarn add -D stylelint stylelint-config-recommended stylelint-config-standard
+  ```
 
   </code-block>
 
   <code-block label="NPM">
 
-    npm i -D stylelint stylelint-config-recommended stylelint-config-standard
+  ```bash
+  npm i -D stylelint stylelint-config-recommended stylelint-config-standard
+  ```
 
   </code-block>
 </code-group>
