@@ -114,7 +114,7 @@
     "vti": "^0.0.13",
     "vue-axe": "^2.4.0",
     "vue-jest": "^3.0.4",
-    "webpack-stats-plugin": "^0.3.2"
+    "webpack-stats-plugin": "^1.0.0"
   },
   "config": {
     "commitizen": {
