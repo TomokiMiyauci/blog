@@ -19,7 +19,8 @@
 
   export default defineComponent({
     components: {
-      MdiInformation: () => import('@/components/atoms/icons/MdiInformation.vue')
+      MdiInformation: () => import('@/components/atoms/icons/MdiInformation.vue'),
+      MdiAlert: () => import('@/components/atoms/icons/MdiAlert.vue')
     },
 
     props: {
