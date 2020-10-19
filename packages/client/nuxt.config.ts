@@ -60,7 +60,8 @@ const config: NuxtConfig = {
   },
 
   publicRuntimeConfig: {
-    PROJECT_NAME
+    PROJECT_NAME,
+    HOSTNAME
   },
 
   /*
@@ -193,9 +194,9 @@ const config: NuxtConfig = {
     hostname: HOSTNAME,
     routes: async () => {
       // const { $content } = (await import('@nuxt/content')).default as { $content: $content }
-      const files = await $content('articles').only(['slug']).where({ private: false }).fetch()
+      const files = await $content('articles', 'ja').only(['slug']).where({ private: false }).fetch()
       if (Array.isArray(files)) {
-        return files.map(({ slug }) => `/${slug}`)
+        return files.map(({ slug }) => `/ja/${slug}`)
       }
     },
     gzip: true
