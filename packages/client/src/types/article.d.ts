@@ -21,6 +21,7 @@ type Frontmatter = {
   tags: string[]
   img: string
   thumbnail: string
+  cover: string
   alt: string
 }
 
