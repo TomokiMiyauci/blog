@@ -9,7 +9,7 @@
 
     <article>
       <div class="flex md:grid grid-temp grid-cols-main">
-        <toc class="hidden md:block" :toc="article.toc" />
+        <toc v-if="article" class="hidden md:block" :toc="article.toc" />
         <div style="grid-column: 2 / 3" class="p-2 overflow-hidden pb-12">
           <div class="mb-5 pb-5">
             <article-header v-bind="article" />
@@ -41,41 +41,74 @@
 </template>
 
 <script lang="ts">
+  // eslint-disable-next-line node/no-deprecated-api
+  import { resolve } from 'url'
+
   import useIntersection from '@/core/intersection'
-  import { PrevNext, Article, Current } from '@/types/article'
+  import { Article, Current } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
-  import { defineComponent, ref, getCurrentInstance } from '@nuxtjs/composition-api'
+  import {
+    ref,
+    getCurrentInstance,
+    useContext,
+    useStatic,
+    computed,
+    defineComponent,
+    useMeta
+  } from '@nuxtjs/composition-api'
 
   export default defineComponent({
-    head: {
-      meta: [{ hid: 'og:type', property: 'og:type', name: 'og:type', content: 'article' }],
-      htmlAttrs: {
-        lang: 'ja'
-      }
-    },
+    head: {},
 
-    async asyncData({ params, app, $content }) {
-      const article = await $content('articles', app.i18n.locale, params.slug).fetch<Article>()
-
-      const [prev, next] = await $content('articles')
-        .only(['title', 'slug'])
-        .sortBy('date', 'desc')
-        .surround(params.slug, { before: 1, after: 1 })
-        .fetch<[PrevNext, PrevNext]>()
-
-      const currentArticles = await $content('articles', app.i18n.locale)
-        .where({ private: false })
-        .limit(4)
-        .fetch<Current[]>()
-
-      return { article, prev, next, currentArticles }
-    },
-
-    setup(_, { root }) {
+    setup() {
       useRegisterCopyButton()
 
       const isShow = ref(false)
+
+      const { $content, app, params, $config, route } = useContext()
+      const { title, meta } = useMeta()
+
+      const slug = computed(() => params.value.slug)
+
+      const article = useStatic(
+        async (slug) => {
+          const article = (await $content('articles', app.i18n.locale, slug)
+            .where({ private: false })
+            .fetch<Article>()) as Article
+          const { title: titl, description, cover } = article
+          const fullpath = resolve($config.HOSTNAME, route.value.fullPath)
+
+          title.value = titl
+          meta.value = [
+            { hid: 'og:type', property: 'og:type', name: 'og:type', content: 'article' },
+            { hid: 'og:title', property: 'og:title', name: 'og:title', content: titl },
+            {
+              hid: 'og:description',
+              property: 'og:description',
+              name: 'og:description',
+              content: description
+            },
+            {
+              hid: 'description',
+              name: 'description',
+              content: description
+            },
+            { hid: 'og:image', name: 'og:image', property: 'og:image', content: cover },
+            { hid: 'og:url', name: 'og:url', property: 'og:url', content: fullpath }
+          ]
+
+          return article
+        },
+        slug,
+        `${app.i18n.locale}/${slug.value}`
+      )
+
+      const currentArticles = useStatic(
+        () => $content('articles', app.i18n.locale).where({ private: false }).limit(4).fetch<Current[]>(),
+        slug,
+        app.i18n.locale
+      )
 
       getCurrentInstance()!.$on('intersect', () => {
         isShow.value = true
@@ -95,7 +128,7 @@
         })
       }
 
-      return { formatDate, isShow, scroll, scrollAnchor }
+      return { formatDate, isShow, scroll, scrollAnchor, article, currentArticles }
     }
   })
 </script>
