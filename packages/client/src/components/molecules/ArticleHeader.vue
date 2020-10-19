@@ -1,6 +1,7 @@
 <template>
   <div>
     <base-h-1 :text="title" />
+    <p class="text-base sm:text-lg mb-4">{{ description }}</p>
     <tags :tags="tags" />
     <div class="mt-4 flex flex-col">
       <span class="inline-flex mb-4 items-center justify-end">
@@ -35,6 +36,11 @@
   export default defineComponent({
     props: {
       title: {
+        type: String,
+        default: ''
+      },
+
+      description: {
         type: String,
         default: ''
       },
