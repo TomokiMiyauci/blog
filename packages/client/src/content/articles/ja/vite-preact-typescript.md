@@ -14,7 +14,7 @@ alt: cover
 ## はじめに
 
 ViteはVue.jsの作者のEvan You氏が開発しているビルドツールです。
-ネイティブのES Moduleのインポートを利用し、バンドル不要で高速に動作するビルド環境を提供します。
+ネイティブのES Moduleのインポートを利用し、バンドル不要で高速に動作する開発環境を提供します。
 Vue3はもちろん、ReactやPreactも対応しています。
 今回はそんなViteを使って、Preactプロジェクトの環境構築をします。
 
@@ -228,7 +228,7 @@ export default config
   <code-block label="NPM">
 
   ```bash
-    npm run lint:script --fix
+  npm run lint:script --fix
   ```
 
   </code-block>
@@ -428,7 +428,7 @@ VSCodeユーザーは次の設定によって、自動的にフォーマット�
 
 `vite.config.ts`と`tsconfig.json`変更してaliasを設定しましょう。
 
-<alert type="warning">Keyは必ず`/`から始まらなければなりません。</alert>
+<alert type="warning">Keyは`/`から始まらなければなりません。</alert>
 
 ```ts[vite.config.ts]
 import { join } from 'path'
