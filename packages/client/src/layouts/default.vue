@@ -21,7 +21,7 @@
   import AppBottomNavigation from '@/components/app/molecules/AppBottomNavigation.vue'
   import AppFooter from '@/components/app/molecules/AppFooter.vue'
   import Notice from '@/components/notice/molecules/Notice.vue'
-  import { defineComponent } from '@nuxtjs/composition-api'
+  import { defineComponent, useMeta, useContext } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     components: {
@@ -29,6 +29,10 @@
       AppBar,
       AppBottomNavigation,
       Notice
+    },
+
+    head() {
+      return this.$nuxtI18nSeo()
     }
   })
 </script>

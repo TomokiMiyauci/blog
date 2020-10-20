@@ -62,10 +62,11 @@
     setup(props, { root }) {
       const asyncSearch = (query: string) => {
         return root
-          .$content('articles')
+          .$content('articles', root.$i18n.locale)
           .limit(3)
           .search(query)
           .only(['title', 'slug'])
+          .where({ private: false })
           .fetch<{ slug: string; title: string }[]>()
       }
 

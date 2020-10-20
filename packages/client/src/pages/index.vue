@@ -30,7 +30,7 @@
       <nuxt-link
         v-for="article in articles"
         :key="article.id"
-        :to="localePath({ name: 'slug', params: { slug: article.slug } })"
+        :to="localePath({ name: 'post-slug', params: { slug: article.slug } })"
       />
 
       <section class="grid grid-cols-1 sm:grid-cols-2 mt-5 lg:grid-cols-3">

@@ -2,7 +2,7 @@
   <nuxt-link
     class="hover:text-green-500 hover:bg-gray-300 transition duration-300 cursor-pointer text-right p-1 rounded font-normal"
     v-bind="$attrs"
-    :to="localePath({ name: 'slug', params: { slug: slug } })"
+    :to="localePath({ name: 'post-slug', params: { slug: slug } })"
     @click.native.prevent="$emit('click')"
     v-html="highlight(title, keyword)"
   >

@@ -4,7 +4,7 @@
     <base-nuxt-link
       v-if="prev"
       tag="div"
-      :to="localePath({ name: 'slug', params: { slug: prev.slug } })"
+      :to="localePath({ name: 'post-slug', params: { slug: prev.slug } })"
       class="inline-flex hover:bg-gray-100 hover:-translate-x-4 duration-75 transform transition-transform p-2 shadow rounded"
     >
       <div class="flex items-center">
@@ -22,7 +22,7 @@
     <div class="p-2 shadow rounded">
       <base-nuxt-link
         v-if="next"
-        :to="localePath({ name: 'slug', params: { slug: next.slug } })"
+        :to="localePath({ name: 'post-slug', params: { slug: next.slug } })"
         class="hover:text-red-500 flex justify-end"
       >
         <h2>{{ next.title }}</h2>
