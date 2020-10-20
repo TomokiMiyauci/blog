@@ -123,7 +123,7 @@ const config: NuxtConfig = {
     },
     lazy: true,
     langDir: 'lang/',
-    seo: true,
+    seo: false,
     vuex: false
   },
 
