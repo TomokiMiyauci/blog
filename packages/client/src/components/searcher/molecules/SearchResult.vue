@@ -66,6 +66,7 @@
           .limit(3)
           .search(query)
           .only(['title', 'slug'])
+          .where({ private: false })
           .fetch<{ slug: string; title: string }[]>()
       }
 
