@@ -15,10 +15,15 @@
   import { user } from '@/store'
   import { defineComponent, onBeforeMount } from '@nuxtjs/composition-api'
   export default defineComponent({
+    head() {
+      return this.$nuxtI18nSeo()
+    },
+
     transition: {
       name: 'fade',
       type: 'transition'
     },
+
     setup(_, { root }) {
       onBeforeMount(() => {
         const vh = window.innerHeight * 0.01
