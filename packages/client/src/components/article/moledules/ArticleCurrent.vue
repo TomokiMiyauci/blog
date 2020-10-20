@@ -1,7 +1,7 @@
 <template>
   <nuxt-link
     tag="article"
-    :to="localePath({ name: 'slug', params: { slug: article.slug } })"
+    :to="localePath({ name: 'post-slug', params: { slug: article.slug } })"
     class="bg-gray-100 w-full dark:bg-gray-900 rounded-md overflow-hidden shadow-md cursor-pointer hover:bg-gray-200 hover:scale-105 transform hover:shadow-xl hover:opacity-90 transition duration-200 ease-in"
   >
     <div>
@@ -11,7 +11,7 @@
         <nuxt-link
           tag="h2"
           class="text-2xl hover:text-green-500 transition duration-300 font-bold"
-          :to="localePath({ name: 'slug', params: { slug: article.slug } })"
+          :to="localePath({ name: 'post-slug', params: { slug: article.slug } })"
         >
           {{ article.title }}
         </nuxt-link>
