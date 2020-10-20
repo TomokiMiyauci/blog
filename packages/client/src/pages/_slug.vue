@@ -22,7 +22,7 @@
         </div>
 
         <div class="hidden md:block p-4" style="grid-column: 3 / 3">
-          <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" />
+          <!-- <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" /> -->
         </div>
       </div>
     </article>
@@ -48,67 +48,96 @@
   import { Article, Current } from '@/types/article'
   import { formatDate } from '@/utils/formatter'
   import { useRegisterCopyButton } from '@/utils/register'
-  import {
-    ref,
-    getCurrentInstance,
-    useContext,
-    useStatic,
-    computed,
-    defineComponent,
-    useMeta
-  } from '@nuxtjs/composition-api'
+  import { ref, getCurrentInstance, defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
-    head: {},
+    async asyncData({ $content, app, params }) {
+      const article = await $content('articles', app.i18n.locale, params.slug).fetch<Article>()
+      const currentArticles = await $content('articles', app.i18n.locale)
+        .where({ private: false })
+        .limit(4)
+        .fetch<Current[]>()
+
+      return { article, currentArticles }
+    },
+
+    head() {
+      const { title, description, cover } = this.$data.article as Article
+      const fullpath = resolve(this.$config.HOSTNAME, this.$route.fullPath)
+
+      return {
+        title,
+        meta: [
+          { hid: 'og:type', property: 'og:type', name: 'og:type', content: 'article' },
+          { hid: 'og:title', property: 'og:title', name: 'og:title', content: title },
+          {
+            hid: 'og:description',
+            property: 'og:description',
+            name: 'og:description',
+            content: description
+          },
+          {
+            hid: 'description',
+            name: 'description',
+            content: description
+          },
+          { hid: 'og:image', name: 'og:image', property: 'og:image', content: cover },
+          { hid: 'og:url', name: 'og:url', property: 'og:url', content: fullpath }
+        ]
+      }
+    },
 
     setup() {
       useRegisterCopyButton()
 
       const isShow = ref(false)
 
-      const { $content, app, params, $config, route } = useContext()
-      const { title, meta } = useMeta()
+      //   const { $content, app, params, $config, route } = useContext()
 
-      const slug = computed(() => params.value.slug)
+      //   const slug = computed(() => params.value.slug)
 
-      const article = useStatic(
-        async (slug) => {
-          const article = (await $content('articles', app.i18n.locale, slug)
-            .where({ private: false })
-            .fetch<Article>()) as Article
-          const { title: titl, description, cover } = article
-          const fullpath = resolve($config.HOSTNAME, route.value.fullPath)
+      //   // const article = useStatic(
+      //   //   async (slug) => {
+      //   //     const article = (await $content('articles', app.i18n.locale, slug)
+      //   //       .where({ private: false })
+      //   //       .fetch<Article>()) as Article
+      //   //     const { title: titl, description, cover } = article
+      //   //     const fullpath = resolve($config.HOSTNAME, route.value.fullPath)
 
-          title.value = titl
-          meta.value = [
-            { hid: 'og:type', property: 'og:type', name: 'og:type', content: 'article' },
-            { hid: 'og:title', property: 'og:title', name: 'og:title', content: titl },
-            {
-              hid: 'og:description',
-              property: 'og:description',
-              name: 'og:description',
-              content: description
-            },
-            {
-              hid: 'description',
-              name: 'description',
-              content: description
-            },
-            { hid: 'og:image', name: 'og:image', property: 'og:image', content: cover },
-            { hid: 'og:url', name: 'og:url', property: 'og:url', content: fullpath }
-          ]
+      //   //     console.log(1111111111, titl)
 
-          return article
-        },
-        slug,
-        `${app.i18n.locale}/${slug.value}`
-      )
+      //   //     title.value = title.value || titl
+      //   //     // meta.value = [
+      //   //     //   { hid: 'og:type', property: 'og:type', name: 'og:type', content: 'article' },
+      //   //     //   { hid: 'og:title', property: 'og:title', name: 'og:title', content: titl },
+      //   //     //   {
+      //   //     //     hid: 'og:description',
+      //   //     //     property: 'og:description',
+      //   //     //     name: 'og:description',
+      //   //     //     content: description
+      //   //     //   },
+      //   //     //   {
+      //   //     //     hid: 'description',
+      //   //     //     name: 'description',
+      //   //     //     content: description
+      //   //     //   },
+      //   //     //   { hid: 'og:image', name: 'og:image', property: 'og:image', content: cover },
+      //   //     //   { hid: 'og:url', name: 'og:url', property: 'og:url', content: fullpath }
+      //   //     // ]
 
-      const currentArticles = useStatic(
-        () => $content('articles', app.i18n.locale).where({ private: false }).limit(4).fetch<Current[]>(),
-        slug,
-        app.i18n.locale
-      )
+      //   //     return article
+      //   //   },
+      //   //   slug,
+      //   //   `${app.i18n.locale}-${slug.value}`
+      //   // )
+
+      //   // const currentArticles = useStatic(
+      //   //   () => $content('articles', app.i18n.locale).where({ private: false }).limit(4).fetch<Current[]>(),
+      //   //   slug,
+      //   //   app.i18n.locale
+      //   // )
+
+      //   // title.value = article.value?.title
 
       getCurrentInstance()!.$on('intersect', () => {
         isShow.value = true
@@ -128,7 +157,7 @@
         })
       }
 
-      return { formatDate, isShow, scroll, scrollAnchor, article, currentArticles }
+      return { formatDate, isShow, scroll, scrollAnchor }
     }
   })
 </script>
