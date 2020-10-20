@@ -1,5 +1,6 @@
 import { join } from 'path'
 
+import type { Article } from '@/types/article'
 import { $content } from '@nuxt/content'
 import type { NuxtConfig } from '@nuxt/types'
 
@@ -194,10 +195,19 @@ const config: NuxtConfig = {
     hostname: HOSTNAME,
     routes: async () => {
       // const { $content } = (await import('@nuxt/content')).default as { $content: $content }
-      const files = await $content('articles', 'ja').only(['slug']).where({ private: false }).fetch()
-      if (Array.isArray(files)) {
-        return files.map(({ slug }) => `/ja/${slug}`)
-      }
+      const jaFiles = (await $content('articles', 'ja')
+        .only(['slug'])
+        .where({ private: false })
+        .fetch<Article[]>()) as Article[]
+      const enFiles = (await $content('articles', 'en')
+        .only(['slug'])
+        .where({ private: false })
+        .fetch<Article[]>()) as Article[]
+
+      const jaLocs = jaFiles.map(({ slug }) => `/ja/post/${slug}`)
+      const enLocs = enFiles.map(({ slug }) => `/post/${slug}`)
+
+      return [...jaLocs, ...enLocs]
     },
     gzip: true
   },
