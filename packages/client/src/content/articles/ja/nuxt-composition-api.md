@@ -7,7 +7,7 @@ tags:
   - Tutorial
   - CompositionApi
 img: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w_400/v1598874649/composition-api.png
-private: false
+private: true
 alt: cover
 ---
 
