@@ -1,19 +1,18 @@
-# techsrc
+#
 
 <div align="center">
-<img src="packages/client/src/static/icon.png" alt="icon" title="icon-img">
+<img width="300" height="300" src="packages/client/src/static/icon.png" alt="icon" title="icon-img">
 </div>
 
 <div align="center">
-<img src="packages/client/src/assets/img/logo-letter.png" alt="icon" title="icon-img">
 </div>
 
 <div align="center">
 
-![test](https://github.com/TomokiMiyauci/techxas/workflows/test/badge.svg?branch=develop)
-[![codecov](https://codecov.io/gh/TomokiMiyauci/techsrc/branch/develop/graph/badge.svg)](https://codecov.io/gh/TomokiMiyauci/techsrc)
-[![CodeFactor](https://www.codefactor.io/repository/github/tomokimiyauci/techsrc/badge)](https://www.codefactor.io/repository/github/tomokimiyauci/techsrc)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3aa70358bd4742e892901cec7d65657c)](https://www.codacy.com/manual/development.operation.6.6.6/techsrc?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TomokiMiyauci/techsrc&amp;utm_campaign=Badge_Grade)
+![test](https://github.com/TomokiMiyauci/blog/workflows/test/badge.svg?branch=develop)
+[![codecov](https://codecov.io/gh/TomokiMiyauci/blog/branch/develop/graph/badge.svg)](https://codecov.io/gh/TomokiMiyauci/blog)
+[![CodeFactor](https://www.codefactor.io/repository/github/tomokimiyauci/blog/badge)](https://www.codefactor.io/repository/github/tomokimiyauci/blog)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3aa70358bd4742e892901cec7d65657c)](https://www.codacy.com/manual/development.operation.6.6.6/blog?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TomokiMiyauci/blog&amp;utm_campaign=Badge_Grade)
 [![DeepScan grade](https://deepscan.io/api/teams/10684/projects/13513/branches/230629/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10684&pid=13513&bid=230629)
 [![RelativeCI](https://badges.relative-ci.com/badges/C3AE8ywl4E79uM0dKQLG?branch=develop)](https://app.relative-ci.com/projects/C3AE8ywl4E79uM0dKQLG)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
@@ -53,5 +52,5 @@ You can check the latest performance in this project.
 - [:scroll: History](https://www.foo.software/dashboard/page/5f3a7dba1a668f00246aeb59)
 
 - :zap: Latest
-  - [:iphone: Mobile](https://tomokimiyauci.github.io/techsrc/lighthouse-mobile)
-  - [:computer: PC](https://tomokimiyauci.github.io/techsrc/lighthouse-pc)
+  - [:iphone: Mobile](https://tomokimiyauci.github.io/blog/lighthouse-mobile)
+  - [:computer: PC](https://tomokimiyauci.github.io/blog/lighthouse-pc)

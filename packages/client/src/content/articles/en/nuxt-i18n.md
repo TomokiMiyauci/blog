@@ -139,7 +139,7 @@ AUTHOR:
 ```
 
 ```js[~/lang/ja.yml]
-PROJECT_NAME: Techsrc
+PROJECT_NAME: IntelliSense
 AUTHOR:
   NAME: 宮内智輝
 ```
