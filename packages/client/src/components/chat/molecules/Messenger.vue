@@ -102,7 +102,7 @@
       const sender = ref<InstanceType<typeof Sender>>()
 
       const onPost = async (message: string): Promise<void> => {
-        messages.value = [...messages.value, { text: message, name: 'Techsrc' }]
+        messages.value = [...messages.value, { text: message, name: 'IntelliSense' }]
 
         const ref = otherRef(ctx)
         if (!ref) return

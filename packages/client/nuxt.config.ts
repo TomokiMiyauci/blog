@@ -4,9 +4,8 @@ import type { Article } from '@/types/article'
 import { $content } from '@nuxt/content'
 import type { NuxtConfig } from '@nuxt/types'
 
+const PROJECT_NAME = 'IntelliSense'
 const HOSTNAME = process.env.HOSTNAME
-const PACKAGE_NAME = process.env.npm_package_name!
-const PROJECT_NAME = PACKAGE_NAME.substring(0, 1).toUpperCase() + PACKAGE_NAME.substring(1).toLocaleLowerCase()
 const TWITTER_ACCOUNT = '@techsrc_'
 const isProduction = process.env.NODE_ENV === 'production'
 const config: NuxtConfig = {
@@ -130,11 +129,17 @@ const config: NuxtConfig = {
 
   pwa: {
     meta: {
+      name: PROJECT_NAME,
       ogHost: HOSTNAME?.endsWith('/') ? HOSTNAME.slice(0, -1) : HOSTNAME,
       twitterCard: 'summary',
       twitterSite: TWITTER_ACCOUNT,
       twitterCreator: TWITTER_ACCOUNT,
       nativeUI: true
+    },
+
+    manifest: {
+      name: PROJECT_NAME,
+      short_name: PROJECT_NAME
     }
   },
 

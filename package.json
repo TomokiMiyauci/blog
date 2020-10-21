@@ -1,11 +1,11 @@
 {
-  "name": "techsrc",
+  "name": "blog",
   "license": "MIT",
   "private": true,
   "author": "TomokiMiyauci",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TomokiMiyauci/techsrc.git"
+    "url": "https://github.com/TomokiMiyauci/blog.git"
   },
   "workspaces": [
     "packages/*"

@@ -21,7 +21,7 @@ export const DEFAULT = () => ({
     },
 
     name: {
-      default: 'Techsrc'
+      default: 'IntelliSense'
     }
   }
 })
