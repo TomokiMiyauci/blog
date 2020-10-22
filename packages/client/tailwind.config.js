@@ -107,7 +107,12 @@ const config = {
     gradientColorStops: ['responsive', 'hover', 'focus', 'dark'],
     cursor: ['responsive', 'disabled']
   },
-  plugins: [require('tailwindcss-dark-mode')(), require('postcss-100vh-fix')],
+  plugins: [
+    require('tailwindcss-dark-mode')(),
+    require('tailwind-bootstrap-grid')({
+      gridGutterWidth: 0
+    })
+  ],
   purge: {
     // Learn more on https://tailwindcss.com/docs/controlling-file-size/#removing-unused-css
     enabled: process.env.NODE_ENV === 'production',

@@ -5579,9 +5579,9 @@
   integrity sha512-+48LLqolaKj/WnIY1crfLseaGQMIDISBy3PTXVOZ7w/PBaRUv+H8t94++atzfoBAvorbUYz6Xq9vh1fHrg33ig==
 
 "@types/node@^14.6.0":
-  version "14.14.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.0.tgz#f1091b6ad5de18e8e91bdbd43ec63f13de372538"
-  integrity sha512-BfbIHP9IapdupGhq/hc+jT5dyiBVZ2DdeC5WwJWQWDb0GijQlzUFAeIQn/2GtvZcd2HVUU7An8felIICFTC2qg==
+  version "14.14.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.2.tgz#d25295f9e4ca5989a2c610754dc02a9721235eeb"
+  integrity sha512-jeYJU2kl7hL9U5xuI/BhKPZ4vqGM/OmK6whiFAXVhlstzZhVamWhDSmHyGLIp+RVyuF9/d0dqr2P85aFj4BvJg==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -24220,6 +24220,14 @@ table@^6.0.1:
     lodash "^4.17.20"
     slice-ansi "^4.0.0"
     string-width "^4.2.0"
+
+tailwind-bootstrap-grid@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/tailwind-bootstrap-grid/-/tailwind-bootstrap-grid-2.2.2.tgz#5159be53edf5107658d3ba8420b4360383849f98"
+  integrity sha512-x5LE/ByLv1JsfmBCBChnJ1heNIn4ujKglZQUClq9lpI22NdUQtPUvmn/E/AgN1AtswRDuGKSve20IACLkwgZXA==
+  dependencies:
+    lodash "^4.17.15"
+    reduce-css-calc "^2.1.6"
 
 tailwindcss-dark-mode@^1.1.6:
   version "1.1.7"
