@@ -6,27 +6,6 @@
       </div>
     </div>
     <div class="row mb-16">
-      <!-- <div v-if="favariteArticle">
-      <h2>
-        <nuxt-link
-          :to="
-            localePath({
-              name: 'users-uid',
-              params: {
-                uid: userId
-              }
-            })
-          "
-          ><mdi-heart /><span class="ml-1">Articles</span></nuxt-link
-        >
-      </h2>
-      <article-headline v-for="article in favariteArticle" :key="article.slug" :headline="article" />
-    </div> -->
-      <!--
-    <portal to="hello">
-      <div>hello</div>
-    </portal> -->
-
       <div class="md:col" />
 
       <section
@@ -35,14 +14,8 @@
         <article-headline v-for="article in articles" :key="article.id" class="mx-auto" :headline="article" />
       </section>
 
-      <!-- <div class="p-4">
-        <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" />
-      </div> -->
       <div class="col p-3">
-        <h3>Tags</h3>
-        <span v-for="(tag, index) in tags" :key="index">
-          <span v-for="t in tag" :key="t" class="inline-flex rounded-full px-3 m-2 py-1 shadow"># {{ t }}</span>
-        </span>
+        <tags-list :tags="tags" />
       </div>
     </div>
 
@@ -90,15 +63,9 @@
         .where({ private: false })
         .fetch<Headline[]>()) as Headline[]
 
-      const tags = articles.map(({ tags }) => tags)
+      const tags = articles.map(({ tags }) => tags).flat()
 
       return { articles, tags }
-    },
-
-    setup() {
-      // const favariteArticle = useAsync(() => useFavariteArticle())
-
-      return { userId: user.id }
     }
   })
 </script>

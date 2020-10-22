@@ -8,22 +8,23 @@
 
 <script lang="ts">
   import BaseTag from '@/components/article/atoms/BaseTag.vue'
+  import { toKebabCase, toPascalCase } from '@/utils/formatter'
   import { defineComponent, Ref, computed, toRefs } from '@nuxtjs/composition-api'
 
   const useTag = (tags: Ref<string[]>) => {
     const aggregateTags = computed(() => {
       const res = tags.value.reduce(
         (prev, curr) => {
-          prev[curr] = prev[curr] ? ++prev[curr] : 1
+          const snakeCase = toKebabCase(curr)
+          prev[snakeCase] = prev[snakeCase] ? ++prev[snakeCase] : 1
           return prev
         },
         {} as {
           [key in string]: number
         }
       )
-      console.dir(res)
       return Object.entries(res).map(([key, value]) => {
-        return { name: key, value: key, number: value }
+        return { name: toPascalCase(key), value: key, number: value }
       })
     })
 
