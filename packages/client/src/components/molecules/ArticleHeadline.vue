@@ -22,6 +22,7 @@
         <p class="mt-3 mb-3">{{ headline.description }}</p>
         <!-- <nuxt-link :to="localePath({ name: 'slug', params: { slug: headline.slug } })">Learn More</nuxt-link> -->
         <!-- <tags :tags="headline.tags" /> -->
+        <base-tag v-for="tag in headline.tags" :key="tag" :name="tag" is-small />
       </div>
     </div>
   </nuxt-link>
