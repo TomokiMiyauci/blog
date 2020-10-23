@@ -5,49 +5,33 @@
         <sub-logo />
       </div>
     </div>
-    <div class="container mx-auto mb-16 px-3">
-      <!-- <div v-if="favariteArticle">
-      <h2>
-        <nuxt-link
-          :to="
-            localePath({
-              name: 'users-uid',
-              params: {
-                uid: userId
-              }
-            })
-          "
-          ><mdi-heart /><span class="ml-1">Articles</span></nuxt-link
-        >
-      </h2>
-      <article-headline v-for="article in favariteArticle" :key="article.slug" :headline="article" />
-    </div> -->
-      <!--
-    <portal to="hello">
-      <div>hello</div>
-    </portal> -->
+    <div class="row mb-16">
+      <div class="md:col" />
 
-      <nuxt-link
-        v-for="article in articles"
-        :key="article.id"
-        :to="localePath({ name: 'post-slug', params: { slug: article.slug } })"
-      />
-
-      <section class="grid grid-cols-1 sm:grid-cols-2 mt-5 lg:grid-cols-3">
-        <article-headline v-for="article in articles" :key="article.id" :headline="article" />
+      <section
+        class="grid col-12 p-3 lg:p-2 lg:col-9 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-0 sm:gap-x-4 md:gap-x-4 glow-blue-100"
+      >
+        <article-headline v-for="article in articles" :key="article.id" class="mx-auto" :headline="article" />
       </section>
-      <!-- <div class="p-4">
-        <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" />
-      </div> -->
-      <portal to="bottom-right">
-        <chat />
-      </portal>
+
+      <div class="col p-3">
+        <tags-list :tags="tags" />
+      </div>
     </div>
+
+    <nuxt-link
+      v-for="article in articles"
+      :key="article.id"
+      class="hidden"
+      :to="localePath({ name: 'post-slug', params: { slug: article.slug } })"
+    />
+    <portal to="bottom-right">
+      <chat />
+    </portal>
   </div>
 </template>
 
 <script lang="ts">
-  import { user } from '@/store'
   import { Headline } from '@/types/article'
   import { defineComponent } from '@nuxtjs/composition-api'
 
@@ -73,24 +57,14 @@
     },
 
     async asyncData({ $content, app }) {
-      const articles = await $content('articles', app.i18n.locale)
+      const articles = (await $content('articles', app.i18n.locale)
         .only(headline)
         .where({ private: false })
-        .fetch<Headline[]>()
+        .fetch<Headline[]>()) as Headline[]
 
-      return { articles }
-    },
+      const tags = articles.map(({ tags }) => tags).flat()
 
-    setup() {
-      // const favariteArticle = useAsync(() => useFavariteArticle())
-
-      return { userId: user.id }
+      return { articles, tags }
     }
   })
 </script>
-
-<style scoped>
-  .grid-temp {
-    grid-template-columns: 340px 1fr 240px;
-  }
-</style>

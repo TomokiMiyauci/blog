@@ -200,19 +200,27 @@ const config: NuxtConfig = {
     hostname: HOSTNAME,
     routes: async () => {
       // const { $content } = (await import('@nuxt/content')).default as { $content: $content }
+      const only = ['slug', 'tags']
       const jaFiles = (await $content('articles', 'ja')
-        .only(['slug'])
+        .only(only)
         .where({ private: false })
         .fetch<Article[]>()) as Article[]
       const enFiles = (await $content('articles', 'en')
-        .only(['slug'])
+        .only(only)
         .where({ private: false })
         .fetch<Article[]>()) as Article[]
 
+      const { toKebabCase } = await import(join(__dirname, 'src', 'utils', 'formatter'))
+
+      const jaTags = jaFiles.map(({ tags }) => tags).flat()
+      const enTags = enFiles.map(({ tags }) => tags).flat()
+
+      const jaTagLocs = Array.from(new Set(jaTags)).map((tag) => `ja/tags/${toKebabCase(tag)}`)
+      const enTagLocs = Array.from(new Set(enTags)).map((tag) => `/tags/${toKebabCase(tag)}`)
       const jaLocs = jaFiles.map(({ slug }) => `/ja/post/${slug}`)
       const enLocs = enFiles.map(({ slug }) => `/post/${slug}`)
 
-      return [...jaLocs, ...enLocs]
+      return [...jaLocs, ...enLocs, ...jaTagLocs, ...enTagLocs]
     },
     gzip: true
   },

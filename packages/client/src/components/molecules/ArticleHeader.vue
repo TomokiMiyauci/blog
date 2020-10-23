@@ -2,7 +2,7 @@
   <div>
     <base-h-1 :text="title" />
     <p class="text-base sm:text-lg mb-4">{{ description }}</p>
-    <tags :tags="tags" />
+    <!-- <base-tag v-for="tag in tags.sort()" :key="tag" class="mr-4" :name="tag" linkable :value="toKebabCase(tag)" /> -->
     <div class="mt-4 flex flex-col">
       <span class="inline-flex mb-4 items-center justify-end">
         <button-like />
@@ -31,6 +31,7 @@
   import TimerReadingTime from '@/components/atoms/icontexts/TimerReadingTime.vue'
   import ButtonLike from '@/components/favorite/molecules/ButtonLike.vue'
   import ViewCounter from '@/components/molecules/ViewCounter.vue'
+  import { toKebabCase } from '@/utils/formatter'
   import { defineComponent } from '@nuxtjs/composition-api'
 
   export default defineComponent({
@@ -72,6 +73,10 @@
       ViewCounter,
       TimerReadingTime,
       CalendarEditDate
+    },
+
+    setup() {
+      return { toKebabCase }
     }
   })
 </script>
