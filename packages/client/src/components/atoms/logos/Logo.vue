@@ -1,6 +1,6 @@
 <template>
   <div class="font-mono inline-flex items-end">
-    <logo-icon />
+    <logo-icon class="rounded" />
     <logo-text />
   </div>
 </template>
