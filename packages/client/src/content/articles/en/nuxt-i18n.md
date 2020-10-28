@@ -6,10 +6,10 @@ tags:
   - NuxtI18n
   - Tutorial
 category: configuration
-img: https://res.cloudinary.com/dz3vsv9pg/image/upload/v1600867634/nuxt-i18n/nuxt_i18n_bppm5k.png
+img: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w_800/v1603902700/nuxt-i18n/thumbnail.png
 private: false
-thumbnail: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w_800/v1599141075/nuxt-i18n/preview_rs5rzf.png
-cover: https://res.cloudinary.com/dz3vsv9pg/image/upload/v1600867634/nuxt-i18n/nuxt_i18n_bppm5k.png
+thumbnail: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w_800/v1603902700/nuxt-i18n/thumbnail.png
+cover: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w_800/v1603902700/nuxt-i18n/thumbnail.png
 alt: cover
 ---
 
