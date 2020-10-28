@@ -319,7 +319,7 @@ Prettierにプロジェクト全体のフォーマットを任せましょう。
 }
 ```
 
-ESLintをPrettierを併用する場合、ルールのバッティングがあるため、`.eslintrc`を修正します。
+ESLintとPrettierを併用する場合、ルールのバッティングがあるため、`.eslintrc`を修正します。
 
 ```json[.eslintrc]
 {
@@ -432,6 +432,7 @@ VSCodeユーザーは次の設定によって、自動的にフォーマット�
 
 ```ts[vite.config.ts]
 import { join } from 'path'
+import type { UserConfig } from 'vite'
 
 const config: UserConfig = {
   alias: {
