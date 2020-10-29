@@ -20,7 +20,7 @@ ViteはNo bundle掲げており、開発時に高速なHMRを提供してくれ�
 今回はViteを使って、CSSフレームワークであるtailwindcssの環境構築をします。
 
 なお、[こちら](https://github.com/TomokiMiyauci/vite-vue3-template)の環境をベースに説明するので、適宜参考にしてください。
-Viteプロジェクトがある前提で説明します。
+以下ではViteプロジェクトがある前提で説明します。
 
 ## 環境構築
 
@@ -63,9 +63,9 @@ module.exports = {
 }
 ```
 
-最後にスタイルファイルをエントリーポイントにインポートします。
+最後にスタイルファイルをエントリーポイントでインポートします。
 
-<alert>例はパスエイリアスを使用してパスを指定しています。各自適切なパスを設定してください。</alert>
+<alert>例ではパスエイリアスでパスを指定しています。各自適切なパスを設定してください。</alert>
 
 ```ts[~/src/main.ts]
 import { createApp } from 'vue'
@@ -116,11 +116,11 @@ Stylelintを使っている場合は、`@tailwind`や、`@apply`などtailwind�
 }
 ```
 
-## Purgecssでビルドを最適化する
+## PurgeCSSでビルドを最適化する
 
 tailwindはそのままビルドしてしまうと、使っていない膨大なUtility Classも一緒にバンドルされてしまいます。
 
-PurgeCSSを内包しているので、設定して最適化をしましょう。
+PurgeCSSを内包しているので、設定してビルドを最適化しましょう。
 
 ```js[~/tailwind.config.js]
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -148,6 +148,6 @@ const config = {
 module.exports = config
 ```
 
-ちなみにES Module形式ではなく、CommonJS形式で記述している理由は、tailwindcssのプラグインがES Module形式を認識できないからです。
+ちなみにES Module形式ではなく、CommonJS形式で記述している理由は、tailwindcssのプラグインがES Module形式を認識できないからです。`.js`形式なのも同様の理由です。
 
 さてこれにてtailwindcssの環境が構築できました。
