@@ -1,6 +1,6 @@
 ---
 title: どこからでもファイルダイアログを呼び出したい
-description: プログラムからファイルダイアログを呼び出し、FileListを受け取る方法を解説
+description: プログラムからファイルダイアログを呼び出し、FileListを受け取る方法を解説する
 tags: 
   - Typescript
   - Javascript
