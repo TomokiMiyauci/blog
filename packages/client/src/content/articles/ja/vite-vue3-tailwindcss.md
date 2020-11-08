@@ -1,5 +1,5 @@
 ---
-title: ViteとVue3でtailwindcssを導入する
+title: ViteとVue3にtailwindcssを導入する
 description: ViteプロジェクトでCSSフレームワークのtailwindcssを導入する方法を紹介します。ついでに、tailwindcss用のStylelintのルールやVSCodeの設定をします。
 tags: 
   - Vue3
@@ -15,7 +15,7 @@ alt: cover
 ## はじめに
 
 ViteはNo bundle掲げており、開発時に高速なHMRを提供してくれます。
-しかし、Cliを用いたデフォルトテンプレート自体はかなりシンプルになっているため、Viteプロジェクトを始める際、他のモジュールを使うには自分で環境を構築しなければなりません。
+しかし、CLIを用いたデフォルトテンプレート自体はかなりシンプルになっているため、Viteプロジェクトを始める際、他のモジュールを使うには自分で環境を構築しなければなりません。
 
 今回はViteを使って、CSSフレームワークであるtailwindcssの環境構築をします。
 
@@ -120,11 +120,11 @@ Stylelintを使っている場合は、`@tailwind`や、`@apply`などtailwind�
 
 tailwindはそのままビルドしてしまうと、使っていない膨大なUtility Classも一緒にバンドルされてしまいます。
 
-PurgeCSSを内包しているので、設定してビルドを最適化しましょう。
+tailwindcssはPurgeCSSを標準でサポートしているため、設定してビルドを最適化しましょう。
 
 ```js[~/tailwind.config.js]
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { join } = require('パス')
+const { join } = require('path')
 const BASE_DIR = join(__dirname, 'src')
 const VUE_FILE = join('**', '*.vue')
 

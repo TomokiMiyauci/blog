@@ -74,7 +74,7 @@ vue/cliのdefaultテンプレートに近づけることを目標に、最低限
 
 実際はこれだけでも動きますが、エディター上でのユーザーエクスペリエンスを向上させるために、さらに設定を加えます。
 
-VSCodeを使っている場合は、`main.ts`でts(2307)エラーが出ているはずです。
+VSCodeを使っている場合は、`main.ts`で`ts(2307)` エラーが出ているはずです。
 
 これを解消するには、vue用の型宣言ファイルを用意します。
 
@@ -103,7 +103,7 @@ declare module '*.vue' {
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "/@/*": [ // /から始まるようにします
+      "/@/*": [ // / to begin with.
         "src/*"
       ]
     },
@@ -123,7 +123,6 @@ declare module '*.vue' {
     "node_modules"
   ]
 }
-
 ```
 
 これでTypescript化は終了です。
@@ -373,7 +372,7 @@ VSCodeユーザーは次の設定によって、自動的にフォーマット�
 }
 ```
 
-`package.jsoon`を編集して、コマンドとlint-stagedを設定します。
+`package.json`を編集して、コマンドとlint-stagedを設定します。
 
 ```json[package.json]
 {
