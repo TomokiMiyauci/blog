@@ -1,6 +1,6 @@
 ---
-title: VueでReading Progressを表示する
-description: コンテンツの長さがひと目で分かるReading ProgressをVueで実装する
+title: Displaying Reading Progress with Vue
+description: Implementing reading progress bar with Vue, which shows the length of the content at a glance
 tags: 
   - Vue
   - Tutorial
@@ -11,28 +11,31 @@ cover: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_100,w_
 alt: cover
 ---
 
-## はじめに
+## Introduction
 
-Reading Progressはページの上部にあるプログレスバーのことで、スクロールに合わせてバーの長さが変化し、ページの残りの長さを表示するものです。このブログの上部にあるのがそれです。
+Reading Progress is the progress bar at the top of the page, where the length of the bar changes as you scroll,
+showing you the rest of the length of the page.
+That's what you see at the top of this blog.
 
-こういったコンポーネントは、たいていライブラリが既にありますが、スタイリングが自由自在であったり、パフォーマンス的に有利であったりするので、自分で作ってみましょう。
+These components are usually already available libraries, but you can create your own because of the flexibility of styling and the performance advantages.
 
-## コンポーネント設計
+## Component Design
 
-まず、コンポーネントの設計について見てみましょう。コンポーネントは見た目を管理するプレゼンテーションコンポーネントと、状態を管理するコンテナコンポーネントに責務を分離し、
-ステートはコンテナコンポーネントにさせることとします。
+First, let's look at the design of components.
+I will separate the responsibilities of the component into a presentation component, which manages its appearance,
+and a container component, which manages its state.
+I'll let the container component manage the state.
 
-- プレゼンテーション: BaseProgress
-- コンテナ: ReadingProgress
+- Presentation: BaseProgress
+- Container: ReadingProgress
 
 ![component grapth](https://res.cloudinary.com/dz3vsv9pg/image/upload/f_auto,q_100/v1602931054/readling-progress/component_ajqajf.png 'component graph')
 
-## プログレスバーを実装する
+## Implementing the progress bar
 
-プレゼンテーションコンポーネントとしてプログレスバーを実装します。propsには、maxとvalueを受け取ります。
+Implements a progress bar as a presentation component.
 
 ```vue[BaseProgress.vue]
-
 <template>
   <progress class="h-1 appearance-none w-full" :max="max" :value="value" />
 </template>
@@ -70,32 +73,36 @@ Reading Progressはページの上部にあるプログレスバーのことで�
     }
   }
 </style>
-
 ```
 
-スタイルのポイントとしては、プログレスバーのスタイルはブラウザの差異が大きいため、Webkitなどの設定が必要なことです。今回はおしゃれにグラデーションカラーを設定します。
+The key to style is that the style of the progress bar varies widely between browsers,
+so you need to set up Webkit and so on.
+In this case, I'm going to set the gradient color in a stylish way.
 
 <playground>
   <progress-playground />
 </playground>
 
-## コンテナコンポーネントを実装する
+## Implementing a container component
 
-見た目ができたので、コンテナコンポーネントでステートを管理し、それを渡しましょう。ステートは`max`と`value`を管理します。`max`は次のように算出します。
+Let's manage the states in the container component and pass them. The state manages the `max` and `value`.
+The `max` is calculated as follows,
 
 ```js
 const max = document.body.clientHeight - window.innerHeight
 ```
 
-また、`value`は `document.scrollingElement.scrollTop`から取得できます。
+You can also get the `value` from `document.scrollingElement.scrollTop`.
 
-これらをスクロールイベントの発火の度に取得し、リアクティブにレンダリングすればいいわけです。
+You can get them every time the scrolling event fires and render them reactively.
 
-イベントを`document`や`window`オブジェクトに設定しましょう。コンポーネント内で`document`や`window`オブジェクトにアクセスするためには、Vueでは`BeforeMount`以降のライフサイクルでなくてはなりません。
+Let's set the events to the `document` and `window` objects.
+In order to access the `document` and `window` objects in a component, the lifecycle in Vue has to be after `BeforeMount`.
 
-Vue3では正式にComposition-apiが採用されました。今回は、ステートとロジック、ライフサイクルとComposition-apiを使うのにはうってつけなため、これを期に使ってみましょう。
+Vue3 has officially adopted Composition API.
+This time around, I'll take this opportunity to use Composition API, as it's a great way to use it.
 
-<alert>Vue3の場合は import { onBeforeMount } from 'vue3' のように使います</alert>
+<alert>For Vue3, I'll use import { onBeforeMount } from 'vue3'</alert>
 
 ```ts
   import { onBeforeMount, reactive, toRefs, onBeforeUnmount } from '@nuxtjs/composition-api'
@@ -134,15 +141,17 @@ Vue3では正式にComposition-apiが採用されました。今回は、ステ�
   }
 ```
 
-1.ステートを準備します。ステートが複数で関連があるなどまとめて管理する場合は、`reactive`関数が便利です。
+1.Prepare the states. The `reactive` function is useful if you want to manage multiple and related states at once.
 
-2.マウントする前に、初期位置をセットしています。また、今回はイベントリスナーへイベントを登録したので、コンポーネントのアンマウント前に登録したイベントを削除します。
+2.Set the initial position before mounting the component.
+Also, since I have registered the event to the event listener, I delete the registered event before unmounting the component.
 
-3.リアクティブオブジェクトをリターンします。
+3.Return the reactive object.
 
-このステートとロジックとライフサイクルを集約し、ビューから分離させることこそ、Composition-apiの利点と言えます。こうすることで、単独でのテスト容易性とポータビリティを高めることができます。
+This aggregation of state, logic and life cycle, and separation from the view, is the advantage of Composition API.
+By doing so, I can increase the portability and ease of testing on its own.
 
-最後に先程作った関数を、コンポーネントで利用します。
+Finally, use the function just created in our components.
 
 ```vue[ReadingProgress.vue]
 <template>
@@ -168,6 +177,7 @@ Vue3では正式にComposition-apiが採用されました。今回は、ステ�
 
 ```
 
-`setup`で値をリターンしているので、`max`と`value`がテンプレートから参照できます。これは、先程の関数で`toRefs`によってリアクティブなオブジェクトを返しているためできます。
+Since I return the value with `setup`, the `max` and `value` can be referenced from the template.
+This can be done because the function used earlier returns a reactive object by `toRefs`.
 
-あとは、`Props`に値を受け渡してあげると、スクロールや画面のリサイズの度にプログレスバーの進捗が調整される、Reading Progress機能の完成になります。
+Now, if you pass the value to `Props`, you'll complete the Reading Progress function, which adjusts the progress bar every time you scroll or resize the screen.

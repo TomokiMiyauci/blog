@@ -19,7 +19,7 @@ Reading Progressはページの上部にあるプログレスバーのことで�
 
 ## コンポーネント設計
 
-まず、コンポーネントの設計について見てみましょう。コンポーネントは見た目を管理するプレゼンテーションコンポーネントと、状態を管理するコンテナコンポーネントに責務を分離し、
+まず、コンポーネントの設計について見てみましょう。コンポーネントは見た目を管理するプレゼンテーションコンポーネントと、状態を管理するコンテナコンポーネントに責務を分離します。
 ステートはコンテナコンポーネントにさせることとします。
 
 - プレゼンテーション: BaseProgress
@@ -32,7 +32,6 @@ Reading Progressはページの上部にあるプログレスバーのことで�
 プレゼンテーションコンポーネントとしてプログレスバーを実装します。propsには、maxとvalueを受け取ります。
 
 ```vue[BaseProgress.vue]
-
 <template>
   <progress class="h-1 appearance-none w-full" :max="max" :value="value" />
 </template>
@@ -70,7 +69,6 @@ Reading Progressはページの上部にあるプログレスバーのことで�
     }
   }
 </style>
-
 ```
 
 スタイルのポイントとしては、プログレスバーのスタイルはブラウザの差異が大きいため、Webkitなどの設定が必要なことです。今回はおしゃれにグラデーションカラーを設定します。
@@ -93,7 +91,7 @@ const max = document.body.clientHeight - window.innerHeight
 
 イベントを`document`や`window`オブジェクトに設定しましょう。コンポーネント内で`document`や`window`オブジェクトにアクセスするためには、Vueでは`BeforeMount`以降のライフサイクルでなくてはなりません。
 
-Vue3では正式にComposition-apiが採用されました。今回は、ステートとロジック、ライフサイクルとComposition-apiを使うのにはうってつけなため、これを期に使ってみましょう。
+Vue3では正式にComposition APIが採用されました。今回は、ステートとロジック、ライフサイクルとComposition APIを使うのにはうってつけなため、これを期に使ってみましょう。
 
 <alert>Vue3の場合は import { onBeforeMount } from 'vue3' のように使います</alert>
 
@@ -140,7 +138,7 @@ Vue3では正式にComposition-apiが採用されました。今回は、ステ�
 
 3.リアクティブオブジェクトをリターンします。
 
-このステートとロジックとライフサイクルを集約し、ビューから分離させることこそ、Composition-apiの利点と言えます。こうすることで、単独でのテスト容易性とポータビリティを高めることができます。
+このステートとロジックとライフサイクルを集約し、ビューから分離させることこそ、Composition APIの利点と言えます。こうすることで、単独でのテスト容易性とポータビリティを高めることができます。
 
 最後に先程作った関数を、コンポーネントで利用します。
 
@@ -153,7 +151,7 @@ Vue3では正式にComposition-apiが採用されました。今回は、ステ�
   import BaseProgress from '@/components/reading-progress/atoms/BaseProgress.vue'
   import { defineComponent, onBeforeMount, reactive, toRefs, onBeforeUnmount } from '@nuxtjs/composition-api'
 
-  const useReadingProgress ... //別ファイルに切り出すこともできます
+  const useReadingProgress ... //You can also separate file.
 
   export default defineComponent({
     components: {
@@ -165,7 +163,6 @@ Vue3では正式にComposition-apiが採用されました。今回は、ステ�
     }
   })
 </script>
-
 ```
 
 `setup`で値をリターンしているので、`max`と`value`がテンプレートから参照できます。これは、先程の関数で`toRefs`によってリアクティブなオブジェクトを返しているためできます。
