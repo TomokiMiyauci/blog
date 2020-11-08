@@ -1,6 +1,6 @@
 ---
-title: ViteでVue3のTypescript環境を構築する
-description: No bundleツールのViteを使って、TypescriptでのVue3環境を構築します。ESLintやPrettierの設定もあわせて行い、DXの高い環境を構築します。
+title: Building a Vue3 Typescript Environment with Vite
+description: Building a Typescript Vue3 environment using the No bundle tool Vite, along with ESLint and Prettier configuration to create a high DX environment.
 tags: 
   - Vue3
   - Tutorial
@@ -11,32 +11,32 @@ cover: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w
 alt: cover
 ---
 
-## はじめに
+## Introduction
 
-ViteはVue.jsの作者のEvan You氏が開発しているビルドツールです。
-ネイティブのES Moduleのインポートを利用し、バンドル不要で高速に動作する開発環境を提供します。
-Vue3はもちろん、ReactやPreactも対応しています。
+Vite is a build tool developed by Evan You, the author of Vue.
+It uses native ES Module imports to provide a fast running development environment with no bundling required.
+Vue3, React and Preact are also supported.
 
-今回はそんなViteを使って、Vue3プロジェクトの環境構築をします。
+In this article, I'll build a Vue3 project environment using Vite.
 
-できあがったテンプレートは[こちら](https://github.com/TomokiMiyauci/vite-vue3-template)にあります。
+You can find the template in [here](https://github.com/TomokiMiyauci/vite-vue3-template).
 
-## やること
+## Things to do
 
-vue/cliのdefaultテンプレートに近づけることを目標に、最低限開発に必要なツールを導入していきます。
-ツールを個別に導入できるよう、それぞれ順を追って説明しています。
+The goal is to get you close to the default vue/cli template, and I'll implement the necessary tools for development.
+I'm going to walk you through each of these tools so that you can introduce them individually.
 
 - Typescript
 - ESLint
 - Prettier
 - Stylelint
-- huskyとlint-staged
+- husky and lint-staged
 - Path Alias
 - VTI
 
-## 環境構築
+## Building Environments
 
-まずは、viteのテンプレートを展開しましょう。
+First, let's expand the vite template.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -60,23 +60,23 @@ vue/cliのdefaultテンプレートに近づけることを目標に、最低限
   </code-block>
 </code-group>
 
-開発サーバーを立ち上げるとその速さに感動します。
+Once the development server is up, you'll be impressed by how fast it is.
 
-### Typescriptにする
+### Typescript
 
-続いてプロジェクトをTypescript化しましょう。といってもVue3からはデフォルトでTypescriptが使えるので次の３つを行うだけです。
+Next, let's make your project Typescripted. Since Vue3 has Typescript by default, you only need to do the following three things.
 
-1.すべての`.vue`ファイルの`script`タグに`lang="ts"`を追記します。  
-2.`main.js`を`main.ts`に変更します。  
-3.`index.html`のscriptタグのsrcを`/src/main.ts`に変更します。
+1.Add `lang="ts"` to the `script` tag in all `.vue` files.  
+2.Change `main.js` to `main.ts`.  
+3.Change the src of the script tag of `index.html` to `/src/main.ts`.
 
-これで開発サーバーを立ち上げると、問題なく実行できるのが確認できます。
+Now you can start up the development server and see that it runs without any problem.
 
-実際はこれだけでも動きますが、エディター上でのユーザーエクスペリエンスを向上させるために、さらに設定を加えます。
+It will actually work on its own, but you can add more settings to improve the user experience in the editor.
 
-VSCodeを使っている場合は、`main.ts`でts(2307)エラーが出ているはずです。
+If you're using VSCode, you should see a `main.ts` with a `ts(2307)` error.
 
-これを解消するには、vue用の型宣言ファイルを用意します。
+To fix this, need to create a type declaration file for vue.
 
 ```ts[~/src/shims-vue.d.ts]
 declare module '*.vue' {
@@ -86,7 +86,7 @@ declare module '*.vue' {
 }
 ```
 
-`tsconfig.json`をプロジェクトルートに設置します。これでエディターにTypescriptプロジェクトであることを認識させます。
+Place the `tsconfig.json` in your project root. This will tell the editor to recognize the project as a Typescript project.
 
 ```json[tsconfig.json]
 {
@@ -123,14 +123,13 @@ declare module '*.vue' {
     "node_modules"
   ]
 }
-
 ```
 
-これでTypescript化は終了です。
+That's the end of Typescript.
 
-### ESLintを導入する
+### Introducing ESLint
 
-リンターのない開発は厳しいので、必ず導入しましょう。
+Development without a linter is tough, so be sure to install it.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -174,7 +173,7 @@ declare module '*.vue' {
 }
 ```
 
-`package.json`の`script`にリント用のコマンドを用意するとのちのち楽です。
+It is easy to prepare a linting command in the `script` of the `package.json` for later.
 
 ```json[package.json]
 "scripts": {
@@ -182,9 +181,9 @@ declare module '*.vue' {
 }
 ```
 
-個人的には、fixしたくない場面もあるので、`--fix`は外から付けるようにしています。
+Personally, I don't want to fix some situations, so I use `--fix` from outside.
 
-さてこれを実行させましょう。
+Now let's run this.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -204,8 +203,8 @@ declare module '*.vue' {
   </code-block>
 </code-group>
 
-VSCodeユーザーは以下の設定もすることで、自動フォーマットを効かせることができます。
-ESLintの拡張が必要なので、なければ[ここを参考に](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)インストールしてください。
+VSCode users can also set up the following settings to make the automatic formatting work.
+An extension to ESLint is required, so if you don't have it, please install it [see here](<https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint>).
 
 ```json[.vscode/settings.json]
 {
@@ -215,11 +214,11 @@ ESLintの拡張が必要なので、なければ[ここを参考に](https://mar
 }
 ```
 
-これによって保存時にフォーマットできました。
+This allowed me to format the file on save.
 
-### huskyとlint-stagedを設定する
+### Configuring husky and lint-staged
 
-コミット前に、静的チェックを走らせ、エラーコードをコミットできない仕組みにしましょう。
+Before committing, let's run a static check to make sure you can't commit the error code.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -239,7 +238,7 @@ ESLintの拡張が必要なので、なければ[ここを参考に](https://mar
   </code-block>
 </code-group>
 
-`package.json`に次を追加します。
+Add the following to `package.json`.
 
 ```json[package.json]
 {
@@ -254,14 +253,14 @@ ESLintの拡張が必要なので、なければ[ここを参考に](https://mar
 }
 ```
 
-これによって、コミット前にコミットファイルのうち該当する拡張子のファイルに対し、ESLintが走ります。
+This causes ESLint to run against any files with the appropriate extensions in the commit file before you commit.
 
-もちろんリントエラーの場合はコミットがキャンセルされます。
+Of course, on a linting error, the commit is canceled.
 
-### Prettierを設定する
+### Configuring Prettier
 
-Prettierにプロジェクト全体のフォーマットを任せましょう。
-また、Typescriptのコードでは、セミコロンは視認性が悪くなるため、Prettierで自動的に削除しましょう。
+Let Prettier do the formatting for your entire project.
+Also, let Prettier automatically remove semicolons in Typescript code.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -289,7 +288,7 @@ Prettierにプロジェクト全体のフォーマットを任せましょう。
 }
 ```
 
-ESLintとPrettierを併用する場合、ルールのバッティングがあるため、`.eslintrc`を修正します。
+When ESLint and Prettier are used together, I need to fix the ``.eslintrc`` to avoid duplicate rules.
 
 ```json[.eslintrc]
 {
@@ -304,7 +303,7 @@ ESLintとPrettierを併用する場合、ルールのバッティングがある
 }
 ```
 
-コマンドによってフォーマッターを実行できます。
+command to execute the formatter.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -324,7 +323,7 @@ ESLintとPrettierを併用する場合、ルールのバッティングがある
   </code-block>
 </code-group>
 
-コミット前に自動フォーマットを適用させたいので、`lint-staged`にその設定を加えます。
+I want to apply automatic formatting before committing, so add the setting to ``lint-staged``.
 
 ```json[package.json]
 {
@@ -335,8 +334,8 @@ ESLintとPrettierを併用する場合、ルールのバッティングがある
 }
 ```
 
-VSCodeユーザーは次の設定によって、自動的にフォーマットできます。
-また、例によって拡張が必要なので、なければ[こちらを参考に](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)インストールしてください。
+VSCode users can format it automatically with the following settings.
+Also, an extension is required, so if it is not available, please install it [see here](<https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>).
 
 ```json[.vscode/settings.json]
 {
@@ -345,9 +344,9 @@ VSCodeユーザーは次の設定によって、自動的にフォーマット�
 }
 ```
 
-### Stylelintを設定する
+### Configuring Stylelint
 
-スタイルもリント対象にしましょう。
+Let's make the style a target for linting as well.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -373,7 +372,7 @@ VSCodeユーザーは次の設定によって、自動的にフォーマット�
 }
 ```
 
-`package.jsoon`を編集して、コマンドとlint-stagedを設定します。
+Edit the `package.json` and set the commands and lint-staged.
 
 ```json[package.json]
 {
@@ -388,17 +387,17 @@ VSCodeユーザーは次の設定によって、自動的にフォーマット�
 }
 ```
 
-VSCodeユーザーは次の設定によって、自動的にフォーマットできます。
-拡張が必要なので、なければ[こちらを参考に](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint)インストールしてください。
+VSCode users can format it automatically with the following settings.
+Extensions are required, so if you don't have them, install them [see here](https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint).
 
-長くなりましたがこれでリンターとフォーマッターの基本的な設定は終了です。
+That's the end of the basic setup of the linker and formatter.
 
-### Path Aliasを設定する
+### Configuring Path Alias
 
-モジュールのimportはデフォルトでは相対パスを指定しますが、aliasを設定して常に同じルートを参照したいです。
-viteは内部ではRollupを使用しているようですが、`vite.config.ts`を作成しaliasを設定しましょう。
+The import of the module is relative by default, but you want to set an alias to always refer to the same root.
+As vite seems to use Rollup internally, let's create a `vite.config.ts` file and set up alias.
 
-<alert type="warning">Keyは`/`から始まらなければなりません。</alert>
+<alert type="warning">Key must start with `/`.</alert>
 
 ```ts[vite.config.ts]
 import { join } from 'path'
@@ -411,7 +410,7 @@ const config: UserConfig = {
 }
 ```
 
-これでaliasの設定ができました。こんな感じで使います。
+Now you can set up alias. I'll use it like this.
 
 ```vue[App.vue]
 <script lang="ts">
@@ -419,14 +418,15 @@ const config: UserConfig = {
 </script>
 ```
 
-`/`から始まらなければならないのが、少し違和感ありますが、パッケージ名のaliasとの兼ね合いみたいです。
-詳しくは[こちら](https://github.com/vitejs/vite/blob/master/src/node/config.ts#L53)を参照ください。
+It's a little strange that it has to start from `/`, but it seems to combine with the alias of the package name.
+For more information, please refer to [here](https://github.com/vitejs/vite/blob/master/src/node/config.ts#L53).
 
-### VTIでtemplateの静的チェックをする
+### Checking template statically in VTI
 
-<alert type="warning" >VTIはWIPなため、使用は各自判断してください</alert>
+<alert type="warning" >VTI is a WIP, so use at your own discretion</alert>
 
-Vueファイルのtemplateタグへも静的チェックを行いたいです。今回はVeturのプロジェクトにあるvtiを使います。
+I want to do a static check on the template tag in the Vue file as well.
+In this case, use the vti in the Vetur project.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -452,7 +452,7 @@ Vueファイルのtemplateタグへも静的チェックを行いたいです。
 }
 ```
 
-既存のVueファイルでは`defineComponent`でラップしないとエラーになってしまうので、修正します。
+The existing Vue files need to be wrapped with a `defineComponent` or they will fail.
 
 ```vue[*.vue]
 <script lang="ts">
@@ -461,6 +461,7 @@ Vueファイルのtemplateタグへも静的チェックを行いたいです。
 </script>
 ```
 
-また、静的チェックはVueファイルが増加するとかなり時間がかかるようになるため、コミット前ではなくCIで実行することをおすすめします。
+I also recommend running static checks in CI rather than before committing,
+as static checks can take quite a bit of time as the number of Vue files increases.
 
-以上で最低限の環境が構築できました。
+That's the minimum environment you'll need to build.
