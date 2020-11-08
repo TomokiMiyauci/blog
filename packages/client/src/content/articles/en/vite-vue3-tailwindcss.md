@@ -1,6 +1,6 @@
 ---
-title: ViteとVue3でtailwindcssを導入する
-description: ViteプロジェクトでCSSフレームワークのtailwindcssを導入する方法を紹介します。ついでに、tailwindcss用のStylelintのルールやVSCodeの設定をします。
+title: Introduce tailwindcss to Vite and Vue3
+description: Show how to introduce the CSS framework tailwindcss in your Vite project. In addition, explain how to set up Stylelint rules and VSCode for tailwindcss.
 tags: 
   - Vue3
   - tailwindcss
@@ -12,20 +12,22 @@ cover: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w
 alt: cover
 ---
 
-## はじめに
+## Introduction
 
-ViteはNo bundle掲げており、開発時に高速なHMRを提供してくれます。
-しかし、Cliを用いたデフォルトテンプレート自体はかなりシンプルになっているため、Viteプロジェクトを始める際、他のモジュールを使うには自分で環境を構築しなければなりません。
+Vite has a No bundle policy and provides a fast HMR during development.
+However, the default template with CLI itself is fairly simple, so when you start a Vite project,
+you'll have to build your own environment to use the other modules.
 
-今回はViteを使って、CSSフレームワークであるtailwindcssの環境構築をします。
+In this article, I will use Vite to build an environment for tailwindcss as CSS framework.
 
-なお、[こちら](https://github.com/TomokiMiyauci/vite-vue3-template)の環境をベースに説明するので、適宜参考にしてください。
-以下ではViteプロジェクトがある前提で説明します。
+Please refer to [here](https://github.com/TomokiMiyauci/vite-vue3-template) for more details.
 
-## 環境構築
+In the following, I will assume that there is a Vite project.
 
-まずは、tailwindcssモジュールをインストールし、設定ファイルを生成します。
-ついでに、`scss`や`sass`も使いたいので、それ用のモジュールもインストールします。
+## Environment building
+
+First, install tailwindcss module and generate a configuration file.
+As you want to use `scss` and `sass`, install modules for them as well.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -47,7 +49,7 @@ ViteはNo bundle掲げており、開発時に高速なHMRを提供してくれ�
   </code-block>
 </code-group>
 
-続いて、tailwindのディレクティブを注入するために、スタイルファイルを用意します。
+Next, prepare a style file to inject the tailwind directive.
 
 ```css[~/assets/styles/tailwind.scss]
 @tailwind base;
@@ -55,7 +57,7 @@ ViteはNo bundle掲げており、開発時に高速なHMRを提供してくれ�
 @tailwind utilities;
 ```
 
-PostCSSの設定ファイルも必要なので、プロジェクトルートに用意します。
+Also need a PostCSS configuration file in the project root.
 
 ```js[~/postcss.config.js]
 module.exports = {
@@ -63,9 +65,9 @@ module.exports = {
 }
 ```
 
-最後にスタイルファイルをエントリーポイントでインポートします。
+Finally, import the style file at the entry point.
 
-<alert>例ではパスエイリアスでパスを指定しています。各自適切なパスを設定してください。</alert>
+<alert>For example, the path is specified in the path alias. Set the appropriate path.</alert>
 
 ```ts[~/src/main.ts]
 import { createApp } from 'vue'
@@ -76,15 +78,15 @@ import '/@/assets/styles/tailwind.scss'
 createApp(App).mount('#app')
 ```
 
-これで開発時にUtility Classを使えるようになりました。
+Now you can use Utility Classes during development.
 
-## DXを向上させる
+## Improving DX
 
-VSCodeではtailwindのインテリセンスを効かせることができます。
-[こちらから](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)インストールしてください。
+VSCode allows you to make tailwind's intellisense work.
+[here](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) to install it.
 
-また、VSCodeではデフォルトで`css`のバリデーションを行っているので、`unknownAtRules`が出ています。
-それを、解消するには以下のように`settings.json`に設定します。
+Also, VSCode has `unknownAtRules` by default as it validates `css`.
+To fix it, set the `settings.json` as follows.
 
 ```json[~/.vscode/settings.json]
 {
@@ -93,9 +95,10 @@ VSCodeではtailwindのインテリセンスを効かせることができます
 }
 ```
 
-Stylelintを使っている場合は、`@tailwind`や、`@apply`などtailwind特有の構文がStylelintのルールに引っかかることがあります。
+If you are using Stylelint, the syntax of `@tailwind` and `@apply`,
+which are specific to tailwind may cause problems with Stylelint rules.
 
-これを解消しましょう。
+Let's get rid of this.
 
 ```json[.stylelintrc]
 {
@@ -116,11 +119,11 @@ Stylelintを使っている場合は、`@tailwind`や、`@apply`などtailwind�
 }
 ```
 
-## PurgeCSSでビルドを最適化する
+## PurgeCSS to optimize your build
 
-tailwindはそのままビルドしてしまうと、使っていない膨大なUtility Classも一緒にバンドルされてしまいます。
+If you build tailwind as is, it will also bundle a huge number of Utility Classes that you don't use with it.
 
-PurgeCSSを内包しているので、設定してビルドを最適化しましょう。
+Tailwindcss supports PurgeCSS as standard, so you should configure it to optimize your build.
 
 ```js[~/tailwind.config.js]
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -148,6 +151,7 @@ const config = {
 module.exports = config
 ```
 
-ちなみにES Module形式ではなく、CommonJS形式で記述している理由は、tailwindcssのプラグインがES Module形式を認識できないからです。`.js`形式なのも同様の理由です。
+The reason why CommonJS format is used instead of ES Module format is because the tailwindcss plugin cannot recognize the ES Module format.
+The reason why it is `.js` format is also the same.
 
-さてこれにてtailwindcssの環境が構築できました。
+Now the environment of tailwindcss has been created.
