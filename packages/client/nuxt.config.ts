@@ -193,14 +193,21 @@ const config: NuxtConfig = {
 
   robots: {
     UserAgent: '*',
-    Sitemap: `${HOSTNAME}sitemap.xml`
+    Sitemap: `${HOSTNAME}sitemap.xml.gz`
   },
 
   sitemap: {
     hostname: HOSTNAME,
+    i18n: true,
+    trailingSlash: true,
+    defaults: {
+      changefreq: 'daily',
+      priority: 0.5,
+      lastmod: new Date()
+    },
     routes: async () => {
       // const { $content } = (await import('@nuxt/content')).default as { $content: $content }
-      const only = ['slug', 'tags']
+      const only = ['slug', 'tags', 'updatedAt']
       const jaFiles = (await $content('articles', 'ja')
         .only(only)
         .where({ private: false })
@@ -215,10 +222,44 @@ const config: NuxtConfig = {
       const jaTags = jaFiles.map(({ tags }) => tags).flat()
       const enTags = enFiles.map(({ tags }) => tags).flat()
 
-      const jaTagLocs = Array.from(new Set(jaTags)).map((tag) => `ja/tags/${toKebabCase(tag)}`)
-      const enTagLocs = Array.from(new Set(enTags)).map((tag) => `/tags/${toKebabCase(tag)}`)
-      const jaLocs = jaFiles.map(({ slug }) => `/ja/post/${slug}`)
-      const enLocs = enFiles.map(({ slug }) => `/post/${slug}`)
+      const jaTagLocs = Array.from(new Set(jaTags)).map((tag) => {
+        return {
+          url: `ja/tags/${toKebabCase(tag)}`,
+          links: ['en', 'ja'].map((lang) => {
+            const baseUrl = lang === 'en' ? 'tags/' : `${lang}/tags/`
+            return { lang, url: `${baseUrl}${tag}/` }
+          })
+        }
+      })
+      const enTagLocs = Array.from(new Set(enTags)).map((tag) => {
+        return {
+          url: `/tags/${toKebabCase(tag)}`,
+          links: ['en', 'ja'].map((lang) => {
+            const baseUrl = lang === 'en' ? 'tags/' : `${lang}/tags/`
+            return { lang, url: `${baseUrl}${tag}/` }
+          })
+        }
+      })
+      const jaLocs = jaFiles.map(({ slug, updatedAt }) => ({
+        url: `/ja/post/${slug}`,
+        priority: 1,
+        lastmod: updatedAt,
+        links: ['en', 'ja'].map((lang) => {
+          const baseUrl = lang === 'en' ? 'post/' : `${lang}/post/`
+          return { lang, url: `${baseUrl}${slug}/` }
+        })
+      }))
+      const enLocs = enFiles.map(({ slug, updatedAt }) => {
+        return {
+          url: `/post/${slug}`,
+          lastmod: updatedAt,
+          priority: 1,
+          links: ['en', 'ja'].map((lang) => {
+            const baseUrl = lang === 'en' ? 'post/' : `${lang}/post/`
+            return { lang, url: `${baseUrl}${slug}/` }
+          })
+        }
+      })
 
       return [...jaLocs, ...enLocs, ...jaTagLocs, ...enTagLocs]
     },
@@ -270,7 +311,7 @@ const config: NuxtConfig = {
   },
 
   generate: {
-    interval: 2000
+    interval: 1500
   }
 }
 

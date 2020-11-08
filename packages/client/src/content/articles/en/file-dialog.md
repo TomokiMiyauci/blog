@@ -1,6 +1,6 @@
 ---
-title: どこからでもファイルダイアログを呼び出したい
-description: プログラムからファイルダイアログを呼び出し、FileListを受け取る方法を解説
+title: I want to call the file dialog from anywhere
+description: Explains how to call a file dialog from a program and receive a FileList
 tags: 
   - Typescript
   - Javascript
@@ -12,20 +12,22 @@ cover: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_80,w_8
 alt: cover
 ---
 
-## ファイルダイアログとは
+## What is the File Dialog
 
-`input`のtypeに`file`を指定し、クリックすると出てくるあれです。現状、ファイルダイアログ自体を直接プログラムから呼び出す方法は無いようで、
-巷の解説では、
+The `input` tag has type of `file`, and if you click on it, you can see the file dialog.
+Currently, there is no way to call the file dialog directly from the program.
+The following is a description of how to call the file dialog.
 
-- inputタグをhiddenにして、labelをボタンのように見せるCSSハック
-- inputタグをhiddenにして、getElementでDOMを取得し、`click`を呼び出す
+- CSS hack to make the label look like a button by making the input tag hidden
+- Make the input tag hidden, get the DOM with getElement and call `click`.
 
-といった方法が溢れています。これらの方法は、同じファイルを複数回選択したときに、inputの`change`イベントが発生しなかったり余計な要素のレンダリングが必要であったりします。
-ファイルダイアログを呼び出して、ファイルを受け取りたいだけなのに、スマートではありません。
+These methods do not cause input `change` events to occur when the same file is selected multiple times,
+or require rendering of extra elements.
+It's not smart to call the file dialog and just want to receive the file.
 
-今回は、ファイルダイアログを簡単に呼び出し、ファイルを受け取る方法を解説します。
+In this article, I'll show you how to easily call a file dialog and receive a file.
 
-## 実装
+## Implementation
 
 ```ts
 export const fileDialog = (accept: string = '*', multiple: boolean = false): Promise<FileList> =>
@@ -49,15 +51,19 @@ export const fileDialog = (accept: string = '*', multiple: boolean = false): Pro
   })
 ```
 
-ポイントとしては、ファイルダイアログを呼び出すだけなら、input要素のレンダリングは必要ありません。
-そのかわりに、`createElement`でinput要素を作成し`click`でtype=fileのinputタグをクリックしたときと、同じイベントを発生できます。
+The point is, if you just want to call the file dialog, you don't need to render the input element.
+Instead, you can generate the same event as when you create an input element with `createElement` and click on the input tag with `click` type=file.
 
-input要素では`onchange`の発火後、`input`の`files`プロパティで、ファイルダイアログで選択されたファイルへアクセスできます。型としては`FileList`または`null`を受け取るので、nullチェックのために分岐します。
+After firing the `onchange` event, the `input` property allows you to access the file selected in the file dialog in the `files` property.
+As it accepts `FileList` or `null` as the type, it branches off for a null check.
 
-Promiseでラップすることにより、`onchange`を同期的に処理できるため、呼び出し側で `await`を付ければ同期的に処理できます。サンプルでは、`files`が`null`の場合は、`reject`として処理しています。
+Because `onchange` can be handled synchronously by wrapping it with Promise,
+you can add `await` in the caller to handle it synchronously. In the sample, when `files` is `null`, it is treated as a `reject`.
 
-また、引数として`accept`と`multiple`を受け取るようにしています。どちらもinputタグに存在する属性で、`accept`には受け取るファイルの種類を指定します。`multiple`を`true`にすると複数のファイルを選択できます。
+Also, the sample takes `accept` and `multiple` as arguments.
+Both of them are in the input tag and `accept` specifies the type of the file to accept. If `multiple` is set to `true`,
+you can select multiple files.
 
-この関数をボタンなどのクリックイベント等によって呼び出すことで、ファイルダイアログを開き、ファイルを受け取ることができます。
+You can call this function by a click event such as a button to open a file dialog and receive the file.
 
-ロジックとビューを分離でき、シンプルに実装できるため、ぜひ参考にしてください。
+You can separate the logic from the view and implement it simply, so please refer to it.

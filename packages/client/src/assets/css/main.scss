@@ -60,6 +60,12 @@
   ul {
     list-style-type: disc;
     @apply my-2 mx-5;
+
+    li {
+      code {
+        @apply p-1 bg-gray-400 bg-opacity-25 rounded-md;
+      }
+    }
   }
 
   & .nuxt-content-highlight {
