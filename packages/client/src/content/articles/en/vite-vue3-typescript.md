@@ -335,7 +335,7 @@ I want to apply automatic formatting before committing, so add the setting to ``
 ```
 
 VSCode users can format it automatically with the following settings.
-Also, an extension is required, so if it is not available, please install it [see here](<https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>).
+Also, an extension is required, so if it is not available, please install it [here](<https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode>).
 
 ```json[.vscode/settings.json]
 {
