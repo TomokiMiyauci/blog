@@ -39,7 +39,7 @@
     const reportViolation = (): Promise<void> => {
       return reportedUserDoc(ctx, props.id).set({
         userRef: userDoc(ctx),
-        createdAt: ctx.$fireStoreObj.FieldValue.serverTimestamp()
+        createdAt: ctx.$fireModule.firestore.FieldValue.serverTimestamp()
       })
     }
 

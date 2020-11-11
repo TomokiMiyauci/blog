@@ -27,6 +27,7 @@
   import ButtonGoogle from '@/components/atoms/buttons/ButtonGoogle.vue'
   import { user } from '@/store'
   import { defineComponent, ref } from '@nuxtjs/composition-api'
+  import type firebase from 'firebase'
 
   export default defineComponent({
     components: {
@@ -42,7 +43,7 @@
       }
 
       // const onSend = async () => {
-      //   const result = await root.$fireAuth.signInWithEmailLink(email.value, 'https://tech-xas.web.app')
+      //   const result = await root.$fire.auth.signInWithEmailLink(email.value, 'https://tech-xas.web.app')
       //   console.log(result)
       // }
 
