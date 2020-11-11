@@ -8,10 +8,10 @@
   import { Headline } from '@/types/article'
   import { defineComponent } from '@nuxtjs/composition-api'
   export default defineComponent({
-    async asyncData({ $fireStore, $content, params }) {
+    async asyncData({ $fire, $content, params }) {
       const { uid } = params
       if (!uid) return
-      const result = await $fireStore
+      const result = await $fire.firestore
         .collection('users')
         .doc(uid)
         .collection('likedArticles')

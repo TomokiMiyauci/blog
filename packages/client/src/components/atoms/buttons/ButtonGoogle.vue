@@ -7,7 +7,7 @@
 <script lang="ts">
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
   import GoogleIcon from '@/components/atoms/icons/GoogleIcon.vue'
-  import { defineComponent } from '@nuxtjs/composition-api'
+  import { defineComponent, useContext } from '@nuxtjs/composition-api'
 
   export default defineComponent({
     components: {
@@ -16,8 +16,9 @@
     },
 
     setup(_, { root, emit }) {
+      useContext()
       const onClick = async (): Promise<void> => {
-        const { user } = await root.$fireAuth.signInWithPopup(new root.$fireAuthObj.GoogleAuthProvider())
+        const { user } = await root.$fire.auth.signInWithPopup(new root.$fireModule.auth.GoogleAuthProvider())
 
         if (user) {
           emit('signin', user)

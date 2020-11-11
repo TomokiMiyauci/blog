@@ -1,10 +1,12 @@
 .nuxt-content {
+  @apply leading-relaxed;
    p {
-     @apply py-1 mb-2 leading-relaxed transition-colors duration-300 ease-linear;
+     @apply py-1 mb-2 leading-7 transition-colors duration-300 ease-linear;
 
-     code {
-      @apply p-1 bg-gray-400 bg-opacity-25 rounded-md;
+    code {
+      @apply py-2px px-3px bg-gray-300 bg-opacity-50 rounded-md text-purple-600;
     }
+
 
      img {
        @apply mx-auto rounded;
@@ -13,10 +15,14 @@
 
   a {
     @apply text-green-600 font-bold;
+
+    code {
+      @apply py-2px px-3px bg-gray-300 shadow-xs bg-opacity-25 rounded-md text-purple-600;
+    }
   }
 
   h2, h3 {
-    @apply relative mt-6 mb-4 text-2xl;
+    @apply text-gray-900 relative mt-6 mb-2 text-2xl;
 
     &::before {
       @apply block pointer-events-none invisible;
@@ -60,12 +66,6 @@
   ul {
     list-style-type: disc;
     @apply my-2 mx-5;
-
-    li {
-      code {
-        @apply p-1 bg-gray-400 bg-opacity-25 rounded-md;
-      }
-    }
   }
 
   & .nuxt-content-highlight {
@@ -94,8 +94,7 @@
 }
 
 body {
-  @apply text-gray-800;
-
+  @apply antialiased text-gray-700;
 }
 
 html {
@@ -105,5 +104,22 @@ html {
 .dark-mode {
   body {
     @apply bg-gray-800 text-white transition duration-300;
+  }
+
+  .nuxt-content {
+    p {
+      code {
+        @apply text-teal-400 bg-gray-900;
+      }
+    }
+    h2, h3 {
+      @apply text-white;
+    }
+
+    a {
+      code {
+        @apply text-teal-400 bg-gray-900;
+      }
+    }
   }
 }

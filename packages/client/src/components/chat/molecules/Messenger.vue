@@ -113,7 +113,7 @@
           name: 'name',
           text: message,
           isUser: true,
-          createdAt: ctx.$fireStoreObj.FieldValue.serverTimestamp()
+          createdAt: ctx.$fireModule.firestore.FieldValue.serverTimestamp()
         })
 
         sender.value!.clearMessage()

@@ -1,5 +1,5 @@
 <template>
-  <span class="inline-flex">
+  <span class="inline-flex items-center">
     <slot />
     <span class="ml-1">{{ text }}</span>
   </span>

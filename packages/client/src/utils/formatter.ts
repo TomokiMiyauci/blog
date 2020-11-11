@@ -1,3 +1,4 @@
+import type firebase from 'firebase'
 export const formatDate = (date: Date | string, locale: string = 'en'): string => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
 

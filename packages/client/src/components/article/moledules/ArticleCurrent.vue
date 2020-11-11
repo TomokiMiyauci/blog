@@ -10,7 +10,7 @@
       <div class="p-4">
         <nuxt-link
           tag="h2"
-          class="text-2xl hover:text-green-500 transition duration-300 font-bold"
+          class="text-3xl hover:text-green-500 transition duration-300"
           :to="localePath({ name: 'post-slug', params: { slug: article.slug } })"
         >
           {{ article.title }}

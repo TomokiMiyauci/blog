@@ -58,7 +58,7 @@
       await articleCommentRef(ctx)!.add({
         userRef: userDoc(ctx),
         text: newCommentRef.value,
-        createdAt: ctx.$fireStoreObj.FieldValue.serverTimestamp()
+        createdAt: ctx.$fireModule.firestore.FieldValue.serverTimestamp()
       })
 
       await getComment()

@@ -5,9 +5,10 @@
  ** Default: https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js
  */
 const { join } = require('path')
+
 const BASE_DIR = join(__dirname, 'src')
 const VUE_FILE = join('**', '*.vue')
-
+const defaultTheme = require('tailwindcss/defaultTheme')
 /**
  * @type {import("src/types/tailwindcss").TailwindcssConfiguration}
  */
@@ -20,11 +21,8 @@ const config = {
     darkSelector: '.dark-mode',
     extend: {
       fontFamily: {
-        sans: [
-          'Quicksand',
-          // ...defaultTheme.fontFamily.sans
-          "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'"
-        ]
+        sans: ['DM Sans', ...defaultTheme.fontFamily.sans],
+        mono: ['DM Mono', ...defaultTheme.fontFamily.mono]
       },
       gridTemplateColumns: {
         main: 'minmax(20%,340px) 1fr min(15%,200px)'
@@ -46,6 +44,9 @@ const config = {
       },
 
       spacing: {
+        '1px': '1px',
+        '2px': '2px',
+        '3px': '3px',
         72: '18rem',
         84: '21rem',
         96: '24rem',

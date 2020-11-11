@@ -1,5 +1,5 @@
 import CommentUnit from '@/components/comment/molecules/CommentUnit.vue'
-import { firestore } from 'firebase'
+import firebase from 'firebase'
 
 export default {
   title: 'comment/molecules/CommentUnit',
@@ -17,7 +17,7 @@ export const DEFAULT = () => ({
 
   props: {
     createdAt: {
-      default: firestore.Timestamp.fromDate(new Date())
+      default: firebase.firestore.Timestamp.fromDate(new Date())
     },
 
     text: {

@@ -85,7 +85,8 @@ const config: NuxtConfig = {
     '@nuxtjs/color-mode',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/composition-api'
+    '@nuxtjs/composition-api',
+    '@nuxtjs/google-fonts'
   ],
 
   stylelint: {
@@ -95,6 +96,13 @@ const config: NuxtConfig = {
   tailwindcss: {
     cssPath: '@/assets/css/tailwind.scss',
     configPath: join(__dirname, 'tailwind.config.js')
+  },
+
+  googleFonts: {
+    families: {
+      'DM+Sans': true,
+      'DM+Mono': true
+    }
   },
   /*
    ** Nuxt.js modules
@@ -159,7 +167,9 @@ const config: NuxtConfig = {
       analytics: {
         collectionEnabled: isProduction
       },
-      firestore: true,
+      firestore: {
+        memoryOnly: true
+      },
       auth: true
     }
   },
@@ -184,6 +194,21 @@ const config: NuxtConfig = {
         document.readingTime = text
       }
     }
+
+    // generate: {
+    //   async done(builder) {
+    //     const appModule = await import('./.nuxt/firebase/app.js')
+    //     const { session } = await appModule.default(builder.options.firebase.config, {
+    //       res: null
+    //     })
+    //     try {
+    //       session.database().goOffline()
+    //     } catch (e) {}
+    //     try {
+    //       session.firestore().terminate()
+    //     } catch (e) {}
+    //   }
+    // }
   },
 
   sentry: {

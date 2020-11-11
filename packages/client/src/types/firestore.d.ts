@@ -1,4 +1,5 @@
 import type { userDoc } from '@/utils/firestore-reference'
+import type firebase from 'firebase'
 
 export type Article = {
   like: number

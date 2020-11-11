@@ -8,21 +8,26 @@
       <img class="h-48 w-full" loading="lazy" style="max-height: 300px" :alt="headline.alt" :src="headline.img" />
 
       <div class="p-4">
-        <div class="flex justify-end mb-1">
-          <calendar-edit-date :date="new Date(headline.createdAt)" />
-          <timer-reading-time class="pl-2" :text="headline.readingTime" />
+        <div>
+          <div class="flex justify-end mb-1">
+            <calendar-edit-date :date="new Date(headline.createdAt)" />
+            <timer-reading-time class="pl-2" :text="headline.readingTime" />
+          </div>
+          <nuxt-link
+            tag="h2"
+            class="text-3xl hover:text-green-500 transition font-semibold leading-tight duration-300"
+            :to="localePath({ name: 'post-slug', params: { slug: headline.slug } })"
+          >
+            {{ headline.title }}
+          </nuxt-link>
+          <p class="mt-3 mb-3 leading-normal">{{ headline.description }}</p>
         </div>
-        <nuxt-link
-          tag="h2"
-          class="text-2xl hover:text-green-500 transition duration-300 font-bold"
-          :to="localePath({ name: 'post-slug', params: { slug: headline.slug } })"
-        >
-          {{ headline.title }}
-        </nuxt-link>
-        <p class="mt-3 mb-3">{{ headline.description }}</p>
+
         <!-- <nuxt-link :to="localePath({ name: 'slug', params: { slug: headline.slug } })">Learn More</nuxt-link> -->
         <!-- <tags :tags="headline.tags" /> -->
-        <base-tag v-for="tag in headline.tags" :key="tag" :name="tag" is-small />
+        <div>
+          <base-tag v-for="tag in headline.tags" :key="tag" :name="tag" is-small />
+        </div>
       </div>
     </div>
   </nuxt-link>
