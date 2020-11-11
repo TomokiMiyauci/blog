@@ -12,7 +12,7 @@ type BaseContent = {
   toc: Toc[]
   extension: '.md'
   createdAt: string
-  updated: string
+  updatedAt: Date
 }
 
 type Frontmatter = {
