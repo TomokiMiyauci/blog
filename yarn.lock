@@ -3803,13 +3803,13 @@
   integrity sha512-BW3qhvxlPBKlMkZHtARFPeliFraiZHS28G3j4qgRbSfOBtHC0yDX3Dnq1LkQMzAbPfbw6A1L3sdjgBVZZnfFAw==
 
 "@nuxtjs/sentry@^4.3.4":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/sentry/-/sentry-4.4.0.tgz#24e04411e9e8e6d1050ffb4892c6d4ece17f51cf"
-  integrity sha512-P/acF9D3nO9Wer0bR/0iDEHclSkVmD/46GQ6rZkFdJFta9YX9ECtPXHvuswi13qdq/IA3TlWe+Fm5pf3LmKw8w==
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@nuxtjs/sentry/-/sentry-4.5.0.tgz#e82c722e7a45e7509711b3a3712c11048ca7a2da"
+  integrity sha512-sIquOUOQ2HUTWlR5udf2FbBFJcaakgxSmycozANV3G4b3E4dGdLYTieVm+oLqj5BcxNLv2RHRf0Wn0JFwr26Zw==
   dependencies:
-    "@sentry/browser" "^5.27.2"
-    "@sentry/integrations" "^5.27.2"
-    "@sentry/node" "^5.27.2"
+    "@sentry/browser" "^5.27.3"
+    "@sentry/integrations" "^5.27.3"
+    "@sentry/node" "^5.27.3"
     "@sentry/webpack-plugin" "^1.13.0"
     consola "^2.15.0"
     deepmerge "^4.2.2"
@@ -4229,7 +4229,7 @@
     lodash "^4.17.4"
     read-pkg-up "^7.0.0"
 
-"@sentry/browser@^5.27.2":
+"@sentry/browser@^5.27.3":
   version "5.27.3"
   resolved "https://registry.yarnpkg.com/@sentry/browser/-/browser-5.27.3.tgz#02e78a4502ee99988d3cbb0075a11ec44b503871"
   integrity sha512-vczS+XTW4Nk2A7TIpAw8IVFHpp+NK6mV9euBG2I61Bs2QbQY9yKLfbjiln/yH2Q8X4THX6MKa0GuiPoCEeq3uw==
@@ -4270,7 +4270,7 @@
     "@sentry/utils" "5.27.3"
     tslib "^1.9.3"
 
-"@sentry/integrations@^5.27.2":
+"@sentry/integrations@^5.27.3":
   version "5.27.3"
   resolved "https://registry.yarnpkg.com/@sentry/integrations/-/integrations-5.27.3.tgz#d9a8f898c9414e9dc287fcd00d28321f54f4701e"
   integrity sha512-lmkYH3g1ZW9I8g3SXQNYIfNc9gaNoqJUxgTI9d0AQph+mSB8Y3lx50NYMAfK74XgiC3VJ9j8kWstdQCMbgfXpQ==
@@ -4289,7 +4289,7 @@
     "@sentry/types" "5.27.3"
     tslib "^1.9.3"
 
-"@sentry/node@^5.27.2":
+"@sentry/node@^5.27.3":
   version "5.27.3"
   resolved "https://registry.yarnpkg.com/@sentry/node/-/node-5.27.3.tgz#174b81fbca8cadac12afe49910cbe9cc25b23f87"
   integrity sha512-IZ/TkYRY+P/E5C+RF6Rcb6tpY59fyk0040Q3akzbDjb/hrw5TRKnK8fJ6/0gXCAOvlDPIlpRHFJgJ1p2QgWy+g==
