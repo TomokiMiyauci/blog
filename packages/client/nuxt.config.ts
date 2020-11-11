@@ -85,7 +85,8 @@ const config: NuxtConfig = {
     '@nuxtjs/color-mode',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/composition-api'
+    '@nuxtjs/composition-api',
+    '@nuxtjs/google-fonts'
   ],
 
   stylelint: {
@@ -95,6 +96,13 @@ const config: NuxtConfig = {
   tailwindcss: {
     cssPath: '@/assets/css/tailwind.scss',
     configPath: join(__dirname, 'tailwind.config.js')
+  },
+
+  googleFonts: {
+    families: {
+      'DM+Sans': true,
+      'DM+Mono': true
+    }
   },
   /*
    ** Nuxt.js modules
