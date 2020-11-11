@@ -1,5 +1,5 @@
 <template>
-  <h1 class="font-mono text-4xl font-semibold mb-4 leading-tight">{{ text }}</h1>
+  <h1 class="text-4xl mb-4 leading-tight dark:text-white text-gray-800">{{ text }}</h1>
 </template>
 
 <script lang="ts">
