@@ -15,7 +15,7 @@
           </div>
           <nuxt-link
             tag="h2"
-            class="text-3xl hover:text-green-500 transition font-semibold duration-300"
+            class="text-3xl hover:text-green-500 transition font-semibold leading-tight duration-300"
             :to="localePath({ name: 'post-slug', params: { slug: headline.slug } })"
           >
             {{ headline.title }}
