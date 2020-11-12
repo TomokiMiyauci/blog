@@ -25214,10 +25214,10 @@ vfile@^4.0.0:
     unist-util-stringify-position "^2.0.0"
     vfile-message "^2.0.0"
 
-vls@^0.5.7:
-  version "0.5.7"
-  resolved "https://registry.yarnpkg.com/vls/-/vls-0.5.7.tgz#b58bbc530514065077aa16be823507492d770bb9"
-  integrity sha512-EDwXlexzfUYotUnRqLE46qktIG/p6cJpkt6/zdraGaF7kH0jpsOk2YayM44Lw35kt5Graqcoofcn3NbnC7Z1wg==
+vls@^0.5.8:
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/vls/-/vls-0.5.8.tgz#7c0f4962dcf925501a8d0a6673df9f21649ab81a"
+  integrity sha512-MDaDgXcuS5qzaZoruCxFcCNZrntD2+RjlO9b1HvUyW5XJdEDPtodciRh6u3+8NYQLaFi/Dag/C+MFqzYHUNPnQ==
   dependencies:
     eslint "^7.13.0"
     eslint-plugin-vue "^7.1.0"
@@ -25232,12 +25232,12 @@ void-elements@^3.1.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
   integrity sha1-YU9/v42AHwu18GYfWy9XhXUOTwk=
 
-vti@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/vti/-/vti-0.0.16.tgz#f65283955e9c45292475d8987f85201b5a29c339"
-  integrity sha512-CbXMNZkTFj/1LfsxuF+VshFXArEV4+HIa8nUZHJzid4iA+BsR4qKVmpnmBMcFtc4EKxpWkzAGykgBkPnvZccNA==
+vti@^0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/vti/-/vti-0.0.17.tgz#3dcea4dbfc31036b729c3adbc61f82653bcc79d7"
+  integrity sha512-8QGizfxFgUP4gYZts32LSn0h63u83REITZd05WY0DRNiGGPg7vZsllmVLwS5/WzRrii9sYBQcTvAWHnrpwkSQA==
   dependencies:
-    vls "^0.5.7"
+    vls "^0.5.8"
 
 vue-axe@^2.4.0:
   version "2.4.2"
