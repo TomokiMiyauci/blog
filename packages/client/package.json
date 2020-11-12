@@ -92,7 +92,6 @@
     "husky": "^4.2.5",
     "jest": "^26.1.0",
     "lint-staged": "^10.2.11",
-    "postcss-100vh-fix": "^1.0.0",
     "postcss-viewport-height-correction": "^2.0.2",
     "prettier": "^2.0.5",
     "reading-time": "^1.2.0",
