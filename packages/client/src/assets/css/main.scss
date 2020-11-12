@@ -1,16 +1,15 @@
 .nuxt-content {
   @apply leading-relaxed;
-   p {
-     @apply py-1 mb-2 leading-7 transition-colors duration-300 ease-linear;
+  p {
+    @apply py-1 mb-2 leading-7 transition-colors duration-300 ease-linear;
 
     code {
       @apply py-2px px-3px bg-gray-300 bg-opacity-50 rounded-md text-purple-600;
     }
 
-
-     img {
-       @apply mx-auto rounded;
-     }
+    img {
+      @apply mx-auto rounded;
+    }
   }
 
   a {
@@ -21,7 +20,8 @@
     }
   }
 
-  h2, h3 {
+  h2,
+  h3 {
     @apply text-gray-900 relative mt-6 mb-2 text-2xl;
 
     &::before {
@@ -29,7 +29,7 @@
 
       height: 85px;
       margin-top: -85px;
-      content: " ";
+      content: ' ';
 
       @screen lg {
         height: 100px;
@@ -41,7 +41,7 @@
       @apply ml-5;
 
       &::before {
-        content: "#";
+        content: '#';
         @apply text-green-500 font-normal text-xl leading-8 -ml-5 pr-2 absolute opacity-100 transition-opacity duration-300 delay-200 ease-in-out;
       }
 
@@ -112,7 +112,8 @@ html {
         @apply text-teal-400 bg-gray-900;
       }
     }
-    h2, h3 {
+    h2,
+    h3 {
       @apply text-white;
     }
 
