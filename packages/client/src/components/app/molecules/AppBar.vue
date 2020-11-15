@@ -4,8 +4,7 @@
   >
     <div class="container relative h-full flex items-center justify-between mx-auto px-4 lg:py-6">
       <nuxt-link class="font-mono inline-flex items-end" :to="localePath('/')">
-        <img width="56px" src="/icon.png" alt="logo" />
-        <logo-text class="hidden sm:block" />
+        <logo />
       </nuxt-link>
       <div class="flex items-center">
         <fulltext-search />
@@ -26,6 +25,7 @@
   import AppNavigationDrawer from '@/components/app/molecules/AppNavigationDrawer.vue'
   import ButtonCircle from '@/components/atoms/buttons/ButtonCircle.vue'
   import HamburgerClose from '@/components/atoms/icons/HamburgerClose.vue'
+  import Logo from '@/components/atoms/logos/Logo.vue'
   import LogoText from '@/components/atoms/logos/LogoText.vue'
   import LangSwitcher from '@/components/lang-switcher/molecules/LangSwitcher.vue'
   import FulltextSearch from '@/components/searcher/molecules/FulltextSearch.vue'
@@ -36,6 +36,7 @@
       ButtonCircle,
       FulltextSearch,
       LogoText,
+      Logo,
       LangSwitcher,
       HamburgerClose,
       AppNavigationDrawer
