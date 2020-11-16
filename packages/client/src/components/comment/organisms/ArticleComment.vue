@@ -1,7 +1,7 @@
 <template>
   <div ref="div">
-    <h2 class="mb-5 text-2xl">
-      <mdi-comment-text-multiple /><span class="ml-2">{{ $t('title') }}</span
+    <h2 class="mb-5 text-2xl lg:text-4xl xl:text-5xl">
+      <mdi-comment-text-multiple class="xl:w-16 xl:h-16 lg:w-10 lg:h-10" /><span class="ml-2">{{ $t('title') }}</span
       ><span class="px-2 shadow ml-2 rounded-full bg-red-500">{{ commentCount }}</span>
     </h2>
 

@@ -108,6 +108,12 @@ html {
 .dark-mode {
   body {
     @apply bg-gray-800 text-white transition duration-300;
+
+    li {
+      code {
+        @apply text-teal-400 bg-gray-900;
+      }
+    }
   }
 
   .nuxt-content {
