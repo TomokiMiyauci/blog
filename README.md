@@ -14,7 +14,7 @@
 [![CodeFactor](https://www.codefactor.io/repository/github/tomokimiyauci/blog/badge)](https://www.codefactor.io/repository/github/tomokimiyauci/blog)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3aa70358bd4742e892901cec7d65657c)](https://www.codacy.com/manual/development.operation.6.6.6/blog?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TomokiMiyauci/blog&amp;utm_campaign=Badge_Grade)
 [![DeepScan grade](https://deepscan.io/api/teams/10684/projects/13513/branches/230629/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=10684&pid=13513&bid=230629)
-[![RelativeCI](https://badges.relative-ci.com/badges/C3AE8ywl4E79uM0dKQLG?branch=develop)](https://app.relative-ci.com/projects/C3AE8ywl4E79uM0dKQLG)
+[![RelativeCI](https://badges.relative-ci.com/badges/ZRQd3JI45KbYMnALEb6m?branch=develop)](https://app.relative-ci.com/projects/ZRQd3JI45KbYMnALEb6m)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![Gitmoji](https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat)](https://gitmoji.carloscuesta.me/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)

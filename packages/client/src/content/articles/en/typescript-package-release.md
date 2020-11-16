@@ -1,6 +1,6 @@
 ---
-title: 最小構成でTypescriptパッケージを公開する
-description: TypescriptプロジェクトをパッケージとしてNPMレジストリへ公開する方法を説明します。パッケージマネジャーにNPM、Yarnを使っている場合を想定しています。
+title: Publish Typescript Packages with minimal configuration
+description: Describes how to publish the Typescript project as a package to the NPM registry. It assumes you are using NPM and Yarn as a package manager.
 tags: 
   - Typescript
   - Package
@@ -12,29 +12,30 @@ cover: https://res.cloudinary.com/dz3vsv9pg/image/upload/c_scale,f_auto,q_auto,w
 alt: cover
 ---
 
-## はじめに
 
-Typescriptで書かれたNode.jsパッケージをNPMレジストリへ公開する方法を紹介します。
-トランスパイラに`tsc`を、ターゲットに`CommonJS`を想定した、一般的なパッケージを公開する手順を説明します。
+## Introduction
 
-この記事では、特に以下の人におすすめの内容になっています。
+I will show you how to expose Node.js packages written in Typescript to the NPM registry.
+I will walk you through the process of publishing a generic package, assuming `tsc` as the compiler and `CommonJS` as the target.
 
-- パッケージの公開を初めて行う方
-- Typescriptプロジェクトのパッケージについて知りたい方
-- いきなり`standard-version`や`semantic-release`など自動リリースツールを使ったはいいものの、
-実際にどんなことを行っているのか知りたい方
+This article is especially recommended for the following people.
 
-この記事では、最も原初的なリリースの部分を説明しています。
-そこで、Gitタグやリリースノート、 GitHubリリースの更新などについては説明していません。
-このあたりについては別の記事で紹介する予定です。
+- Those who are publishing a package for the first time
+- Who want to know about the Typescript project packages
+- Although used automatic release tools such as `standard-version` and `semantic-release`,
+Who want to know what actually doing
 
-最後にはパッケージの削除のやり方まで紹介するので、手を動かしてやってもらえると、雰囲気をつかめるかと思われます。
+This article covers the most primitive part of the release.
+I'm not going to cover things like Git tags, release notes, or updating GitHub releases.
+We'll cover this area in another article.
 
-## Typescriptの環境構築
+I'll even show you how to remove packages at the end, so you can get a feel for it if get hands-on with it.
 
-まずは、適当なTypescriptプロジェクトを用意します。
-.gitignoreをはじめ各種リンターの導入などは説明から省くので、適宜対応してください。
-すでにプロジェクトがある場合は、必要な部分を参考にしてください。
+## Building the Typescript environment
+
+First, prepare a Typescript project.
+The introduction is omitted .gitignore and other linters from the explanation, so please deal with it accordingly.
+If you already have a project, please refer to the necessary parts of it.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -55,10 +56,10 @@ Typescriptで書かれたNode.jsパッケージをNPMレジストリへ公開す
 </code-group>
 
 ```bash
-package name: (test-typescript-release) //NPMに存在していない名前にする必要があります
-version: (1.0.0) 0.0.0 //とりあえず0.0.0にしておきます
+package name: (test-typescript-release) // Must be a non-existent
+version: (1.0.0) 0.0.0 // Set it to 0.0.0 for now
 description: This is test typescript project
-entry point: (index.js) dist/index.js　// outDirに合わせて変更します
+entry point: (index.js) dist/index.js　// Change this to match the outDir
 test command:
 git repository:
 keywords: test
@@ -66,7 +67,8 @@ author: TomokiMiyauci
 license: (ISC) MIT
 ```
 
-package nameについては、NPMで一意である必要があります。次のコマンドや、NPMのウェブサイトなどで、プロジェクトが存在しているか確認しておくと確実です。
+The package name must be unique in NPM.
+You can confirm the existence of the project by using the following command or the NPM website.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -86,13 +88,13 @@ package nameについては、NPMで一意である必要があります。次�
   </code-block>
 </code-group>
 
-また最初の`version`については、`0.1.0`が推奨されているようですので、それよりも低い`0.0.0`にしておきます。
+As for the first `version`, the recommended value is `0.1.0`, so you should set it to `0.0.0`.
 
-version`1.0.0`については、以下の基準があるようです。
+For `version`1.0.0`, the following criteria seem to apply.
 
-`もし既にプロダクション用途であなたのソフトウェアが利用されているのなら、それは1.0.0であるべきでしょう。またもし安定したAPIを持ち、それに依存しているユーザーが複数いるのなら、それは1.0.0であるべきでしょう。もし後方互換性について多大な心配をしているのなら、それは1.0.0であるべきでしょう。`
+`If your software is being used in production, it should probably already be 1.0.0. If you have a stable API on which users have come to depend, you should be 1.0.0. If you’re worrying a lot about backwards compatibility, you should probably already be 1.0.0.`
 
-続いてTypescriptに必要なパッケージを導入します。
+Next, install the packages needed for Typescript.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -141,12 +143,11 @@ version`1.0.0`については、以下の基準があるようです。
 }
 ```
 
-Node.jsで動くパッケージを想定しているので、`module`は`CommonJS`にします。
-`outDir`にはコンパイルするときの出力先を指定します。
-またパッケージなので、`declaration`や`declarationMap`、`sourceMap`は全て`true`にします。
-そして、`include`にはコンパイルに含めるディレクトリを指定します。今回メインのコードは`src`以下に置くこととします。
+Since the package is intended to work with Node.js, `module` is set to `CommonJS`.
+It is a package, set `declaration`, `declarationMap` and `sourceMap` to `true`.
+And `include` is the directory you want to include in the compilation. The main code is placed under `src`.
 
-package.jsonの`script`にビルド用のコマンドと、パブリッシュ前に毎回ビルドを行うコマンドを設定しましょう。
+Set the `script` in package.json to include the build command and the command to build the code before publishing each time.
 
 ```json[package.json]
 {
@@ -164,20 +165,21 @@ package.jsonの`script`にビルド用のコマンドと、パブリッシュ前
   },
   "scripts": {
     "build": "tsc",
-    "prepublishOnly": "yarn build" // npmユーザーの場合はnpm run build
+    "prepublishOnly": "yarn build" // "npm run build" if you are an npm user
   }
 }
 ```
 
-`private`オプションは`false`を明示しておきましょう。`true`の場合は決して公開されないことを示します。
+The `private` option should be marked `false`. If the option set to `true`, the file is never published.
 
-また、`files`オプションには、実際に公開するディレクトリを指定します。これによって、余計なものを公開せずに済みます。
-tsconfig.jsonの`outDir`でdistを指定したので、これに合わせてdistを指定します。
-同様の理由で、`main`オプションもdist/index.jsにします。これは`import`や`require`のエントリーポイントとなります。
+Also, the `files` option specifies the actual directory to be published. This saves you from publishing anything extra.
+Since I specified dist in the `outDir` in `tsconfig.json`, I can specify the dist to match it.
+For the same reason, set the `main` option to dist/index.js . This will be the entry point for `import` and `require`.
 
-あとはsrcディレクトリを作って、適当なプログラムを用意します。エントリーポイントとしては先程`main`でdist/index.jsを指定したので`index.ts`があれば問題ありません。
+Now, make a src directory and prepare an appropriate program.
+As I specified dist/index.js in `main` earlier, there is no problem as long as you have `index.ts` as the entry point.
 
-適当にファイルから関数をインポートしてRe-exportしておきます。ここはご自身で好きなプログラムを用意しても構いません。
+Import the functions from the file and re-export them as you see fit. You can create your own program here as well.
 
 ```ts[~/src/index.ts]
 export { hello } from './core'
@@ -187,7 +189,7 @@ export { hello } from './core'
 export const hello = () => console.info('hello world')
 ```
 
-これをコンパイルすると次のようなディレクトリ構造になります。
+When compile it, you get the following directory structure
 
 ```bash
 .
@@ -208,12 +210,12 @@ export const hello = () => console.info('hello world')
 └── yarn.lock/package-lock.json
 ```
 
-## パッケージを公開する
+## Publish the package
 
-あとはパッケージを公開するだけです。公開するには、まずNPMのアカウントが必要です。
-アカウントがない場合は、[こちら](https://www.npmjs.com/signup)からアカウントを作成してください。
+All you have to do now is to publish the package. To publish, you need an NPM account first.
+If you don't have an account, please create one from [here](https://www.npmjs.com/signup).
 
-続いて、コマンドラインでログインします。
+Then, log in with the command line.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -233,7 +235,7 @@ export const hello = () => console.info('hello world')
   </code-block>
 </code-group>
 
-ちゃんとログインできたかは、次のコマンドで確認できます。
+You can check if you have successfully logged in with the following command.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -253,8 +255,8 @@ export const hello = () => console.info('hello world')
   </code-block>
 </code-group>
 
-無事ログインできたら、いよいよパッケージを公開します。
-公開には次のコマンドを実行します。
+Once you have successfully logged in, it's time to publish the package.
+To do so, issue the following command.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -274,21 +276,23 @@ export const hello = () => console.info('hello world')
   </code-block>
 </code-group>
 
-対話型インタフェースでversionを聞かれますので、最初は`0.1.0`としましょう。
+The interactive interface asks for the version, so set `0.1.0` at first.
 
 ```bash
 info Current version: 0.0.0
 question New version: 0.1.0
 ```
 
-ここはインクリメントしなければ公開できない仕様になっています。
-そのうち採番がめんどくさくなってきますが、commit messageから自動採番するツールが存在します。このあたりの解説はまた別の記事で行います。
+If you don't increment version, you can't publish it.
+The numbering process will be a pain in the ass, but there is a tool that automatically numbers from the commit message.
+I will explain about this in another article.
 
-その後、package.jsonのversionが自動で書き換わり、パッケージの公開が完了します。
+After that, the version of package.json will be rewritten automatically and the package will be published.
 
-またコマンドログを見ると、package.jsonの`prepublishOnly`に指定した、ビルドコマンドも実行されています。
+If you look at the command log,
+you can see that the build command specified in `prepublishOnly` of package.json is also executed.
 
-無事公開されたら、公開されたパッケージをインストールしてみましょう。
+After the package has been successfully published, let's install the published package.
 
 <code-group>
   <code-block label="Yarn" active>
@@ -308,9 +312,9 @@ question New version: 0.1.0
   </code-block>
 </code-group>
 
-普通のパッケージのように`import`や`require`で指定すると、しっかりインポートできます。エディタにもよりますが、型情報なども表示されているかと思われます。
+You can import them by `import` or `require` like normal packages. Depending on the editor, type information may also be shown.
 
-また、インストールしたパッケージをnode_modulesから確認すると、以下のような内容が公開されていることがわかります。
+Also, if you check the installed package from node_modules, you will see the following information.
 
 ```bash
 .
@@ -326,30 +330,31 @@ question New version: 0.1.0
 └── package.json
 ```
 
-package.jsonの`files`オプションで指定したように、distディレクトリと、package.jsonのみが公開されているようですね。
+It looks like only the dist directory and package.json are public, as specified in the `files` option of package.json.
 
-## パッケージを削除する
+## Removing the package
 
-パッケージの削除には次のコマンドを実行します。
+You can remove the package by executing the following command.
 
 ```bash
 npm unpublish <package-name>　--force
 ```
 
-ちなみにyarn v1ではunpublishコマンドがサポートされていません。
-そのためyarnでpublishした場合でも、npmでunpublishすれば問題ないです。
+By the way, yarn v1 does not support the unpublish command.
+So if you publish with yarn, you can unpublish with npm.
 
-また、unpublishには非公開ポリシーが存在します。
-詳しくは[こちら](https://www.npmjs.com/policies/unpublish)を参照いただきたいですが、要約すると以下の場合、非公開にできます。
+Also, unpublish has a privacy policy.
+See [here](https://www.npmjs.com/policies/unpublish) for more details, but in summary, you can make the following cases private
 
-- 72時間以内に公開されたパッケージ
-  - NPMの他のパブリックパッケージに参照されていない
+- Packages published within 72 hours
+  - Not referenced to any other public package in NPM
 
-- 公開から72時間以上経過したパッケージ
-  - NPMの他のパブリックパッケージに参照されていない
-  - 前週のダウンロード数が300以下
-  - 単一のオーナーまたはメンテナ
+- Packages that are more than 72 hours old since their release
+  - Not referenced to any other public package in NPM
+  - Less than 300 downloads in the previous week
+  - Single owner or maintainer
 
-テストで作る分には問題ありませんが、他のパブリックパッケージに参照されると、削除は事実上できないことに注意が必要です。
+You should be aware that while this works fine for testing,
+it is virtually impossible to remove it if it is referenced by another public package.
 
-なにはともあれこれで、 Typescriptパッケージの公開ができました。
+At any rate, the Typescript package is now available.

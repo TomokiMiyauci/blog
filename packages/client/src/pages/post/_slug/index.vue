@@ -1,29 +1,33 @@
 <template>
-  <div class="container mx-auto">
+  <!-- <div class="container mx-auto"> -->
+  <div>
     <readling-progress />
-    <nuxt-link
-      ref="scrollAnchor"
-      class="inline-flex items-center dark:hover:text-nuxt-lightgreen light:hover:text-nuxt-lightgreen dark:text-dark-onSurfaceSecondary light:text-light-onSurfaceSecondary nuxt-link-active"
-      :to="localePath('/')"
-    ></nuxt-link>
+
+    <div ref="scrollAnchor" />
 
     <article>
-      <div class="flex md:grid grid-temp grid-cols-main">
-        <toc v-if="article" class="hidden md:block" :toc="article.toc" />
-        <div style="grid-column: 2 / 3" class="px-4 overflow-hidden pb-12">
-          <div class="mb-5 pb-5">
-            <article-header v-bind="article" />
-          </div>
+      <div>
+        <div style="grid-column: 2 / 3" class="overflow-hidden pb-12">
+          <article-header v-bind="article" />
 
-          <nuxt-content :document="article" />
-          <!-- <prev-next class="my-32" :prev="prev" :next="next" /> -->
-          <current-articles class="my-20" :articles="currentArticles" />
-          <article-comment class="mt-20" />
+          <section class="row lg:mt-16">
+            <toc class="lg:col-2 sm:col-9 px-4 pt-8 container" :toc="article.toc" />
+
+            <nuxt-content class="lg:col-8 sm:col-9 col-12 px-4 container" :document="article" />
+
+            <div class="lg:col-2 pr-6 lg:col" />
+
+            <!-- <prev-next class="my-32" :prev="prev" :next="next" /> -->
+            <div class="container">
+              <current-articles class="my-20 px-4" :articles="currentArticles" />
+              <article-comment class="mt-32 w-full px-4" />
+            </div>
+          </section>
         </div>
 
-        <div class="hidden md:block p-4" style="grid-column: 3 / 3">
+        <p class="hidden md:block p-4" style="grid-column: 3 / 3">
           <!-- <tags-list class="lg:sticky lg:top-0 lg:pt-24 lg:-mt-24" :tags="['hello', 'world', 'blog']" /> -->
-        </div>
+        </p>
       </div>
     </article>
     <portal to="bottom-right">

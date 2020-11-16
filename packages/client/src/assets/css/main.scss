@@ -65,6 +65,10 @@
 
   ul {
     list-style-type: disc;
+
+    code {
+      @apply py-2px px-3px bg-gray-300 bg-opacity-50 rounded-md text-purple-600;
+    }
     @apply my-2 mx-5;
   }
 
@@ -104,6 +108,12 @@ html {
 .dark-mode {
   body {
     @apply bg-gray-800 text-white transition duration-300;
+
+    li {
+      code {
+        @apply text-teal-400 bg-gray-900;
+      }
+    }
   }
 
   .nuxt-content {
