@@ -41,9 +41,7 @@
   const useComment = () => {
     const ctx = useContext()
     const commentsRef = ref<Comment[]>([])
-    // const commentsRef = ref<Comment[]>([
-    //   { createdAt: Date as any, id: 'rkbABwsHkNrsbUzpyqKP', text: 'asfs', userRef: { id: 'hhiih' } as any }
-    // ])
+
     const newCommentRef = ref<string>('')
     const isProcessing = ref<boolean>(false)
 
