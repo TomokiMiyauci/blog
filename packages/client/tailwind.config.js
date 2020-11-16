@@ -39,6 +39,9 @@ const config = {
         12: '3rem',
         16: '4rem',
         20: '5rem',
+        '-20': '-5rem',
+        '-144': '-36rem',
+        '-180': '-45rem',
         '11/12': '91.666667%',
         full: '100%'
       },
@@ -65,6 +68,21 @@ const config = {
       opacity: {
         90: '0.9',
         95: '0.95'
+      },
+
+      fontSize: {
+        '7xl': '5rem',
+        '8xl': '6rem',
+        '9xl': '7rem',
+        '10xl': '8rem'
+      },
+
+      height: {
+        'screen-90': '90vh',
+        'screen-80': '80vh',
+        'screen/2': '50vh',
+        'screen/3': 'calc(100vh / 3)',
+        'screen/4': 'calc(100vh / 4)'
       }
     }
   },
