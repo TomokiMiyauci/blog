@@ -5,7 +5,7 @@
     class="bg-gray-100 w-full dark:bg-gray-900 rounded-md overflow-hidden shadow-md cursor-pointer hover:bg-gray-200 hover:scale-105 transform hover:shadow-xl hover:opacity-90 transition duration-200 ease-in"
   >
     <div>
-      <img class="h-48 w-full" loading="lazy" :alt="alt" :src="article.img" />
+      <img class="h-48 w-full" loading="lazy" alt="cover" :src="article.img" />
 
       <div class="p-4">
         <nuxt-link

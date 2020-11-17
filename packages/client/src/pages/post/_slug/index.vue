@@ -11,11 +11,11 @@
           <article-header v-bind="article" />
 
           <section class="row lg:mt-16">
-            <toc class="lg:col-2 sm:col-9 px-4 pt-8 container" :toc="article.toc" />
+            <toc class="lg:col-2 sm:col-9 px-4 pt-8 mx-auto" :toc="article.toc" />
 
-            <nuxt-content class="lg:col-8 sm:col-9 col-12 px-4 container" :document="article" />
+            <nuxt-content class="lg:col-6 sm:col-9 col-12 px-4 mx-auto" :document="article" />
 
-            <div class="lg:col-2 pr-6 lg:col" />
+            <div class="lg:col-2 mx-auto" />
 
             <!-- <prev-next class="my-32" :prev="prev" :next="next" /> -->
             <div class="container">
