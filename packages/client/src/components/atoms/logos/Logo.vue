@@ -1,5 +1,5 @@
 <template>
-  <div class="font-mono inline-flex items-end">
+  <div class="inline-flex items-end">
     <logo-icon class="rounded" />
     <logo-text />
   </div>
