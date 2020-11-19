@@ -102,7 +102,8 @@ const config: NuxtConfig = {
     families: {
       'DM+Sans': true,
       'DM+Mono': true
-    }
+    },
+    display: 'swap'
   },
   /*
    ** Nuxt.js modules
