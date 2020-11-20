@@ -226,7 +226,6 @@ const config: NuxtConfig = {
   sitemap: {
     hostname: HOSTNAME,
     i18n: true,
-    trailingSlash: true,
     defaults: {
       changefreq: 'daily',
       priority: 0.5,
@@ -254,7 +253,7 @@ const config: NuxtConfig = {
           url: `ja/tags/${toKebabCase(tag)}`,
           links: ['en', 'ja'].map((lang) => {
             const baseUrl = lang === 'en' ? 'tags/' : `${lang}/tags/`
-            return { lang, url: `${baseUrl}${tag}/` }
+            return { lang, url: `${baseUrl}${tag}` }
           })
         }
       })
@@ -263,7 +262,7 @@ const config: NuxtConfig = {
           url: `/tags/${toKebabCase(tag)}`,
           links: ['en', 'ja'].map((lang) => {
             const baseUrl = lang === 'en' ? 'tags/' : `${lang}/tags/`
-            return { lang, url: `${baseUrl}${tag}/` }
+            return { lang, url: `${baseUrl}${tag}` }
           })
         }
       })
@@ -273,7 +272,7 @@ const config: NuxtConfig = {
         lastmod: updatedAt,
         links: ['en', 'ja'].map((lang) => {
           const baseUrl = lang === 'en' ? 'post/' : `${lang}/post/`
-          return { lang, url: `${baseUrl}${slug}/` }
+          return { lang, url: `${baseUrl}${slug}` }
         })
       }))
       const enLocs = enFiles.map(({ slug, updatedAt }) => {
@@ -283,7 +282,7 @@ const config: NuxtConfig = {
           priority: 1,
           links: ['en', 'ja'].map((lang) => {
             const baseUrl = lang === 'en' ? 'post/' : `${lang}/post/`
-            return { lang, url: `${baseUrl}${slug}/` }
+            return { lang, url: `${baseUrl}${slug}` }
           })
         }
       })
