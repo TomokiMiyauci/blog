@@ -43,7 +43,7 @@
     'alt',
     'img',
     'readingTime',
-    'createdAt'
+    'updatedAt'
   ]
 
   // const useFavariteArticle = async () => {

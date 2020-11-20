@@ -10,7 +10,7 @@
       <div class="p-4">
         <div>
           <div class="flex justify-end mb-1">
-            <calendar-edit-date :date="new Date(headline.createdAt)" />
+            <calendar-edit-date :date="new Date(headline.updatedAt)" />
             <timer-reading-time class="pl-2" :text="headline.readingTime" />
           </div>
           <nuxt-link

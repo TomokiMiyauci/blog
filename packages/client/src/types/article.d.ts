@@ -40,7 +40,7 @@ export type PrevNext = Pick<Article, 'title' | 'slug'>
 
 export type Headline = Pick<
   Article,
-  'title' | 'description' | 'slug' | 'tags' | 'readingTime' | 'createdAt' | 'img' | 'alt'
+  'title' | 'description' | 'slug' | 'tags' | 'readingTime' | 'createdAt' | 'updatedAt' | 'img' | 'alt'
 >
 
 export type Current = Pick<Article, 'title' | 'slug' | 'img' | 'alt'>
