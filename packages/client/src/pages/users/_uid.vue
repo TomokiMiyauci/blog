@@ -21,7 +21,7 @@
       let titles: string[] = []
       result.forEach(({ id }) => (titles = [...titles, id]))
 
-      const headline: (keyof Headline)[] = ['title', 'description', 'slug', 'tags', 'readingTime', 'createdAt']
+      const headline: (keyof Headline)[] = ['title', 'description', 'slug', 'tags', 'readingTime', 'updatedAt']
       const articles = await $content('articles')
         .where({ slug: { $in: titles } })
         .only(headline)
