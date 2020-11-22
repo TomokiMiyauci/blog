@@ -133,6 +133,8 @@ const config = {
   },
   plugins: [preactRefresh()]
 }
+
+export default config
 ```
 
 I was able to make Typescript with minimal configuration. You don't have to do the following.
