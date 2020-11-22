@@ -439,6 +439,8 @@ const config: UserConfig = {
     '/@/': join(__dirname, 'src'),
   }
 }
+
+export default config
 ```
 
 ```json[tsconfig.json]

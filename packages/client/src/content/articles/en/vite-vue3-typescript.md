@@ -408,6 +408,8 @@ const config: UserConfig = {
     '/@/': join(__dirname, 'src'),
   }
 }
+
+export default config
 ```
 
 Now you can set up alias. I'll use it like this.

@@ -408,6 +408,8 @@ const config: UserConfig = {
     '/@/': join(__dirname, 'src'),
   }
 }
+
+export default config
 ```
 
 これでaliasの設定ができました。こんな感じで使います。

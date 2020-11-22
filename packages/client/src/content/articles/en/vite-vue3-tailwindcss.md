@@ -127,7 +127,7 @@ Tailwindcss supports PurgeCSS as standard, so you should configure it to optimiz
 
 ```js[~/tailwind.config.js]
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { join } = require('パス')
+const { join } = require('path')
 const BASE_DIR = join(__dirname, 'src')
 const VUE_FILE = join('**', '*.vue')
 
