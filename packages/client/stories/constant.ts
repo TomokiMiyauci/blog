@@ -45,3 +45,11 @@ export const document = {
   updatedAt: '2020-09-02T13:30:14.158Z',
   readingTime: '1 min read'
 }
+
+export const prevNext = {
+  title: 'Nuxtjsでブログを作ろう',
+  path: '/articles/start-to-create-blog',
+  extension: '.md',
+  slug: 'start-to-create-blog',
+  img: thumbnail
+}
