@@ -238,7 +238,7 @@ const config: NuxtConfig = {
     },
     routes: async () => {
       // const { $content } = (await import('@nuxt/content')).default as { $content: $content }
-      const only = ['slug', 'tags', 'updatedAt']
+      const only = ['slug', 'updatedAt']
       const jaFiles = (await $content('articles', 'ja')
         .only(only)
         .where({ private: false })
@@ -248,29 +248,6 @@ const config: NuxtConfig = {
         .where({ private: false })
         .fetch<Article[]>()) as Article[]
 
-      const { toKebabCase } = await import(join(__dirname, 'src', 'utils', 'formatter'))
-
-      const jaTags = jaFiles.map(({ tags }) => tags).flat()
-      const enTags = enFiles.map(({ tags }) => tags).flat()
-
-      const jaTagLocs = Array.from(new Set(jaTags)).map((tag) => {
-        return {
-          url: `ja/tags/${toKebabCase(tag)}`,
-          links: ['en', 'ja'].map((lang) => {
-            const baseUrl = lang === 'en' ? 'tags/' : `${lang}/tags/`
-            return { lang, url: `${baseUrl}${tag}` }
-          })
-        }
-      })
-      const enTagLocs = Array.from(new Set(enTags)).map((tag) => {
-        return {
-          url: `/tags/${toKebabCase(tag)}`,
-          links: ['en', 'ja'].map((lang) => {
-            const baseUrl = lang === 'en' ? 'tags/' : `${lang}/tags/`
-            return { lang, url: `${baseUrl}${tag}` }
-          })
-        }
-      })
       const jaLocs = jaFiles.map(({ slug, updatedAt }) => ({
         url: `/ja/post/${slug}`,
         priority: 1,
@@ -292,7 +269,7 @@ const config: NuxtConfig = {
         }
       })
 
-      return [...jaLocs, ...enLocs, ...jaTagLocs, ...enTagLocs]
+      return [...jaLocs, ...enLocs]
     },
     gzip: true
   },

@@ -61,9 +61,10 @@ export const reportedUserRef = (
   ctx: ReturnType<typeof useContext>,
   docId: string
 ): firebase.firestore.CollectionReference<ReportedUser> => {
-  return articleCommentDoc(ctx, docId).collection('reportedUsers') as firebase.firestore.CollectionReference<
-    ReportedUser
-  >
+  // eslint-disable-next-line prettier/prettier
+  return articleCommentDoc(ctx, docId).collection(
+    'reportedUsers'
+  ) as firebase.firestore.CollectionReference<ReportedUser>
 }
 
 export const reportedUserDoc = (
