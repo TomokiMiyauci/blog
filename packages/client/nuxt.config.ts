@@ -225,12 +225,14 @@ const config: NuxtConfig = {
 
   robots: {
     UserAgent: '*',
+    disallow: '/tags/',
     Sitemap: `${HOSTNAME}sitemap.xml.gz`
   },
 
   sitemap: {
     hostname: HOSTNAME,
     i18n: true,
+    exclude: ['/users', '/tags', '/chat', '/ja/users', '/ja/tags', '/ja/chat'],
     defaults: {
       changefreq: 'daily',
       priority: 0.5,
